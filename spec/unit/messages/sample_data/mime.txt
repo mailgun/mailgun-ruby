@@ -1,0 +1,38 @@
+X-SBRS: 5.6
+X-SenderGroup: WHITELIST
+X-MailFlowPolicy: $TRUSTED
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=trstx.com; q=dns/txt; s=mx;
+ t=1381182797; h=Mime-Version: Content-Type: Subject: From: To:
+ Message-Id: Date: Sender: Content-Transfer-Encoding;
+ bh=r6P1omjKL3m7gDuZC6dZEJU6trgWm1IRwAJb8h4wtfg=; b=UPFaFGiuDx2yZjCmiMEji0fIXvGMNwXUsuaX4Ss9p5EUkqE25eYjeJaJZ5w5FK+t0jsUPZqu
+ FIH6sftQv7GBEbSktY6sv7dgv5q2yVlY8YNG7CXvUZdWmvwfQVvfL9j1RHJo9H3QpXT9c8bZ
+ p9rpYmqZtZEz2ZesPj4kzUaB0lU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=trstx.com; s=mx; q=dns;
+ h=Mime-Version: Content-Type: Subject: From: To: Message-Id: Date:
+ Sender: Content-Transfer-Encoding;
+ b=QUYQf9OP16DphNAjeF95+G7V6DaqL4FA+m1sjIEWHdLzrGTQkiYTpzJdne3lzSypB0DwaG
+ AT9zOhjjN64DWFOkJD2Ce5t6vfHa/GC3FCUMq3xz/Big94g+kOciawkHyUhCrmPyh/D7kWx1
+ J75UIAdmE9XQ9bCSPhZ2MRaOv7b8c=
+Received: by luna.mailgun.net with HTTP; Mon, 07 Oct 2013 21:53:16 +0000
+Content-Type: text/plain; charset="ascii"
+Subject: Test Subject
+From: <joe@example.com>
+To: <bob@sample.com>
+Message-ID: <20131007215316.27052.7818@example.com>
+X-Mailgun-Sid: WyI4MzY1OSIsICJ0cmF2aXMuc3dpZW50ZWtAcmFja3NwYWasdfewNvbSIsICJjZjQ4Il0=
+Date: Mon, 7 Oct 2013 21:53:17 +0000
+Sender: <joe@example.com>
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+--3a8c26e9f23c4ac193606295aa17fa6f
+Content-Type: text/plain; charset="ascii"
+Content-Transfer-Encoding: 7bit
+
+Testing some Mailgun awesomness!
+--3a8c26e9f23c4ac193606295aa17fa6f
+Content-Type: text/html; charset="ascii"
+Content-Transfer-Encoding: 7bit
+
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">Test
+--3a8c26e9f23c4ac193606295aa17fa6f--
