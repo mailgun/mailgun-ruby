@@ -1,7 +1,7 @@
-require 'digest'
 require 'json'
 require 'uri'
 require 'base64'
+require 'digest/hmac'
 
 module Mailgun
 
@@ -16,11 +16,19 @@ module Mailgun
     # @return [String] A url encoded URL suffix hash.
 
     def self.generate_hash(mailing_list, secret_app_id, recipient_address)
-      hash = {'s' => Digest::MD5.hexdigest("#{secret_app_id}#{recipient_address}"),
-              'l' => mailing_list,
-              'r' => recipient_address}
+      innerPayload = {'l' => mailing_list,
+                      'r' => recipient_address}
 
-      URI.escape(Base64.encode64(JSON.generate(hash)))
+      innerPayloadEncoded = Base64.encode64(JSON.generate(innerPayload))
+
+      digest = Digest::HMAC.hexdigest(innerPayloadEncoded, secret_app_id, Digest::SHA1)
+
+      outerPayload = {'h' => digest,
+                      'p' => innerPayloadEncoded}
+
+      outerPayloadEncoded = Base64.encode64(JSON.generate(outerPayload))
+
+      URI.escape(outerPayloadEncoded)
     end
 
     # Validates the hash provided from the generate_hash method.
@@ -30,12 +38,16 @@ module Mailgun
     # @return [Hash or Boolean] A hash with 'recipient_address' and 'mailing_list', if validates. Otherwise, boolean false.
 
     def self.validate_hash(secret_app_id, unique_hash)
-      url_parameters = JSON.parse(Base64.decode64(URI.unescape(unique_hash)))
-      generated_hash = Digest::MD5.hexdigest("#{secret_app_id}#{url_parameters['r']}")
-      hash_provided = url_parameters['s']
+      outerPayload = JSON.parse(Base64.decode64(URI.unescape(unique_hash)))
+
+      generated_hash = Digest::HMAC.hexdigest(outerPayload['p'], secret_app_id, Digest::SHA1)
+
+      innerPayload = JSON.parse(Base64.decode64(URI.unescape(outerPayload['p'])))
+
+      hash_provided = outerPayload['h']
 
       if(generated_hash == hash_provided)
-        return {'recipient_address' => url_parameters['r'], 'mailing_list' => url_parameters['l']}
+        return {'recipient_address' => innerPayload['r'], 'mailing_list' => innerPayload['l']}
       else
         return false
       end
