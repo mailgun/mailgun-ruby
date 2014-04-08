@@ -81,12 +81,12 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
-    def get(resource_path, params=nil)
+    def get(resource_path, params=nil, accept="*/*")
       begin
         if params
-          response = @http_client[resource_path].get(:params => params)
+          response = http_client[resource_path].get(:params => params, :accept => accept)
         else
-          response = @http_client[resource_path].get()
+          response = @http_client[resource_path].get(:accept => accept)
         end
         Response.new(response)
       rescue Exception => e
