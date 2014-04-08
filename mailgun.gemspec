@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.post_install_message = %q{
     ---------------------------------------------------------------
-    Congrats, you've successfully installed the Mailgun SDK! 
+    Congrats, you've successfully installed the Mailgun SDK!
     Check out our documentation at http://documentation.mailgun.com
 
     Contact us at support@mailgunhq.com with any questions.
@@ -37,6 +37,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rest-client", "~> 1.6"
   spec.add_dependency "json", "~> 1.8"
-  spec.add_dependency "multimap", "~> 1.1"
-  
+
 end
