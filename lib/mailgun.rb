@@ -11,9 +11,9 @@ require "mailgun/exceptions/exceptions"
 
 module Mailgun
 
-  # A Mailgun::Client object is used to communicate with the Mailgun API. It is a 
-  # wrapper around RestClient so you don't have to worry about the HTTP aspect 
-  # of communicating with our API. 
+  # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
+  # wrapper around RestClient so you don't have to worry about the HTTP aspect
+  # of communicating with our API.
   #
   # See the Github documentation for full examples.
 
@@ -84,7 +84,7 @@ module Mailgun
     def get(resource_path, params=nil)
       begin
         if params
-          response = @http_client[resource_path].get(:params => params)
+          response = @http_client[resource_path].get(:params => params, :accept => accept)
         else
           response = @http_client[resource_path].get()
         end
@@ -139,7 +139,7 @@ module Mailgun
       file
     end
 
-    # Generates the endpoint URL to for the API. Allows overriding 
+    # Generates the endpoint URL to for the API. Allows overriding
     # API endpoint, API versions, and toggling SSL.
     #
     # @param [String] api_host URL endpoint the library will hit
@@ -160,7 +160,7 @@ module Mailgun
   # A Mailgun::Response object is instantiated for each response generated
   # by the Client request. The Response object supports deserialization of
   # the JSON result. Or, if you prefer JSON or YAML formatting, call the
-  # method for conversion. 
+  # method for conversion.
   #
   # See the Github documentation for full examples.
 
@@ -223,5 +223,5 @@ module Mailgun
     end
 
   end
-  
+
 end
