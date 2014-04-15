@@ -10,16 +10,16 @@ module Mailgun
   # this code makes it dead simple to send millions of messages in batches of
   # 1,000 recipients per HTTP call.
   #
-  # For the curious, the class simply keeps track of recipient data (count, 
+  # For the curious, the class simply keeps track of recipient data (count,
   # user variables), and fires the API payload on the 1,000th addition of a recipient.
   #
   # The best way to use this class is:
-  # 1. Build your message using the Message Builder methods. 
-  # 2. Query your source and create an iterable list. 
-  # 3. Iterate through your source data, and add your recipients using the 
-  #    add_recipient() method. 
-  # 4. Call finalize() to flush any remaining recipients and obtain/store 
-  #    the message_ids for tracking purposes. 
+  # 1. Build your message using the Message Builder methods.
+  # 2. Query your source and create an iterable list.
+  # 3. Iterate through your source data, and add your recipients using the
+  #    add_recipient() method.
+  # 4. Call finalize() to flush any remaining recipients and obtain/store
+  #    the message_ids for tracking purposes.
   #
   # See the Github documentation for full examples.
 
@@ -48,7 +48,7 @@ module Mailgun
       end
 
       compiled_address = parse_address(address, variables)
-      @message[recipient_type] = compiled_address
+      complex_setter(recipient_type, compiled_address)
       if recipient_type != :from
         store_recipient_variables(recipient_type, address, variables)
       end
@@ -68,7 +68,7 @@ module Mailgun
       end
       @message_ids
     end
-    
+
     private
 
     # This method determines if it's necessary to send another batch.
@@ -88,21 +88,21 @@ module Mailgun
     end
 
     # This method initiates a batch send to the API. It formats the recipient
-    # variables, posts to the API, gathers the message IDs, then flushes that data 
+    # variables, posts to the API, gathers the message IDs, then flushes that data
     # to prepare for the next batch. This method implements the Mailgun Client, thus,
-    # an exception will be thrown if a communication error occurs. 
+    # an exception will be thrown if a communication error occurs.
     #
     # @return [Boolean]
 
     def send_message(message)
-      @message["recipient-variables"] = JSON.generate(@recipient_variables)
+      simple_setter("recipient-variables", JSON.generate(@recipient_variables))
       response = @client.send_message(@domain, @message).to_h!
       message_id = response['id'].gsub(/\>|\</, '')
       @message_ids[message_id] = count_recipients()
       reset_message()
     end
 
-    # This method stores recipient variables for each recipient added, if 
+    # This method stores recipient variables for each recipient added, if
     # variables exist.
 
     def store_recipient_variables(recipient_type, address, variables)
@@ -112,7 +112,7 @@ module Mailgun
       @recipient_variables[address] = variables
     end
 
-    # This method stores recipient variables for each recipient added, if 
+    # This method stores recipient variables for each recipient added, if
     # variables exist.
 
     def count_recipients()
@@ -121,8 +121,8 @@ module Mailgun
       count
     end
 
-    # This method resets the message object to prepare for the next batch 
-    # of recipients. 
+    # This method resets the message object to prepare for the next batch
+    # of recipients.
 
     def reset_message()
       @message.delete("recipient-variables")
@@ -135,5 +135,5 @@ module Mailgun
     end
 
   end
-  
+
 end

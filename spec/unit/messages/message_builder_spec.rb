@@ -14,11 +14,6 @@ describe 'The instantiation of MessageBuilder' do
     @mb_obj = Mailgun::MessageBuilder.new()
   end
 
-  it 'contains Message, which should be of type Multimap and empty' do
-    @mb_obj.message.should be_a(Multimap)
-    @mb_obj.message.length.should eq(0)
-  end
-
   it 'contains counters, which should be of type hash and contain several important counters' do
     @mb_obj.counters.should be_a(Hash)
     @mb_obj.counters.should include(:recipients)

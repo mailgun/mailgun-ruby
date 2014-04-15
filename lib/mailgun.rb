@@ -11,9 +11,9 @@ require "mailgun/exceptions/exceptions"
 
 module Mailgun
 
-  # A Mailgun::Client object is used to communicate with the Mailgun API. It is a 
-  # wrapper around RestClient so you don't have to worry about the HTTP aspect 
-  # of communicating with our API. 
+  # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
+  # wrapper around RestClient so you don't have to worry about the HTTP aspect
+  # of communicating with our API.
   #
   # See the Github documentation for full examples.
 
@@ -34,13 +34,13 @@ module Mailgun
     # Simple Message Sending
     #
     # @param [String] working_domain This is the domain you wish to send from.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
     def send_message(working_domain, data)
       case data
-      when Hash, Multimap
+      when Hash
         if data.has_key?(:message)
           if data[:message].is_a?(String)
             data[:message] = convert_string_to_file(data[:message])
@@ -60,7 +60,7 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
@@ -77,16 +77,16 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] query_string This should be a standard Hash or Multimap
+    # @param [Hash] query_string This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
-    def get(resource_path, params=nil)
+    def get(resource_path, params=nil, accept="*/*")
       begin
         if params
-          response = @http_client[resource_path].get(:params => params)
+          response = http_client[resource_path].get(:params => params, :accept => accept)
         else
-          response = @http_client[resource_path].get()
+          response = @http_client[resource_path].get(:accept => accept)
         end
         Response.new(response)
       rescue Exception => e
@@ -98,7 +98,7 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
@@ -139,7 +139,7 @@ module Mailgun
       file
     end
 
-    # Generates the endpoint URL to for the API. Allows overriding 
+    # Generates the endpoint URL to for the API. Allows overriding
     # API endpoint, API versions, and toggling SSL.
     #
     # @param [String] api_host URL endpoint the library will hit
@@ -160,7 +160,7 @@ module Mailgun
   # A Mailgun::Response object is instantiated for each response generated
   # by the Client request. The Response object supports deserialization of
   # the JSON result. Or, if you prefer JSON or YAML formatting, call the
-  # method for conversion. 
+  # method for conversion.
   #
   # See the Github documentation for full examples.
 
@@ -223,5 +223,5 @@ module Mailgun
     end
 
   end
-  
+
 end
