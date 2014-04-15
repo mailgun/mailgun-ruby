@@ -5,14 +5,14 @@ require 'mailgun/version'
 
 Gem::Specification.new do |spec|
 
-  spec.name             = "mailgun"
+  spec.name             = "mailgun-ruby"
   spec.version          = Mailgun::VERSION
   spec.homepage         = "http://www.mailgun.com"
   spec.platform         = Gem::Platform::RUBY
   spec.license          = 'Apache'
 
   spec.summary          = "Mailgun's Official Ruby SDK"
-  spec.description      = "This Gem allows you to interact with Mailgun's API. A few utilities are included!"
+  spec.description      = "Mailgun's Official Ruby SDK for interacting with the Mailgun API."
 
   spec.authors          = ["Mailgun", "Travis Swientek"]
   spec.email            = "support@mailgunhq.com"
