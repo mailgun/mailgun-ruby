@@ -5,7 +5,7 @@ describe 'The method generate_hash' do
     @mailing_list = "mylist@example.com"
     @secret_app_id = "mysupersecretpassword"
     @recipient_address = "bob@example.com"
-    @precalculated_hash = "eyJzIjoiNDc4ZjVlM2M0MWQyNDdlZGQ2NDMzYzdkZTRjOTg3MTYiLCJsIjoi%0AbXlsaXN0QGV4YW1wbGUuY29tIiwiciI6ImJvYkBleGFtcGxlLmNvbSJ9%0A"
+    @precalculated_hash = "eyJoIjoiMmY3ZmY1MzFlOGJmMjA0OWNhMTI3ZmU4ZTQyNjZkOTljYzhkMTdk%0AMiIsInAiOiJleUpzSWpvaWJYbHNhWE4wUUdWNFlXMXdiR1V1WTI5dElpd2lj%0AaUk2SW1KdllrQmxlR0Z0Y0d4bExtTnZcbmJTSjlcbiJ9%0A"
   end
 
   it 'generates a web safe hash for the recipient wishing to subscribe' do

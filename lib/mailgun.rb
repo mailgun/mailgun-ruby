@@ -34,13 +34,13 @@ module Mailgun
     # Simple Message Sending
     #
     # @param [String] working_domain This is the domain you wish to send from.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
     def send_message(working_domain, data)
       case data
-      when Hash, Multimap
+      when Hash
         if data.has_key?(:message)
           if data[:message].is_a?(String)
             data[:message] = convert_string_to_file(data[:message])
@@ -60,7 +60,7 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
@@ -77,16 +77,20 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] query_string This should be a standard Hash or Multimap
+    # @param [Hash] query_string This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 
-    def get(resource_path, params=nil)
+    def get(resource_path, params=nil, accept="*/*")
       begin
         if params
+<<<<<<< HEAD
           response = @http_client[resource_path].get(:params => params, :accept => accept)
+=======
+          response = http_client[resource_path].get(:params => params, :accept => accept)
+>>>>>>> 5dc7b88363e43a5e63b3b43618134e6cd1d3a78c
         else
-          response = @http_client[resource_path].get()
+          response = @http_client[resource_path].get(:accept => accept)
         end
         Response.new(response)
       rescue Exception => e
@@ -98,7 +102,7 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] data This should be a standard Hash or Multimap
+    # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
 

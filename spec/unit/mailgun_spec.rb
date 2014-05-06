@@ -24,12 +24,10 @@ describe 'The method send_message()' do
 
   it 'accepts only specific data types' do
     @mb_obj = Mailgun::MessageBuilder.new()
-    @mm_obj = Multimap.new()
     @mh_obj = {}
 
     expect {@mg_obj.send_message("test.com", "incorrect data")}.to raise_error
     expect {@mg_obj.send_message("test.com", @mb_obj)}.not_to raise_error
-    expect {@mg_obj.send_message("test.com", @mm_obj)}.not_to raise_error
     expect {@mg_obj.send_message("test.com", @mh_obj)}.not_to raise_error
   end
 

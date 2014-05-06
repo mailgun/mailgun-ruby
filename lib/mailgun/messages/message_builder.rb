@@ -1,4 +1,3 @@
-require 'multimap'
 require 'time'
 require 'json'
 
@@ -15,7 +14,7 @@ module Mailgun
     attr_reader :message, :counters
 
     def initialize()
-      @message = Multimap.new
+      @message = Hash.new{|hash, key| hash[key] = []}
       @counters = {:recipients  =>
                    {:to  => 0,
                     :cc  => 0,
@@ -40,7 +39,7 @@ module Mailgun
       end
 
       compiled_address = parse_address(address, variables)
-      @message[recipient_type] = compiled_address
+      complex_setter(recipient_type, compiled_address)
 
       if @counters[:recipients].has_key?(recipient_type)
         @counters[:recipients][recipient_type] += 1
@@ -100,7 +99,7 @@ module Mailgun
       if !filename.nil?
         attachment.instance_eval "def original_filename; '#{filename}'; end"
       end
-      @message[:attachment] = attachment
+      complex_setter(:attachment, attachment)
     end
 
     # Adds an inline image to the mesage object.
@@ -119,7 +118,7 @@ module Mailgun
       if !filename.nil?
         inline_image.instance_eval "def original_filename; '#{filename}'; end"
       end
-      @message[:inline] = inline_image
+      complex_setter(:inline, inline_image)
     end
 
     # Send a message in test mode. (The message won't really be sent to the recipient)
@@ -149,7 +148,7 @@ module Mailgun
       if (@counters[:attributes][:campaign_id] == 3)
         raise ParameterError.new("Too many campaigns added to message.", campaign_id)
       end
-      @message["o:campaign"] = campaign_id
+      complex_setter("o:campaign", campaign_id)
       @counters[:attributes][:campaign_id] += 1
     end
 
@@ -162,7 +161,7 @@ module Mailgun
       if (@counters[:attributes][:tag] == 3)
         raise ParameterError.new("Too many tags added to message.", tag)
       end
-      @message["o:tag"] = tag
+      complex_setter("o:tag", tag)
       @counters[:attributes][:tag] += 1
     end
 
@@ -228,7 +227,7 @@ module Mailgun
     # @return [void]
 
     def add_custom_parameter(name, data)
-      @message[name] = data
+      complex_setter(name, data)
     end
 
     private
@@ -242,17 +241,24 @@ module Mailgun
 
     def simple_setter(parameter, value)
       if value.nil?
-        if @message.include?(parameter)
-          @message.replace({parameter => ''})
-        else
-          @message[parameter] = ''
-        end
+        @message[parameter] = ['']
       else
-        if @message.include?(parameter)
-          @message.replace({parameter => value})
-        else
-          @message[parameter] = value
-        end
+        @message[parameter] = [value]
+      end
+    end
+
+    # Sets values within the multidict, however, allows
+    # duplicate values for keys.
+    #
+    # @param [String] parameter The message object parameter name.
+    # @param [String] value The value of the parameter.
+    # @return [void]
+
+    def complex_setter(parameter, value)
+      if value.nil?
+        @message[parameter] << ''
+      else
+        @message[parameter] << value
       end
     end
 
@@ -268,7 +274,7 @@ module Mailgun
         value.downcase!
         if ['true', 'yes', 'yep'].include? value
           return "yes"
-        elsif ['false', 'no', 'nope'].include? value 
+        elsif ['false', 'no', 'nope'].include? value
           return "no"
         else
           return value
@@ -317,5 +323,5 @@ module Mailgun
     end
 
   end
-  
+
 end

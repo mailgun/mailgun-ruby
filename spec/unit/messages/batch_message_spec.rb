@@ -27,8 +27,8 @@ describe 'The instantiation of Batch Message' do
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
   end
 
-  it 'contains Message, which should be of type Multimap and empty' do
-    @mb_obj.message.should be_a(Multimap)
+  it 'contains Message, which should be of type Hash and empty' do
+    @mb_obj.message.should be_a(Hash)
     @mb_obj.message.length.should eq(0)
   end
 
