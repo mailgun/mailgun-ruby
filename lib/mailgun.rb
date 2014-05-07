@@ -6,6 +6,7 @@ require 'json'
 require "mailgun/version"
 require "mailgun/lists/opt_in_handler"
 require "mailgun/messages/batch_message"
+require "mailgun/events/events"
 require "mailgun/messages/message_builder"
 require "mailgun/exceptions/exceptions"
 
@@ -84,11 +85,7 @@ module Mailgun
     def get(resource_path, params=nil, accept="*/*")
       begin
         if params
-<<<<<<< HEAD
           response = @http_client[resource_path].get(:params => params, :accept => accept)
-=======
-          response = http_client[resource_path].get(:params => params, :accept => accept)
->>>>>>> 5dc7b88363e43a5e63b3b43618134e6cd1d3a78c
         else
           response = @http_client[resource_path].get(:accept => accept)
         end

@@ -21,7 +21,7 @@ describe 'The method send_message()' do
                                             :subject => 'Hash Integration Test',
                                             :text => 'INTEGRATION TESTING',
                                             'o:testmode' => true})
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -36,7 +36,7 @@ describe 'The method send_message()' do
 
     result = @mg_obj.send_message(@domain, mb_obj)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -63,7 +63,7 @@ Testing some Mailgun awesomness!'
 
     result = @mg_obj.send_message(@domain, message_params)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -82,7 +82,7 @@ describe 'For the domains endpoint' do
                                        :smtp_password => 'super_secret',
                                        :spam_action => 'tag'})
 
-    @result.to_hash!
+    @result.to_h!
     @result.body.should include("domain")
     expect(@result.body["domain"]["name"]).to eq(@domain)
     expect(@result.body["domain"]["spam_action"]).to eq("tag")
@@ -92,7 +92,7 @@ describe 'For the domains endpoint' do
   it 'get the domain.' do
     result = @mg_obj.get("domains/#{@domain}")
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("domain")
     result.body["domain"]["name"].should eq(@domain)
   end
@@ -100,14 +100,14 @@ describe 'For the domains endpoint' do
   it 'gets a list of domains.' do
     result = @mg_obj.get("domains")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
   it 'deletes a domain.' do
     result = @mg_obj.delete("domains/#{@domain}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Domain has been deleted")
   end
 
@@ -131,7 +131,7 @@ describe 'For the Unsubscribes endpoint' do
                            {:address => @email,
                             :tag => '*'})
 
-    @result.to_hash!
+    @result.to_h!
     expect(@result.body["message"]).to eq("Address has been added to the unsubscribes table")
     expect(@result.body["address"]).to eq(@email)
   end
@@ -139,7 +139,7 @@ describe 'For the Unsubscribes endpoint' do
   it 'get an unsubscribee.' do
     result = @mg_obj.get("#{@domain}/unsubscribes/#{@email}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to eq 1
     expect(result.body["items"][0]["address"]).to eq(@email)
   end
@@ -147,7 +147,7 @@ describe 'For the Unsubscribes endpoint' do
   it 'gets a list of unsubscribes.' do
     result = @mg_obj.get("#{@domain}/unsubscribes")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -173,7 +173,7 @@ describe 'For the Complaints endpoint' do
     @email = "integration-test-#{random_number}@example.com"
     @result = @mg_obj.post("#{@domain}/complaints", {:address => @email})
 
-    @result.to_hash!
+    @result.to_h!
     expect(@result.body["message"]).to eq("Address has been added to the complaints table")
     expect(@result.body["address"]).to eq(@email)
   end
@@ -181,7 +181,7 @@ describe 'For the Complaints endpoint' do
   it 'get a complaint.' do
     result = @mg_obj.get("#{@domain}/complaints/#{@email}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["complaint"]["count"]).to eq 1
     expect(result.body["complaint"]["address"]).to eq(@email)
   end
@@ -189,7 +189,7 @@ describe 'For the Complaints endpoint' do
   it 'gets a list of complaints.' do
     result = @mg_obj.get("#{@domain}/complaints")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -218,7 +218,7 @@ describe 'For the Bounces endpoint' do
                             :code => 550,
                             :error => "Integration Test"})
 
-    @result.to_hash!
+    @result.to_h!
     expect(@result.body["message"]).to eq("Address has been added to the bounces table")
     expect(@result.body["address"]).to eq(@email)
   end
@@ -226,7 +226,7 @@ describe 'For the Bounces endpoint' do
   it 'get a bounce.' do
     result = @mg_obj.get("#{@domain}/bounces/#{@email}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["bounce"]["code"]).to eq("550")
     expect(result.body["bounce"]["address"]).to eq(@email)
     expect(result.body["bounce"]["error"]).to eq("Integration Test")
@@ -235,7 +235,7 @@ describe 'For the Bounces endpoint' do
   it 'gets a list of bounces.' do
     result = @mg_obj.get("#{@domain}/bounces")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -276,7 +276,7 @@ describe 'For the Events endpoint' do
   it 'get an event.' do
     result = @mg_obj.get("#{@domain}/events", {:limit => 1})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["items"].length).to be_within(1).of(1)
     expect(result.body["paging"]).to include("next")
     expect(result.body["paging"]).to include("previous")
@@ -298,7 +298,7 @@ describe 'For the Routes endpoint' do
                                       :expression => 'match_recipient(".*@example.com")',
                                       :action => 'forward("alice@example.com")'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Route has been created")
     expect(result.body["route"]["description"]).to eq("Integration Test Route")
     expect(result.body["route"]["actions"]).to include('forward("alice@example.com")')
@@ -311,7 +311,7 @@ describe 'For the Routes endpoint' do
   it 'get the route.' do
     result = @mg_obj.get("routes/#{@route_id}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["route"]["description"]).to eq("Integration Test Route")
     expect(result.body["route"]["actions"]).to include('forward("alice@example.com")')
     expect(result.body["route"]["expression"]).to include('match_recipient(".*@example.com")')
@@ -321,7 +321,7 @@ describe 'For the Routes endpoint' do
   it 'gets a list of all routes.' do
     result = @mg_obj.get("routes", {:limit => 50})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -331,7 +331,7 @@ describe 'For the Routes endpoint' do
                                                   :expression => 'match_recipient(".*@example.com")',
                                                   :action => 'forward("update@example.com")'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Route has been updated")
     expect(result.body["description"]).to eq("Integration Test Route Update")
     expect(result.body["actions"]).to include('forward("update@example.com")')
@@ -358,7 +358,7 @@ describe 'For the campaigns endpoint' do
     result = @mg_obj.post("#{@domain}/campaigns", {:name => 'My Campaign',
                                                    :id => @campaign_id})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Campaign created")
     expect(result.body["campaign"]["id"]).to eq(@campaign_id)
     expect(result.body["campaign"]["name"]).to eq('My Campaign')
@@ -367,7 +367,7 @@ describe 'For the campaigns endpoint' do
   it 'get a campaign.' do
     result = @mg_obj.get("#{@domain}/campaigns/#{@campaign_id}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["id"]).to eq(@campaign_id)
     expect(result.body["name"]).to eq('My Campaign')
   end
@@ -375,7 +375,7 @@ describe 'For the campaigns endpoint' do
   it 'gets a list of all campaigns.' do
     result = @mg_obj.get("#{@domain}/campaigns", {:limit => 50})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -383,7 +383,7 @@ describe 'For the campaigns endpoint' do
     result = @mg_obj.put("#{@domain}/campaigns/#{@campaign_id}", {:name => 'My Updated Campaign',
                                                                   :id => @campaign_id})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Campaign updated")
     expect(result.body["campaign"]["id"]).to eq(@campaign_id)
     expect(result.body["campaign"]["name"]).to eq('My Updated Campaign')
@@ -419,7 +419,7 @@ describe 'For the webhooks endpoint' do
     result = @mg_obj.post("domains/#{@domain}/webhooks", {:id => 'bounce',
                                                           :url => 'http://example.com/mailgun/events/bounce'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Webhook has been created")
     expect(result.body["webhook"]["url"]).to eq('http://example.com/mailgun/events/bounce')
   end
@@ -427,14 +427,14 @@ describe 'For the webhooks endpoint' do
   it 'get a webhook.' do
     result = @mg_obj.get("domains/#{@domain}/webhooks/bounce")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["webhook"]["url"]).to eq('http://example.com/mailgun/events/bounce')
   end
 
   it 'gets a list of all webhooks.' do
     result = @mg_obj.get("domains/#{@domain}/webhooks")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["webhooks"]["bounce"]["url"]).to eq('http://example.com/mailgun/events/bounce')
   end
 
@@ -442,7 +442,7 @@ describe 'For the webhooks endpoint' do
     result = @mg_obj.put("domains/#{@domain}/webhooks/bounce", {:id => 'bounce',
                                                                 :url => 'http://example.com/mailgun/events/new_bounce'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Webhook has been updated")
     expect(result.body["webhook"]["url"]).to eq('http://example.com/mailgun/events/new_bounce')
   end
@@ -472,7 +472,7 @@ describe 'For the Mailing Lists endpoint' do
                                     :description => 'This list should be deleted automatically.',
                                     :access_level => 'members'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Mailing list has been created")
     expect(result.body["list"]["address"]).to eq(@ml_address)
     expect(result.body["list"]["name"]).to eq('Integration Test List')
@@ -481,7 +481,7 @@ describe 'For the Mailing Lists endpoint' do
   it 'get a list.' do
     result = @mg_obj.get("lists/#{@ml_address}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["list"]["address"]).to eq(@ml_address)
     expect(result.body["list"]["name"]).to eq('Integration Test List')
   end
@@ -489,7 +489,7 @@ describe 'For the Mailing Lists endpoint' do
   it 'gets a list of all lists.' do
     result = @mg_obj.get("lists", {:limit => 50})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["total_count"]).to be > 0
   end
 
@@ -500,7 +500,7 @@ describe 'For the Mailing Lists endpoint' do
                           :description => 'This list should be deleted automatically.',
                           :access_level => 'readonly'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Mailing list has been updated")
     expect(result.body["list"]["address"]).to eq(@ml_address)
     expect(result.body["list"]["name"]).to eq('Integration Test List Update')
@@ -537,7 +537,7 @@ describe 'For the Mailing Lists Members endpoint' do
                            :subscribed => true,
                            :upsert => 'no'})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Mailing list member has been created")
     expect(result.body["member"]["address"]).to eq(@ml_member)
     expect(result.body["member"]["name"]).to eq('Jane Doe')
@@ -546,7 +546,7 @@ describe 'For the Mailing Lists Members endpoint' do
   it 'get a list member.' do
     result = @mg_obj.get("lists/#{@ml_address}/members/#{@ml_member}")
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["member"]["address"]).to eq(@ml_member)
     expect(result.body["member"]["name"]).to eq('Jane Doe')
   end
@@ -556,7 +556,7 @@ describe 'For the Mailing Lists Members endpoint' do
                          {:name => 'Jane Doe Update',
                           :subscribed => false})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["message"]).to eq("Mailing list member has been updated")
     expect(result.body["member"]["address"]).to eq(@ml_member)
     expect(result.body["member"]["name"]).to eq('Jane Doe Update')
@@ -581,7 +581,7 @@ describe 'For the Email Validation endpoint' do
     result = @mg_obj.get("address/validate",
                          {:address => "test@example.com"})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["is_valid"]).to eq(false)
     expect(result.body["address"]).to eq("test@example.com")
   end
@@ -590,7 +590,7 @@ describe 'For the Email Validation endpoint' do
     result = @mg_obj.get("address/parse",
                          {:addresses => "Alice <alice@example.com>,bob@example.com,example.com"})
 
-    result.to_hash!
+    result.to_h!
     expect(result.body["parsed"]).to include("Alice <alice@example.com>")
     expect(result.body["parsed"]).to include("bob@example.com")
     expect(result.body["unparseable"]).to include("example.com")
