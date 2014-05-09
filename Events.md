@@ -33,9 +33,9 @@ result = mg_events.next
 result = mg_events.previous
 ```
 
-A few notes:
+A few notes:  
 1. Next will use the pagination links to advance the result set.
-Retain the mg_events object to query forward, or reverse, at any time.
+Retain the mg_events object to query forward, or reverse, at any time.  
 2. If the result set is less than your limit, do not worry. A
 second query against "next" will return the next 25 results since the
 last time you called "next".
