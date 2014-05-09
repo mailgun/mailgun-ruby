@@ -1,22 +1,14 @@
 require 'spec_helper'
 
-module Mailgun
-  class Client
-    def initialize(api_key, api_host="api.mailgun.net", api_version="v2")
-      @http_client = Mailgun::UnitClient::new(api_key, api_host, api_version)
-    end
-  end
-end
-
 describe 'Mailgun instantiation' do
   it 'instantiates an HttpClient object' do
-    expect {@mg_obj = Mailgun::Client.new("Fake-API-Key")}.not_to raise_error
+    expect {@mg_obj = Mailgun::UnitClient.new("messages")}.not_to raise_error
   end
 end
 
 describe 'The method send_message()' do
   before(:each) do
-    @mg_obj = Mailgun::Client.new("Fake-API-Key")
+    @mg_obj = Mailgun::UnitClient.new("messages")
     @domain = "test.com"
     @list_address = "mylist@test.com"
     @member_address = "subscribee@test.com"
@@ -38,7 +30,7 @@ describe 'The method send_message()' do
                     'text' => 'Test Data'}
     result = @mg_obj.send_message("testdomain.com", data)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -48,7 +40,7 @@ describe 'The method send_message()' do
                     'message' => 'Sample Data/mime.txt'}
     result = @mg_obj.send_message("testdomain.com", data)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -56,7 +48,7 @@ end
 
 describe 'The method post()' do
   before(:each) do
-    @mg_obj = Mailgun::Client.new("Fake-API-Key")
+    @mg_obj = Mailgun::UnitClient.new("messages")
     @domain = "test.com"
   end
   it 'in this case, sends a simple message.' do
@@ -66,7 +58,7 @@ describe 'The method post()' do
                     'text' => 'Test Data'}
     result = @mg_obj.post("#{@domain}/messages", data)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end
@@ -74,7 +66,7 @@ end
 
 describe 'The method put()' do
   before(:each) do
-    @mg_obj = Mailgun::Client.new("Fake-API-Key")
+    @mg_obj = Mailgun::UnitClient.new("lists")
     @domain = "test.com"
     @list_address = "mylist@test.com"
     @member_address = "subscribee@test.com"
@@ -85,7 +77,7 @@ describe 'The method put()' do
                     'name' => 'Foo Bar'}
     result = @mg_obj.put("lists/#{@list_address}/members#{@member_address}", data)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("member")
     result.body["member"].should include("vars")
     result.body["member"]["vars"].should include("age")
@@ -99,7 +91,7 @@ end
 
 describe 'The method get()' do
   before(:each) do
-    @mg_obj = Mailgun::Client.new("Fake-API-Key")
+    @mg_obj = Mailgun::UnitClient.new("bounces")
     @domain = "test.com"
   end
   it 'in this case, obtains a list of bounces for the domain, limit of 5, skipping the first 10.' do
@@ -107,7 +99,7 @@ describe 'The method get()' do
                     'limit' => '5'}
     result = @mg_obj.get("#{@domain}/bounces", query_string)
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("total_count")
     result.body.should include("items")
   end
@@ -115,14 +107,14 @@ end
 
 describe 'The method delete()' do
   before(:each) do
-    @mg_obj = Mailgun::Client.new("Fake-API-Key")
+    @mg_obj = Mailgun::UnitClient.new("campaigns")
     @domain = "test.com"
   end
 
   it 'issues a generic delete request.' do
     result = @mg_obj.delete("#{@domain}/campaigns/ABC123")
 
-    result.to_hash!
+    result.to_h!
     result.body.should include("message")
     result.body.should include("id")
   end

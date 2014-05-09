@@ -1,16 +1,8 @@
 require 'spec_helper'
 
-module Mailgun
-  class Client
-    def initialize(api_key, api_host="api.mailgun.net", api_version="v2")
-      @http_client = UnitClient::new(api_key, api_host, api_version)
-    end
-  end
-end
-
 describe 'BatchMessage attribute readers' do
   it 'should be readable' do
-    @mb_client = Mailgun::Client.new("My-Fake-API-Key")
+    @mb_client = Mailgun::UnitClient.new("messages")
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
     @mb_obj.should respond_to(:message_ids)
     @mb_obj.should respond_to(:message)
@@ -23,7 +15,7 @@ end
 describe 'The instantiation of Batch Message' do
 
   before(:each) do
-    @mb_client = Mailgun::Client.new("My-Fake-API-Key")
+    @mb_client = Mailgun::UnitClient.new("messages")
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
   end
 
@@ -70,7 +62,7 @@ end
 
 describe 'The method add_recipient' do
   before(:each) do
-    @mb_client = Mailgun::Client.new("My-Fake-API-Key")
+    @mb_client = Mailgun::UnitClient.new("messages")
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
     @address_1   = 'jane@example.com'
     @variables_1 = {'first' => 'Jane', 'last' => 'Doe', 'tracking' => 'ABC123'}
