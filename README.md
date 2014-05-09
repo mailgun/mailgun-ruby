@@ -128,7 +128,7 @@ For usage examples on each API endpoint, head over to our official documentation
 pages. Or the [Snippets](Snippets.md) file.
 
 This SDK includes a [Message Builder](Messages.md),
-[Batch Message](Messages.md) and [Opt-In Handler](OptInHandler.md) component.
+[Batch Message](Messages.md), [Opt-In Handler](OptInHandler.md) and [Events](Events.md) component.
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.
