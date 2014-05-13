@@ -59,13 +59,25 @@ mb_obj.set_from_address("me@example.com", {"first"=>"Ruby", "last" => "SDK"});
 # Define the subject.
 mb_obj.set_subject("A message from the Ruby SDK using Message Builder!");
 # Define the body of the message.
-mb_obj.set_text_body("This is the text body of the message!");
+mb_obj.set_text_body("Hello %recipient.first%, 
+                     This is the text body of the message 
+                     using recipient variables!
+                     If you need to include custom data, 
+                     you could do it like this: %account-id%.");
 
-mb_obj.add_recipient(:to, "john.doe@example.com", {"first" => "John", "last" => "Doe"});
-mb_obj.add_recipient(:to, "jane.doe@example.com", {"first" => "Jane", "last" => "Doe"});
-mb_obj.add_recipient(:to, "bob.doe@example.com", {"first" => "Bob", "last" => "Doe"});
+mb_obj.add_recipient(:to, "john.doe@example.com", {"first"      => "John", 
+                                                   "last"       => "Doe", 
+                                                   "account-id" => 1234});
+mb_obj.add_recipient(:to, "jane.doe@example.com", {"first"      => "Jane", 
+                                                   "last"       => "Doe", 
+                                                   "account-id" => 5678});
+mb_obj.add_recipient(:to, "bob.doe@example.com", {"first"       => "Bob", 
+                                                  "last"        => "Doe", 
+                                                  "account-id"  => 91011});
 ...
-mb_obj.add_recipient(:to, "sally.doe@example.com", {"first" => "Sally", "last" => "Doe"});
+mb_obj.add_recipient(:to, "sally.doe@example.com", {"first"      => "Sally", 
+                                                    "last"       => "Doe", 
+                                                    "account-id" => 121314});
 
 # Send your message through the client
 message_ids = mg_client.finalize
