@@ -21,7 +21,7 @@ Here's how to use Message Builder to build your Message.
 ```ruby
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new("your-api-key")
-mb_obj = Mailgun::MessageBuilder.new(@mb_client, "example.com")
+mb_obj = Mailgun::MessageBuilder.new
 
 # Define the from address.
 mb_obj.set_from_address("me@example.com", {"first"=>"Ruby", "last" => "SDK"});
