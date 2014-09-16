@@ -70,7 +70,7 @@ module Mailgun
         response = @http_client[resource_path].post(data)
         Response.new(response)
       rescue Exception => e
-        raise CommunicationError.new(e), e.response
+        communication_error e
       end
     end
 
@@ -91,7 +91,7 @@ module Mailgun
         end
         Response.new(response)
       rescue Exception => e
-        raise CommunicationError.new(e), e.response
+        communication_error e
       end
     end
 
@@ -108,7 +108,7 @@ module Mailgun
         response = @http_client[resource_path].put(data)
         Response.new(response)
       rescue Exception => e
-        raise CommunicationError.new(e), e.response
+        communication_error e
       end
     end
 
@@ -123,7 +123,7 @@ module Mailgun
         response = @http_client[resource_path].delete()
         Response.new(response)
       rescue Exception => e
-        raise CommunicationError.new(e), e.response
+        communication_error e
       end
     end
 
@@ -154,6 +154,18 @@ module Mailgun
         "#{scheme}://#{api_host}/#{api_version}"
       else
         "#{scheme}://#{api_host}"
+      end
+    end
+
+    # Raises CommunicationError and stores response in it if present
+    #
+    # @param [Exception] e upstream exception object
+
+    def communication_error(e)
+      if e.respond_to? :response
+        raise CommunicationError.new(e.message, e.response)
+      else
+        raise CommunicationError.new(e.message)
       end
     end
   end
