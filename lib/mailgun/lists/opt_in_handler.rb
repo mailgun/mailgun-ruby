@@ -1,7 +1,7 @@
 require 'json'
 require 'uri'
 require 'base64'
-require 'digest/hmac'
+require 'openssl'
 
 module Mailgun
 
@@ -21,7 +21,8 @@ module Mailgun
 
       innerPayloadEncoded = Base64.encode64(JSON.generate(innerPayload))
 
-      digest = Digest::HMAC.hexdigest(innerPayloadEncoded, secret_app_id, Digest::SHA1)
+      sha1_digest = OpenSSL::Digest.new('sha1')
+      digest = OpenSSL::HMAC.hexdigest(sha1_digest, secret_app_id, innerPayloadEncoded)
 
       outerPayload = {'h' => digest,
                       'p' => innerPayloadEncoded}
@@ -40,7 +41,8 @@ module Mailgun
     def self.validate_hash(secret_app_id, unique_hash)
       outerPayload = JSON.parse(Base64.decode64(URI.unescape(unique_hash)))
 
-      generated_hash = Digest::HMAC.hexdigest(outerPayload['p'], secret_app_id, Digest::SHA1)
+      sha1_digest = OpenSSL::Digest.new('sha1')
+      generated_hash = OpenSSL::HMAC.hexdigest(sha1_digest, secret_app_id, outerPayload['p'])
 
       innerPayload = JSON.parse(Base64.decode64(URI.unescape(outerPayload['p'])))
 
