@@ -152,26 +152,6 @@ module Mailgun
       end
     end
 
-    def to_h
-      begin
-        JSON.parse(@body)
-      rescue Exception => e
-        raise ParseError.new(e), e
-      end
-    end
-
-    # Replace @body with Ruby Hash
-    #
-    # @return [Hash] A standard Ruby Hash containing the HTTP result.
-
-    def to_h!
-      begin
-        @body = JSON.parse(@body)
-      rescue Exception => e
-        raise ParseError.new(e), e
-      end
-    end
-
     # Return response as Yaml
     #
     # @return [String] A string containing response as YAML
