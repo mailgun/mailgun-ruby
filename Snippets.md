@@ -83,6 +83,7 @@ bm_obj = Mailgun::BatchMessage.new
 
 # Build message using Message Builder
 bm_obj.set_from_address :from, "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+bm_obj.set_message_id("<20141014000000.11111.11111@example.com>") # optional
 bm_obj.set_subject :subject, "This is the subject!"
 bm_obj.set_text_body :text, "This is the text body."
 
