@@ -52,7 +52,7 @@ Here's how to use Batch Message to easily handle batch sending jobs.
 ```ruby
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new("your-api-key")
-mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
+mb_obj = Mailgun::BatchMessage.new(mg_client, "example.com")
 
 # Define the from address.
 mb_obj.set_from_address("me@example.com", {"first"=>"Ruby", "last" => "SDK"});
