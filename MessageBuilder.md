@@ -57,7 +57,7 @@ Here's how to use Batch Message to easily handle batch sending jobs.
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new("your-api-key")
 # Create a Batch Message object, pass in the client and your domain.
-mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
+mb_obj = Mailgun::BatchMessage.new(mg_client, "example.com")
 
 # Define the from address.
 mb_obj.set_from_address("me@example.com", {"first"=>"Ruby", "last" => "SDK"});
@@ -75,7 +75,7 @@ mb_obj.add_recipient(:to, "bob.doe@example.com", {"first" => "Bob", "last" => "D
 mb_obj.add_recipient(:to, "sally.doe@example.com", {"first" => "Sally", "last" => "Doe"});
 
 # Call finalize to get a list of message ids and totals.
-message_ids = mg_client.finalize
+message_ids = mb_obj.finalize
 # {'id1234@example.com' => 1000, 'id5678@example.com' => 15}
 ```
 
