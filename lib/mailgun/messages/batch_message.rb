@@ -96,6 +96,9 @@ module Mailgun
 
     def send_message(message)
       simple_setter("recipient-variables", JSON.generate(@recipient_variables))
+      if @message.has_key?("recipient-variables")
+        @message["recipient-variables"] = @message["recipient-variables"].first
+      end
       response = @client.send_message(@domain, @message).to_h!
       message_id = response['id'].gsub(/\>|\</, '')
       @message_ids[message_id] = count_recipients()
