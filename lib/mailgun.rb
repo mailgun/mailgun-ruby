@@ -29,7 +29,9 @@ module Mailgun
       @http_client = RestClient::Resource.new(endpoint,
                                               :user => "api",
                                               :password => api_key,
-                                              :user_agent => "mailgun-sdk-ruby/#{Mailgun::VERSION}")
+                                              :user_agent => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
+                                              :ssl_version => 'TLSv1'
+                                             )
     end
 
     # Simple Message Sending
