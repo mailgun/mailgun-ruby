@@ -80,7 +80,7 @@ mb_obj.add_recipient(:to, "sally.doe@example.com", {"first"      => "Sally",
                                                     "account-id" => 121314});
 
 # Send your message through the client
-message_ids = mg_obj.finalize
+message_ids = mb_obj.finalize
 ```
 
 More Documentation
