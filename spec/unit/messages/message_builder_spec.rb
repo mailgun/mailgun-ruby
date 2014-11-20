@@ -180,26 +180,26 @@ describe 'The method set_test_mode' do
   end
   it 'turns on test mode with boolean true' do
     @mb_obj.set_test_mode(true)
-    @mb_obj.message["o:testmode"][0].should eq ("yes")
+    @mb_obj.message["o:testmode"][0].should eq("yes")
   end
   it 'turns on test mode with string true' do
     @mb_obj.set_test_mode("true")
-    @mb_obj.message["o:testmode"][0].should eq ("yes")
+    @mb_obj.message["o:testmode"][0].should eq("yes")
   end
   it 'turns off test mode with boolean false' do
     @mb_obj.set_test_mode(false)
-    @mb_obj.message["o:testmode"][0].should eq ("no")
+    @mb_obj.message["o:testmode"][0].should eq("no")
   end
   it 'turns off test mode with string false' do
     @mb_obj.set_test_mode("false")
-    @mb_obj.message["o:testmode"][0].should eq ("no")
+    @mb_obj.message["o:testmode"][0].should eq("no")
   end
   it 'does not allow multiple values' do
     @mb_obj.set_test_mode("false")
     @mb_obj.set_test_mode("true")
     @mb_obj.set_test_mode("false")
     @mb_obj.message["o:testmode"].length.should eq(1)
-    @mb_obj.message["o:testmode"][0].should eq ("no")
+    @mb_obj.message["o:testmode"][0].should eq("no")
   end
 end
 
@@ -209,26 +209,26 @@ describe 'The method set_dkim' do
   end
   it 'turns on dkim with boolean true' do
     @mb_obj.set_dkim(true)
-    @mb_obj.message["o:dkim"][0].should eq ("yes")
+    @mb_obj.message["o:dkim"][0].should eq("yes")
   end
   it 'turns on dkim with string true' do
     @mb_obj.set_dkim("true")
-    @mb_obj.message["o:dkim"][0].should eq ("yes")
+    @mb_obj.message["o:dkim"][0].should eq("yes")
   end
   it 'turns off dkim with boolean false' do
     @mb_obj.set_dkim(false)
-    @mb_obj.message["o:dkim"][0].should eq ("no")
+    @mb_obj.message["o:dkim"][0].should eq("no")
   end
   it 'turns off dkim with string false' do
     @mb_obj.set_dkim("false")
-    @mb_obj.message["o:dkim"][0].should eq ("no")
+    @mb_obj.message["o:dkim"][0].should eq("no")
   end
   it 'does not allow multiple values' do
     @mb_obj.set_dkim("false")
     @mb_obj.set_dkim("true")
     @mb_obj.set_dkim("false")
     @mb_obj.message["o:dkim"].length.should eq(1)
-    @mb_obj.message["o:dkim"][0].should eq ("no")
+    @mb_obj.message["o:dkim"][0].should eq("no")
   end
 end
 
@@ -244,9 +244,9 @@ describe 'The method add_campaign_id' do
     @mb_obj.add_campaign_id('My-Campaign-Id-1')
     @mb_obj.add_campaign_id('My-Campaign-Id-2')
     @mb_obj.add_campaign_id('My-Campaign-Id-3')
-    @mb_obj.message["o:campaign"][0].should eq ("My-Campaign-Id-1")
-    @mb_obj.message["o:campaign"][1].should eq ("My-Campaign-Id-2")
-    @mb_obj.message["o:campaign"][2].should eq ("My-Campaign-Id-3")
+    @mb_obj.message["o:campaign"][0].should eq("My-Campaign-Id-1")
+    @mb_obj.message["o:campaign"][1].should eq("My-Campaign-Id-2")
+    @mb_obj.message["o:campaign"][2].should eq("My-Campaign-Id-3")
   end
   it 'adds too many campaign IDs to the message' do
     expect{
@@ -262,15 +262,15 @@ describe 'The method add_tag' do
   end
   it 'adds a tag to the message' do
     @mb_obj.add_tag('My-Tag-1')
-    @mb_obj.message["o:tag"][0].should eq ("My-Tag-1")
+    @mb_obj.message["o:tag"][0].should eq("My-Tag-1")
   end
   it 'adds a few more tags to the message' do
     @mb_obj.add_tag('My-Tag-1')
     @mb_obj.add_tag('My-Tag-2')
     @mb_obj.add_tag('My-Tag-3')
-    @mb_obj.message["o:tag"][0].should eq ("My-Tag-1")
-    @mb_obj.message["o:tag"][1].should eq ("My-Tag-2")
-    @mb_obj.message["o:tag"][2].should eq ("My-Tag-3")
+    @mb_obj.message["o:tag"][0].should eq("My-Tag-1")
+    @mb_obj.message["o:tag"][1].should eq("My-Tag-2")
+    @mb_obj.message["o:tag"][2].should eq("My-Tag-3")
   end
   it 'adds too many tags to the message' do
     expect{
@@ -286,13 +286,13 @@ describe 'The method set_open_tracking' do
   end
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.set_open_tracking('Yes')
-    @mb_obj.message["o:tracking-opens"][0].should eq ("yes")
+    @mb_obj.message["o:tracking-opens"][0].should eq("yes")
     @mb_obj.set_open_tracking('No')
-    @mb_obj.message["o:tracking-opens"][0].should eq ("no")
+    @mb_obj.message["o:tracking-opens"][0].should eq("no")
     @mb_obj.set_open_tracking(true)
-    @mb_obj.message["o:tracking-opens"][0].should eq ("yes")
+    @mb_obj.message["o:tracking-opens"][0].should eq("yes")
     @mb_obj.set_open_tracking(false)
-    @mb_obj.message["o:tracking-opens"][0].should eq ("no")
+    @mb_obj.message["o:tracking-opens"][0].should eq("no")
   end
 end
 
@@ -302,15 +302,15 @@ describe 'The method set_click_tracking' do
   end
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.set_click_tracking('Yes')
-    @mb_obj.message["o:tracking-clicks"][0].should eq ("yes")
+    @mb_obj.message["o:tracking-clicks"][0].should eq("yes")
     @mb_obj.set_click_tracking('No')
-    @mb_obj.message["o:tracking-clicks"][0].should eq ("no")
+    @mb_obj.message["o:tracking-clicks"][0].should eq("no")
     @mb_obj.set_click_tracking(true)
-    @mb_obj.message["o:tracking-clicks"][0].should eq ("yes")
+    @mb_obj.message["o:tracking-clicks"][0].should eq("yes")
     @mb_obj.set_click_tracking(false)
-    @mb_obj.message["o:tracking-clicks"][0].should eq ("no")
+    @mb_obj.message["o:tracking-clicks"][0].should eq("no")
     @mb_obj.set_click_tracking('html')
-    @mb_obj.message["o:tracking-clicks"][0].should eq ("html")
+    @mb_obj.message["o:tracking-clicks"][0].should eq("html")
   end
 end
 
@@ -320,7 +320,7 @@ describe 'The method set_delivery_time' do
   end
   it 'defines a time/date to deliver a message in RFC2822 format.' do
     @mb_obj.set_delivery_time('October 25, 2013 10:00PM CST')
-    @mb_obj.message["o:deliverytime"][0].should eq ("Fri, 25 Oct 2013 22:00:00 -0600")
+    @mb_obj.message["o:deliverytime"][0].should eq("Fri, 25 Oct 2013 22:00:00 -0600")
   end
 end
 
@@ -330,12 +330,12 @@ describe 'The method set_custom_data' do
   end
   it 'accepts valid JSON and appends as data to the message.' do
     @mb_obj.set_custom_data('my-data', '{"key":"value"}')
-    @mb_obj.message["v:my-data"][0].should eq ("{\"key\":\"value\"}")
+    @mb_obj.message["v:my-data"][0].should eq("{\"key\":\"value\"}")
   end
   it 'accepts a hash and appends as data to the message.' do
     data = {'key'=> 'value'}
     @mb_obj.set_custom_data('my-data', data)
-    @mb_obj.message["v:my-data"][0].should eq ("{\"key\":\"value\"}")
+    @mb_obj.message["v:my-data"][0].should eq("{\"key\":\"value\"}")
   end
   it 'throws an exception on broken JSON.' do
     data = 'This is some crappy JSON.'
@@ -349,6 +349,27 @@ describe 'The method add_custom_parameter' do
   end
   it 'adds an undefined parameter to the message.' do
     @mb_obj.add_custom_parameter('h:my-sweet-header', 'datagoeshere')
-    @mb_obj.message["h:my-sweet-header"][0].should eq ("datagoeshere")
+    @mb_obj.message["h:my-sweet-header"][0].should eq("datagoeshere")
+  end
+end
+
+describe 'The method set_message_id' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+    @the_message_id = '<20141014000000.11111.11111@example.com>'
+  end
+  it 'correctly sets the Message-Id header' do
+    @mb_obj.set_message_id(@the_message_id)
+    @mb_obj.message['h:Message-Id'].should eq(@the_message_id)
+  end
+  it 'correctly clears the Message-Id header when passed nil' do
+    @mb_obj.set_message_id(nil)
+    @mb_obj.message.has_key?('h:Message-Id').should eq(false)
+  end
+  it 'correctly sets the Message-Id header when passed an empty string' do
+    @mb_obj.set_message_id(@the_message_id)
+    @mb_obj.message.has_key?('h:Message-Id').should eq(true)
+    @mb_obj.set_message_id('')
+    @mb_obj.message.has_key?('h:Message-Id').should eq(false)
   end
 end

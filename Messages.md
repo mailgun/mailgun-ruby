@@ -33,7 +33,11 @@ mb_obj.add_recipient(:cc, "sally.doe@example.com", {"first" => "Sally", "last" =
 mb_obj.set_subject("A message from the Ruby SDK using Message Builder!");
 # Define the body of the message.
 mb_obj.set_text_body("This is the text body of the message!");
-
+# Set the Message-Id header. Pass in a valid Message-Id.
+mb_obj.set_message_id("<20141014000000.11111.11111@example.com>")
+# Clear the Message-Id header. Pass in nil or empty string.
+mb_obj.set_message_id(nil)
+mb_obj.set_message_id('')
 # Other Optional Parameters.
 mb_obj.add_campaign_id("My-Awesome-Campaign");
 mb_obj.add_custom_parameter("h:Customer-Id", "12345");
