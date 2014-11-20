@@ -20,7 +20,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 ```
 
 Include
