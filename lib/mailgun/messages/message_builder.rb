@@ -53,7 +53,7 @@ module Mailgun
     # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
     # @return [void]
     def set_from_address(address, variables=nil)
-      add_recipient("from", address, variables)
+      add_recipient(:from, address, variables)
     end
 
 
