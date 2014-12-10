@@ -90,16 +90,7 @@ module Mailgun
     # @param [String] filename The filename you wish the attachment to be.
     # @return [void]
     def add_attachment(attachment, filename=nil)
-      if attachment.is_a?(String)
-        attachment = File.open(attachment, "r")
-      end
-      if !attachment.is_a?(File) || !attachment.respond_to?(:read)
-        raise ParameterError.new("Unable to access attachment file object.")
-      end
-      if !filename.nil?
-        attachment.instance_eval "def original_filename; '#{filename}'; end"
-      end
-      complex_setter(:attachment, attachment)
+      add_file(attachment, :attachment, filename)
     end
 
 
@@ -109,16 +100,7 @@ module Mailgun
     # @param [String] filename The filename you wish the inline image to be.
     # @return [void]
     def add_inline_image(inline_image, filename=nil)
-      if inline_image.is_a?(String)
-        inline_image = File.open(inline_image, "r")
-      end
-      if !inline_image.is_a?(File) || !inline_image.respond_to?(:read)
-        raise ParameterError.new("Unable to access attachment file object.")
-      end
-      if !filename.nil?
-        inline_image.instance_eval "def original_filename; '#{filename}'; end"
-      end
-      complex_setter(:inline, inline_image)
+      add_file(inline_image, :inline, filename)
     end
 
 
@@ -151,8 +133,8 @@ module Mailgun
       complex_setter("o:campaign", campaign_id)
       @counters[:attributes][:campaign_id] += 1
     end
-    
-    
+
+
     # Add tags to message. Limit of 3 per message.
     #
     # @param [String] tag A defined campaign ID to add to the message.
@@ -165,7 +147,7 @@ module Mailgun
       @counters[:attributes][:tag] += 1
     end
 
-    
+
     # Turn Open Tracking on and off, on a per message basis.
     #
     # @param [Boolean] tracking Boolean true or false.
@@ -173,8 +155,8 @@ module Mailgun
     def set_open_tracking(tracking)
       simple_setter("o:tracking-opens", bool_lookup(tracking))
     end
-    
-    
+
+
     # Turn Click Tracking on and off, on a per message basis.
     #
     # @param [String] tracking True, False, or HTML (for HTML only tracking)
@@ -183,7 +165,7 @@ module Mailgun
       simple_setter("o:tracking-clicks", bool_lookup(tracking))
     end
 
-    
+
     # Enable Delivery delay on message. Specify an RFC2822 date, and Mailgun
     # will not deliver the message until that date/time. For conversion
     # options, see Ruby "Time". Example: "October 25, 2013 10:00PM CST" will
@@ -196,7 +178,7 @@ module Mailgun
       simple_setter("o:deliverytime", time_str.rfc2822)
     end
 
-    
+
     # Add custom data to the message. The data should be either a hash or JSON
     # encoded. The custom data will be added as a header to your message.
     #
@@ -218,7 +200,7 @@ module Mailgun
       simple_setter("v:#{name}", data)
     end
 
-    
+
     # Add custom parameter to the message. A custom parameter is any parameter that
     # is not yet supported by the SDK, but available at the API. Note: No validation
     # is performed. Don't forget to prefix the parameter with o, h, or v.
@@ -230,7 +212,7 @@ module Mailgun
     def add_custom_parameter(name, data)
       complex_setter(name, data)
     end
-    
+
 
     # Set the Message-Id header to a custom value. Don't forget to enclose the
     # Message-Id in angle brackets, and ensure the @domain is present. Doesn't
@@ -240,7 +222,7 @@ module Mailgun
     # @return [void]
     def set_message_id(data)
       key = "h:Message-Id"
-      
+
       if data.to_s.empty?
         @message.delete_if { |k, v| k == key }
       else
@@ -248,7 +230,7 @@ module Mailgun
       end
     end
 
-    
+
     private
 
     # Sets values within the multidict, however, prevents
@@ -280,7 +262,26 @@ module Mailgun
       end
     end
 
-    
+    # Adds a file. Called through add_attachment and add_inline_image
+    #
+    # @param [String] attachment A file object for attaching as an attachment.
+    # @param [Symbol] disposition The type of file: :attachment or :inline
+    # @param [String] filename The filename you wish the attachment to be.
+    # @return [void]
+    def add_file(attachment, disposition, filename=nil)
+      if attachment.is_a?(String)
+        attachment = File.open(attachment, "r")
+      end
+      if !(attachment.is_a?(File) || attachment.respond_to?(:read))
+        raise ParameterError.new("Unable to access attachment file object.")
+      end
+      if !filename.nil?
+        attachment.instance_eval "def original_filename; '#{filename}'; end"
+      end
+      complex_setter(disposition, attachment)
+    end
+
+
     # Converts boolean type to string
     #
     # @param [String] value The item to convert
