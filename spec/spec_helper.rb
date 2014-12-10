@@ -7,9 +7,10 @@ Bundler.setup(:development)
 require 'mailgun'
 require_relative 'unit/connection/test_client'
 
-# INSERT YOUR API KEYS HERE
-APIKEY = "key"
-PUB_APIKEY = "pubkey"
+# Call tests like this:
+# MAILGUN_API_KEY=abcd MAILGUN_PUBLIC_KEY=1234 bundle exec rspec
+APIKEY = ENV['MAILGUN_API_KEY']
+PUB_APIKEY = ENV['MAILGUN_PUBLIC_KEY']
 APIHOST = "api.mailgun.net"
 APIVERSION = "v2"
-SSL= true
+SSL = true
