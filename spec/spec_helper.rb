@@ -8,8 +8,8 @@ require 'mailgun'
 require_relative 'unit/connection/test_client'
 
 # INSERT YOUR API KEYS HERE
-APIKEY = "key"
-PUB_APIKEY = "pubkey"
+APIKEY = ENV['MAILGUN_API_KEY']
+PUB_APIKEY = ENV['MAILGUN_PUBLIC_KEY']
 APIHOST = "api.mailgun.net"
 APIVERSION = "v2"
-SSL= true
+SSL = true
