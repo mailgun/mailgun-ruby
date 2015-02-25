@@ -276,7 +276,8 @@ module Mailgun
         raise ParameterError.new("Unable to access attachment file object.")
       end
       if !filename.nil?
-        attachment.instance_eval "def original_filename; '#{filename}'; end"
+        attachment.instance_variable_set :@original_filename, filename
+        attachment.instance_eval "def original_filename; @original_filename; end"
       end
       complex_setter(disposition, attachment)
     end
