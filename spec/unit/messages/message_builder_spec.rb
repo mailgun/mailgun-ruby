@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'stringio'
 
 describe 'MessageBuilder attribute readers' do
   it 'should be readable' do
@@ -156,6 +157,13 @@ describe 'The method add_attachment' do
 
     file_paths.each {|item| @mb_obj.add_attachment(item)}
     @mb_obj.message[:attachment].length.should eq(2)
+  end
+
+  it 'adds file-like objects to the message object' do
+    io = StringIO.new
+    io << File.binread(File.dirname(__FILE__) + "/sample_data/mailgun_icon.png")
+
+    @mb_obj.add_attachment io, 'mailgun_icon.png'
   end
 end
 
