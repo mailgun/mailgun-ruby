@@ -95,6 +95,19 @@ message_id = result['id']
 message = result['message']
 ```
 
+Email validation
+--------
+For email validation you need to build the client using your Mailgun public API key.
+Here's an example of how to use the call:
+
+```ruby
+mg_client = Mailgun::Client.new("your-public-api-key")
+result = mg_client.validate_email('test@test-mail-domain.com').to_h!
+
+is_valid = result['is_valid']
+alternatives = result['did_you_mean']
+```
+
 Debugging
 ---------
 
