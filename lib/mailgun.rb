@@ -57,6 +57,13 @@ module Mailgun
       end
     end
 
+    # Validate an email address
+    #
+    # @param [String] email This is the email address you wish to validate
+    def validate_email(email)
+      get('/address/validate', {address: email})
+    end
+
     # Generic Mailgun POST Handler
     #
     # @param [String] resource_path This is the API resource you wish to interact
