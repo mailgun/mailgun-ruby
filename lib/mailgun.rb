@@ -7,6 +7,7 @@ require "mailgun/version"
 require "mailgun/lists/opt_in_handler"
 require "mailgun/messages/batch_message"
 require "mailgun/events/events"
+require "mailgun/domains/domains"
 require "mailgun/messages/message_builder"
 require "mailgun/exceptions/exceptions"
 
