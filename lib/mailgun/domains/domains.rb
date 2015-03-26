@@ -34,7 +34,7 @@ module Mailgun
     # Verify Domain
     #
     # @param [String] domain Domain name
-    # @return [Hash] Informations on the requested domains
+    # @return [Hash] Informations on the verified domains
     
     def verify_domain(options)
       domain = options[:domain]
