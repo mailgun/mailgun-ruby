@@ -31,9 +31,20 @@ module Mailgun
       JSON.parse(response.body)
     end
     
+    # Verify Domain
+    #
+    # @param [String] domain Domain name
+    # @return [Hash] Informations on the requested domains
+    
+    def verify_domain(options)
+      domain = options[:domain]
+      response = @client.put "domains/#{domain}/verify", nil
+      JSON.parse(response.body)
+    end
+    
     # Add Domain
     #
-    # @param [String] domain Name of the domain (ex. domain.com)
+    # @param [String] name Name of the domain (ex. domain.com)
     # @param [String] smtp_password Password for SMTP authentication
     # @param [String] spam_action disabled or tag Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged wtih a spam header. See Spam Filter.
     # @param [Boolean] wildcard true or false Determines whether the domain will accept email for sub-domains.
@@ -48,7 +59,7 @@ module Mailgun
     
     def delete_domain(options)
       domain = options[:domain]
-      @client.delete("/domains#{domain}")
+      @client.delete("/domains/#{domain}")
     end
     
   end
