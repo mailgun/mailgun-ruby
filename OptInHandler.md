@@ -31,8 +31,9 @@ recipient_address = 'recipient@example.com';
 
 # Let's validate the customer's email address, using Mailgun's validation endpoint.
 result = mg_validate.get('address/validate', {:address => recipient_address});
+is_valid = JSON.parse(result.body)['is_valid']
 
-if result[:body]["is_valid"] == true
+if is_valid == true
 	# Next, generate a hash.
 	generated_hash = Mailgun::OptInHandler.generate_hash(mailing_list, secret_app_id, recipient_address);
 	
