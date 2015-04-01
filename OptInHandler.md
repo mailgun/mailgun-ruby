@@ -77,7 +77,7 @@ if !hash_validation.nil?
                                     :to      => validated_recipient, 
                                     :subject => 'Confirmation Received!', 
                                     :html    => "<html><body>Hello,<br><br>We've successfully subscribed you to the list, #{validated_list}!<br><br>Thank you!
-                                    </body></html>"));
+                                    </body></html>"});
 end
 ```
 
