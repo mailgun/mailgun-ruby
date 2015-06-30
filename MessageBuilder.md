@@ -45,7 +45,7 @@ mb_obj.add_custom_parameter("h:Customer-Id", "12345");
 mb_obj.add_attachment("/path/to/file/receipt_123491820.pdf", "Receipt.pdf");
 
 # Schedule message in the future
-mb_obj.set_delivery_time("tomorrow 8:00AM", "PST");
+mb_obj.set_delivery_time("tomorrow 8:00AM PST");
 
 # Finally, send your message using the client
 result = mg_client.send_message("sending_domain.com", mb_obj)
