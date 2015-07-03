@@ -137,6 +137,7 @@ module Mailgun
     def convert_string_to_file(string)
       file = Tempfile.new('MG_TMP_MIME')
       file.write(string)
+      file.rewind
       file
     end
 
