@@ -93,7 +93,7 @@ module Mailgun
       if attachment.is_a?(String)
         attachment = File.open(attachment, "r")
       end
-      if !attachment.is_a?(File) || !attachment.respond_to?(:read)
+      if !attachment.is_a?(File) && !attachment.respond_to?(:read)
         raise ParameterError.new("Unable to access attachment file object.")
       end
       if !filename.nil?
@@ -112,7 +112,7 @@ module Mailgun
       if inline_image.is_a?(String)
         inline_image = File.open(inline_image, "r")
       end
-      if !inline_image.is_a?(File) || !inline_image.respond_to?(:read)
+      if !inline_image.is_a?(File) && !inline_image.respond_to?(:read)
         raise ParameterError.new("Unable to access attachment file object.")
       end
       if !filename.nil?
