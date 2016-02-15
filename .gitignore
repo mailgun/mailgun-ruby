@@ -18,3 +18,5 @@ tmp
 .DS_Store
 test.rb
 ruby
+.ruby-env.yml
+.rspec-local

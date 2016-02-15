@@ -1,0 +1,390 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists
+    body:
+      encoding: US-ASCII
+      string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List&description=This%20list%20should%20be%20deleted%20automatically.&access_level=members
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '195'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:22:42 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '361'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "list": {
+            "access_level": "members",
+            "address": "integration_test_list@DOMAIN.TEST",
+            "created_at": "Fri, 08 Jan 2016 20:22:42 -0000",
+            "description": "This list should be deleted automatically.",
+            "members_count": 0,
+            "name": "Integration Test List"
+          },
+          "message": "Mailing list has been created"
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:22:43 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:22:43 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '233'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+        <title>404 Not Found</title>
+        <h1>Not Found</h1>
+        <p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:22:43 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists?limit=50
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:22:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '360'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "access_level": "members",
+              "address": "integration_test_list@DOMAIN.TEST",
+              "created_at": "Fri, 08 Jan 2016 20:22:42 -0000",
+              "description": "This list should be deleted automatically.",
+              "members_count": 0,
+              "name": "Integration Test List"
+            }
+          ],
+          "total_count": 1
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:22:44 GMT
+- request:
+    method: put
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    body:
+      encoding: US-ASCII
+      string: address=&name=Integration%20Test%20List%20Update&description=This%20list%20should%20be%20deleted%20automatically.&access_level=readonly
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '135'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:22:44 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '233'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+        <title>404 Not Found</title>
+        <h1>Not Found</h1>
+        <p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:22:45 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:22:45 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '233'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+        <title>404 Not Found</title>
+        <h1>Not Found</h1>
+        <p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:22:45 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:23:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '315'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "list": {
+            "access_level": "members",
+            "address": "integration_test_list@DOMAIN.TEST",
+            "created_at": "Fri, 08 Jan 2016 20:22:42 -0000",
+            "description": "This list should be deleted automatically.",
+            "members_count": 0,
+            "name": "Integration Test List"
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:23:02 GMT
+- request:
+    method: put
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List%20Update&description=This%20list%20should%20be%20deleted%20automatically.&access_level=readonly
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '205'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:23:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '369'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "list": {
+            "access_level": "readonly",
+            "address": "integration_test_list@DOMAIN.TEST",
+            "created_at": "Fri, 08 Jan 2016 20:22:42 -0000",
+            "description": "This list should be deleted automatically.",
+            "members_count": 0,
+            "name": "Integration Test List Update"
+          },
+          "message": "Mailing list has been updated"
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:23:03 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:23:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '133'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "address": "integration_test_list@DOMAIN.TEST",
+          "message": "Mailing list has been removed"
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:23:03 GMT
+recorded_with: VCR 3.0.1

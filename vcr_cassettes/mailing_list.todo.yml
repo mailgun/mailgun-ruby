@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists
+    body:
+      encoding: US-ASCII
+      string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List&description=This%20list%20should%20be%20deleted%20automatically.&access_level=members
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '195'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:13:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '35'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "message": "Duplicate object"
+        }
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:13:41 GMT
+recorded_with: VCR 3.0.1

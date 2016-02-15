@@ -1,7 +1,4 @@
 require 'mailgun/messages/message_builder'
-require 'mailgun'
-require "mailgun/exceptions/exceptions"
-
 
 module Mailgun
 
@@ -22,17 +19,22 @@ module Mailgun
   #    the message_ids for tracking purposes.
   #
   # See the Github documentation for full examples.
-
   class BatchMessage < MessageBuilder
 
     attr_reader :message_ids, :domain, :recipient_variables
 
+    # Public: Creates a new BatchMessage object.
     def initialize(client, domain)
       @client = client
       @recipient_variables = {}
       @domain = domain
       @message_ids = {}
-      super()
+      @message = Hash.new { |hash, key| hash[key] = [] }
+
+      @counters = {
+        recipients: { to: 0, cc: 0, bcc: 0 },
+        attributes: { attachment: 0, campaign_id: 0, custom_option: 0, tag: 0 }
+      }
     end
 
     # Adds a specific type of recipient to the batch message object.
@@ -41,31 +43,24 @@ module Mailgun
     # @param [String] address The email address of the recipient to add to the message object.
     # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
     # @return [void]
-
-    def add_recipient(recipient_type, address, variables=nil)
-      if (@counters[:recipients][recipient_type] == 1000)
-        send_message(@message)
-      end
+    def add_recipient(recipient_type, address, variables = nil)
+      # send the message when we have 1000, not before
+      send_message if @counters[:recipients][recipient_type] == Mailgun::Chains::MAX_RECIPIENTS
 
       compiled_address = parse_address(address, variables)
       complex_setter(recipient_type, compiled_address)
-      if recipient_type != :from
-        store_recipient_variables(recipient_type, address, variables)
-      end
-      if @counters[:recipients].has_key?(recipient_type)
-        @counters[:recipients][recipient_type] += 1
-      end
+
+      store_recipient_variables(recipient_type, address, variables) if recipient_type != :from
+
+      @counters[:recipients][recipient_type] += 1 if @counters[:recipients].key?(recipient_type)
     end
 
     # Always call this function after adding recipients. If less than 1000 are added,
     # this function will ensure the batch is sent.
     #
     # @return [Hash] A hash of {'Message ID' => '# of Messages Sent'}
-
-    def finalize()
-      if any_recipients_left?
-        send_message(@message)
-      end
+    def finalize
+      send_message if any_recipients_left?
       @message_ids
     end
 
@@ -74,17 +69,11 @@ module Mailgun
     # This method determines if it's necessary to send another batch.
     #
     # @return [Boolean]
-
     def any_recipients_left?
-      if @counters[:recipients][:to] > 0
-        return true
-      elsif @counters[:recipients][:cc] > 0
-        return true
-      elsif @counters[:recipients][:bcc] > 0
-        return true
-      else
-        return false
-      end
+      return true if @counters[:recipients][:to] > 0
+      return true if @counters[:recipients][:cc] > 0
+      return true if @counters[:recipients][:bcc] > 0
+      false
     end
 
     # This method initiates a batch send to the API. It formats the recipient
@@ -93,42 +82,36 @@ module Mailgun
     # an exception will be thrown if a communication error occurs.
     #
     # @return [Boolean]
+    def send_message
+      rkey = 'recipient-variables'
+      simple_setter rkey, JSON.generate(@recipient_variables)
+      @message[rkey] = @message[rkey].first if @message.key?(rkey)
 
-    def send_message(message)
-      simple_setter("recipient-variables", JSON.generate(@recipient_variables))
-      if @message.has_key?("recipient-variables")
-        @message["recipient-variables"] = @message["recipient-variables"].first
-      end
       response = @client.send_message(@domain, @message).to_h!
       message_id = response['id'].gsub(/\>|\</, '')
-      @message_ids[message_id] = count_recipients()
-      reset_message()
+      @message_ids[message_id] = count_recipients
+      reset_message
     end
 
     # This method stores recipient variables for each recipient added, if
     # variables exist.
-
     def store_recipient_variables(recipient_type, address, variables)
-      if not variables
-        variables = {:id => @counters[:recipients][recipient_type]}
-      end
+      variables = { id: @counters[:recipients][recipient_type] } unless variables
       @recipient_variables[address] = variables
     end
 
     # This method stores recipient variables for each recipient added, if
     # variables exist.
-
-    def count_recipients()
+    def count_recipients
       count = 0
-      @counters[:recipients].each { |a| count = a[1] + count}
+      @counters[:recipients].each_value { |cnt| count += cnt }
       count
     end
 
     # This method resets the message object to prepare for the next batch
     # of recipients.
-
-    def reset_message()
-      @message.delete("recipient-variables")
+    def reset_message
+      @message.delete('recipient-variables')
       @message.delete(:to)
       @message.delete(:cc)
       @message.delete(:bcc)

@@ -1,15 +1,15 @@
 Mailgun-Ruby Snippets
 =====================
 
-This page is filled with snippets that cover almost every API endpoint and action. Copy, Paste, Go! There will be little inline documentation in these samples, please consult Mailgun's official documentation for detailed information. 
+This page is filled with snippets that cover almost every API endpoint and action. Copy, Paste, Go! There will be little inline documentation in these samples, please consult Mailgun's official documentation for detailed information.
 
-If you haven't already installed the SDK, go to the README and follow the installation instructions. 
+If you haven't already installed the SDK, go to the README and follow the installation instructions.
 
 These snippets require that you pipe in a few parameters. "mg_client" is instantiated like so:
 
 ```ruby
 require 'mailgun'
-mg_client = Mailgun::Client.new "your-api-key" 
+mg_client = Mailgun::Client.new "your-api-key"
 ```
 
 ### Messages:
@@ -17,9 +17,9 @@ ____________________________________________________
 **Send a basic message: **
 
 ```ruby
-data = {:from => 'bob@sending_domain.com', 
-                  :to => 'sally@example.com', 
-                  :subject => 'The Ruby SDK is awesome!', 
+data = {:from => 'bob@sending_domain.com',
+                  :to => 'sally@example.com',
+                  :subject => 'The Ruby SDK is awesome!',
                   :text => 'It is really easy to send a message!'}
 
 mg_client.send_message "sending_domain.com", data
@@ -28,9 +28,9 @@ mg_client.send_message "sending_domain.com", data
 **Send a multipart text/html message:**
 
 ```ruby
-data = {:from => 'bob@sending_domain.com', 
-                  :to => 'sally@example.com', 
-                  :subject => 'The Ruby SDK is awesome!', 
+data = {:from => 'bob@sending_domain.com',
+                  :to => 'sally@example.com',
+                  :subject => 'The Ruby SDK is awesome!',
                   :text => 'This is the text part.',
                   :html => '<html><body><p>This is the HTML part.</p></body></html>'}
 
@@ -68,10 +68,10 @@ mg_client.send_message "sending_domain.com", data
 ```ruby
 mb_obj = Mailgun::MessageBuilder.new
 
-mb_obj.set_from_address :from, "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+mb_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
 mb_obj.add_recipient :to, "recipient@example.com", {'first' => 'Recipient', 'last' => 'User'}
-mb_obj.set_subject :subject, "This is the subject!"
-mb_obj.set_text_body :text, "This is the text body."
+mb_obj.set_subject "This is the subject!"
+mb_obj.set_text_body "This is the text body."
 
 mg_client.send_message "sending_domain.com", mb_obj
 ```
@@ -82,10 +82,10 @@ mg_client.send_message "sending_domain.com", mb_obj
 bm_obj = Mailgun::BatchMessage.new
 
 # Build message using Message Builder
-bm_obj.set_from_address :from, "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+bm_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
 bm_obj.set_message_id("<20141014000000.11111.11111@example.com>") # optional
-bm_obj.set_subject :subject, "This is the subject!"
-bm_obj.set_text_body :text, "This is the text body."
+bm_obj.set_subject "This is the subject!"
+bm_obj.set_text_body "This is the text body."
 
 # Loop and add unlimited recipients (batch jobs will fire when thresholds reached)
 bm_obj.add_recipient :to, "a_user@example.com"
@@ -108,10 +108,10 @@ result = @mg_client.get "domains", {:limit => 5, :skip => 0}
 result = @mg_client.get "domains/#{domain}"
 ```
 
-**Add a domain:** 
+**Add a domain:**
 
 ```ruby
-result = @mg_client.post "domains", {:name => 'anothersample.mailgun.org', 
+result = @mg_client.post "domains", {:name => 'anothersample.mailgun.org',
                                      :smtp_password => 'super_secret',
                                      :spam_action => 'tag'}
 ```
@@ -210,7 +210,7 @@ ____________________________________________________
 **Get Statistics: **
 
 ```ruby
-result = @mg_client.get "#{domain}/stats", {:limit => 50, 
+result = @mg_client.get "#{domain}/stats", {:limit => 50,
                                             :skip => 10,
                                             :event => 'sent',
                                             "start-date" => 'Mon, 13 Feb 2015 00:00:00 GMT'}
@@ -300,7 +300,7 @@ result = @mg_client.delete "#{domain}/campaigns/#{campaign_id}"
 **Get Campaign Events: **
 
 ```ruby
-result = @mg_client.get "#{domain}/campaigns/#{campaign_id}/events", {:event => 'clicked', 
+result = @mg_client.get "#{domain}/campaigns/#{campaign_id}/events", {:event => 'clicked',
                                                                       :recipient => 'test@example.com',
                                                                       :country => 'US',
                                                                       :region => 'TX',
@@ -488,7 +488,7 @@ result = @mg_client.get "address/validate", {:address => 'test@example.com'}
 **Parse Addresses: **
 
 ```ruby
-result = @mg_client.get "address/parse", {:addresses => 'test@example.com, "First Last <first.last@example.com>', 
+result = @mg_client.get "address/parse", {:addresses => 'test@example.com, "First Last <first.last@example.com>',
                                           :syntax_only => true}
 ```
 
@@ -496,12 +496,12 @@ result = @mg_client.get "address/parse", {:addresses => 'test@example.com, "Firs
 Support and Feedback
 --------------------
 
-Be sure to visit the Mailgun official 
-[documentation website](http://documentation.mailgun.com/) for additional 
-information about our API. 
+Be sure to visit the Mailgun official
+[documentation website](https://documentation.mailgun.com/) for additional
+information about our API.
 
-If you find a bug, please submit the issue in Github directly. 
+If you find a bug, please submit the issue in Github directly.
 [Mailgun-Ruby Issues](https://github.com/mailgun/Mailgun-PHP/issues)
 
-As always, if you need additional assistance, drop us a note at 
+As always, if you need additional assistance, drop us a note at
 [support@mailgun.com](mailto:support@mailgun.com).

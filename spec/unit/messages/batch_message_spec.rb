@@ -4,11 +4,12 @@ describe 'BatchMessage attribute readers' do
   it 'should be readable' do
     @mb_client = Mailgun::UnitClient.new("messages")
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
-    @mb_obj.should respond_to(:message_ids)
-    @mb_obj.should respond_to(:message)
-    @mb_obj.should respond_to(:counters)
-    @mb_obj.should respond_to(:recipient_variables)
-    @mb_obj.should respond_to(:domain)
+
+    expect(@mb_obj).to respond_to(:message_ids)
+    expect(@mb_obj).to respond_to(:message)
+    expect(@mb_obj).to respond_to(:counters)
+    expect(@mb_obj).to respond_to(:recipient_variables)
+    expect(@mb_obj).to respond_to(:domain)
   end
 end
 
@@ -20,43 +21,43 @@ describe 'The instantiation of Batch Message' do
   end
 
   it 'contains Message, which should be of type Hash and empty' do
-    @mb_obj.message.should be_a(Hash)
-    @mb_obj.message.length.should eq(0)
+    expect(@mb_obj.message).to be_a(Hash)
+    expect(@mb_obj.message.length).to eq(0)
   end
 
   it 'contains recipient_variables, which should be of type Hash and empty' do
-    @mb_obj.recipient_variables.should be_a(Hash)
-    @mb_obj.recipient_variables.length.should eq(0)
+    expect(@mb_obj.recipient_variables).to be_a(Hash)
+    expect(@mb_obj.recipient_variables.length).to eq(0)
   end
 
   it 'contains domain, which should be of type string and contain example.com' do
-    @mb_obj.domain.should be_a(String)
-    @mb_obj.domain.should eq('example.com')
+    expect(@mb_obj.domain).to be_a(String)
+    expect(@mb_obj.domain).to eq('example.com')
   end
 
   it 'contains message_ids, which should be of type hash and empty' do
-    @mb_obj.message_ids.should be_a(Hash)
-    @mb_obj.message_ids.length.should eq(0)
+    expect(@mb_obj.message_ids).to be_a(Hash)
+    expect(@mb_obj.message_ids.length).to eq(0)
   end
 
   it 'contains counters, which should be of type hash and contain several important counters' do
-    @mb_obj.counters.should be_a(Hash)
-    @mb_obj.counters.should include(:recipients)
+    expect(@mb_obj.counters).to be_a(Hash)
+    expect(@mb_obj.counters).to include(:recipients)
   end
 
   it 'contains counters, which should be of type hash and contain several important counters' do
-    @mb_obj.counters.should be_a(Hash)
+    expect(@mb_obj.counters).to be_a(Hash)
 
-    @mb_obj.counters.should include(:recipients)
-    @mb_obj.counters[:recipients].should include(:to)
-    @mb_obj.counters[:recipients].should include(:cc)
-    @mb_obj.counters[:recipients].should include(:bcc)
+    expect(@mb_obj.counters).to include(:recipients)
+    expect(@mb_obj.counters[:recipients]).to include(:to)
+    expect(@mb_obj.counters[:recipients]).to include(:cc)
+    expect(@mb_obj.counters[:recipients]).to include(:bcc)
 
-    @mb_obj.counters.should include(:attributes)
-    @mb_obj.counters[:attributes].should include(:attachment)
-    @mb_obj.counters[:attributes].should include(:campaign_id)
-    @mb_obj.counters[:attributes].should include(:custom_option)
-    @mb_obj.counters[:attributes].should include(:tag)
+    expect(@mb_obj.counters).to include(:attributes)
+    expect(@mb_obj.counters[:attributes]).to include(:attachment)
+    expect(@mb_obj.counters[:attributes]).to include(:campaign_id)
+    expect(@mb_obj.counters[:attributes]).to include(:custom_option)
+    expect(@mb_obj.counters[:attributes]).to include(:tag)
   end
 end
 
@@ -77,9 +78,12 @@ describe 'The method add_recipient' do
     1000.times do
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
     end
-    @mb_obj.counters[:recipients][recipient_type].should eq(1000)
+
+    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
+    
     @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-    @mb_obj.counters[:recipients][recipient_type].should eq(1)
+    
+    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
   it 'adds recipients to the message, calls finalize, and cleans up' do
@@ -87,11 +91,13 @@ describe 'The method add_recipient' do
     1000.times do
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
     end
-    @mb_obj.counters[:recipients][recipient_type].should eq(1000)
+
+    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
     @mb_obj.finalize
-    @mb_obj.message['recipient-variables'].length.should eq(0)
-    @mb_obj.message[:to].length.should eq(0)
-    @mb_obj.counters[:recipients][recipient_type].should eq(0)
+
+    expect(@mb_obj.message['recipient-variables'].length).to eq(0)
+    expect(@mb_obj.message[:to].length).to eq(0)
+    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(0)
   end
 
   it 'adds 5,005 recipients to the message body and validates we receive message_ids back' do
@@ -100,13 +106,15 @@ describe 'The method add_recipient' do
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
     end
     @mb_obj.finalize
-    @mb_obj.message_ids.length.should eq(6)
+
+    expect(@mb_obj.message_ids.length).to eq(6)
   end
 
   it 'sets recipient-variables, for batch expansion' do
     recipient_type = :to
     @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-    @mb_obj.recipient_variables[@address_1].should eq(@variables_1)
+
+    expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
   end
 
   it 'sets multiple recipient-variables, for batch expansion' do
@@ -114,9 +122,10 @@ describe 'The method add_recipient' do
     @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
     @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
     @mb_obj.add_recipient(recipient_type, @address_3, @variables_3)
-    @mb_obj.recipient_variables[@address_1].should eq(@variables_1)
-    @mb_obj.recipient_variables[@address_2].should eq(@variables_2)
-    @mb_obj.recipient_variables[@address_3].should eq(@variables_3)
+    
+    expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
+    expect(@mb_obj.recipient_variables[@address_2]).to eq(@variables_2)
+    expect(@mb_obj.recipient_variables[@address_3]).to eq(@variables_3)
   end
 
 end

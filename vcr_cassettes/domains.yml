@@ -1,0 +1,360 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains
+    body:
+      encoding: US-ASCII
+      string: smtp_password=super_secret&spam_action=tag&wildcard=false&name=integration-test.domain.invalid
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '94'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 15 Jan 2016 20:11:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1417'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "domain": {
+            "created_at": "Fri, 15 Jan 2016 20:11:28 GMT",
+            "name": "integration-test.domain.invalid",
+            "require_tls": false,
+            "skip_verification": false,
+            "smtp_login": "postmaster@integration-test.domain.invalid",
+            "smtp_password": "super_secret",
+            "spam_action": "tag",
+            "state": "unverified",
+            "type": "custom",
+            "wildcard": false
+          },
+          "message": "Domain has been created",
+          "receiving_dns_records": [
+            {
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxa.mailgun.org"
+            },
+            {
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxb.mailgun.org"
+            }
+          ],
+          "sending_dns_records": [
+            {
+              "name": "integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "v=spf1 include:mailgun.org ~all"
+            },
+            {
+              "name": "pic._domainkey.integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCYHL7d9j0Y2Vzt11AQk3ZoO2tNu4E3MRJvjw4Uhw3WY2iUpM4x1pw/L+nzGFyd0NfCVLea6mafUTeTWTMIocQVZLWqtnVPONS+YkQTqo1xtcZzC7GMBEVA+VsEMAYbw57pyIu1DQVW+dnqd7cbb4POdLk3Jy75w59Mys8/9GQUNQIDAQAB"
+            },
+            {
+              "name": "email.integration-test.domain.invalid",
+              "record_type": "CNAME",
+              "valid": "unknown",
+              "value": "mailgun.org"
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/integration-test.domain.invalid
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 15 Jan 2016 20:11:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1377'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "domain": {
+            "created_at": "Fri, 15 Jan 2016 20:11:28 GMT",
+            "name": "integration-test.domain.invalid",
+            "require_tls": false,
+            "skip_verification": false,
+            "smtp_login": "postmaster@integration-test.domain.invalid",
+            "smtp_password": "super_secret",
+            "spam_action": "tag",
+            "state": "unverified",
+            "type": "custom",
+            "wildcard": false
+          },
+          "receiving_dns_records": [
+            {
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxa.mailgun.org"
+            },
+            {
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxb.mailgun.org"
+            }
+          ],
+          "sending_dns_records": [
+            {
+              "name": "integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "v=spf1 include:mailgun.org ~all"
+            },
+            {
+              "name": "pic._domainkey.integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCYHL7d9j0Y2Vzt11AQk3ZoO2tNu4E3MRJvjw4Uhw3WY2iUpM4x1pw/L+nzGFyd0NfCVLea6mafUTeTWTMIocQVZLWqtnVPONS+YkQTqo1xtcZzC7GMBEVA+VsEMAYbw57pyIu1DQVW+dnqd7cbb4POdLk3Jy75w59Mys8/9GQUNQIDAQAB"
+            },
+            {
+              "name": "email.integration-test.domain.invalid",
+              "record_type": "CNAME",
+              "valid": "unknown",
+              "value": "mailgun.org"
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 15 Jan 2016 20:11:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2041'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "created_at": "Fri, 15 Jan 2016 20:11:28 GMT",
+              "name": "integration-test.domain.invalid",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@integration-test.domain.invalid",
+              "smtp_password": "super_secret",
+              "spam_action": "tag",
+              "state": "unverified",
+              "type": "custom",
+              "wildcard": false
+            },
+            {
+              "created_at": "Fri, 08 Jan 2016 21:40:17 GMT",
+              "name": "mail.mitchellandness.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@mail.mitchellandness.com",
+              "smtp_password": "33114017612439705daa4edcda233950",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "wildcard": false
+            },
+            {
+              "created_at": "Tue, 29 Dec 2015 21:05:59 GMT",
+              "name": "DOMAIN.TEST",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@DOMAIN.TEST",
+              "smtp_password": "bc68064e57238b091107c80dd61a7e6a",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "sandbox",
+              "wildcard": false
+            },
+            {
+              "created_at": "Mon, 14 Dec 2015 22:02:29 GMT",
+              "name": "mail.honingpigeon.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@mail.honingpigeon.com",
+              "smtp_password": "7344e71cd355c986d6ece8218a520b88",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "wildcard": false
+            },
+            {
+              "created_at": "Mon, 14 Sep 2015 21:34:08 GMT",
+              "name": "mailhive.dmipartners.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@mailhive.dmipartners.com",
+              "smtp_password": "a040bcfef229efa52283224144ebc15f",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "wildcard": false
+            }
+          ],
+          "total_count": 5
+        }
+    http_version: 
+  recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/integration-test.domain.invalid
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 15 Jan 2016 20:12:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '42'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "message": "Domain has been deleted"
+        }
+    http_version: 
+  recorded_at: Fri, 15 Jan 2016 20:12:54 GMT
+recorded_with: VCR 3.0.1
