@@ -1,0 +1,175 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints
+    body:
+      encoding: US-ASCII
+      string: address=integration-test-email%40DOMAIN.TEST
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '79'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:31:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '142'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Address
+        has been added to the complaints table"}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:31:59 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/integration-test-email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:31:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '128'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","created_at":"Fri,
+        08 Jan 2016 20:31:59 UTC"}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:31:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '791'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"address":"integration-test-email@DOMAIN.TEST","created_at":"Fri,
+        08 Jan 2016 20:31:59 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=last\u0026limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=next\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=previous\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100"}}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/integration-test-email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Jan 2016 20:31:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '127'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Spam complaint
+        has been removed"}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
+recorded_with: VCR 3.0.1

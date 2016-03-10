@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/stats?event=sent&limit=50&skip=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"items":[],"total_count":10000}'
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:06 GMT
+recorded_with: VCR 3.0.1

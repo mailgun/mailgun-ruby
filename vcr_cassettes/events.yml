@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/events?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3336'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: "{\n  \"items\": [\n    {\n      \"tags\": [], \n      \"timestamp\":
+        1452204483.41958, \n      \"envelope\": {\n        \"targets\": \"sally@DOMAIN.TEST\",
+        \n        \"transport\": \"smtp\", \n        \"sender\": \"bob@DOMAIN.TEST\"\n
+        \     }, \n      \"recipient-domain\": \"DOMAIN.TEST\", \n      \"method\":
+        \"http\", \n      \"campaigns\": [], \n      \"user-variables\": {}, \n      \"flags\":
+        {\n        \"is-routed\": null, \n        \"is-authenticated\": true, \n        \"is-system-test\":
+        false, \n        \"is-test-mode\": true\n      }, \n      \"log-level\": \"info\",
+        \n      \"id\": \"JAx9z641TuGGUyaJlD9sCQ\", \n      \"message\": {\n        \"headers\":
+        {\n          \"to\": \"sally@DOMAIN.TEST\", \n          \"message-id\": \"20160107220803.53710.46802@DOMAIN.TEST\",
+        \n          \"from\": \"bob@DOMAIN.TEST\", \n          \"subject\": \"Hash
+        Integration Test\"\n        }, \n        \"attachments\": [], \n        \"recipients\":
+        [\n          \"sally@DOMAIN.TEST\"\n        ], \n        \"size\": 457\n      },
+        \n      \"recipient\": \"sally@DOMAIN.TEST\", \n      \"event\": \"accepted\"\n
+        \   }\n  ], \n  \"paging\": {\n    \"next\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjA2LjQ1MiswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIHsiYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjAzLjQxOSswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIFsiZiJdLCBudWxsLCBbWyJhY2NvdW50LmlkIiwgIjU1ZTA0ZWRlMDQ1Y2E0MzY0MTNiN2I0YSJdLCBbImRvbWFpbi5uYW1lIiwgInJzOTBiNjhmZDM5Y2UyNDE1NjlmZDEwZjUzNGVmOWMwNjUubWFpbGd1bi5vcmciXV0sIDEsICJtZXNzYWdlI0pBeDl6NjQxVHVHR1V5YUpsRDlzQ1EiXQ==\",
+        \n    \"last\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjA2LjQ1MiswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIHsiYiI6ICIyMDE2LTAxLTA1VDIyOjA4OjA2LjQ1MyswMDowMCIsICJlIjogIjIwMTYtMDEtMDdUMjI6MDg6MDYuNDUyKzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIFtbImFjY291bnQuaWQiLCAiNTVlMDRlZGUwNDVjYTQzNjQxM2I3YjRhIl0sIFsiZG9tYWluLm5hbWUiLCAicnM5MGI2OGZkMzljZTI0MTU2OWZkMTBmNTM0ZWY5YzA2NS5tYWlsZ3VuLm9yZyJdXSwgMSwgbnVsbF0=\",
+        \n    \"first\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjA2LjQ1MiswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIHsiYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjA2LjQ1MiswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIFsiZiJdLCBudWxsLCBbWyJhY2NvdW50LmlkIiwgIjU1ZTA0ZWRlMDQ1Y2E0MzY0MTNiN2I0YSJdLCBbImRvbWFpbi5uYW1lIiwgInJzOTBiNjhmZDM5Y2UyNDE1NjlmZDEwZjUzNGVmOWMwNjUubWFpbGd1bi5vcmciXV0sIDEsIG51bGxd\",
+        \n    \"previous\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjA2LjQ1MiswMDowMCIsICJlIjogIjIwMTYtMDEtMDVUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIHsiYiI6ICIyMDE2LTAxLTA3VDIyOjA4OjAzLjQxOSswMDowMCIsICJlIjogIjIwMTYtMDEtMDdUMjI6MDg6MDYuNDUzKzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIFtbImFjY291bnQuaWQiLCAiNTVlMDRlZGUwNDVjYTQzNjQxM2I3YjRhIl0sIFsiZG9tYWluLm5hbWUiLCAicnM5MGI2OGZkMzljZTI0MTU2OWZkMTBmNTM0ZWY5YzA2NS5tYWlsZ3VuLm9yZyJdXSwgMSwgIm1lc3NhZ2UjSkF4OXo2NDFUdUdHVXlhSmxEOXNDUSJd\"\n
+        \ }\n}"
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:06 GMT
+recorded_with: VCR 3.0.1

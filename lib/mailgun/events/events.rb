@@ -1,17 +1,21 @@
-require 'mailgun'
-require "mailgun/exceptions/exceptions"
-
+require 'mailgun/exceptions/exceptions'
 
 module Mailgun
 
   # A Mailgun::Events object makes it really simple to consume
-  # Mailgun's events from the Events endpoint.
+  #   Mailgun's events from the Events endpoint.
   #
+  # This is not yet comprehensive.
   #
-  # See the Github documentation for full examples.
-
+  # Examples
+  #
+  #    See the Github documentation for full examples.
   class Events
 
+    # Public: event initializer
+    #
+    # client - an instance of Mailgun::Client
+    # domain - the domain to build queries
     def initialize(client, domain)
       @client = client
       @domain = domain
@@ -19,56 +23,70 @@ module Mailgun
       @paging_previous = nil
     end
 
-    # Issues a simple get against the client.
+    # Public: Issues a simple get against the client.
     #
-    # @param [Hash] params A hash of query options and/or filters.
-    # @return [Mailgun::Response] Mailgun Response object.
-
-    def get(params=nil)
-      _get(params)
+    # params - a Hash of query options and/or filters.
+    #
+    # Returns a Mailgun::Response object.
+    def get(params = nil)
+      get_events(params)
     end
 
-    # Using built in paging, obtains the next set of data.
+    # Public: Using built in paging, obtains the next set of data.
+    # If an events request hasn't been sent previously, this will send one
+    #   without parameters
     #
-    # @return [Mailgun::Response] Mailgun Response object.
-
-    def next()
-      _get(nil, @paging_next)
+    # Returns a Mailgun::Response object.
+    def next
+      get_events(nil, @paging_next)
     end
 
-    # Using built in paging, obtains the previous set of data.
+    # Public: Using built in paging, obtains the previous set of data.
+    # If an events request hasn't been sent previously, this will send one
+    #   without parameters
     #
-    # @return [Mailgun::Response] Mailgun Response object.
-
-    def previous()
-      _get(nil, @paging_previous)
+    # Returns Mailgun::Response object.
+    def previous
+      get_events(nil, @paging_previous)
     end
 
     private
 
-    def _get(params=nil, paging=nil)
+    # Internal: Makes and processes the event request through the client
+    #
+    # params - optional Hash of query options
+    # paging - the URL key used for previous/next requests
+    #
+    # Returns a Mailgun.Response object.
+    def get_events(params = nil, paging = nil)
       response = @client.get(construct_url(paging), params)
       extract_paging(response)
       response
     end
 
+    # Internal: given an event response, pull and store the paging keys
+    #
+    # response - a Mailgun::Response object
+    #
+    # Return is irrelevant.
     def extract_paging(response)
-      paging_next = response.to_h["paging"]["next"]
-      paging_previous = response.to_h["paging"]["previous"]
-
       # This is pretty hackish. But the URL will never change in API v2.
-      @paging_next = paging_next.split("/")[6]
-      @paging_previous = paging_previous.split("/")[6]
+      @paging_next = response.to_h['paging']['next'].split('/')[6]
+      @paging_previous = response.to_h['paging']['previous'].split('/')[6]
+    rescue
+      @paging_next = nil
+      @paging_previous = nil
     end
 
-    def construct_url(paging=nil)
-      if paging
-        "#{@domain}/events/#{paging}"
-      else
-        "#{@domain}/events"
-      end
+    # Internal: construct the event path to be used by the client
+    #
+    # paging - the URL key for previous/next set of results
+    #
+    # Returns a String of the partial URI
+    def construct_url(paging = nil)
+      return "#{@domain}/events/#{paging}" if paging
+      "#{@domain}/events"
     end
 
   end
-
 end

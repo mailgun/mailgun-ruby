@@ -5,8 +5,9 @@ describe 'The method get' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, "samples.mailgun.org")
     result = events.get()
-    result.body.should include("items")
-    result.body.should include("paging")
+    
+    expect(result.body).to include("items")
+    expect(result.body).to include("paging")
   end
 end
 
@@ -16,8 +17,9 @@ describe 'The method next' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, "samples.mailgun.org")
     result = events.next()
-    result.body.should include("items")
-    result.body.should include("paging")
+    
+    expect(result.body).to include("items")
+    expect(result.body).to include("paging")
   end
 end
 
@@ -26,7 +28,8 @@ describe 'The method previous' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, "samples.mailgun.org")
     result = events.previous()
-    result.body.should include("items")
-    result.body.should include("paging")
+
+    expect(result.body).to include("items")
+    expect(result.body).to include("paging")
   end
 end

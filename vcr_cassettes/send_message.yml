@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/messages
+    body:
+      encoding: US-ASCII
+      string: from=bob%40DOMAIN.TEST&to=sally%40DOMAIN.TEST&subject=Hash%20Integration%20Test&text=INTEGRATION%20TESTING&o%3Atestmode=true
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '194'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '124'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "<20160107220803.53710.46802@DOMAIN.TEST>",
+          "message": "Queued. Thank you."
+        }
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:03 GMT
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/messages.mime
+    body:
+      encoding: ASCII-8BIT
+      string: "--896727\r\nContent-Disposition: form-data; name=\"to\"\r\n\r\nsally@DOMAIN.TEST\r\n--896727\r\nContent-Disposition:
+        form-data; name=\"message\"; filename=\"MG_TMP_MIME20160107-14880-12qjotm\"\r\nContent-Type:
+        text/plain\r\n\r\n\r\n--896727--\r\n"
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '255'
+      Content-Type:
+      - multipart/form-data; boundary=896727
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '124'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "<20160107220803.17329.90097@DOMAIN.TEST>",
+          "message": "Queued. Thank you."
+        }
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:03 GMT
+recorded_with: VCR 3.0.1

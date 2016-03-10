@@ -1,0 +1,104 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/validate?address=test@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '247'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "address": "test@DOMAIN.TEST",
+          "did_you_mean": null,
+          "is_valid": true,
+          "parts": {
+            "display_name": null,
+            "domain": "DOMAIN.TEST",
+            "local_part": "test"
+          }
+        }
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:10 GMT
+- request:
+    method: get
+    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@DOMAIN.TEST%3E,bob@DOMAIN.TEST,DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 07 Jan 2016 22:08:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '223'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "parsed": [
+            "Alice <alice@DOMAIN.TEST>",
+            "bob@DOMAIN.TEST"
+          ],
+          "unparseable": [
+            "DOMAIN.TEST"
+          ]
+        }
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 22:08:10 GMT
+recorded_with: VCR 3.0.1
