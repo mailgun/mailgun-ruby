@@ -1,4 +1,3 @@
-require 'json'
 require 'uri'
 require 'base64'
 require 'openssl'

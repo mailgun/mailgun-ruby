@@ -1,5 +1,4 @@
 require 'time'
-require 'json'
 
 module Mailgun
 
