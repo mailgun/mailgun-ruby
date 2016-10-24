@@ -3,7 +3,6 @@ rvm:
   - 2.2
   - 2.1
   - 2.0.0
-  - 1.9.3
 sudo: false
 gemfile: Gemfile
 script: bundle exec rake spec

@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = '>= 1.9.3'
+  spec.required_ruby_version = '>= 2.0.0'
 
   spec.add_development_dependency 'bundler', '~> 1.5'
   spec.add_development_dependency 'rspec', '~> 3.0'
@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr', '~> 3.0'
   spec.add_development_dependency 'simplecov', '~> 0.11'
 
-  spec.add_dependency 'rest-client', '~> 1.6'
+  spec.add_dependency 'rest-client', '~> 2.0'
   spec.add_dependency 'json', '~> 1.8'
 
 end
