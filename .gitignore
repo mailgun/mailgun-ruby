@@ -20,3 +20,4 @@ test.rb
 ruby
 .ruby-env.yml
 .rspec-local
+.tool-versions

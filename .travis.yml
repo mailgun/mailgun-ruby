@@ -1,8 +1,12 @@
 language: ruby
-rvm:
-  - 2.2
-  - 2.1
-  - 2.0.0
 sudo: false
-gemfile: Gemfile
+rvm:
+- 2.3.1
+- 2.2
+- 2.1
+- 2.0.0
 script: bundle exec rake spec
+notifications:
+  slack:
+    rooms:
+      secure: G4iBtDfFGeryQslfrKZK4hSPikOy9y3SDnpzwmN8SoB0uIAWE2mLfMUJZonKm7yoz+DbPU0u3c1SwiMLwHkXZhPdnJdC1fb1DpicXnVgGZYdiLGiY+OAwkvcBE9p3piWhpwigTjvmSqTaNSRL/VLhG4qwQbHU0fTl1M1zwU4e6c=
