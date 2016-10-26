@@ -5,7 +5,9 @@ rvm:
 - 2.2
 - 2.1
 - 2.0.0
-script: bundle exec rake spec
+script:
+- bundle exec rake spec
+- '[[ "${TRAVIS_PULL_REQUEST}" == "false" ]] && ( bundle exec rake spec:integration ) || ( echo "Testing PR - No integration tests available")'
 notifications:
   slack:
     rooms:
