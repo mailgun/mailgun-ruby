@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.0.6'
+gem 'mailgun-ruby', '~>1.1.1'
 ```
 
 Usage

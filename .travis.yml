@@ -5,7 +5,17 @@ rvm:
 - 2.2
 - 2.1
 - 2.0.0
-script: bundle exec rake spec
+script:
+- bundle exec rake spec
+- '[[ "${TRAVIS_PULL_REQUEST}" == "false" ]] && ( bundle exec rake spec:integration
+  ) || ( echo "Testing PR - No integration tests available")'
+deploy:
+  provider: rubygems
+  api_key:
+    secure: QTNP+6720w38b8krtvXM25WDEOUxw9BlUwdXgWLrU0MGAOSvVFgnWTJs+7QvGWODjhrIqAfAm11zc+yEpzgD9P8np9cteWv5K7rMxsUMcb14kaGIA+MKO+RRJXlru4teBNX5jtp2GJiNS2mn7urzn5YhE9x9P7pMjcF+j5usoF0=
+  gemspec: mailgun.gemspec
+  on:
+    tags: true
 notifications:
   slack:
     rooms:

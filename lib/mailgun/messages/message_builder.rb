@@ -333,10 +333,10 @@ module Mailgun
 
     # Private: Adds a file to the message.
     #
-    # disposition - a Symbol of either :inline or :attachment specifying how to
-    #   to set the file/image
-    # attachment  - either a file object or string which is a path to the file
-    # filename    - optional String signifying the filename
+    # @param [Symbol] disposition The type of file: :attachment or :inline
+    # @param [String] attachment A file object for attaching as an attachment.
+    # @param [String] filename The filename you wish the attachment to be.
+    # @return [void]
     #
     # Returns nothing
     def add_file(disposition, filedata, filename)

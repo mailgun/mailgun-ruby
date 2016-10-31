@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/validate?address=test@DOMAIN.TEST
+    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@example.com%3E%3Bbob@example.com%3Bexample.org&syntax_only=true
     body:
       encoding: US-ASCII
       string: ''
@@ -12,7 +12,9 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
   response:
     status:
       code: 200
@@ -21,64 +23,15 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 07 Jan 2016 22:08:10 GMT
+      - Wed, 26 Oct 2016 22:44:07 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '247'
+      - '118'
       Connection:
       - keep-alive
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "address": "test@DOMAIN.TEST",
-          "did_you_mean": null,
-          "is_valid": true,
-          "parts": {
-            "display_name": null,
-            "domain": "DOMAIN.TEST",
-            "local_part": "test"
-          }
-        }
-    http_version: 
-  recorded_at: Thu, 07 Jan 2016 22:08:10 GMT
-- request:
-    method: get
-    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@DOMAIN.TEST%3E,bob@DOMAIN.TEST,DOMAIN.TEST
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Thu, 07 Jan 2016 22:08:10 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '223'
-      Connection:
-      - keep-alive
+      Content-Disposition:
+      - inline
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
@@ -92,13 +45,123 @@ http_interactions:
       string: |-
         {
           "parsed": [
-            "Alice <alice@DOMAIN.TEST>",
-            "bob@DOMAIN.TEST"
+            "Alice <alice@example.com>",
+            "bob@example.com"
           ],
           "unparseable": [
-            "DOMAIN.TEST"
+            "example.org"
           ]
         }
     http_version: 
-  recorded_at: Thu, 07 Jan 2016 22:08:10 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
+- request:
+    method: get
+    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/validate?address=alice@mailgun.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 26 Oct 2016 22:44:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '179'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "address": "alice@mailgun.net",
+          "did_you_mean": null,
+          "is_valid": true,
+          "parts": {
+            "display_name": null,
+            "domain": "mailgun.net",
+            "local_part": "alice"
+          }
+        }
+    http_version: 
+  recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
+- request:
+    method: get
+    uri: https://api:<PUBKEY>@api.mailgun.net/v3/address/validate?address=example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 26 Oct 2016 22:44:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '162'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "address": "example.org",
+          "did_you_mean": null,
+          "is_valid": false,
+          "parts": {
+            "display_name": null,
+            "domain": null,
+            "local_part": null
+          }
+        }
+    http_version: 
+  recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
+recorded_with: VCR 3.0.3
