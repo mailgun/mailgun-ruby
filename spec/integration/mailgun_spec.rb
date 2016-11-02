@@ -1,11 +1,36 @@
 require 'spec_helper'
 require 'mailgun'
+require 'mailgun/exceptions/exceptions'
 
 vcr_opts = { :cassette_name => "instance" }
 
 describe 'Mailgun instantiation', vcr: vcr_opts do
   it 'instantiates an HttpClient object' do
     expect {@mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)}.not_to raise_error
+  end
+end
+
+vcr_opts = { :cassette_name => "exceptions" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'display useful error information' do
+    begin
+      @mg_obj.send_message("not-our-doma.in", {
+          :from => "sally@not-our-doma.in",
+          :to => "bob@#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::CommunicationError => err
+      expect(err.message).to eq('404 Not Found: Domain not found: not-our-doma.in')
+    else
+      fail
+    end
   end
 end
 
@@ -16,7 +41,7 @@ describe 'The method send_message()', vcr: vcr_opts do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN
   end
-  
+
   it 'sends a standard message in test mode.' do
     result = @mg_obj.send_message(@domain, {:from => "bob@#{@domain}",
                                     :to => "sally@#{@domain}",
