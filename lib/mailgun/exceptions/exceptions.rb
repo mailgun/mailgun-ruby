@@ -37,16 +37,28 @@ module Mailgun
 
     # Public: initialization of new error given a message and/or object
     #
-    # message - a String detailing the error
-    # object  - a RestClient::Reponse object
+    # message  - a String detailing the error
+    # response - a RestClient::Response object
     #
-    def initialize(message = nil, object = nil)
-      @object = object
-      @code = object.http_code || NOCODE
-      super(JSON.parse(object.body)['message'])
+    def initialize(message = nil, response = nil)
+      @response = response
+      @code = response.code || NOCODE
+
+      begin
+        api_message = JSON.parse(response.body)['message']
+      rescue JSON::ParserError
+        api_message = response.body
+      rescue NoMethodError
+        api_message = "Unknown API error"
+      end
+
+      message = message || ''
+      message = message + ': ' + api_message
+
+      super(message, response)
     rescue NoMethodError, JSON::ParserError
       @code = NOCODE
-      super(message)
+      super(message, response)
     end
 
   end
