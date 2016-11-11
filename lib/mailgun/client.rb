@@ -12,13 +12,36 @@ module Mailgun
     def initialize(api_key = Mailgun.api_key,
                    api_host = 'api.mailgun.net',
                    api_version = 'v3',
-                   ssl = true)
+                   ssl = true,
+                   test_mode = false)
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
       @http_client = RestClient::Resource.new(endpoint,
                                               user: 'api',
                                               password: api_key,
                                               user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}")
+      @test_mode = test_mode
+    end
+
+    # Enable test mode
+    #
+    # Prevents sending of any messages.
+    def enable_test_mode!
+      @test_mode = true
+    end
+
+    # Disable test mode
+    #
+    # Reverts the test_mode flag and allows the client to send messages.
+    def disable_test_mode!
+      @test_mode = false
+    end
+
+    # Client is in test mode?
+    #
+    # @return [Boolean] Is the client set in test mode?
+    def test_mode?
+      @test_mode
     end
 
     # Simple Message Sending
@@ -28,6 +51,15 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def send_message(working_domain, data)
+      if test_mode? then
+        return Response.from_hash(
+          {
+            :body => '{"id": "test-mode-mail@localhost", "message": "Queued. Thank you."}',
+            :code => 200,
+          }
+        )
+      end
+
       case data
       when Hash
         if data.key?(:message)

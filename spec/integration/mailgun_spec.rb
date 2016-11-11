@@ -54,6 +54,28 @@ describe 'The method send_message()', vcr: vcr_opts do
     expect(result.body).to include("id")
   end
 
+  it 'fakes message send while in *client* test mode' do
+    @mg_obj.enable_test_mode!
+
+    expect(@mg_obj.test_mode?).to eq(true)
+
+    data = { :from => "joe@#{@domain}",
+             :to => "bob@#{@domain}",
+             :subject => "Test",
+             :text => "Test Data" }
+
+    result = @mg_obj.send_message(@domain, data)
+
+    result.to_h!
+
+    expect(result.body).to include("message")
+    expect(result.body).to include("id")
+
+    expect(result.code).to eq(200)
+    expect(result.body['id']).to eq("test-mode-mail@localhost")
+    expect(result.body['message']).to eq("Queued. Thank you.")
+  end
+
   it 'sends a message builder message in test mode.' do
     mb_obj = Mailgun::MessageBuilder.new()
     mb_obj.from("sender@#{@domain}", {'first' => 'Sending', 'last' => 'User'})

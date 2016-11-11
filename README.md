@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.1.1'
+gem 'mailgun-ruby', '~>1.1.2'
 ```
 
 Usage
@@ -45,7 +45,7 @@ Or obtain the last couple log items:
 
 ```ruby
 # First, instantiate the Mailgun Client with your API key
-mg_client = Mailgun::Client.new 'your-api-key'
+mg_client = Mailgun::Client.new 'your-secret-api-key'
 
 # Define the domain you wish to query
 domain = 'example.com'
@@ -60,7 +60,7 @@ Rails
 The library can be initialized with a Rails initializer containing similar:
 ```ruby
 Mailgun.configure do |config|
-  config.api_key = 'your-secret-key'
+  config.api_key = 'your-secret-api-key'
 end
 ```
 Or have the initializer read your environment setting if you perfer.

@@ -25,9 +25,9 @@ describe 'The method send_message()' do
 
   it 'sends a message' do
     data = { 'from' => 'joe@test.com',
-                    'to' => 'bob@example.com',
-                    'subject' => 'Test',
-                    'text' => 'Test Data'}
+             'to' => 'bob@example.com',
+             'subject' => 'Test',
+             'text' => 'Test Data' }
     result = @mg_obj.send_message("testdomain.com", data)
 
     result.to_h!
@@ -42,7 +42,7 @@ describe 'The method send_message()' do
     result = @mg_obj.send_message("testdomain.com", data)
 
     result.to_h!
-    
+
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
@@ -61,7 +61,7 @@ describe 'The method post()' do
     result = @mg_obj.post("#{@domain}/messages", data)
 
     result.to_h!
-    
+
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
@@ -81,7 +81,7 @@ describe 'The method put()' do
     result = @mg_obj.put("lists/#{@list_address}/members#{@member_address}", data)
 
     result.to_h!
-    
+
     expect(result.body).to include("member")
     expect(result.body["member"]).to include("vars")
     expect(result.body["member"]["vars"]).to include("age")
@@ -104,7 +104,7 @@ describe 'The method get()' do
     result = @mg_obj.get("#{@domain}/bounces", query_string)
 
     result.to_h!
-    
+
     expect(result.body).to include("total_count")
     expect(result.body).to include("items")
   end
@@ -120,7 +120,7 @@ describe 'The method delete()' do
     result = @mg_obj.delete("#{@domain}/campaigns/ABC123")
 
     result.to_h!
-    
+
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
