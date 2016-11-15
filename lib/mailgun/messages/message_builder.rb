@@ -23,11 +23,18 @@ module Mailgun
 
     # Adds a specific type of recipient to the message object.
     #
+    # WARNING: Setting 'h:reply-to' with add_recipient() is deprecated! Use 'reply_to' instead.
+    #
     # @param [String] recipient_type The type of recipient. "to", "cc", "bcc" or "h:reply-to".
     # @param [String] address The email address of the recipient to add to the message object.
     # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
+      if recipient_type == "h:reply-to"
+        warn 'DEPRECATION: "add_recipient("h:reply-to", ...)" is deprecated. Please use "reply_to" instead.'
+        return reply_to(address, variables)
+      end
+
       if (@counters[:recipients][recipient_type] || 0) >= Mailgun::Chains::MAX_RECIPIENTS
         fail Mailgun::ParameterError, 'Too many recipients added to message.', address
       end
@@ -51,6 +58,19 @@ module Mailgun
     def set_from_address(address, variables = nil)
       warn 'DEPRECATION: "set_from_address" is deprecated. Please use "from" instead.'
       from(address, variables)
+    end
+
+    # Set the message's Reply-To address.
+    #
+    # Rationale: According to RFC, only one Reply-To address is allowed, so it
+    # is *okay* to bypass the simple_setter and set reply-to directly.
+    #
+    # @param [String] address The email address to provide as Reply-To.
+    # @param [Hash] variables A hash of variables associated with the recipient.
+    # @return [void]
+    def reply_to(address, variables = nil)
+      compiled_address = parse_address(address, variables)
+      @message["h:reply-to"] = compiled_address
     end
 
     # Set a subject for the message object
