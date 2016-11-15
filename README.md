@@ -139,8 +139,8 @@ For usage examples on each API endpoint, head over to our official documentation
 pages. Or the [Snippets](Snippets.md) file.
 
 This SDK includes the following components:
-- [Message Builder](Messages.md)
-- [Batch Message](Messages.md)
+- [Message Builder](MessageBuilder.md)
+- [Batch Message](MessageBuilder.md)
 - [Opt-In Handler](OptInHandler.md)
 - [Domains](Domains.md)
 - [Webhooks](Webhooks.md)
