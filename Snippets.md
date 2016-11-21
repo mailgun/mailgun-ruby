@@ -41,8 +41,7 @@ mg_client.send_message "sending_domain.com", data
 
 ```ruby
 # Don't include a file, pull the file to a string
-mime_string = '
-From: Bob Sample <example@example.com>
+mime_string = 'From: Bob Sample <example@example.com>
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
 boundary="--boundary-goes-here--"

@@ -70,7 +70,7 @@ describe 'The method add_recipient' do
     recipient_type = 'h:reply-to'
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
     @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
   end
 
