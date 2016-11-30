@@ -1,0 +1,676 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces
+    body:
+      encoding: UTF-8
+      string: '[{"address":"test4@example.info","code":"500","error":"integration
+        testing"},{"address":"test3@example.net","code":"500","error":"integration
+        testing"},{"address":"test2@example.org","code":"500","error":"integration
+        testing"},{"address":"test1@example.com","code":"500","error":"integration
+        testing"}]'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '302'
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '62'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"message":"4 addresses have been added to the bounces table"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:49 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/test1@example.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '76'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test1@example.com","message":"Bounced address has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:49 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/test2@example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '76'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test2@example.org","message":"Bounced address has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/test3@example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '76'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test3@example.net","message":"Bounced address has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/test4@example.info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '77'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test4@example.info","message":"Bounced address has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
+    body:
+      encoding: UTF-8
+      string: '[{"address":"test4@example.info","tag":"Tools"},{"address":"test3@example.net","tag":"Garden
+        & Automotive"},{"address":"test2@example.org","tag":"Toys, Jewelry & Kids"},{"address":"test1@example.com","tag":"Outdoors,
+        Books & Shoes"}]'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '233'
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '67'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"message":"4 addresses have been added to the unsubscribes table"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/test1@example.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '78'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test1@example.com","message":"Unsubscribe event has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/test2@example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '78'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test2@example.org","message":"Unsubscribe event has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/test3@example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '78'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test3@example.net","message":"Unsubscribe event has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/test4@example.info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '79'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test4@example.info","message":"Unsubscribe event has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints
+    body:
+      encoding: UTF-8
+      string: '[{"address":"test4@example.info"},{"address":"test3@example.net"},{"address":"test2@example.org"},{"address":"test1@example.com"}]'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '130'
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '75'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"message":"4 complaint addresses have been added to the complaints
+        table"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/test1@example.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '75'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test1@example.com","message":"Spam complaint has been removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/test2@example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '75'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test2@example.org","message":"Spam complaint has been removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/test3@example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '75'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test3@example.net","message":"Spam complaint has been removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:53 GMT
+- request:
+    method: delete
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/complaints/test4@example.info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 30 Nov 2016 20:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '76'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+    body:
+      encoding: UTF-8
+      string: '{"address":"test4@example.info","message":"Spam complaint has been
+        removed"}'
+    http_version: 
+  recorded_at: Wed, 30 Nov 2016 20:53:53 GMT
+recorded_with: VCR 3.0.3
