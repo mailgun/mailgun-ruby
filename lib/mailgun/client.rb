@@ -87,9 +87,10 @@ module Mailgun
     # with. Be sure to include your domain, where necessary.
     # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
+    # @param [Hash] headers Additional headers to pass to the resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
-    def post(resource_path, data)
-      response = @http_client[resource_path].post(data)
+    def post(resource_path, data, headers = {})
+      response = @http_client[resource_path].post(data, headers)
       Response.new(response)
     rescue => err
       raise communication_error err
@@ -99,8 +100,9 @@ module Mailgun
     #
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
-    # @param [Hash] query_string This should be a standard Hash
+    # @param [Hash] params This should be a standard Hash
     # containing required parameters for the requested resource.
+    # @param [String] accept Acceptable Content-Type of the response body.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def get(resource_path, params = nil, accept = '*/*')
       if params
