@@ -27,6 +27,8 @@ Usage
 Here's how to send a message using the library:
 
 ```ruby
+require 'mailgun' 
+
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new 'your-api-key'
 
