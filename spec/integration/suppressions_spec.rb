@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'faker'
-
 require 'mailgun'
 require 'mailgun/suppressions'
 
