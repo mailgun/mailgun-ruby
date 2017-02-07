@@ -206,6 +206,24 @@ describe 'The method from' do
   end
 end
 
+describe 'The method set_from_address' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  it 'sets the from address' do
+    the_from_address = 'test@mailgun.com'
+    @mb_obj.set_from_address(the_from_address)
+    @mb_obj.message[:from].should eq([the_from_address])
+  end
+  it 'sets the from address with metadata' do
+    the_from_address = 'test@mailgun.com'
+    the_first_name = 'Magilla'
+    the_last_name = 'Gorilla'
+    @mb_obj.set_from_address(the_from_address, {'first' => the_first_name, 'last' => the_last_name})
+    @mb_obj.message[:from].should eq(["'#{the_first_name} #{the_last_name}' <#{the_from_address}>"])
+  end
+end
+
 describe 'The method add_attachment' do
   before(:each) do
     @mb_obj = Mailgun::MessageBuilder.new
