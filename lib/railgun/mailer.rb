@@ -158,5 +158,3 @@ module Railgun
   end
 
 end
-
-ActionMailer::Base.add_delivery_method :mailgun, Railgun::Mailer
