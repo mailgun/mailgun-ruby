@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.version          = Mailgun::VERSION
   spec.homepage         = 'http://www.mailgun.com'
   spec.platform         = Gem::Platform::RUBY
-  spec.license          = 'Apache'
+  spec.license          = 'Apache-2.0'
 
   spec.summary          = "Mailgun's Official Ruby SDK"
   spec.description      = "Mailgun's Official Ruby SDK for interacting with the Mailgun API."

@@ -1,4 +1,4 @@
 # It's the version. Yeay!
 module Mailgun
-  VERSION = '1.1.3'
+  VERSION = '1.1.4'
 end
