@@ -1,6 +1,4 @@
-require 'action_mailer'
-require 'active_support/rescuable'
-
+require 'railgun/railtie'
 require 'railgun/attachment'
 require 'railgun/errors'
 require 'railgun/mailer'
