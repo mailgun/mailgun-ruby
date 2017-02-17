@@ -1,21 +1,23 @@
 language: ruby
 sudo: false
 rvm:
-- 2.3.1
-- 2.2
-- 2.1
 - 2.0.0
+- 2.1
+- 2.2
+- 2.3.1
 script:
+- bundle install
 - bundle exec rake spec
 - '[[ "${TRAVIS_PULL_REQUEST}" == "false" ]] && ( bundle exec rake spec:integration
   ) || ( echo "Testing PR - No integration tests available")'
 deploy:
   provider: rubygems
   api_key:
-    secure: QTNP+6720w38b8krtvXM25WDEOUxw9BlUwdXgWLrU0MGAOSvVFgnWTJs+7QvGWODjhrIqAfAm11zc+yEpzgD9P8np9cteWv5K7rMxsUMcb14kaGIA+MKO+RRJXlru4teBNX5jtp2GJiNS2mn7urzn5YhE9x9P7pMjcF+j5usoF0=
+    secure: DoX3w48gRyhDM1o1OLvtWsTi8ehLIarIsErzg/UlNRoLacQt5l5UzwD+u6wqsCEr4+c2uAHNahafpnw/j1rPG3LBPIXOK5A0SYbjovlckutiAC0330Q4PHwOZb73AFN1DG5JTeg4/fguEjdsEBdZObF7mh5gBMBQtNjo1Fos+4w=
   gemspec: mailgun.gemspec
   on:
     tags: true
+    condition: "$TRAVIS_RUBY_VERSION == 2.3.1"
 notifications:
   slack:
     rooms:

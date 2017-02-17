@@ -50,8 +50,8 @@ mb_obj.set_message_id('')
 
 # Other Optional Parameters.
 mb_obj.add_campaign_id("My-Awesome-Campaign")
-mb_obj.add_custom_parameter("h:Customer-Id", "12345")
-mb_obj.add_attachment("@/tron.jpg")
+mb_obj.header("Customer-Id", "12345")
+mb_obj.add_attachment("./tron.jpg")
 mb_obj.set_delivery_time("tomorrow 8:00AM PST")
 mb_obj.set_click_tracking(true)
 

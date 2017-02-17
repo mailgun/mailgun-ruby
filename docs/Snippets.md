@@ -75,6 +75,26 @@ mb_obj.set_text_body "This is the text body."
 mg_client.send_message "sending_domain.com", mb_obj
 ```
 
+**Build a message with attachments, part by part, with Message Builder:**
+
+```ruby
+mb_obj = Mailgun::MessageBuilder.new
+
+mb_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+mb_obj.add_recipient :to, "recipient@example.com", {'first' => 'Recipient', 'last' => 'User'}
+mb_obj.set_subject "This is the subject!"
+mb_obj.set_text_body "This is the text body."
+
+# Add separate attachments
+mb_obj.add_attachment "/path/to/file/invoice_8675309.pdf", "Order Invoice - 8675309.pdf"
+mb_obj.add_attachment "/path/to/file/datasheet_00001.pdf", "Product Datasheet - 00001.pdf"
+
+# Attach inline image to message
+mb_obj.add_inline_image "/path/to/file/product_image_00001.png"
+
+mg_client.send_message "sending_domain.com", mb_obj
+```
+
 **Send batches of 1000 messages per post:**
 
 ```ruby

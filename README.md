@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.1.2'
+gem 'mailgun-ruby', '~>1.1.4'
 ```
 
 Usage
@@ -27,6 +27,8 @@ Usage
 Here's how to send a message using the library:
 
 ```ruby
+require 'mailgun' 
+
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new 'your-api-key'
 
@@ -65,6 +67,15 @@ end
 ```
 Or have the initializer read your environment setting if you perfer.
 
+To use as the ActionMailer delivery method, add this to your `config/environments/whatever.yml`
+and replace `api-myapikey` and `mydomain.com` with your secret API key and domain, respectively:
+```ruby
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: 'api-myapikey',
+    domain: 'mydomain.com',
+  }
+```
 
 Response
 --------
@@ -136,15 +147,15 @@ mg_client.send_message("sending_domain.com", message_params)
 ```
 
 For usage examples on each API endpoint, head over to our official documentation
-pages. Or the [Snippets](Snippets.md) file.
+pages. Or the [Snippets](docs/Snippets.md) file.
 
 This SDK includes the following components:
-- [Message Builder](MessageBuilder.md)
-- [Batch Message](MessageBuilder.md)
-- [Opt-In Handler](OptInHandler.md)
-- [Domains](Domains.md)
-- [Webhooks](Webhooks.md)
-- [Events](Events.md)
+- [Message Builder](docs/MessageBuilder.md)
+- [Batch Message](docs/MessageBuilder.md)
+- [Opt-In Handler](docs/OptInHandler.md)
+- [Domains](docs/Domains.md)
+- [Webhooks](docs/Webhooks.md)
+- [Events](docs/Events.md)
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.

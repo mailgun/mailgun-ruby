@@ -485,19 +485,31 @@ describe 'The method header' do
   it 'accepts valid JSON and appends as data to the message.' do
     @mb_obj.header('my-data', '{"key":"value"}')
 
-    expect(@mb_obj.message["v:my-data"][0]).to be_kind_of(String)
-    expect(@mb_obj.message["v:my-data"][0].to_s).to eq('{"key"=>"value"}')
+    expect(@mb_obj.message["h:my-data"]).to be_kind_of(String)
+    expect(@mb_obj.message["h:my-data"].to_s).to eq('{"key":"value"}')
+  end
+end
+
+describe 'The method variable' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  it 'accepts valid JSON and stores it as message[param].' do
+    @mb_obj.variable('my-data', '{"key":"value"}')
+
+    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
+    expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
   end
   it 'accepts a hash and appends as data to the message.' do
     data = {'key' => 'value'}
-    @mb_obj.header('my-data', data)
+    @mb_obj.variable('my-data', data)
 
-    expect(@mb_obj.message["v:my-data"][0]).to be_kind_of(String)
-    expect(@mb_obj.message["v:my-data"][0].to_s).to eq('{"key"=>"value"}')
+    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
+    expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
   end
   it 'throws an exception on broken JSON.' do
     data = 'This is some crappy JSON.'
-    expect {@mb_obj.header('my-data', data)}.to raise_error(Mailgun::ParameterError)
+    expect {@mb_obj.variable('my-data', data)}.to raise_error(Mailgun::ParameterError)
   end
 end
 

@@ -40,7 +40,7 @@ module Mailgun
       end
 
       compiled_address = parse_address(address, variables)
-      complex_setter(recipient_type, compiled_address)
+      set_multi_complex(recipient_type, compiled_address)
 
       @counters[:recipients][recipient_type] += 1 if @counters[:recipients].key?(recipient_type)
     end
@@ -63,14 +63,14 @@ module Mailgun
     # Set the message's Reply-To address.
     #
     # Rationale: According to RFC, only one Reply-To address is allowed, so it
-    # is *okay* to bypass the simple_setter and set reply-to directly.
+    # is *okay* to bypass the set_multi_simple and set reply-to directly.
     #
     # @param [String] address The email address to provide as Reply-To.
     # @param [Hash] variables A hash of variables associated with the recipient.
     # @return [void]
     def reply_to(address, variables = nil)
       compiled_address = parse_address(address, variables)
-      @message["h:reply-to"] = compiled_address
+      header("reply-to", compiled_address)
     end
 
     # Set a subject for the message object
@@ -78,7 +78,7 @@ module Mailgun
     # @param [String] subject The subject for the email.
     # @return [void]
     def subject(subj = nil)
-      simple_setter(:subject, subj)
+      set_multi_simple(:subject, subj)
     end
 
     # Deprecated: Please use "subject" instead.
@@ -92,7 +92,7 @@ module Mailgun
     # @param [String] text_body The text body for the email.
     # @return [void]
     def body_text(text_body = nil)
-      simple_setter(:text, text_body)
+      set_multi_simple(:text, text_body)
     end
 
     # Deprecated: Please use "body_text" instead.
@@ -106,7 +106,7 @@ module Mailgun
     # @param [String] html_body The html body for the email.
     # @return [void]
     def body_html(html_body = nil)
-      simple_setter(:html, html_body)
+      set_multi_simple(:html, html_body)
     end
 
     # Deprecated: Please use "body_html" instead.
@@ -138,7 +138,7 @@ module Mailgun
     # @param [Boolean] mode The boolean or string value (will fix itself)
     # @return [void]
     def test_mode(mode)
-      simple_setter('o:testmode', bool_lookup(mode))
+      set_multi_simple('o:testmode', bool_lookup(mode))
     end
 
     # Deprecated: 'set_test_mode' is depreciated. Please use 'test_mode' instead.
@@ -152,7 +152,7 @@ module Mailgun
     # @param [Boolean] mode The boolean or string value(will fix itself)
     # @return [void]
     def dkim(mode)
-      simple_setter('o:dkim', bool_lookup(mode))
+      set_multi_simple('o:dkim', bool_lookup(mode))
     end
 
     # Deprecated: 'set_dkim' is deprecated. Please use 'dkim' instead.
@@ -168,7 +168,7 @@ module Mailgun
     def add_campaign_id(campaign_id)
       fail(Mailgun::ParameterError, 'Too many campaigns added to message.', campaign_id) if @counters[:attributes][:campaign_id] >= Mailgun::Chains::MAX_CAMPAIGN_IDS
 
-      complex_setter('o:campaign', campaign_id)
+      set_multi_complex('o:campaign', campaign_id)
       @counters[:attributes][:campaign_id] += 1
     end
 
@@ -180,7 +180,7 @@ module Mailgun
       if @counters[:attributes][:tag] >= Mailgun::Chains::MAX_TAGS
         fail Mailgun::ParameterError, 'Too many tags added to message.', tag
       end
-      complex_setter('o:tag', tag)
+      set_multi_complex('o:tag', tag)
       @counters[:attributes][:tag] += 1
     end
 
@@ -189,7 +189,7 @@ module Mailgun
     # @param [Boolean] tracking Boolean true or false.
     # @return [void]
     def track_opens(mode)
-      simple_setter('o:tracking-opens', bool_lookup(mode))
+      set_multi_simple('o:tracking-opens', bool_lookup(mode))
     end
 
     # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
@@ -203,7 +203,7 @@ module Mailgun
     # @param [String] mode True, False, or HTML (for HTML only tracking)
     # @return [void]
     def track_clicks(mode)
-      simple_setter('o:tracking-clicks', bool_lookup(mode))
+      set_multi_simple('o:tracking-clicks', bool_lookup(mode))
     end
 
     # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.
@@ -221,7 +221,7 @@ module Mailgun
     # @return [void]
     def deliver_at(timestamp)
       time_str = DateTime.parse(timestamp)
-      simple_setter('o:deliverytime', time_str.rfc2822)
+      set_multi_simple('o:deliverytime', time_str.rfc2822)
     end
 
     # Deprecated: 'set_delivery_time' is deprecated. Please use 'deliver_at' instead.
@@ -238,14 +238,31 @@ module Mailgun
     # @return [void]
     def header(name, data)
       fail(Mailgun::ParameterError, 'Header name for message must be specified') if name.to_s.empty?
-      jsondata = make_json data
-      simple_setter("v:#{name}", jsondata)
+      begin
+        jsondata = make_json data
+        set_single("h:#{name}", jsondata)
+      rescue Mailgun::ParameterError
+        set_single("h:#{name}", data)
+      end
     end
 
     # Deprecated: 'set_custom_data' is deprecated. Please use 'header' instead.
     def set_custom_data(name, data)
       warn 'DEPRECATION: "set_custom_data" is deprecated. Please use "header" instead.'
       header name, data
+    end
+
+    # Attaches custom JSON data to the message. See the following doc page for more info.
+    # https://documentation.mailgun.com/user_manual.html#attaching-data-to-messages
+    #
+    # @param [String] name A name for the custom variable block.
+    # @param [String|Hash] data Either a string or a hash. If it is not valid JSON or
+    #                           can not be converted to JSON, ParameterError will be raised.
+    # @return [void]
+    def variable(name, data)
+      fail(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
+      jsondata = make_json data
+      set_single("v:#{name}", jsondata)
     end
 
     # Add custom parameter to the message. A custom parameter is any parameter that
@@ -256,7 +273,7 @@ module Mailgun
     # @param [string] data A string of data for the parameter.
     # @return [void]
     def add_custom_parameter(name, data)
-      complex_setter(name, data)
+      set_multi_complex(name, data)
     end
 
     # Set the Message-Id header to a custom value. Don't forget to enclose the
@@ -269,7 +286,7 @@ module Mailgun
     def message_id(data = nil)
       key = 'h:Message-Id'
       return @message.delete(key) if data.to_s.empty?
-      @message[key] = data
+      set_single(key, data)
     end
 
     # Deprecated: 'set_message_id' is deprecated. Use 'message_id' instead.
@@ -280,13 +297,23 @@ module Mailgun
 
     private
 
+    # Sets a single value in the message hash where "multidict" features are not needed.
+    # Does *not* permit duplicate params.
+    #
+    # @param [String] parameter The message object parameter name.
+    # @param [String] value The value of the parameter.
+    # @return [void]
+    def set_single(parameter, value)
+      @message[parameter] = value ? value : ''
+    end
+
     # Sets values within the multidict, however, prevents
     # duplicate values for keys.
     #
     # @param [String] parameter The message object parameter name.
     # @param [String] value The value of the parameter.
     # @return [void]
-    def simple_setter(parameter, value)
+    def set_multi_simple(parameter, value)
       @message[parameter] = value ? [value] : ['']
     end
 
@@ -296,7 +323,7 @@ module Mailgun
     # @param [String] parameter The message object parameter name.
     # @param [String] value The value of the parameter.
     # @return [void]
-    def complex_setter(parameter, value)
+    def set_multi_complex(parameter, value)
       @message[parameter] << (value || '')
     end
 
@@ -327,9 +354,9 @@ module Mailgun
     #
     # Returns a JSON object or raises ParameterError
     def make_json(obj)
-      return JSON.parse(obj).to_s if obj.is_a?(String)
-      return obj.to_s if obj.is_a?(Hash)
-      return JSON.generate(obj).to_s
+      return JSON.parse(obj).to_json if obj.is_a?(String)
+      return obj.to_json if obj.is_a?(Hash)
+      return JSON.generate(obj).to_json
     rescue
       raise Mailgun::ParameterError, 'Provided data could not be made into JSON. Try a JSON string or Hash.', obj
     end
@@ -371,7 +398,7 @@ module Mailgun
         attachment.instance_variable_set :@original_filename, filename
         attachment.instance_eval 'def original_filename; @original_filename; end'
       end
-      complex_setter(disposition, attachment)
+      set_multi_complex(disposition, attachment)
     end
   end
 
