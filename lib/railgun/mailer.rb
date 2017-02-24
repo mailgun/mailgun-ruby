@@ -119,11 +119,8 @@ module Railgun
     return mb.message if mail.attachments.empty?
 
     mail.attachments.each do |attach|
-      if attach.inline?
-        mb.add_inline_image Attachment.new(attach, encoding: 'ascii-8bit', inline: true)
-      else
-        mb.add_attachment Attachment.new(attach, encoding: 'ascii-8bit')
-      end
+      attach = Attachment.new(attach, encoding: 'ascii-8bit', inline: attach.inline?)
+      attach.attach_to_message! mb
     end
 
     return mb.message

@@ -117,7 +117,7 @@ module Mailgun
 
     # Adds a series of attachments, when called upon.
     #
-    # @param [String] attachment A file object for attaching as an attachment.
+    # @param [String|File] attachment A file object for attaching as an attachment.
     # @param [String] filename The filename you wish the attachment to be.
     # @return [void]
     def add_attachment(attachment, filename = nil)
@@ -126,7 +126,7 @@ module Mailgun
 
     # Adds an inline image to the mesage object.
     #
-    # @param [String] inline_image A file object for attaching an inline image.
+    # @param [String|File] inline_image A file object for attaching an inline image.
     # @param [String] filename The filename you wish the inline image to be.
     # @return [void]
     def add_inline_image(inline_image, filename = nil)
@@ -381,7 +381,7 @@ module Mailgun
     # Private: Adds a file to the message.
     #
     # @param [Symbol] disposition The type of file: :attachment or :inline
-    # @param [String] attachment A file object for attaching as an attachment.
+    # @param [String|File] attachment A file object for attaching as an attachment.
     # @param [String] filename The filename you wish the attachment to be.
     # @return [void]
     #
