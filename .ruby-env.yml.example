@@ -7,6 +7,6 @@
 # Replace <THESE_VALUES> with yours from
 # https://mailgun.com/app/dashboard (don't include <brackets>)
 # and rename to/save as: .ruby-env.yml
-MAILGUN_APIKEY : '<MAILGUN_APIKEY'>
+MAILGUN_APIKEY : '<MAILGUN_APIKEY>'
 MAILGUN_PUB_APIKEY : '<MAILGUN_PUBLIC_APIKEY>'
 MAILGUN_TESTDOMAIN : '<MAILGUN_SANDBOX_DOMAIN>'
