@@ -20,7 +20,7 @@ module Railgun
       @config = config
 
       [:api_key, :domain].each do |k|
-        raise Railgun::ConfigurationError("Config requires `#{k}` key", @config) unless @config.has_key? k
+        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
       end
 
       @mg_client = Mailgun::Client.new(config[:api_key])
