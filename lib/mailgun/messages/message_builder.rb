@@ -133,6 +133,14 @@ module Mailgun
       add_file(:inline, inline_image, filename)
     end
 
+    # Adds a List-Unsubscribe for the message header.
+    #
+    # @param [Array<String>] *variables Any number of url or mailto
+    # @return [void]
+    def list_unsubscribe(*variables)
+      set_single('h:List-Unsubscribe', variables.map { |var| "<#{var}>" }.join(','))
+    end
+
     # Send a message in test mode. (The message won't really be sent to the recipient)
     #
     # @param [Boolean] mode The boolean or string value (will fix itself)
