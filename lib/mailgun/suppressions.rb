@@ -60,16 +60,17 @@ module Mailgun
     #
     # @param [Array] data Array of bounce hashes
     # @return [Response] Mailgun API response
-    # @return [Array] Array of invalid bounce hashes.
     # @return [Array] Return values from recursive call for list split.
     def create_bounces(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000 then
-        split_return = create_bounces data[999..-1]
+        resp, resp_l = create_bounces data[999..-1]
+        split_return.push(resp)
+        split_return.concat(resp_l)
         data = data[0..998]
       elsif data.length == 0 then
-        []
+        return nil, []
       end
 
       valid = []
@@ -132,16 +133,17 @@ module Mailgun
     #
     # @param [Array] data Array of unsubscribe hashes
     # @return [Response] Mailgun API response
-    # @return [Array] Array of invalid unsubscribe hashes.
     # @return [Array] Return values from recursive call for list split.
     def create_unsubscribes(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000 then
-        split_return = create_unsubscribes data[999..-1]
+        resp, resp_l = create_unsubscribes data[999..-1]
+        split_return.push(resp)
+        split_return.concat(resp_l)
         data = data[0..998]
       elsif data.length == 0 then
-        []
+        return nil, []
       end
 
       valid = []
@@ -197,16 +199,17 @@ module Mailgun
     #
     # @param [Array] data Array of complaint hashes
     # @return [Response] Mailgun API response
-    # @return [Array] Array of invalid complaint hashes.
     # @return [Array] Return values from recursive call for list split.
     def create_complaints(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000 then
-        split_return = create_complaints data[999..-1]
+        resp, resp_l = create_complaints data[999..-1]
+        split_return.push(resp)
+        split_return.concat(resp_l)
         data = data[0..998]
       elsif data.length == 0 then
-        []
+        return nil, []
       end
 
       valid = []

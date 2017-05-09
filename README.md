@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.1.4'
+gem 'mailgun-ruby', '~>1.1.6'
 ```
 
 Usage
@@ -157,6 +157,7 @@ This SDK includes the following components:
 - [Domains](docs/Domains.md)
 - [Webhooks](docs/Webhooks.md)
 - [Events](docs/Events.md)
+- [Suppressions](docs/Suppressions.md)
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.

@@ -30,6 +30,24 @@ domainer.create 'my.new.moreness', { some: 'options' }
 domainer.remove 'this.one.is.not.needed.'
 ```
 
+Suppressions for a Domain
+-------------------------
+
+You can manage domain suppressions (bounces, unsubscribes, complaints) using the
+[`Mailgun::Suppressions`](/docs/Suppressions.md) client:
+
+```ruby
+# Instantiate the Mailgun Client with your API key
+mg_client = Mailgun::Client.new('your-api-key')
+supp_client = mg_client.suppressions('example.org')
+
+# ...
+```
+
+See the [Suppressions](/docs/Suppressions.md) for usage samples and
+[suppressions.rb](/lib/mailgun/suppressions.rb) for suppressions client API.
+
+
 More Documentation
 ------------------
 See the official [Mailgun Domain Docs](https://documentation.mailgun.com/api-domains.html)
