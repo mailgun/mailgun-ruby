@@ -59,3 +59,24 @@ response, addt_responses = @supp_client.create_bounces bounces
 return two values - first, a simple `Mailgun::Response` object. Second,
 a list containing any `Mailgun::Response` objects created recursively, if over 998
 bounces were provided to `create_*`.
+
+----
+
+To delete bounces:
+
+```ruby
+@addresses = <load addresses...>
+
+@addresses.each do |addr|
+  @supp_client.delete_bounce addr
+end
+```
+
+Or, alternatively, to remove *all* bounces:
+
+```ruby
+@supp_client.delete_all_bounces
+```
+
+The `delete_*` methods are similar for `bounces`, `unsubscribe`, and `complaints` -
+they all will return a `Mailgun::Response` object.

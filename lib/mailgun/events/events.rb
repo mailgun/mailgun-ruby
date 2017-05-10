@@ -11,6 +11,7 @@ module Mailgun
   #
   #    See the Github documentation for full examples.
   class Events
+    include Enumerable
 
     # Public: event initializer
     #
@@ -23,13 +24,13 @@ module Mailgun
       @paging_previous = nil
     end
 
-    # Public: Issues a simple get against the client.
+    # Public: Issues a simple get against the client. Alias of `next`.
     #
     # params - a Hash of query options and/or filters.
     #
     # Returns a Mailgun::Response object.
     def get(params = nil)
-      get_events(params)
+      self.next(params)
     end
 
     # Public: Using built in paging, obtains the next set of data.
@@ -52,6 +53,18 @@ module Mailgun
     # Returns Mailgun::Response object.
     def previous(params = nil)
       get_events(params, @paging_previous)
+    end
+
+    # Public: Allows iterating through all events and performs automatic paging.
+    #
+    # &block - Block to execute on items.
+    def each(&block)
+      items = self.next.to_h['items']
+
+      until items.empty?
+        items.each(&block)
+        items = self.next.to_h['items']
+      end
     end
 
     private

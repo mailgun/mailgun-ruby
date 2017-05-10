@@ -58,4 +58,51 @@ http_interactions:
         \ }\n}"
     http_version: 
   recorded_at: Thu, 07 Jan 2016 22:08:06 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: get
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/events
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (linux-gnu x86_64) ruby/2.3.3p222
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 10 May 2017 20:06:54 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '2060'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"items\": [], \n  \"paging\": {\n    \"next\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIHsiYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIFsiZiJdLCBudWxsLCBbWyJhY2NvdW50LmlkIiwgIjU4MDUyMTg2NzhmYTE2MTNjNzkwYjUwZiJdLCBbImRvbWFpbi5uYW1lIiwgInNhbmRib3gyOTcwMTUyYWYzZDM0NTU5YmZjN2U3MTcwM2E2Y2YyNC5tYWlsZ3VuLm9yZyJdXSwgMTAwLCBudWxsXQ==\",
+        \n    \"last\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIHsiYiI6ICIyMDE3LTA1LTA4VDIwOjA2OjU0LjU3NyswMDowMCIsICJlIjogIjIwMTctMDUtMTBUMjA6MDY6NTQuNTc2KzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIFtbImFjY291bnQuaWQiLCAiNTgwNTIxODY3OGZhMTYxM2M3OTBiNTBmIl0sIFsiZG9tYWluLm5hbWUiLCAic2FuZGJveDI5NzAxNTJhZjNkMzQ1NTliZmM3ZTcxNzAzYTZjZjI0Lm1haWxndW4ub3JnIl1dLCAxMDAsIG51bGxd\",
+        \n    \"first\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIHsiYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIFsiZiJdLCBudWxsLCBbWyJhY2NvdW50LmlkIiwgIjU4MDUyMTg2NzhmYTE2MTNjNzkwYjUwZiJdLCBbImRvbWFpbi5uYW1lIiwgInNhbmRib3gyOTcwMTUyYWYzZDM0NTU5YmZjN2U3MTcwM2E2Y2YyNC5tYWlsZ3VuLm9yZyJdXSwgMTAwLCBudWxsXQ==\",
+        \n    \"previous\": \"https://api.mailgun.net/v3/DOMAIN.TEST/events/W3siYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMDhUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIHsiYiI6ICIyMDE3LTA1LTEwVDIwOjA2OjU0LjU3NiswMDowMCIsICJlIjogIjIwMTctMDUtMTBUMjA6MDY6NTQuNTc3KzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIFtbImFjY291bnQuaWQiLCAiNTgwNTIxODY3OGZhMTYxM2M3OTBiNTBmIl0sIFsiZG9tYWluLm5hbWUiLCAic2FuZGJveDI5NzAxNTJhZjNkMzQ1NTliZmM3ZTcxNzAzYTZjZjI0Lm1haWxndW4ub3JnIl1dLCAxMDAsIG51bGxd\"\n
+        \ }\n}"
+    http_version: 
+  recorded_at: Wed, 10 May 2017 20:06:54 GMT
+recorded_with: VCR 3.0.3

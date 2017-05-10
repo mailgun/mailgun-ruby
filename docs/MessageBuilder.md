@@ -78,7 +78,7 @@ mg_client = Mailgun::Client.new("your-api-key")
 mb_obj = Mailgun::BatchMessage.new(mg_client, "example.com")
 
 # Define the from address.
-mb_obj.from("me@example.com", {"first"=>"Ruby", "last" => "SDK"});
+mb_obj.from("me@example.com", {"first" => "Ruby", "last" => "SDK"});
 
 # Define the subject.
 mb_obj.subject("A message from the Ruby SDK using Message Builder!");

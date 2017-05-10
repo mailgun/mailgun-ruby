@@ -97,6 +97,7 @@ module Railgun
     mb = Mailgun::MessageBuilder.new
 
     mb.from mail[:from]
+    mb.reply_to(mail[:reply_to].to_s) if mail[:reply_to].present?
     mb.subject mail.subject
     mb.body_html extract_body_html(mail)
     mb.body_text extract_body_text(mail)

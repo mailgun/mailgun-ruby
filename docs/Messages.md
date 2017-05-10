@@ -79,7 +79,7 @@ mb_obj.set_text_body("Hello %recipient.first%,
                      This is the text body of the message
                      using recipient variables!
                      If you need to include custom data,
-                     you could do it like this: %account-id%.")
+                     you could do it like this: %recipient.account-id%.")
 
 mb_obj.add_recipient(:to, "john.doe@example.com", {"first"      => "John",
                                                    "last"       => "Doe",
