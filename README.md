@@ -164,6 +164,31 @@ Batch Message is an extension of Message Builder, and allows you to easily send
 a batch message job within a few seconds. The complexity of
 batch messaging is eliminated!
 
+Testing mail deliveries
+----------------------
+
+```ruby
+# First, instantiate the Mailgun Client with your API key
+mg_client = Mailgun::Client.new 'your-api-key'
+
+# Put the client in test mode
+mg_client.enable_test_mode!
+
+# Define your message parameters
+message_params = {  from: 'bob@sending_domain.com',
+                    to: 'sally@example.com',
+                    subject: 'The Ruby SDK is awesome!',
+                    text: 'It is really easy to send a message!'
+                  }
+
+# Send your message through the client
+# Note: This will not actually hit the API, and will return a generic OK response.
+mg_client.send_message('sending_domain.com', message_params)
+
+# You can now access a copy of message_params
+Mailgun::Client.deliveries.first[:from] # => 'bob@sending_domain.com'
+```
+
 Testing
 -------
 
