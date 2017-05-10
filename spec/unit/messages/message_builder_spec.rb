@@ -249,6 +249,31 @@ describe 'The method add_inline_image' do
   end
 end
 
+describe 'The method list_unsubscribe' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+
+  it 'sets the message list_unsubscribe to blank if called and no parameters are provided' do
+    @mb_obj.list_unsubscribe
+    expect(@mb_obj.message['h:List-Unsubscribe']).to eq('')
+  end
+
+  it 'sets the message list_unsubscribe if called with one list_unsubscribe parameter' do
+    unsubscribe_to = 'http://example.com/stop-hassle'
+    @mb_obj.list_unsubscribe(unsubscribe_to)
+    expect(@mb_obj.message['h:List-Unsubscribe']).to eq("<#{unsubscribe_to}>")
+  end
+
+  it 'sets the message list_unsubscribe if called with many list_unsubscribe parameters' do
+    unsubscribe_to = %w(http://example.com/stop-hassle mailto:stop-hassle@example.com)
+    @mb_obj.list_unsubscribe(*unsubscribe_to)
+    expect(@mb_obj.message['h:List-Unsubscribe']).to eq(
+      unsubscribe_to.map { |var| "<#{var}>" }.join(',')
+    )
+  end
+end
+
 describe 'The method set_test_mode' do
   it 'warns of set_test_mode deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
