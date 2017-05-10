@@ -36,18 +36,22 @@ module Mailgun
     # If an events request hasn't been sent previously, this will send one
     #   without parameters
     #
+    # params - a Hash of query options and/or filters.
+    #
     # Returns a Mailgun::Response object.
-    def next
-      get_events(nil, @paging_next)
+    def next(params = nil)
+      get_events(params, @paging_next)
     end
 
     # Public: Using built in paging, obtains the previous set of data.
     # If an events request hasn't been sent previously, this will send one
     #   without parameters
     #
+    # params - a Hash of query options and/or filters.
+    #
     # Returns Mailgun::Response object.
-    def previous
-      get_events(nil, @paging_previous)
+    def previous(params = nil)
+      get_events(params, @paging_previous)
     end
 
     private
