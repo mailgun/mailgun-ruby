@@ -44,6 +44,13 @@ module Mailgun
       @test_mode
     end
 
+    # Provides a store of all the emails sent in test mode so you can check them.
+    #
+    # @return [Hash]
+    def self.deliveries
+      @@deliveries ||= []
+    end
+
     # Simple Message Sending
     #
     # @param [String] working_domain This is the domain you wish to send from.
@@ -52,6 +59,7 @@ module Mailgun
     # @return [Mailgun::Response] A Mailgun::Response object.
     def send_message(working_domain, data)
       if test_mode? then
+        Mailgun::Client.deliveries << data
         return Response.from_hash(
           {
             :body => '{"id": "test-mode-mail@localhost", "message": "Queued. Thank you."}',
