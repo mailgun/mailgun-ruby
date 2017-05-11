@@ -1,4 +1,5 @@
 require 'mailgun/chains'
+require 'mailgun/suppressions'
 require 'mailgun/exceptions/exceptions'
 
 module Mailgun
@@ -147,6 +148,14 @@ module Mailgun
       Response.new(response)
     rescue => err
       raise communication_error err
+    end
+
+    # Constructs a Suppressions client for the given domain.
+    #
+    # @param [String] domain Domain which suppressions requests will be made for
+    # @return [Mailgun::Suppressions]
+    def suppressions(domain)
+      Suppressions.new(self, domain)
     end
 
     private
