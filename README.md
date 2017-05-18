@@ -67,7 +67,7 @@ end
 ```
 Or have the initializer read your environment setting if you perfer.
 
-To use as the ActionMailer delivery method, add this to your `config/environments/whatever.yml`
+To use as the ActionMailer delivery method, add this to your `config/environments/whatever.rb`
 and replace `api-myapikey` and `mydomain.com` with your secret API key and domain, respectively:
 ```ruby
   config.action_mailer.delivery_method = :mailgun
