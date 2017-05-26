@@ -27,7 +27,7 @@ Usage
 Here's how to send a message using the library:
 
 ```ruby
-require 'mailgun' 
+require 'mailgun'
 
 # First, instantiate the Mailgun Client with your API key
 mg_client = Mailgun::Client.new 'your-api-key'
@@ -75,6 +75,14 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
     api_key: 'api-myapikey',
     domain: 'mydomain.com',
   }
+```
+
+To get the Mailgun `message_id` after ActionMailer has successfully delivered the email:
+
+```ruby
+  mailer = UserNotifier.welcome_email(current_user)
+  mailer_response = mailer.deliver_now
+  mailgun_message_id = mailer_response.message_id
 ```
 
 Response
