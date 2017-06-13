@@ -135,7 +135,7 @@ module Railgun
   # @return [String]
   def extract_body_html(mail)
     begin
-      (mail.html_part || mail).body.decoded || nil
+      mail.html_part.body.decoded || nil
     rescue
       nil
     end
@@ -149,7 +149,7 @@ module Railgun
   # @return [String]
   def extract_body_text(mail)
     begin
-      (mail.text_part || mail).body.decoded || nil
+      mail.text_part.body.decoded || nil
     rescue
       nil
     end
