@@ -11,7 +11,7 @@ module Railgun
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
-    attr_accessor :config, :domain
+    attr_accessor :config, :domain, :settings
 
     # Initialize the Railgun mailer.
     #
@@ -25,6 +25,9 @@ module Railgun
 
       @mg_client = Mailgun::Client.new(config[:api_key])
       @domain = @config[:domain]
+
+      # To avoid exception in mail gem v2.6
+      @settings = { return_response: true }
 
       if (@config[:fake_message_send] || false)
         Rails.logger.info "NOTE: fake message sending has been enabled for mailgun-ruby!"
