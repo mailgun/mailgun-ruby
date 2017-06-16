@@ -21,3 +21,5 @@ ruby
 .ruby-env.yml
 .rspec-local
 .tool-versions
+.ruby-version
+modd.conf
