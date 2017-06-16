@@ -87,12 +87,22 @@ module Mailgun
     #
     # Return is irrelevant.
     def extract_paging(response)
-      # This is pretty hackish. But the URL will never change in API v2.
-      @paging_next = response.to_h['paging']['next'].split('/')[6]
-      @paging_previous = response.to_h['paging']['previous'].split('/')[6]
-    rescue
-      @paging_next = nil
-      @paging_previous = nil
+      next_page_url = response.to_h.dig('paging', 'next')
+      previous_page_url = response.to_h.dig('paging', 'previous')
+      @paging_next     = extract_endpoint_from(next_page_url)
+      @paging_previous = extract_endpoint_from(previous_page_url)
+    end
+
+    # Internal: given a paging URL, extract the endpoint
+    #
+    # response - the endpoint for the previous/next page
+    #
+    # Returns a String of the partial URI if the given url follows the regular API format
+    # Returns nil in other cases (e.g. when given nil, or an irrelevant url)
+    def extract_endpoint_from(url = nil)
+      URI.parse(url).path[/api.mailgun.net\/v[\d]\/#{@domain}\/events\/(.+)/,1]
+    rescue URI::InvalidURIError
+      nil
     end
 
     # Internal: construct the event path to be used by the client
