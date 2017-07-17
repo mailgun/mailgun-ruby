@@ -31,7 +31,7 @@ hook.create 'my.perfect.domain', 'deliver', 'https://the.webhook.url/'
 hook.remove 'my.perfect.domain', 'deliver'
 
 # Remove all webhooks for a domain
-hook.remove 'my.perfect.domain'
+hook.remove_all 'my.perfect.domain'
 ```
 
 More Documentation
