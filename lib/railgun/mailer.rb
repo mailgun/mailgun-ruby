@@ -40,7 +40,7 @@ module Railgun
       response = @mg_client.send_message(@domain, mg_message)
 
       if response.code == 200 then
-        mg_id = response.body['id']
+        mg_id = response.to_h['id']
         mail.message_id = mg_id
       end
       response
