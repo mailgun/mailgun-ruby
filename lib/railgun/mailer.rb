@@ -138,6 +138,12 @@ module Railgun
   # @return [String]
   def extract_body_html(mail)
     begin
+      if /text\/plain/ =~ mail.html_part.content_type then
+        return nil
+      elsif /text\/plain/ =~ mail.content_type then
+        return nil
+      end
+
       (mail.html_part || mail).body.decoded || nil
     rescue
       nil
