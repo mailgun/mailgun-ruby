@@ -196,13 +196,28 @@ describe 'The method from' do
     expect(@mb_obj.message[:from]).to eq([the_from_address])
   end
 
-  it 'sets the from address with metadata' do
+  it 'sets the from address with first/last metadata' do
     the_from_address = 'test@mailgun.com'
     the_first_name = 'Magilla'
     the_last_name = 'Gorilla'
     @mb_obj.from(the_from_address, {'first' => the_first_name, 'last' => the_last_name})
 
     expect(@mb_obj.message[:from]).to eq(["'#{the_first_name} #{the_last_name}' <#{the_from_address}>"])
+  end
+
+  it 'sets the from address with full name metadata' do
+    the_from_address = 'test@mailgun.com'
+    full_name = 'Magilla Gorilla'
+    @mb_obj.from(the_from_address, {'full_name' => full_name})
+
+    expect(@mb_obj.message[:from]).to eq(["'#{full_name}' <#{the_from_address}>"])
+  end
+
+  it 'fails when first/last and full_name are used' do
+    the_from_address = 'test@mailgun.com'
+    full_name = 'Magilla Gorilla'
+    first_name = 'Magilla'
+    expect{@mb_obj.from(the_from_address, {'full_name' => full_name, 'first' => first_name})}.to raise_error(Mailgun::ParameterError)
   end
 end
 
