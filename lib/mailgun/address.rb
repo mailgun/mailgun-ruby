@@ -18,8 +18,11 @@ module Mailgun
     # Given an arbitrary address, validates it based on defined checks.
     #
     # @param [String] address Email address to validate (max 512 chars.)
-    def validate(address)
-      res = @client.get "address/validate", {:address => address}
+    def validate(address, mailbox_verification = false)
+      params = {:address => address}
+      params[:mailbox_verification] = true if mailbox_verification
+
+      res = @client.get "address/validate", params
       return res.to_h!
     end
 

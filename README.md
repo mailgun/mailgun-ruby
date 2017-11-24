@@ -65,7 +65,7 @@ Mailgun.configure do |config|
   config.api_key = 'your-secret-api-key'
 end
 ```
-Or have the initializer read your environment setting if you perfer.
+Or have the initializer read your environment setting if you prefer.
 
 To use as the ActionMailer delivery method, add this to your `config/environments/whatever.rb`
 and replace `api-myapikey` and `mydomain.com` with your secret API key and domain, respectively:

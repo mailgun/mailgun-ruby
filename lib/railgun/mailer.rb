@@ -40,7 +40,7 @@ module Railgun
       response = @mg_client.send_message(@domain, mg_message)
 
       if response.code == 200 then
-        mg_id = response.body['id']
+        mg_id = response.to_h['id']
         mail.message_id = mg_id
       end
       response
@@ -138,7 +138,7 @@ module Railgun
   # @return [String]
   def extract_body_html(mail)
     begin
-      (mail.html_part || mail).body.decoded || nil
+      retrieve_html_part(mail).body.decoded || nil
     rescue
       nil
     end
@@ -152,10 +152,34 @@ module Railgun
   # @return [String]
   def extract_body_text(mail)
     begin
-      (mail.text_part || mail).body.decoded || nil
+      retrieve_text_part(mail).body.decoded || nil
     rescue
       nil
     end
+  end
+
+  # Returns the mail object from the Mail::Message object if text part exists,
+  # (decomposing multipart into individual format if necessary)
+  # otherwise nil.
+  #
+  # @param [Mail::Message] mail message to transform
+  #
+  # @return [Mail::Message] mail message with its content-type = text/plain
+  def retrieve_text_part(mail)
+    return mail.text_part if mail.multipart?
+    (mail.mime_type =~ /^text\/plain$/i) && mail
+  end
+
+  # Returns the mail object from the Mail::Message object if html part exists,
+  # (decomposing multipart into individual format if necessary)
+  # otherwise nil.
+  #
+  # @param [Mail::Message] mail message to transform
+  #
+  # @return [Mail::Message] mail message with its content-type = text/html
+  def retrieve_html_part(mail)
+    return mail.html_part if mail.multipart?
+    (mail.mime_type =~ /^text\/html$/i) && mail
   end
 
 end

@@ -38,6 +38,12 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     expect(res).to eq(expected)
   end
 
+  it 'performs mailbox validation for alice@mailgun.net' do
+    res = @mg_obj.validate("alice@mailgun.net", true)
+
+    expect(res["mailbox_verification"]).to eq("true")
+  end
+
   it 'fails to validate example.org' do
     res = @mg_obj.validate("example.org")
 
