@@ -69,17 +69,3 @@ describe 'extract_body' do
     end
   end
 end
-
-describe 'The method mailgun_client' do
-  before(:each) do
-    config = {
-      api_key:  {},
-      domain:   {}
-    }
-    @mailer_obj = Railgun::Mailer.new(config)
-  end
-
-  it 'should return a Mailgun::Client object' do
-    expect(@mailer_obj.mailgun_client).to be_a(Mailgun::Client)
-  end
-end
