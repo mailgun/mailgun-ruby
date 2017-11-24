@@ -23,7 +23,7 @@ module Railgun
         raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
       end
 
-      @mg_client = Mailgun::Client.new(config[:api_key])
+      @mg_client = Mailgun::Client.new(config[:api_key], config[:api_host] || 'api.mailgun.net', config[:api_version] || 'v3', config[:api_ssl].nil? ? true : config[:api_ssl])
       @domain = @config[:domain]
 
       # To avoid exception in mail gem v2.6
