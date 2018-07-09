@@ -120,6 +120,8 @@ module Railgun
       end
     end
 
+    mail[:tags].each { |tag| mb.add_tag(tag) } if mail[:tags].present?
+
     return mb.message if mail.attachments.empty?
 
     mail.attachments.each do |attach|
