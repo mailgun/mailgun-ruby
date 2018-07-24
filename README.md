@@ -83,9 +83,9 @@ class UserMailer < ApplicationMailer
   def welcome_email
     mail(to: params[:to], subject: "Welcome!").tap do |message|
       message.mailgun_options = {
-        "campaign" => "welcome",
         "tag" => ["abtest-option-a", "beta-user"],
-        "tracking-opens" => "yes"
+        "tracking-opens" => true,
+        "tracking-clicks" => "htmlonly
       }
     end
   end
