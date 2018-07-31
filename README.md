@@ -85,7 +85,7 @@ class UserMailer < ApplicationMailer
       message.mailgun_options = {
         "tag" => ["abtest-option-a", "beta-user"],
         "tracking-opens" => true,
-        "tracking-clicks" => "htmlonly
+        "tracking-clicks" => "htmlonly"
       }
     end
   end
