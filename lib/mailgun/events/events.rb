@@ -101,7 +101,7 @@ module Mailgun
     # Returns a String of the partial URI if the given url follows the regular API format
     # Returns nil in other cases (e.g. when given nil, or an irrelevant url)
     def extract_endpoint_from(url = nil)
-      URI.parse(url).path[/api.mailgun.net\/v[\d]\/#{@domain}\/events\/(.+)/,1]
+      URI.parse(url).path[/\/v[\d]\/#{@domain}\/events\/(.+)/,1]
     rescue URI::InvalidURIError
       nil
     end
