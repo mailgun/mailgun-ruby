@@ -379,8 +379,15 @@ module Mailgun
     def parse_address(address, vars)
       return address unless vars.is_a? Hash
       fail(Mailgun::ParameterError, 'Email address not specified') unless address.is_a? String
+      if vars['full_name'] != nil && (vars['first'] != nil || vars['last'] != nil)
+        fail(Mailgun::ParameterError, 'Must specify at most one of full_name or first/last. Vars passed: #{vars}')
+      end
 
-      full_name = "#{vars['first']} #{vars['last']}".strip
+      if vars['full_name']
+        full_name = vars['full_name']
+      elsif vars['first'] || vars['last']
+        full_name = "#{vars['first']} #{vars['last']}".strip
+      end 
 
       return "'#{full_name}' <#{address}>" if defined?(full_name)
       address

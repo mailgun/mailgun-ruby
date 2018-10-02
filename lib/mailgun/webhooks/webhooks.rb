@@ -46,7 +46,7 @@ module Mailgun
     # Returns a Boolean of whether the webhook was created
     def create(domain, action, url = '')
       res = @client.post("domains/#{domain}/webhooks", id: action, url: url)
-      res.to_h['webhook']['url'] == url && res.to_h[message] == 'Webhook has been created'
+      res.to_h['webhook']['url'] == url && res.to_h['message'] == 'Webhook has been created'
     end
     alias_method :add, :create
     alias_method :add_webhook, :create
