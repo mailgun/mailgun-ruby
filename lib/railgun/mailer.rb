@@ -47,7 +47,7 @@ module Railgun
     end
 
     def mailgun_client
-      @mg_obj
+      @mg_client
     end
 
   end
