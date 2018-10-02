@@ -77,7 +77,7 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   }
 ```
 
-To specify Mailgun options such as campagin or tags:
+To specify Mailgun options such as campaign or tags:
 ```ruby
 class UserMailer < ApplicationMailer
   def welcome_email
