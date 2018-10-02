@@ -77,6 +77,21 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   }
 ```
 
+To specify Mailgun options such as campaign or tags:
+```ruby
+class UserMailer < ApplicationMailer
+  def welcome_email
+    mail(to: params[:to], subject: "Welcome!").tap do |message|
+      message.mailgun_options = {
+        "tag" => ["abtest-option-a", "beta-user"],
+        "tracking-opens" => true,
+        "tracking-clicks" => "htmlonly"
+      }
+    end
+  end
+end   
+```
+
 To get the Mailgun `message_id` after ActionMailer has successfully delivered the email:
 
 ```ruby
