@@ -14,13 +14,15 @@ module Mailgun
                    api_host = 'api.mailgun.net',
                    api_version = 'v3',
                    ssl = true,
-                   test_mode = false)
+                   test_mode = false,
+                   timeout = -1)
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
       @http_client = RestClient::Resource.new(endpoint,
                                               user: 'api',
                                               password: api_key,
-                                              user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}")
+                                              user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}",
+                                              timeout: timeout)
       @test_mode = test_mode
     end
 
