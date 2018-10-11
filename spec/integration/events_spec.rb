@@ -22,7 +22,7 @@ describe 'For the Events endpoint', vcr: vcr_opts do
 
   it 'can iterate over all events with `each`' do
     @events.each do |e|
-      expect(e.id).to eq("JAx9z641TuGGUyaJlD9sCQ")
+      expect(e["id"]).to eq("JAx9z641TuGGUyaJlD9sCQ")
     end
   end
 end

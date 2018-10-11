@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'base64'
 require 'bundler'
 require 'bundler/setup'
 Bundler.setup(:development)
@@ -37,9 +38,10 @@ TESTDOMAIN = envs['MAILGUN_TESTDOMAIN']
 VCR.configure do |c|
   c.cassette_library_dir = 'vcr_cassettes'
   c.hook_into :webmock
-  c.configure_rspec_metadata!
   c.default_cassette_options = { record: :new_episodes }
   c.filter_sensitive_data('<APIKEY>') { APIKEY }
   c.filter_sensitive_data('DOMAIN.TEST') { TESTDOMAIN }
   c.filter_sensitive_data('<PUBKEY>') { PUB_APIKEY }
+
+  c.configure_rspec_metadata!
 end
