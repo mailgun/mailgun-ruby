@@ -28,7 +28,11 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     expected = {
         "address" => "alice@mailgun.net",
         "did_you_mean" => nil,
+        "is_disposable_address" => false,
+        "is_role_address" => false,
         "is_valid" => true,
+        "mailbox_verification" => "true",
+        "reason" => nil,
         "parts" => {
             "display_name" => nil,
             "domain" => "mailgun.net",
@@ -50,7 +54,11 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     expected = {
         "address" => "example.org",
         "did_you_mean" => nil,
+        "is_disposable_address" => false,
+        "is_role_address" => false,
         "is_valid" => false,
+        "mailbox_verification" => "unknown",
+        "reason" => "Validation failed for 'example.org', reason: 'malformed address; missing @ sign'",
         "parts" => {
             "display_name" => nil,
             "domain" => nil,

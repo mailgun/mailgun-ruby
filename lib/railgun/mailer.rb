@@ -1,4 +1,5 @@
 require 'action_mailer'
+require 'json'
 require 'mailgun'
 require 'rails'
 require 'railgun/errors'
@@ -8,6 +9,9 @@ module Railgun
   # Railgun::Mailer is an ActionMailer provider for sending mail through
   # Mailgun.
   class Mailer
+
+    # List of the headers that will be ignored when copying headers from `mail.header_fields`
+    IGNORED_HEADERS = %w[ to from subject ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -66,7 +70,7 @@ module Railgun
 
     # v:* attributes (variables)
     mail.mailgun_variables.try(:each) do |k, v|
-      message["v:#{k}"] = v
+      message["v:#{k}"] = JSON.dump(v)
     end
 
     # o:* attributes (options)
@@ -74,8 +78,36 @@ module Railgun
       message["o:#{k}"] = v
     end
 
+    # support for using ActionMailer's `headers()` inside of the mailer
+    # note: this will filter out parameters such as `from`, `to`, and so forth
+    #       as they are accepted as POST parameters on the message endpoint.
+
+    msg_headers = Hash.new
+
     # h:* attributes (headers)
     mail.mailgun_headers.try(:each) do |k, v|
+      msg_headers[k] = v
+    end
+
+    mail.header_fields.each do |field|
+      msg_headers[field.name] = field.value
+    end
+
+    msg_headers.each do |k, v|
+      if Railgun::Mailer::IGNORED_HEADERS.include? k.downcase
+        Rails.logger.debug("[railgun] ignoring header (using envelope instead): #{k}")
+        next
+      end
+
+      # Cover cases like `cc`, `bcc` where parameters are valid
+      # headers BUT they are submitted as separate POST params
+      # and already exist on the message because of the call to
+      # `build_message_object`.
+      if message.include? k.downcase
+        Rails.logger.debug("[railgun] ignoring header (already set): #{k}")
+        next
+      end
+
       message["h:#{k}"] = v
     end
 
