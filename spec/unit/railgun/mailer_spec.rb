@@ -112,6 +112,18 @@ describe 'Railgun::Mailer' do
     expect(body['h:X-Unit-Test-2']).to eq('true')
   end
 
+  it 'does not add the reply-to header twice' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {
+      'Reply-To' => 'only@once.com',
+    })
+
+    body = Railgun.transform_for_mailgun(message)
+
+    expect(body).to include('h:Reply-To')
+    expect(body).to_not include('h:reply-to')
+    expect(body['h:Reply-To']).to eq('only@once.com')
+  end
+
   it 'properly handles headers that are passed as separate POST params' do
     message = UnitTestMailer.plain_message('test@example.org', 'Test!', {
       # `From`, `To`, and `Subject` are set on the envelope, so they should be ignored as headers

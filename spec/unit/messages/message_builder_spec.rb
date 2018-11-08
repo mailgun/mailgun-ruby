@@ -66,11 +66,11 @@ describe 'The method add_recipient' do
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
-  it 'adds a "h:reply-to" recipient type to the message body and counters are not incremented' do
-    recipient_type = 'h:reply-to'
+  it 'adds a "h:Reply-To" recipient type to the message body and counters are not incremented' do
+    recipient_type = 'h:Reply-To'
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
     @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
   end
 

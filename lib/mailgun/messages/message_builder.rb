@@ -70,7 +70,7 @@ module Mailgun
     # @return [void]
     def reply_to(address, variables = nil)
       compiled_address = parse_address(address, variables)
-      header("reply-to", compiled_address)
+      header("Reply-To", compiled_address)
     end
 
     # Set a subject for the message object
@@ -387,7 +387,7 @@ module Mailgun
         full_name = vars['full_name']
       elsif vars['first'] || vars['last']
         full_name = "#{vars['first']} #{vars['last']}".strip
-      end 
+      end
 
       return "'#{full_name}' <#{address}>" if defined?(full_name)
       address
