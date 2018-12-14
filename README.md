@@ -79,7 +79,7 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
 
 To use separate domains, between for instance marketing and transactional messages:
 ```ruby
-// config/application.rb or config/environments/*.rb
+# config/application.rb or config/environments/*.rb
   
 ActionMailer::Base.add_delivery_method :mailgun_marketing, Railgun::Mailer
 config.action_mailer.mailgun_marketing_settings = {
@@ -92,13 +92,13 @@ config.action_mailer.mailgun_transactional_settings = {
   domain:  ENV["MAILGUN_TRANSACTIONAL_DOMAIN"]
 }
   
-// transactional_mailer.rb
+# transactional_mailer.rb
 class TransactionalMailer < ActionMailer::Base
   default delivery_method: :mailgun_transactional
   ...
 end
 
-// marketing_mailer.rb
+# marketing_mailer.rb
 class MarketingMailer < ActionMailer::Base
   default delivery_method: :mailgun_marketing
   ...
