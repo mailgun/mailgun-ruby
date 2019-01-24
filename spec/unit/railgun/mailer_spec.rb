@@ -163,7 +163,7 @@ describe 'Railgun::Mailer' do
     expect(ActionMailer::Base.deliveries).to include(message)
   end
 
-  it 'overwrites headers from `headers()` with `mailgun_headers`' do
+  it 'ignores `reply-to` in headers' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
       'reply-to' => 'user@example.com',
     })
@@ -171,11 +171,12 @@ describe 'Railgun::Mailer' do
       'Reply-To' => 'administrator@example.org',
     }
     message.headers({'REPLY-TO' => 'admin@example.net'})
+    message.reply_to = "dude@example.com.au"
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:reply-to')
     expect(body).not_to include('h:Reply-To')
-    expect(body['h:reply-to']).to eq('administrator@example.org')
+    expect(body['h:reply-to']).to eq('dude@example.com.au')
   end
 
   it 'treats `headers()` names as case-insensitve' do
@@ -197,5 +198,20 @@ describe 'Railgun::Mailer' do
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:x-big-value')
     expect(body['h:x-big-value']).to eq("1")
+  end
+
+  it 'handles multi-value, mixed case headers correctly' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {})
+    message.headers({
+      'x-neat-header' => 'foo',
+      'X-Neat-Header' => 'bar',
+      'X-NEAT-HEADER' => 'zoop',
+    })
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).to include('h:x-neat-header')
+    expect(body['h:x-neat-header']).to include('foo')
+    expect(body['h:x-neat-header']).to include('bar')
+    expect(body['h:x-neat-header']).to include('zoop')
   end
 end
