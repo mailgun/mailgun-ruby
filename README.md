@@ -77,6 +77,8 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   }
 ```
 
+> Note: If you are using europe region, you should add `api_host: 'api.eu.mailgun.net'`
+
 To specify Mailgun options such as campaign or tags:
 ```ruby
 class UserMailer < ApplicationMailer
