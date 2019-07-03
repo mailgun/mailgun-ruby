@@ -20,6 +20,14 @@ class UnitTestMailer < ActionMailer::Base
     end
   end
 
+  def template_message(address, subject, headers)
+    headers(headers)
+    mail(to: address, subject: subject, template: 'template.test') do |format|
+      format.text { render plain: "Test!" }
+      format.html { render html: "<p>Test!</p>".html_safe }
+    end
+  end
+
   def message_with_attachment(address, subject)
     attachments['info.txt'] = {
       :content => File.read('docs/railgun/Overview.md'),
@@ -110,6 +118,15 @@ describe 'Railgun::Mailer' do
 
     expect(body).to include('h:X-Unit-Test-2')
     expect(body['h:X-Unit-Test-2']).to eq('true')
+  end
+
+  it 'adds template header to message body from mailer' do
+    message = UnitTestMailer.template_message('test@example.org', '', {})
+
+    body = Railgun.transform_for_mailgun(message)
+
+    expect(body).to include('template')
+    expect(body['template'].value).to eq('template.test')
   end
 
   it 'properly handles headers that are passed as separate POST params' do
