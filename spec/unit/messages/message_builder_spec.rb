@@ -530,6 +530,34 @@ describe 'The method header' do
   end
 end
 
+describe 'The method template' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+
+  it 'unsets the message template if called and no parameters are provided' do
+    @mb_obj.template
+
+    expect(@mb_obj.message['template']).to be_empty
+  end
+
+  it 'sets the message template if called with the template_name parameter' do
+    template_name = 'template.test'
+    @mb_obj.template(template_name)
+
+    expect(@mb_obj.message['template']).to eq(template_name)
+  end
+
+  it 'ensures no duplicate templates can exist and last setter is stored' do
+    first_template_name = 'template.test'
+    second_template_name = 'template.second_test'
+    @mb_obj.template(first_template_name)
+    @mb_obj.template(second_template_name)
+
+    expect(@mb_obj.message['template']).to eq(second_template_name)
+  end
+end
+
 describe 'The method variable' do
   before(:each) do
     @mb_obj = Mailgun::MessageBuilder.new
