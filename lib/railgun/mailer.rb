@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject ]
+    IGNORED_HEADERS = %w[ to from subject template ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -139,6 +139,7 @@ module Railgun
     mb.from mail[:from]
     mb.reply_to(mail[:reply_to].to_s) if mail[:reply_to].present?
     mb.subject mail.subject
+    mb.template(mail[:template]) if mail[:template].present?
     mb.body_html extract_body_html(mail)
     mb.body_text extract_body_text(mail)
 

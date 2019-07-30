@@ -260,6 +260,18 @@ module Mailgun
       header name, data
     end
 
+    # Send email by a template. Note that this is NOT used for template variables, but
+    # rather for the Templating feature (check Sending->Templates)
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template(template_name = nil)
+      key = 'template'
+      return @message.delete(key) if template_name.to_s.empty?
+      set_single(key, template_name)
+    end
+
     # Attaches custom JSON data to the message. See the following doc page for more info.
     # https://documentation.mailgun.com/user_manual.html#attaching-data-to-messages
     #
