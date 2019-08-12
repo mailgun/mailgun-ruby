@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject ]
+    IGNORED_HEADERS = %w[ to from subject reply-to ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -27,7 +27,12 @@ module Railgun
         raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
       end
 
-      @mg_client = Mailgun::Client.new(config[:api_key], config[:api_host] || 'api.mailgun.net', config[:api_version] || 'v3', config[:api_ssl].nil? ? true : config[:api_ssl])
+      @mg_client = Mailgun::Client.new(
+        config[:api_key],
+        config[:api_host] || 'api.mailgun.net',
+        config[:api_version] || 'v3',
+        config[:api_ssl].nil? ? true : config[:api_ssl],
+      )
       @domain = @config[:domain]
 
       # To avoid exception in mail gem v2.6
@@ -62,6 +67,9 @@ module Railgun
   # After prefixing them with the proper option type, they are added to
   # the message hash where they will then be sent to the API as JSON.
   #
+  # It is important to note that headers set in `mailgun_headers` on the message
+  # WILL overwrite headers set via `mail.headers()`.
+  #
   # @param [Mail::Message] mail message to transform
   #
   # @return [Hash] transformed message hash
@@ -85,12 +93,17 @@ module Railgun
     msg_headers = Hash.new
 
     # h:* attributes (headers)
-    mail.mailgun_headers.try(:each) do |k, v|
-      msg_headers[k] = v
-    end
 
+    # Let's set all of these headers on the [Mail::Message] so that
+    # the are created inside of a [Mail::Header] instance and processed there.
+    mail.headers(mail.mailgun_headers || {})
     mail.header_fields.each do |field|
-      msg_headers[field.name] = field.value
+      header = field.name.downcase
+      if msg_headers.include? header
+        msg_headers[header] = [msg_headers[header], field.value].flatten
+      else
+        msg_headers[header] = field.value
+      end
     end
 
     msg_headers.each do |k, v|

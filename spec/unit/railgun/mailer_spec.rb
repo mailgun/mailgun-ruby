@@ -92,24 +92,24 @@ describe 'Railgun::Mailer' do
   it 'adds headers to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_headers ||= {
-      'X-Unit-Test' => 'true',
+      'x-unit-test' => 'true',
     }
 
     body = Railgun.transform_for_mailgun(message)
 
-    expect(body).to include('h:X-Unit-Test')
-    expect(body['h:X-Unit-Test']).to eq('true')
+    expect(body).to include('h:x-unit-test')
+    expect(body['h:x-unit-test']).to eq('true')
   end
 
   it 'adds headers to message body from mailer' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
-      'X-Unit-Test-2' => 'true',
+      'x-unit-test-2' => 'true',
     })
 
     body = Railgun.transform_for_mailgun(message)
 
-    expect(body).to include('h:X-Unit-Test-2')
-    expect(body['h:X-Unit-Test-2']).to eq('true')
+    expect(body).to include('h:x-unit-test-2')
+    expect(body['h:x-unit-test-2']).to eq('true')
   end
 
   it 'properly handles headers that are passed as separate POST params' do
@@ -131,7 +131,7 @@ describe 'Railgun::Mailer' do
       expect(body).not_to include("h:#{header}")
     end
 
-    ['bcc', 'cc', 'to', 'h:X-Source'].each do |param|
+    ['bcc', 'cc', 'to', 'h:x-source'].each do |param|
       expect(body).to include(param)
     end
 
@@ -142,7 +142,7 @@ describe 'Railgun::Mailer' do
     expect(body[:html]).to eq(['<p>Test!</p>'.html_safe])
     expect(body['bcc']).to eq(['list@example.org'])
     expect(body['cc']).to eq(['admin@example.com'])
-    expect(body['h:X-Source']).to eq('unit tests')
+    expect(body['h:x-source']).to eq('unit tests')
   end
 
   it 'properly adds attachments' do
@@ -163,4 +163,55 @@ describe 'Railgun::Mailer' do
     expect(ActionMailer::Base.deliveries).to include(message)
   end
 
+  it 'ignores `reply-to` in headers' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {
+      'reply-to' => 'user@example.com',
+    })
+    message.mailgun_headers = {
+      'Reply-To' => 'administrator@example.org',
+    }
+    message.headers({'REPLY-TO' => 'admin@example.net'})
+    message.reply_to = "dude@example.com.au"
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).to include('h:reply-to')
+    expect(body).not_to include('h:Reply-To')
+    expect(body['h:reply-to']).to eq('dude@example.com.au')
+  end
+
+  it 'treats `headers()` names as case-insensitve' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {
+      'X-BIG-VALUE' => 1,
+    })
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).to include('h:x-big-value')
+    expect(body['h:x-big-value']).to eq("1")
+  end
+
+  it 'treats `mailgun_headers` names as case-insensitive' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {})
+    message.mailgun_headers = {
+      'X-BIG-VALUE' => 1,
+    }
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).to include('h:x-big-value')
+    expect(body['h:x-big-value']).to eq("1")
+  end
+
+  it 'handles multi-value, mixed case headers correctly' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {})
+    message.headers({
+      'x-neat-header' => 'foo',
+      'X-Neat-Header' => 'bar',
+      'X-NEAT-HEADER' => 'zoop',
+    })
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).to include('h:x-neat-header')
+    expect(body['h:x-neat-header']).to include('foo')
+    expect(body['h:x-neat-header']).to include('bar')
+    expect(body['h:x-neat-header']).to include('zoop')
+  end
 end
