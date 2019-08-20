@@ -23,7 +23,7 @@ module Railgun
     def initialize(config)
       @config = config
 
-      [:api_key, :domain].each do |k|
+      [:api_key, :api_host, :domain].each do |k|
         raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
       end
 

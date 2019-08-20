@@ -73,6 +73,7 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: 'api-myapikey',
+    api_host: 'api.eu.mailgun.net', # this option is needed only if your domain is set to EU region.
     domain: 'mydomain.com',
   }
 ```

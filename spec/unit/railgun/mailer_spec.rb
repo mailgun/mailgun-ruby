@@ -38,6 +38,7 @@ describe 'Railgun::Mailer' do
   it 'has a mailgun_client property which returns a Mailgun::Client' do
     config = {
       api_key:  {},
+      api_host:  {},
       domain:   {}
     }
     @mailer_obj = Railgun::Mailer.new(config)
