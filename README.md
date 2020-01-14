@@ -56,6 +56,12 @@ domain = 'example.com'
 result = mg_client.get("#{domain}/events", {:event => 'delivered'})
 ```
 
+If you're using the EU domains, make sure you specify it when creating the client:
+
+```
+mg_client = Mailgun::Client.new 'your-api-key', 'api.eu.mailgun.net'
+```
+
 Rails
 -----
 
@@ -74,6 +80,7 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   config.action_mailer.mailgun_settings = {
     api_key: 'api-myapikey',
     domain: 'mydomain.com',
+    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
   }
 ```
 
