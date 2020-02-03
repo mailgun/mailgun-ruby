@@ -41,4 +41,44 @@ http_interactions:
       string: '{"items":[],"total_count":10000}'
     http_version: 
   recorded_at: Thu, 07 Jan 2016 22:08:06 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/stats?event=sent&limit=50&skip=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '79'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"this route was deprecated 2 years ago and is no longer
+        available"}
+
+        '
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:15 GMT
+recorded_with: VCR 3.0.3

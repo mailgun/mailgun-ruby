@@ -52,12 +52,29 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     end
   end
 
-  it 'can batch-add unsubscribes' do
+  it 'can batch-add unsubscribes with tags as string' do
     unsubscribes = []
     @addresses.each do |addr|
       unsubscribes.push({
         :address => addr,
         :tag => 'integration',
+      })
+    end
+
+    response, nested = @suppress.create_unsubscribes unsubscribes
+    response.to_h!
+
+    expect(response.code).to eq(200)
+    expect(response.body['message']).to eq('4 addresses have been added to the unsubscribes table')
+    expect(nested.length).to eq(0)
+  end
+
+  it 'can batch-add unsubscribes with tags as array' do
+    unsubscribes = []
+    @addresses.each do |addr|
+      unsubscribes.push({
+        :address => addr,
+        :tags => ['integration'],
       })
     end
 
@@ -123,4 +140,3 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
 
   # TODO: Add tests for pagination support.
 end
-

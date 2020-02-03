@@ -357,4 +357,386 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 15 Jan 2016 20:12:54 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/domains
+    body:
+      encoding: UTF-8
+      string: smtp_password=super_secret&spam_action=tag&wildcard=false&name=integration-test.domain.invalid
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Content-Length:
+      - '94'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:05 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "message": "smtp_password cannot be set anymore"
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:05 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:05 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '1556'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "domain": {
+            "created_at": "Mon, 03 Feb 2020 19:51:03 GMT",
+            "id": "5e3879a742f836ed26b5d77f",
+            "is_disabled": false,
+            "name": "integration-test.domain.invalid",
+            "require_tls": false,
+            "skip_verification": false,
+            "smtp_login": "postmaster@integration-test.domain.invalid",
+            "spam_action": "tag",
+            "state": "unverified",
+            "type": "custom",
+            "web_prefix": "email",
+            "web_scheme": "http",
+            "wildcard": false
+          },
+          "receiving_dns_records": [
+            {
+              "cached": [],
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxa.mailgun.org"
+            },
+            {
+              "cached": [],
+              "priority": "10",
+              "record_type": "MX",
+              "valid": "unknown",
+              "value": "mxb.mailgun.org"
+            }
+          ],
+          "sending_dns_records": [
+            {
+              "cached": [],
+              "name": "integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "v=spf1 include:mailgun.org ~all"
+            },
+            {
+              "cached": [],
+              "name": "mx._domainkey.integration-test.domain.invalid",
+              "record_type": "TXT",
+              "valid": "unknown",
+              "value": "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDjO/ThNYWtAnXDnQrFITB34aAD2ipv21UIGn3MiFQ5Kjh4EbbhWd+yBMCuqF/xgroARHQnsn2Xet+nW2y/c2tqZ50aIuSqwZ19rdc0/BtsuK6LXjvKuHzabJ/zsPCN0Wymo/sYry2XPn4xtYxX8j95Obm/hPDXWTRyVJLhsJ+H9QIDAQAB"
+            },
+            {
+              "cached": [],
+              "name": "email.integration-test.domain.invalid",
+              "record_type": "CNAME",
+              "valid": "unknown",
+              "value": "mailgun.org"
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:05 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:06 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '4144'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "created_at": "Mon, 03 Feb 2020 19:51:03 GMT",
+              "id": "5e3879a742f836ed26b5d77f",
+              "is_disabled": false,
+              "name": "integration-test.domain.invalid",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@integration-test.domain.invalid",
+              "spam_action": "tag",
+              "state": "unverified",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Tue, 21 Jan 2020 16:34:29 GMT",
+              "id": "5e2728156556d579c1a79fe4",
+              "is_disabled": false,
+              "name": "opera.mail.epifany.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@opera.mail.epifany.com",
+              "smtp_password": "16dc011fc19e7697cca7e11fd3f66c91-9dfbeecd-d3964b03",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Tue, 16 Jul 2019 19:03:05 GMT",
+              "id": "5d2e1f695c4c97f60d603995",
+              "is_disabled": false,
+              "name": "o2.mail.epifany.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@o2.mail.epifany.com",
+              "smtp_password": "022108938e7e6509f16cfadeed322ccd-fd0269a6-9c3b21f6",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Wed, 13 Feb 2019 15:48:52 GMT",
+              "id": "5c643c64d0303a00013fa393",
+              "is_disabled": false,
+              "name": "mail.epifany.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@mail.epifany.com",
+              "smtp_password": "7fe8d976f40571f03a7cc900e2008ac7-1b65790d-7f23d5a8",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Thu, 17 Jan 2019 15:38:27 GMT",
+              "id": "5c40a173d0303a000171a861",
+              "is_disabled": false,
+              "name": "DOMAIN.TEST",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@DOMAIN.TEST",
+              "smtp_password": "4ed55266b26401a49222a5ab6824485f-3939b93a-10914bde",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Fri, 02 Dec 2016 02:26:46 GMT",
+              "id": "5840dbe6354c785e6e6c9e2f",
+              "is_disabled": false,
+              "name": "mailgun.getstealz.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@mailgun.getstealz.com",
+              "smtp_password": "fd33b34bb8549093c76dd6a3157831c7",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Fri, 26 Sep 2014 16:59:34 GMT",
+              "id": "54259b76045ca43d0ae247e4",
+              "is_disabled": false,
+              "name": "members.getstealz.com",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@members.getstealz.com",
+              "smtp_password": "1a8f49fbc33bdfd7d47199b2d5100bbe",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "custom",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            },
+            {
+              "created_at": "Wed, 12 Sep 2012 13:18:02 GMT",
+              "id": "50508b8a69d7c533fe012a2b",
+              "is_disabled": false,
+              "name": "getstealz.mailgun.org",
+              "require_tls": false,
+              "skip_verification": false,
+              "smtp_login": "postmaster@getstealz.mailgun.org",
+              "smtp_password": "3qih3vfvclh8",
+              "spam_action": "disabled",
+              "state": "active",
+              "type": "sandbox",
+              "web_prefix": "email",
+              "web_scheme": "http",
+              "wildcard": false
+            }
+          ],
+          "total_count": 8
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:06 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:06 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '42'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "message": "Domain has been deleted"
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:06 GMT
+recorded_with: VCR 3.0.3

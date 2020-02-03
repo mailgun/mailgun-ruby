@@ -58,7 +58,7 @@ http_interactions:
             "priority": 10
           }
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
 - request:
     method: get
@@ -136,7 +136,7 @@ http_interactions:
           ],
           "total_count": 3
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
 - request:
     method: get
@@ -194,7 +194,7 @@ http_interactions:
           ],
           "total_count": 3
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
 - request:
     method: get
@@ -249,7 +249,7 @@ http_interactions:
             "priority": 10
           }
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
 - request:
     method: put
@@ -307,7 +307,7 @@ http_interactions:
           "message": "Route has been updated",
           "priority": 10
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
 - request:
     method: delete
@@ -354,6 +354,378 @@ http_interactions:
           "id": "5690173212573000be30671e",
           "message": "Route has been deleted"
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 08 Jan 2016 20:08:20 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/routes
+    body:
+      encoding: UTF-8
+      string: priority=10&description=Integration+Test+Route&expression=match_recipient%28%22alice%40DOMAIN.TEST%22%29&action=forward%28%22.*%40DOMAIN.TEST%22%29
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Content-Length:
+      - '167'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:13 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '352'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "message": "Route has been created",
+          "route": {
+            "actions": [
+              "forward(\".*@DOMAIN.TEST\")"
+            ],
+            "created_at": "Mon, 03 Feb 2020 19:51:13 GMT",
+            "description": "Integration Test Route",
+            "expression": "match_recipient(\"alice@DOMAIN.TEST\")",
+            "id": "5e3879b1fafd1fd4e4111338",
+            "priority": 10
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:13 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/routes?limit=50
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '361'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "actions": [
+                "forward(\".*@DOMAIN.TEST\")"
+              ],
+              "created_at": "Mon, 03 Feb 2020 19:51:13 GMT",
+              "description": "Integration Test Route",
+              "expression": "match_recipient(\"alice@DOMAIN.TEST\")",
+              "id": "5e3879b1fafd1fd4e4111338",
+              "priority": 10
+            }
+          ],
+          "total_count": 1
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:14 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/routes?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '361'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "actions": [
+                "forward(\".*@DOMAIN.TEST\")"
+              ],
+              "created_at": "Mon, 03 Feb 2020 19:51:13 GMT",
+              "description": "Integration Test Route",
+              "expression": "match_recipient(\"alice@DOMAIN.TEST\")",
+              "id": "5e3879b1fafd1fd4e4111338",
+              "priority": 10
+            }
+          ],
+          "total_count": 1
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:14 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/routes/5e3879b1fafd1fd4e4111338
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '313'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "route": {
+            "actions": [
+              "forward(\".*@DOMAIN.TEST\")"
+            ],
+            "created_at": "Mon, 03 Feb 2020 19:51:13 GMT",
+            "description": "Integration Test Route",
+            "expression": "match_recipient(\"alice@DOMAIN.TEST\")",
+            "id": "5e3879b1fafd1fd4e4111338",
+            "priority": 10
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:14 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/routes/5e3879b1fafd1fd4e4111338
+    body:
+      encoding: UTF-8
+      string: priority=10&description=Integration+Test+Route+Update&expression=match_recipient%28%22alice%40DOMAIN.TEST%22%29&action=forward%28%22.*%40DOMAIN.TEST%22%29
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Content-Length:
+      - '174'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '326'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "actions": [
+            "forward(\".*@DOMAIN.TEST\")"
+          ],
+          "created_at": "Mon, 03 Feb 2020 19:51:13 GMT",
+          "description": "Integration Test Route Update",
+          "expression": "match_recipient(\"alice@DOMAIN.TEST\")",
+          "id": "5e3879b1fafd1fd4e4111338",
+          "message": "Route has been updated",
+          "priority": 10
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:14 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/routes/5e3879b1fafd1fd4e4111338
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:14 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '77'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "5e3879b1fafd1fd4e4111338",
+          "message": "Route has been deleted"
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:14 GMT
+recorded_with: VCR 3.0.3

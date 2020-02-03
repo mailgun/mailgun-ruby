@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -33,7 +33,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -62,7 +62,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -87,7 +87,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -117,7 +117,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -142,7 +142,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -172,7 +172,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -189,7 +189,7 @@ http_interactions:
       Access-Control-Allow-Methods:
       - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Content-Disposition:
@@ -212,4 +212,160 @@ http_interactions:
         "alice"}}'
     http_version: 
   recorded_at: Tue, 12 Sep 2017 16:55:09 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@example.com%3E%3Bbob@example.com%3Bexample.org&syntax_only=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOjxNQUlMR1VOX1BVQkxJQ19BUElLRVk+
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:07 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"Invalid public key"}'
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:07 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/address/validate?address=alice@mailgun.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOjxNQUlMR1VOX1BVQkxJQ19BUElLRVk+
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:07 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"Invalid public key"}'
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:07 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/address/validate?address=alice@mailgun.net&mailbox_verification=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOjxNQUlMR1VOX1BVQkxJQ19BUElLRVk+
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:07 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"Invalid public key"}'
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:07 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/address/validate?address=example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOjxNQUlMR1VOX1BVQkxJQ19BUElLRVk+
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:07 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"Invalid public key"}'
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:08 GMT
 recorded_with: VCR 3.0.3

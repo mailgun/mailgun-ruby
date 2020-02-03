@@ -105,4 +105,3997 @@ http_interactions:
         \ }\n}"
     http_version: 
   recorded_at: Wed, 10 May 2017 20:06:54 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/events?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:08 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '2703'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579864823.863905,
+              "log-level": "info",
+              "id": "btQxTjeKRQWTp3J2v4lMcg",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "99.85.27.49",
+              "client-info": {
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "client-type": "mobile browser",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            }
+          ],
+          "paging": {
+            "previous": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC4xNjcrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC4xNjcrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTI0VDExOjIwOjIzLjg2MyswMDowMCIsImUiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjE2OCswMDowMCJ9LCJfZG9jI2J0UXhUamVLUlFXVHAzSjJ2NGxNY2ciLFsicCIsImYiXSxudWxsLFtbImFjY291bnQuaWQiLCI1MDUwOGI4OTY5ZDdjNTMzZmUwMTJhMjgiXSxbImRvbWFpbi5uYW1lIiwidGVzdC1tYWlsLmVwaWZhbnkuY29tIl1dLDFd",
+            "first": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC4xNjcrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC4xNjcrMDA6MDAifSx7ImIiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjE2NyswMDowMCIsImUiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjE2NyswMDowMCJ9LG51bGwsWyJmIl0sbnVsbCxbWyJhY2NvdW50LmlkIiwiNTA1MDhiODk2OWQ3YzUzM2ZlMDEyYTI4Il0sWyJkb21haW4ubmFtZSIsInRlc3QtbWFpbC5lcGlmYW55LmNvbSJdXSwxXQ==",
+            "last": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC4xNjcrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC4xNjcrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjE2NyswMDowMCIsImUiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjE2NyswMDowMCJ9LG51bGwsWyJwIiwiZiJdLG51bGwsW1siYWNjb3VudC5pZCIsIjUwNTA4Yjg5NjlkN2M1MzNmZTAxMmEyOCJdLFsiZG9tYWluLm5hbWUiLCJ0ZXN0LW1haWwuZXBpZmFueS5jb20iXV0sMV0=",
+            "next": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC4xNjcrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC4xNjcrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTI0VDExOjIwOjIzLjg2MyswMDowMCIsImUiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjE2NyswMDowMCJ9LCJfZG9jI2J0UXhUamVLUlFXVHAzSjJ2NGxNY2ciLFsiZiJdLG51bGwsW1siYWNjb3VudC5pZCIsIjUwNTA4Yjg5NjlkN2M1MzNmZTAxMmEyOCJdLFsiZG9tYWluLm5hbWUiLCJ0ZXN0LW1haWwuZXBpZmFueS5jb20iXV0sMV0="
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:08 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/events
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmtleS0xeGZvZGs4YzB3bTRlcHUyeTQ3b2E0d2JjZjQyNDBnOQ==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 03 Feb 2020 19:51:08 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "items": [
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579864823.863905,
+              "log-level": "info",
+              "id": "btQxTjeKRQWTp3J2v4lMcg",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "99.85.27.49",
+              "client-info": {
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "client-type": "mobile browser",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.102.8.2",
+              "recipient-domain": "epifany.com",
+              "id": "vYerPHQuRnKMLF2j0yWYMw",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579836856.5557,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "ip": "99.85.27.49",
+              "log-level": "info",
+              "id": "NsmNZwnWSf67Kcy2W7n1KQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579807617.50862,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "OS X",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.82",
+              "recipient-domain": "epifany.com",
+              "id": "_mS5k6QKSq6no0wftddz6Q",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579807605.29194,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "timestamp": 1579807382.704875,
+              "log-level": "info",
+              "id": "dy6QfYa3RqS4U8u6vgjeLA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "99.85.27.49",
+              "client-info": {
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "client-type": "mobile browser",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Mobile/15E148 Safari/604.1"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "99.85.27.49",
+              "recipient-domain": "epifany.com",
+              "id": "jFjXXbWHQ9upHUksbtD5Nw",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579807379.659872,
+              "client-info": {
+                "client-type": "mobile browser",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                "client-os": "iOS"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "timestamp": 1579807340.308709,
+              "log-level": "info",
+              "id": "_WVT-udDTvmKCgD1mOq9oQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "99.85.27.49",
+              "client-info": {
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "client-type": "mobile browser",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.4 Mobile/15E148 Safari/604.1"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "ip": "66.102.8.12",
+              "recipient-domain": "epifany.com",
+              "id": "mRoDnz8NSJqZG4mjSUWchQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579807083.472949,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "ip": "66.102.8.30",
+              "recipient-domain": "epifany.com",
+              "id": "pKGcSv4QQNaUcnsNiEpR1w",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579807083.144508,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=julie.barberio%40epifany.com&type=default",
+              "ip": "99.85.27.49",
+              "recipient-domain": "epifany.com",
+              "id": "nWnbXAtGTBicy1ZKBuAo1w",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579807080.211726,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
+                "client-os": "OS X"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.102.7.110",
+              "log-level": "info",
+              "id": "1QKAlc3YSCaErJvOs_jxYQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579807077.276399,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "99.85.27.49",
+              "recipient-domain": "epifany.com",
+              "id": "cImcCNCUTDuRwk5OtZG_Ug",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579806790.390552,
+              "client-info": {
+                "client-name": "Mobile Safari",
+                "client-type": "mobile browser",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+                "device-type": "mobile",
+                "client-os": "iOS"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Mountain View",
+                "region": "CA",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=haley.rafols%40epifany.com&type=default",
+              "timestamp": 1579805862.243044,
+              "log-level": "info",
+              "id": "QhbGuGl1Qu2XpaRMgQAlzQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.92.5",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246 Mozilla/5.0"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "t07hvVnvToe9BWaZeOrT6A",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579799886.543381,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "OS X",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "Bhtjsod5RWCITU15XTSKWQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579799805.919598,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "OS X",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "AWZrjmCbQ2aAbpfV8TzUqg",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579799798.693114,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "OS X",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579799797.480009,
+              "log-level": "info",
+              "id": "slNja1hlTpu4EPAMZo91FQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.88.83",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=haley.rafols%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "cbcfTEz1QBmncB8gyDU3pA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798801.271788,
+              "client-info": {
+                "client-type": "mobile browser",
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "66.102.8.4",
+              "recipient-domain": "epifany.com",
+              "id": "OQ9W5OphSMmk6WSomAUOdg",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798749.003176,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "66.102.8.2",
+              "recipient-domain": "epifany.com",
+              "id": "vLbJl1idTWuUkavgTVAWbQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798748.905914,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=amanda.powell%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "cD0y4L7ESU-GuQNpOfgdqw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798738.912346,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798730.389662,
+              "log-level": "info",
+              "id": "-MOTOGnYQZSqdRHaJLvA4g",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.88.82",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=haley.rafols%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "JZW2KU7eSJqysWv6hjfKNw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798728.269293,
+              "client-info": {
+                "client-type": "mobile browser",
+                "client-os": "iOS",
+                "device-type": "mobile",
+                "client-name": "Mobile Safari",
+                "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=haley.rafols%40epifany.com&type=default",
+              "timestamp": 1579798727.490603,
+              "log-level": "info",
+              "id": "m8qah3qjQE2t-x2LaV4tRw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.102.8.4",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=haley.rafols%40epifany.com&type=default",
+              "ip": "66.102.8.30",
+              "recipient-domain": "epifany.com",
+              "id": "E4FWCbukS5CuKv7BZJQ-qg",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798727.440789,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=shawn.murphy%40epifany.com&type=default",
+              "ip": "66.102.8.2",
+              "recipient-domain": "epifany.com",
+              "id": "4p4HUudeTZ6tVIWcv1Pk6Q",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798726.698092,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=shawn.murphy%40epifany.com&type=default",
+              "ip": "66.102.8.3",
+              "log-level": "info",
+              "id": "nk_6GJfCSD-22-QlPftD0A",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798726.679705,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=shawn.murphy%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "recipient-domain": "epifany.com",
+              "id": "JUEAkghmTiCRPFuh0tTFBQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798723.19422,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
+                "device-type": "desktop",
+                "client-os": "OS X"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.93",
+              "log-level": "info",
+              "id": "uWQpAmGQQU-blQwZvaRDyw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798721.536296,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.66",
+              "log-level": "info",
+              "id": "b__nhLfUTNqddNBAmWeqOA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798712.120682,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=stephen.morgan%40epifany.com&type=default",
+              "ip": "66.102.8.31",
+              "recipient-domain": "epifany.com",
+              "id": "8xnm94ZHRKekQTgQ1T6WtA",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798700.321491,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.83 Safari/537.1",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=stephen.morgan%40epifany.com&type=default",
+              "ip": "66.102.8.3",
+              "recipient-domain": "epifany.com",
+              "id": "jUn3N2eNT66tRU7Gc1f6pQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798700.202002,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=stephen.morgan%40epifany.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "M0DlRSNyTbGkafpsX-mO9Q",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798692.041743,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.93",
+              "recipient-domain": "epifany.com",
+              "id": "kaS_Rh86T1OCyK7yKck3Mg",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798687.406244,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798651.722366,
+              "log-level": "info",
+              "id": "XJTBPgCMQ3ylED0-hVANnA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.88.83",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798644.151274,
+              "log-level": "info",
+              "id": "iUtkXQdgR3WtdhcDWylUcQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.88.83",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798631.242406,
+              "log-level": "info",
+              "id": "ZUxBe_wjQtazcNZu3bM4sQ",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "66.249.88.81",
+              "client-info": {
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.93",
+              "recipient-domain": "epifany.com",
+              "id": "S2oeD_cIRny30cFCOMHKZQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798624.626998,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.79",
+              "recipient-domain": "epifany.com",
+              "id": "CbFj7ycHSaaLSLw1sHl-wA",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579798604.08809,
+              "client-info": {
+                "client-type": "browser",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA==",
+                "key": "AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA=="
+              },
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.499413013458252,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "log-level": "info",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798492.886562,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Stephen Morgan, NC Opera Wants to Hear From You! [stephen.morgan@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40636
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "KvXnFo0HQhSn9zXRJSu3KQ"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA==",
+                "key": "AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA=="
+              },
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.241486072540283,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "log-level": "info",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798491.899583,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Stephen Morgan, NC Opera Wants to Hear From You! [stephen.morgan@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40646
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "mJrhK45dSd64ZGwC8vOxXw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA==",
+                "key": "AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA=="
+              },
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.001133918762207,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "log-level": "info",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798488.22732,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Julie Barberio, NC Opera Wants to Hear From You! [julie.barberio@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40641
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "ZGb_ZHmpRrOM8uU8jxF6Kg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798488.074987,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA==",
+                "key": "AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "zRxmYI7XSYaI4dwetMeVog",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Haley Rafols, NC Opera Wants to Hear From You! [haley.rafols@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40634
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 2.7583799362182617,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798487.735178,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA==",
+                "key": "AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "0O8cJVw6RkWbeFfprjCZSA",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Haley Rafols, NC Opera Wants to Hear From You! [haley.rafols@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40623
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 2.907418966293335,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798486.069942,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA==",
+                "key": "AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "DSER6IgvRQiwZU2Mdl5KGA",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Shawn Murphy, NC Opera Wants to Hear From You! [shawn.murphy@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40639
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 3.153596878051758,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA==",
+                "key": "AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA=="
+              },
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 2.1263840198516846,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "log-level": "info",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798485.837238,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Julie Barberio, NC Opera Wants to Hear From You! [julie.barberio@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40635
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "2_QCQZKNRIGgtg-1naeNvg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798484.995067,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA==",
+                "key": "AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "GVdsNYppS5eVbjXDC4fYZg",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Shawn Murphy, NC Opera Wants to Hear From You! [shawn.murphy@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40636
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 2.280358076095581,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798483.1945043,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA==",
+                "key": "AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Stephen Morgan, NC Opera Wants to Hear From You! [stephen.morgan@epifany.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "WCB2ESIRRe-EB-HfE-5FyA"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798483.1220677,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA==",
+                "key": "AgEFHLOKXR8ICru1O0ZPw6XwCP8PtJpJZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd298eff_42b2a4e1f6bcc976c0@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Stephen Morgan, NC Opera Wants to Hear From You! [stephen.morgan@epifany.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "aGrvaVVfSSGvki8-HBjh-w"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798483.017343,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA==",
+                "key": "AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "6joY9M35RA-EWZLnnpc0dA",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Amanda Powell, NC Opera Wants to Hear From You! [amanda.powell@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40641
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 1.4664008617401123,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA==",
+                "key": "AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA=="
+              },
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 0.6860668659210205,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "log-level": "info",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579798482.199233,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Amanda Powell, NC Opera Wants to Hear From You! [amanda.powell@epifany.com]"
+                },
+                "attachments": [],
+                "size": 40637
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "T_9pYpqjRLK3u_l0TbQw3A"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798482.178251,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA==",
+                "key": "AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA=="
+              },
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "log-level": "info",
+              "id": "8mokKeB1QrGcgneKTXm9bw",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Julie Barberio, NC Opera Wants to Hear From You! [julie.barberio@epifany.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "accepted"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798482.1335177,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA==",
+                "key": "AgEFAVoXPwn-F0BekGFH9ooddMGK7_nRZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd19a012_42b2a4e1f6bcc9752f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Julie Barberio, NC Opera Wants to Hear From You! [julie.barberio@epifany.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "vSMmMWJqSpmTAcLLLvOh-w"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798481.0728397,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA==",
+                "key": "AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA=="
+              },
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "log-level": "info",
+              "id": "IMKjoFBYTEyNm7Ok6_addg",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Amanda Powell, NC Opera Wants to Hear From You! [amanda.powell@epifany.com]"
+                },
+                "size": 37785
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "accepted"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798481.017749,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA==",
+                "key": "AgEF-u7c5B13GIBY0hhDqI4X1vi66zcwZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfd049110_42b2a4e1f6bcc974fc@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Amanda Powell, NC Opera Wants to Hear From You! [amanda.powell@epifany.com]"
+                },
+                "size": 37785
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "f8etV7jCTAuJJA4uXqr9vw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798479.9070146,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA==",
+                "key": "AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Haley Rafols, NC Opera Wants to Hear From You! [haley.rafols@epifany.com]"
+                },
+                "size": 37781
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "zQKCMzzSTFmzsJ6o0b6JGw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798479.8918307,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA==",
+                "key": "AgEF6gagxfjI9QDYGRRH6LinFRTTh_hpZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfcf52157_42b2a4e1f6bcc9733f@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Haley Rafols, NC Opera Wants to Hear From You! [haley.rafols@epifany.com]"
+                },
+                "size": 37781
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "eYGZ14l_TGeinDAVeBKZbA"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798478.9227521,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA==",
+                "key": "AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA=="
+              },
+              "log-level": "info",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Shawn Murphy, NC Opera Wants to Hear From You! [shawn.murphy@epifany.com]"
+                },
+                "size": 37781
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "TyT3A3bvTHqt49vA3OhN4Q"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579798478.9100864,
+              "storage": {
+                "url": "https://sw.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA==",
+                "key": "AgEFSxR8AYnz1MyIEPRN6pswTRzd_p_pZA=="
+              },
+              "envelope": {
+                "sender": "postmaster@DOMAIN.TEST",
+                "transport": "smtp",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "log-level": "info",
+              "id": "y8h1BeVKQPG89mrSoCHugw",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "recipient-domain": "epifany.com",
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e29cfce55493_42b2a4e1f6bcc972f2@58999e8c-a86f-45e4-ad9a-416d097d08de.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Shawn Murphy, NC Opera Wants to Hear From You! [shawn.murphy@epifany.com]"
+                },
+                "size": 37781
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "accepted"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-unsubscribe.epifany.com/opera?address=lukasbbarry%40gmail.com&id=200787&tag=OPERA+Fill+Survey",
+              "timestamp": 1579796212.01093,
+              "log-level": "info",
+              "id": "uWAKSMAnSJuWlSiQfOhp0g",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "ip": "199.255.11.3",
+              "client-info": {
+                "client-os": "OS X",
+                "device-type": "desktop",
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e280f144ce3a_42ab8d92ffd481183e@9ba4b181-8ea5-4dfe-81eb-2c3c8803d88b.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-unsubscribe.epifany.com/opera?address=lukasbbarry%40gmail.com&id=200787&tag=OPERA+Fill+Survey",
+              "ip": "199.255.11.3",
+              "recipient-domain": "epifany.com",
+              "id": "xbl1B2G3QRiXLXLLSwdo6Q",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579795853.484523,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+                "device-type": "desktop",
+                "client-os": "OS X"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e280f144ce3a_42ab8d92ffd481183e@9ba4b181-8ea5-4dfe-81eb-2c3c8803d88b.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.93",
+              "recipient-domain": "epifany.com",
+              "id": "aXjCvQzkT7qTFj8Ok9EiNg",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579795850.854494,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e280f144ce3a_42ab8d92ffd481183e@9ba4b181-8ea5-4dfe-81eb-2c3c8803d88b.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.78",
+              "recipient-domain": "epifany.com",
+              "id": "ASyMeGojQTewFH2pBW-6kQ",
+              "campaigns": [],
+              "user-variables": {},
+              "log-level": "info",
+              "timestamp": 1579726141.706892,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e289108a02e9_42ab9a0a077f41058e8@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.78",
+              "log-level": "info",
+              "id": "lepBvEw8Qy-0KTzZn22Fdw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579723612.309751,
+              "client-info": {
+                "client-type": "browser",
+                "client-os": "Windows",
+                "device-type": "desktop",
+                "client-name": "Firefox",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890e23279f_42ab9a0a077f4999d9@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.87",
+              "log-level": "info",
+              "id": "OaGyqem8QJmLWZFcFMzi3g",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579723601.28057,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e28906993d01_42ab9a0a077f4880c1@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "country": "US",
+                "region": "Unknown",
+                "city": "Unknown"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.83",
+              "log-level": "info",
+              "event": "opened",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579723601.258764,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e28907bde058_42ab9a0a077f4903bb@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "dvZMSBHfQj6d3p9yz9EYUg"
+            },
+            {
+              "geolocation": {
+                "country": "US",
+                "region": "NC",
+                "city": "Raleigh"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=clairethompson615%40yahoo.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "event": "clicked",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579717774.989463,
+              "client-info": {
+                "client-name": "Chrome",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
+                "device-type": "desktop",
+                "client-os": "OS X"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890c73beb7_42ab9a0a077f49705d@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "8hyMxlDkS2q3uMd9XudkIA"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.176",
+              "log-level": "info",
+              "id": "Z5n6TmaiTRur9SAwbAT5SA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579717773.342642,
+              "client-info": {
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "client-name": "Firefox",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890c73beb7_42ab9a0a077f49705d@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "geolocation": {
+                "country": "US",
+                "region": "Unknown",
+                "city": "Unknown"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.184",
+              "log-level": "info",
+              "event": "opened",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579717773.112847,
+              "client-info": {
+                "client-name": "Firefox",
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890e8ac63c_42ab9a0a077f4100799@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "Not720HZSQux4KRLUw-mtQ"
+            },
+            {
+              "geolocation": {
+                "city": "Raleigh",
+                "region": "NC",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "url": "https://test-web.epifany.com/opera?major=2444&email=cczentorychy%40yahoo.com&type=default",
+              "ip": "199.255.11.3",
+              "log-level": "info",
+              "id": "eD7eN018QuuLRnUUTn6qKA",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579717564.400899,
+              "client-info": {
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
+                "client-name": "Chrome",
+                "device-type": "desktop",
+                "client-os": "OS X"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890261f771_42ab9a0a077f481968@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "clicked"
+            },
+            {
+              "geolocation": {
+                "city": "Unknown",
+                "region": "Unknown",
+                "country": "US"
+              },
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "ip": "66.249.88.174",
+              "log-level": "info",
+              "id": "69rhuiRORyuX_smd8QbsMw",
+              "campaigns": [],
+              "user-variables": {},
+              "recipient-domain": "epifany.com",
+              "timestamp": 1579717475.72526,
+              "client-info": {
+                "client-type": "browser",
+                "user-agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)",
+                "client-name": "Firefox",
+                "device-type": "desktop",
+                "client-os": "Windows"
+              },
+              "message": {
+                "headers": {
+                  "message-id": "5e2890261f771_42ab9a0a077f481968@9a8aefa4-d584-42c5-8d52-1adac175810d.mail"
+                }
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "opened"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 5.27187705039978,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA==",
+                "key": "AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716882.817898,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e289108a02e9_42ab9a0a077f41058e8@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Charles Lankford, NC Opera Wants to Hear From You! [tracy.kahn@pharma-sys.com]"
+                },
+                "attachments": [],
+                "size": 40656
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "9JsqmEr3SiyQB4hhyZ-Caw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.914803981781006,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA==",
+                "key": "AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716881.103367,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e289108a02e9_42ab9a0a077f41058e8@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Charles Lankford, NC Opera Wants to Hear From You! [tracy.kahn@pharma-sys.com]"
+                },
+                "attachments": [],
+                "size": 40667
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "5Rz-LM0MRKqX0jXvVmCA1w"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716879.085171,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFO1ZctGNyuTHrKnVPVpcn1nWr4wyNZA==",
+                "key": "AgEFO1ZctGNyuTHrKnVPVpcn1nWr4wyNZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "APiRVAa9RR6kXNMPbN2Rvg",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e289106b664e_42ab9a0a077f410553@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Tom Wentley, NC Opera Wants to Hear From You! [tbwentley@yahoo.com]"
+                },
+                "attachments": [],
+                "size": 40630
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 4.43303108215332,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 4.344880819320679,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFO1ZctGNyuTHrKnVPVpcn1nWr4wyNZA==",
+                "key": "AgEFO1ZctGNyuTHrKnVPVpcn1nWr4wyNZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716879.075831,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e289106b664e_42ab9a0a077f410553@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Tom Wentley, NC Opera Wants to Hear From You! [tbwentley@yahoo.com]"
+                },
+                "attachments": [],
+                "size": 40632
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "5XqO0xDdS8uXKKIaSR_uYg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.748795986175537,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF4bvG5uKPhtejqtNCcYCdlzhIWHjHZA==",
+                "key": "AgEF4bvG5uKPhtejqtNCcYCdlzhIWHjHZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716878.809767,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e289106ba9b_42ab9a0a077f4105435@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Katy Sherman, NC Opera Wants to Hear From You! [katysherm@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40631
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "SzaNyzHVRw6soqBVMgn2Pg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.877161979675293,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEF4bvG5uKPhtejqtNCcYCdlzhIWHjHZA==",
+                "key": "AgEF4bvG5uKPhtejqtNCcYCdlzhIWHjHZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716878.608885,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e289106ba9b_42ab9a0a077f4105435@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Katy Sherman, NC Opera Wants to Hear From You! [katysherm@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40620
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "Fp4_qMuiRLmS6sMRd0dAIQ"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 4.061612844467163,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFhmTjxtMpfbInpw5Ck6I-D3IJ6XgSZA==",
+                "key": "AgEFhmTjxtMpfbInpw5Ck6I-D3IJ6XgSZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716878.595035,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e2891037f59c_42ab9a0a077f4105027@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Steve Kutay, NC Opera Wants to Hear From You! [skutay1@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40626
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "rf_e_CikSSybE0RNxpmc_w"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 4.399448871612549,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFhmTjxtMpfbInpw5Ck6I-D3IJ6XgSZA==",
+                "key": "AgEFhmTjxtMpfbInpw5Ck6I-D3IJ6XgSZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716876.959879,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e2891037f59c_42ab9a0a077f4105027@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Steve Kutay, NC Opera Wants to Hear From You! [skutay1@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40634
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "HG387-1fS8aMo-V3XwxnMg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716876.735753,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFpXX4do-MQ8BB3EFHN5YIies4LYObZA==",
+                "key": "AgEFpXX4do-MQ8BB3EFHN5YIies4LYObZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "jFRs2UxlQHKsXRrFI_SUUQ",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e289102d311f_42ab9a0a077f4104993@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Ralph & Francine Roberson, NC Opera Wants to Hear From You! [roberson@rmb-consulting.com]"
+                },
+                "attachments": [],
+                "size": 40674
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 5.329949855804443,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716876.078911,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFiFs3FuePE56WmQRG0pQ2aXy9CH8EZA==",
+                "key": "AgEFiFs3FuePE56WmQRG0pQ2aXy9CH8EZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "T59bkJ9aSRKtE7yiuIecSQ",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e2891075ec8e_42ab9a0a077f41056cf@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Marko Zivkovic, NC Opera Wants to Hear From You! [marko.zivkovicsrb@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40678
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 1.0185539722442627,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.914436101913452,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFovcL34n3Ma1tRL1H94ugvAMYBe-DZA==",
+                "key": "AgEFovcL34n3Ma1tRL1H94ugvAMYBe-DZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716875.663838,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e28910428370_42ab9a0a077f4105126@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Michelle Thompson, NC Opera Wants to Hear From You! [mhholbrook@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40645
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "Ctd3KxHbTmy9MJVWngs7SQ"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716875.440851,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFxuXgXe7o3P2oxx5BQoSt0wevOUAcZA==",
+                "key": "AgEFxuXgXe7o3P2oxx5BQoSt0wevOUAcZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "DHKaSON7TIKUz3WamceERw",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e28910228818_42ab9a0a077f410487d@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Douglas Poole, NC Opera Wants to Hear From You! [douglasepoole21@yahoo.com]"
+                },
+                "attachments": [],
+                "size": 40653
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 5.201658010482788,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 4.868946075439453,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFxuXgXe7o3P2oxx5BQoSt0wevOUAcZA==",
+                "key": "AgEFxuXgXe7o3P2oxx5BQoSt0wevOUAcZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716875.131806,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e28910228818_42ab9a0a077f410487d@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Douglas Poole, NC Opera Wants to Hear From You! [douglasepoole21@yahoo.com]"
+                },
+                "attachments": [],
+                "size": 40656
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "DgZKhux9RnKxcOMIfxFhWA"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 4.361043930053711,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFpXX4do-MQ8BB3EFHN5YIies4LYObZA==",
+                "key": "AgEFpXX4do-MQ8BB3EFHN5YIies4LYObZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716875.092451,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e289102d311f_42ab9a0a077f4104993@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Ralph & Francine Roberson, NC Opera Wants to Hear From You! [roberson@rmb-consulting.com]"
+                },
+                "attachments": [],
+                "size": 40683
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "wz6sux2-TE-BA4WZy07dBw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716873.950286,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFrXM72YSL_wMOmi5AyrCAEb6UZjFkZA==",
+                "key": "AgEFrXM72YSL_wMOmi5AyrCAEb6UZjFkZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "cJ-HB84PSKaJahtRlmG7lg",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e289104cfccb_42ab9a0a077f4105290@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Jane Lynch, NC Opera Wants to Hear From You! [janilu@mindspring.com]"
+                },
+                "attachments": [],
+                "size": 40645
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 1.9385089874267578,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716873.876334,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA==",
+                "key": "AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "0DhjJ-QZShe_Y1bT1gDKLw",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e2891081eb66_42ab9a0a077f41057f0@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Timothy Stammers, NC Opera Wants to Hear From You! [tomit613@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40640
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 0.528048038482666,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716873.789008,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA==",
+                "key": "AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "sMm-gRhgTp2EDTw08Laezw",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e2891081eb66_42ab9a0a077f41057f0@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Timothy Stammers, NC Opera Wants to Hear From You! [tomit613@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40640
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 0.40761780738830566,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 2.5005218982696533,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFovcL34n3Ma1tRL1H94ugvAMYBe-DZA==",
+                "key": "AgEFovcL34n3Ma1tRL1H94ugvAMYBe-DZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716873.474099,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e28910428370_42ab9a0a077f4105126@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Michelle Thompson, NC Opera Wants to Hear From You! [mhholbrook@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40653
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "NjGzJi-NRqWYsnqbPH_u5w"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716873.343551,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFrXM72YSL_wMOmi5AyrCAEb6UZjFkZA==",
+                "key": "AgEFrXM72YSL_wMOmi5AyrCAEb6UZjFkZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "rb5MUnwhSQCOZc_YFj40VA",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e289104cfccb_42ab9a0a077f4105290@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Jane Lynch, NC Opera Wants to Hear From You! [janilu@mindspring.com]"
+                },
+                "attachments": [],
+                "size": 40658
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 0.7119250297546387,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 2.9347450733184814,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFcDrHSKuuR5zZjxVCe6vUGqbzm1FTZA==",
+                "key": "AgEFcDrHSKuuR5zZjxVCe6vUGqbzm1FTZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716873.151834,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e28910578de1_42ab9a0a077f41053b2@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Jo Murray, NC Opera Wants to Hear From You! [jocarolmurray@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40651
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "ER8Y15ibRCqmbpd9FhdsTg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA==",
+                "key": "AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA=="
+              },
+              "envelope": {
+                "targets": "lukas.barry+sandbox@epifany.com",
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST"
+              },
+              "recipient-domain": "epifany.com",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716872.8307364,
+              "id": "DOCmCnoSQuSPEraRiN_b2w",
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e289108a02e9_42ab9a0a077f41058e8@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Charles Lankford, NC Opera Wants to Hear From You! [tracy.kahn@pharma-sys.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "event": "accepted"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716872.7787228,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA==",
+                "key": "AgEFheJPHaQMJsBZzTZJho9jWthE8XFzZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "targets": "leonel.galan+sandbox@epifany.com",
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e289108a02e9_42ab9a0a077f41058e8@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Charles Lankford, NC Opera Wants to Hear From You! [tracy.kahn@pharma-sys.com]"
+                },
+                "size": 37789
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "dKh2e6bqQyKUs4ENAlIk1Q"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 0.4027690887451172,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFiFs3FuePE56WmQRG0pQ2aXy9CH8EZA==",
+                "key": "AgEFiFs3FuePE56WmQRG0pQ2aXy9CH8EZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716872.762535,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e2891075ec8e_42ab9a0a077f41056cf@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Marko Zivkovic, NC Opera Wants to Hear From You! [marko.zivkovicsrb@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40672
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "aLQHSxpFTL6Lf9L7xIqyiw"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.8785111904144287,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFTmqBa90rDNd4rg1BWoW5dOFgnuajZA==",
+                "key": "AgEFTmqBa90rDNd4rg1BWoW5dOFgnuajZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716872.705416,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e2891015f154_42ab9a0a077f41047b6@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Susan Oller, NC Opera Wants to Hear From You! [doller@nc.rr.com]"
+                },
+                "attachments": [],
+                "size": 40631
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "wH2Fti5tS4GcxiTvqRA7Hg"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 2.434997081756592,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFcDrHSKuuR5zZjxVCe6vUGqbzm1FTZA==",
+                "key": "AgEFcDrHSKuuR5zZjxVCe6vUGqbzm1FTZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716872.563027,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e28910578de1_42ab9a0a077f41053b2@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Jo Murray, NC Opera Wants to Hear From You! [jocarolmurray@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40656
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "fa0evS6WSb68gyPBhbtPgA"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716872.399833,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFVZ9qenFxX55AvQVBR7pep8lOe0wGZA==",
+                "key": "AgEFVZ9qenFxX55AvQVBR7pep8lOe0wGZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "id": "9_QokSy-QcO_yhzmu2x8Bw",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "leonel.galan+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "leonel.galan+sandbox@epifany.com",
+                  "message-id": "5e2890ff51da2_42ab9a0a077f4104489@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Andrea Mensch, NC Opera Wants to Hear From You! [kinnersna@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40637
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "event": "delivered",
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "code": 250,
+                "description": "",
+                "session-seconds": 3.6946492195129395,
+                "utf8": true,
+                "attempt-no": 1,
+                "message": "OK",
+                "certificate-verified": true
+              }
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "delivery-status": {
+                "tls": true,
+                "mx-host": "aspmx.l.google.com",
+                "attempt-no": 1,
+                "description": "",
+                "session-seconds": 3.9692699909210205,
+                "utf8": true,
+                "code": 250,
+                "message": "OK",
+                "certificate-verified": true
+              },
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFVZ9qenFxX55AvQVBR7pep8lOe0wGZA==",
+                "key": "AgEFVZ9qenFxX55AvQVBR7pep8lOe0wGZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "delivered",
+              "campaigns": [],
+              "user-variables": {},
+              "flags": {
+                "is-routed": false,
+                "is-authenticated": true,
+                "is-system-test": false,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "timestamp": 1579716872.35743,
+              "envelope": {
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST",
+                "sending-ip": "198.61.254.22",
+                "targets": "lukas.barry+sandbox@epifany.com"
+              },
+              "message": {
+                "headers": {
+                  "to": "lukas.barry+sandbox@epifany.com",
+                  "message-id": "5e2890ff51da2_42ab9a0a077f4104489@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Andrea Mensch, NC Opera Wants to Hear From You! [kinnersna@gmail.com]"
+                },
+                "attachments": [],
+                "size": 40635
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "gJD0BnASSAq03cHO6XtszQ"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716872.3038182,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA==",
+                "key": "AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "targets": "lukas.barry+sandbox@epifany.com",
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e2891081eb66_42ab9a0a077f41057f0@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Timothy Stammers, NC Opera Wants to Hear From You! [tomit613@gmail.com]"
+                },
+                "size": 37768
+              },
+              "recipient": "lukas.barry+sandbox@epifany.com",
+              "id": "mMiS5qniRXm2zZO7RQGyJA"
+            },
+            {
+              "tags": [
+                "OPERA Fill Survey"
+              ],
+              "timestamp": 1579716872.2886732,
+              "storage": {
+                "url": "https://se.api.mailgun.net/v3/domains/DOMAIN.TEST/messages/AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA==",
+                "key": "AgEFNUNZMGftxlXIQDJEN4LqKFWRI-_kZA=="
+              },
+              "recipient-domain": "epifany.com",
+              "event": "accepted",
+              "method": "http",
+              "user-variables": {},
+              "flags": {
+                "is-authenticated": true,
+                "is-test-mode": false
+              },
+              "log-level": "info",
+              "envelope": {
+                "targets": "leonel.galan+sandbox@epifany.com",
+                "transport": "smtp",
+                "sender": "postmaster@DOMAIN.TEST"
+              },
+              "message": {
+                "headers": {
+                  "to": "%recipient%",
+                  "message-id": "5e2891081eb66_42ab9a0a077f41057f0@9a8aefa4-d584-42c5-8d52-1adac175810d.mail",
+                  "from": "NC Opera - Pagliacci on 1/24 <no-reply@opera.mail.epifany.com>",
+                  "subject": "Timothy Stammers, NC Opera Wants to Hear From You! [tomit613@gmail.com]"
+                },
+                "size": 37768
+              },
+              "recipient": "leonel.galan+sandbox@epifany.com",
+              "id": "WhL6EJO-SHiyha1-zGyJiQ"
+            }
+          ],
+          "paging": {
+            "previous": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC40MzUrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC40MzUrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTI0VDExOjIwOjIzLjg2MyswMDowMCIsImUiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjQzNiswMDowMCJ9LCJfZG9jI2J0UXhUamVLUlFXVHAzSjJ2NGxNY2ciLFsicCIsImYiXSxudWxsLFtbImFjY291bnQuaWQiLCI1MDUwOGI4OTY5ZDdjNTMzZmUwMTJhMjgiXSxbImRvbWFpbi5uYW1lIiwidGVzdC1tYWlsLmVwaWZhbnkuY29tIl1dLDEwMF0=",
+            "first": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC40MzUrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC40MzUrMDA6MDAifSx7ImIiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjQzNSswMDowMCIsImUiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjQzNSswMDowMCJ9LG51bGwsWyJmIl0sbnVsbCxbWyJhY2NvdW50LmlkIiwiNTA1MDhiODk2OWQ3YzUzM2ZlMDEyYTI4Il0sWyJkb21haW4ubmFtZSIsInRlc3QtbWFpbC5lcGlmYW55LmNvbSJdXSwxMDBd",
+            "last": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC40MzUrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC40MzUrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjQzNSswMDowMCIsImUiOiIyMDIwLTAyLTAzVDE5OjUxOjA4LjQzNSswMDowMCJ9LG51bGwsWyJwIiwiZiJdLG51bGwsW1siYWNjb3VudC5pZCIsIjUwNTA4Yjg5NjlkN2M1MzNmZTAxMmEyOCJdLFsiZG9tYWluLm5hbWUiLCJ0ZXN0LW1haWwuZXBpZmFueS5jb20iXV0sMTAwXQ==",
+            "next": "https://api.mailgun.net/v3/DOMAIN.TEST/events/WzMseyJiIjoiMjAyMC0wMi0wM1QxOTo1MTowOC40MzUrMDA6MDAiLCJlIjoiMjAyMC0wMS0wNFQxOTo1MTowOC40MzUrMDA6MDAifSx7ImIiOiIyMDIwLTAxLTIyVDE4OjE0OjMyLjI4OCswMDowMCIsImUiOiIyMDIwLTAxLTA0VDE5OjUxOjA4LjQzNSswMDowMCJ9LCJfZG9jI1doTDZFSk8tU0hpeWhhMS16R3lKaVEiLFsiZiJdLG51bGwsW1siYWNjb3VudC5pZCIsIjUwNTA4Yjg5NjlkN2M1MzNmZTAxMmEyOCJdLFsiZG9tYWluLm5hbWUiLCJ0ZXN0LW1haWwuZXBpZmFueS5jb20iXV0sMTAwXQ=="
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 03 Feb 2020 19:51:09 GMT
 recorded_with: VCR 3.0.3
