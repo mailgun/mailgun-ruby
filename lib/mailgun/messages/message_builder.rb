@@ -115,6 +115,14 @@ module Mailgun
       body_html(html_body)
     end
 
+    # Set an AMP part for the message object
+    #
+    # @param [String] amp The AMP HTML for the email.
+    # @return [void]
+    def amp_html(amp = nil)
+      set_multi_simple('amp-html', amp)
+    end
+
     # Adds a series of attachments, when called upon.
     #
     # @param [String|File] attachment A file object for attaching as an attachment.
