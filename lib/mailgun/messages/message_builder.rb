@@ -120,7 +120,7 @@ module Mailgun
     # @param [String] amp The AMP HTML for the email.
     # @return [void]
     def amp_html(amp = nil)
-      set_multi_simple('amp-html', amp)
+      set_single('amp-html', amp)
     end
 
     # Adds a series of attachments, when called upon.
