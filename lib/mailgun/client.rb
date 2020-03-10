@@ -17,12 +17,15 @@ module Mailgun
                    test_mode = false,
                    timeout = nil)
 
+      rest_client_params = {
+        user: 'api',
+        password: api_key,
+        user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}"
+      }
+      rest_client_params[:timeout] = timeout if timeout
+
       endpoint = endpoint_generator(api_host, api_version, ssl)
-      @http_client = RestClient::Resource.new(endpoint,
-                                              user: 'api',
-                                              password: api_key,
-                                              user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}",
-                                              timeout: timeout)
+      @http_client = RestClient::Resource.new(endpoint, rest_client_params)
       @test_mode = test_mode
     end
 
