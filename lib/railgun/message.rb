@@ -11,7 +11,8 @@ module Mail
     attr_accessor :mailgun_variables,
                   :mailgun_options,
                   :mailgun_recipient_variables,
-                  :mailgun_headers
+                  :mailgun_headers,
+                  :mailgun_template
 
   end
 end
