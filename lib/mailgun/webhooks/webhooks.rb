@@ -3,6 +3,7 @@ module Mailgun
   # A Mailgun::Webhooks object is a simple CRUD interface to Mailgun Webhooks.
   # Uses Mailgun
   class Webhooks
+    WEBHOOKS_ACTIONS = %w(clicked complained delivered opened permanent_fail temporary_fail unsubscribed).freeze
     # Public creates a new Mailgun::Webhooks instance.
     #   Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -57,7 +58,7 @@ module Mailgun
     #
     # Returns true or false
     def create_all(domain, url = '')
-      %w(clicked complained delivered opened permanent_fail temporary_fail unsubscribed).each do |action|
+      WEBHOOKS_ACTIONS.each do |action|
         add_webhook domain, action, url
       end
       true
@@ -89,7 +90,7 @@ module Mailgun
     # Returns a Boolean on the success
     def remove_all(domain)
       fail Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
-      %w(clicked complained delivered opened permanent_fail temporary_fail unsubscribed).each do |action|
+      WEBHOOKS_ACTIONS.each do |action|
         delete_webhook domain, action
       end
     end
