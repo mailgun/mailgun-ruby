@@ -264,13 +264,11 @@ module Mailgun
     # https://documentation.mailgun.com/user_manual.html#attaching-data-to-messages
     #
     # @param [String] name A name for the custom variable block.
-    # @param [String|Hash] data Either a string or a hash. If it is not valid JSON or
-    #                           can not be converted to JSON, ParameterError will be raised.
+    # @param [String] data Variable value.
     # @return [void]
     def variable(name, data)
       fail(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
-      jsondata = make_json data
-      set_single("v:#{name}", jsondata)
+      set_single("v:#{name}", data.is_a?(Hash) ? data.to_json : data.to_s)
     end
 
     # Add custom parameter to the message. A custom parameter is any parameter that
@@ -387,7 +385,7 @@ module Mailgun
         full_name = vars['full_name']
       elsif vars['first'] || vars['last']
         full_name = "#{vars['first']} #{vars['last']}".strip
-      end 
+      end
 
       return "'#{full_name}' <#{address}>" if defined?(full_name)
       address
