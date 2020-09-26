@@ -157,7 +157,10 @@ module Mailgun
 
         unsubscribe.each do |k, v|
           # Hash values MUST be strings.
-          if not v.is_a? String then
+          # However, unsubscribes contain an array of tags
+          if v.is_a? Array
+            unsubscribe[k] = v.map(&:to_s)
+          elsif !v.is_a? String
             unsubscribe[k] = v.to_s
           end
         end
