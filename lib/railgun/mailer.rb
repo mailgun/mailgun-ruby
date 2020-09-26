@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject reply-to template ]
+    IGNORED_HEADERS = %w[ to from subject reply-to template mime-version]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -46,9 +46,12 @@ module Railgun
 
     def deliver!(mail)
       mg_message = Railgun.transform_for_mailgun(mail)
-      response = @mg_client.send_message(@domain, mg_message)
 
-      if response.code == 200 then
+      domain = mail.mailgun_domain || @domain # get the domain from the current message or from config
+
+      response = @mg_client.send_message(domain, mg_message)
+
+      if response.code == 200
         mg_id = response.to_h['id']
         mail.message_id = mg_id
       end
