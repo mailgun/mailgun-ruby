@@ -49,7 +49,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"message":"4 addresses have been added to the bounces table"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:49 GMT
 - request:
     method: delete
@@ -93,7 +93,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test1@example.com","message":"Bounced address has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:49 GMT
 - request:
     method: delete
@@ -137,7 +137,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test2@example.org","message":"Bounced address has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
 - request:
     method: delete
@@ -181,7 +181,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test3@example.net","message":"Bounced address has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
 - request:
     method: delete
@@ -225,7 +225,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test4@example.info","message":"Bounced address has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:50 GMT
 - request:
     method: post
@@ -274,7 +274,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"message":"4 addresses have been added to the unsubscribes table"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
 - request:
     method: delete
@@ -318,7 +318,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test1@example.com","message":"Unsubscribe event has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
 - request:
     method: delete
@@ -362,7 +362,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test2@example.org","message":"Unsubscribe event has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
 - request:
     method: delete
@@ -406,7 +406,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test3@example.net","message":"Unsubscribe event has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:51 GMT
 - request:
     method: delete
@@ -450,7 +450,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test4@example.info","message":"Unsubscribe event has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
 - request:
     method: post
@@ -498,7 +498,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"4 complaint addresses have been added to the complaints
         table"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
 - request:
     method: delete
@@ -541,7 +541,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"address":"test1@example.com","message":"Spam complaint has been removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
 - request:
     method: delete
@@ -584,7 +584,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"address":"test2@example.org","message":"Spam complaint has been removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:52 GMT
 - request:
     method: delete
@@ -627,7 +627,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"address":"test3@example.net","message":"Spam complaint has been removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:53 GMT
 - request:
     method: delete
@@ -671,6 +671,57 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"test4@example.info","message":"Spam complaint has been
         removed"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 30 Nov 2016 20:53:53 GMT
+- request:
+    method: post
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
+    body:
+      encoding: UTF-8
+      string: '[{"address":"test4@example.info","tag":"integration"},{"address":"test3@example.net","tag":"integration"},{"address":"test2@example.org","tag":"integration"},{"address":"test1@example.com","tag":"integration"}]'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin18.7.0 x86_64) ruby/2.5.7p206
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '210'
+      Host:
+      - api.mailgun.net
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 04 Feb 2020 15:16:07 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '68'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"4 addresses have been added to the unsubscribes table"}
+
+        '
+    http_version:
+  recorded_at: Tue, 04 Feb 2020 15:16:07 GMT
 recorded_with: VCR 3.0.3
