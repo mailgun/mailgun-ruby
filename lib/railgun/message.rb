@@ -12,7 +12,8 @@ module Mail
                   :mailgun_options,
                   :mailgun_recipient_variables,
                   :mailgun_headers,
-                  :mailgun_template
+                  :mailgun_template,
+                  :mailgun_domain
 
   end
 end
