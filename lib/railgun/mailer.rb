@@ -81,11 +81,6 @@ module Railgun
   def transform_for_mailgun(mail)
     message = build_message_object(mail)
 
-    # v:* attributes (variables)
-    mail.mailgun_variables.try(:each) do |k, v|
-      message["v:#{k}"] = JSON.dump(v)
-    end
-
     # o:* attributes (options)
     mail.mailgun_options.try(:each) do |k, v|
       message["o:#{k}"] = v
@@ -131,6 +126,9 @@ module Railgun
 
     # recipient variables
     message['recipient-variables'] = mail.mailgun_recipient_variables.to_json if mail.mailgun_recipient_variables
+
+    # recipient variables
+    message['h:X-Mailgun-Variables'] = mail.mailgun_variables.to_json if mail.mailgun_variables
 
     # reject blank values
     message.delete_if do |k, v|
