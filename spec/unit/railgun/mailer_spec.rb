@@ -81,19 +81,19 @@ describe 'Railgun::Mailer' do
 
   it 'adds variables to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
-    message.mailgun_variables ||= {
-      'user' => {:id => '1', :name => 'tstark'},
-    }
 
+    mailgun_variables =  { 'user' => {:id => '1', :name => 'tstark'} }
+
+    message.mailgun_variables ||= mailgun_variables
+    
     body = Railgun.transform_for_mailgun(message)
 
-    expect(body).to include('v:user')
+    expect(body).to include('h:X-Mailgun-Variables')
 
-    var_body = JSON.load(body['v:user'])
-    expect(var_body).to include('id')
-    expect(var_body).to include('name')
-    expect(var_body['id']).to eq('1')
-    expect(var_body['name']).to eq('tstark')
+    var_body = JSON.load(body['h:X-Mailgun-Variables'])
+    expect(var_body['user']['id']).to eq('1')
+    expect(var_body['user']['name']).to eq('tstark')
+    expect(var_body).to eq(JSON.parse(JSON.dump(mailgun_variables)))
   end
 
   it 'adds headers to message body' do
