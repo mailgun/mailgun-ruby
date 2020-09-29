@@ -13,37 +13,63 @@ module Railgun
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
     IGNORED_HEADERS = %w[ to from subject reply-to template mime-version]
 
+    DEFAULT_CONFIG = {
+      api_host: 'api.mailgun.net',
+      api_version: 'v3',
+      api_ssl: true,
+      api_test_mode: false,
+      api_timeout: nil,
+      fake_message_send: false
+    }.freeze
+
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
-    attr_accessor :config, :domain, :settings
+    attr_accessor :domain, :settings
 
     # Initialize the Railgun mailer.
     #
     # @param [Hash] config Hash of config values, typically from `app_config.action_mailer.mailgun_config`
     def initialize(config)
-      @config = config
-
-      [:api_key, :domain].each do |k|
-        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
+      unless config && (config.key?(:api_key) || config.key?(:domains))
+        raise Railgun::ConfigurationError.new('Config requires api_key or domain specific config', config)
       end
 
-      @mg_client = Mailgun::Client.new(
+      @config = config
+    end
+
+    def domain_config(domain = nil)
+      domain_config = DEFAULT_CONFIG.merge(@config.except(:domains))
+
+      if domain && @config[:domains][domain]
+        domain_config.merge(@config[:domains][domain])
+      else
+        domain_config
+      end
+    end
+
+    def mailgun_client(domain = nil)
+      config = domain_config(domain)
+
+      raise Railgun::ConfigurationError.new('Config requires api_key key', config) unless config.key?(:api_key)
+
+      mg_client = Mailgun::Client.new(
         config[:api_key],
-        config[:api_host] || 'api.mailgun.net',
-        config[:api_version] || 'v3',
-        config[:api_ssl].nil? ? true : config[:api_ssl],
-        config[:api_test_mode] || false,
+        config[:api_host],
+        config[:api_version],
+        config[:api_ssl],
+        config[:api_test_mode],
         config[:api_timeout]
       )
-      @domain = @config[:domain]
 
       # To avoid exception in mail gem v2.6
       @settings = { return_response: true }
 
-      if (@config[:fake_message_send] || false)
-        Rails.logger.info "NOTE: fake message sending has been enabled for mailgun-ruby!"
-        @mg_client.enable_test_mode!
+      if config[:fake_message_send]
+        Rails.logger.info 'NOTE: fake message sending has been enabled for mailgun-ruby!'
+        mg_client.enable_test_mode!
       end
+
+      mg_client
     end
 
     def deliver!(mail)
@@ -51,7 +77,7 @@ module Railgun
 
       domain = mail.mailgun_domain || @domain # get the domain from the current message or from config
 
-      response = @mg_client.send_message(domain, mg_message)
+      response = mailgun_client(domain).send_message(domain, mg_message)
 
       if response.code == 200
         mg_id = response.to_h['id']
@@ -59,11 +85,6 @@ module Railgun
       end
       response
     end
-
-    def mailgun_client
-      @mg_client
-    end
-
   end
 
   module_function

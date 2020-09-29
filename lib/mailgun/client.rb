@@ -10,6 +10,8 @@ module Mailgun
   # See the Github documentation for full examples.
   class Client
 
+    attr_reader :http_client
+
     def initialize(api_key = Mailgun.api_key,
                    api_host = 'api.mailgun.net',
                    api_version = 'v3',
