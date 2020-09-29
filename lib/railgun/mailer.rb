@@ -13,32 +13,51 @@ module Railgun
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
     IGNORED_HEADERS = %w[ to from subject reply-to template mime-version]
 
+    DEFAULT_CONFIG = {
+      api_host: 'api.mailgun.net',
+      api_version: 'v3',
+      api_ssl: true,
+      api_test_mode: false,
+      api_timeout: nil,
+      fake_message_send: false
+    }.freeze
+
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
-    attr_accessor :config, :domain, :settings
+    attr_accessor :domain, :settings
 
     # Initialize the Railgun mailer.
     #
     # @param [Hash] config Hash of config values, typically from `app_config.action_mailer.mailgun_config`
     def initialize(config)
+      unless config && (config.key?(:api_key) || config.key?(:domains))
+        raise Railgun::ConfigurationError.new('Config requires api_key or domain specific config', config)
+      end
+
       @config = config
     end
 
-    def mailgun_client(domain = nil)
-      if domain
-        config = ((@config[:domains] && @config[:domains][domain]) || {}).merge(config.except(:domains))
+    def domain_config(domain = nil)
+      domain_config = DEFAULT_CONFIG.merge(@config.except(:domains))
+
+      if domain && @config[:domains][domain]
+        domain_config.merge(@config[:domains][domain])
       else
-        config = @config
+        domain_config
       end
+    end
+
+    def mailgun_client(domain = nil)
+      config = domain_config(domain)
 
       raise Railgun::ConfigurationError.new('Config requires api_key key', config) unless config.key?(:api_key)
 
       mg_client = Mailgun::Client.new(
         config[:api_key],
-        config[:api_host] || 'api.mailgun.net',
-        config[:api_version] || 'v3',
-        config[:api_ssl].nil? ? true : config[:api_ssl],
-        config[:api_test_mode] || false,
+        config[:api_host],
+        config[:api_version],
+        config[:api_ssl],
+        config[:api_test_mode],
         config[:api_timeout]
       )
 

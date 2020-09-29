@@ -41,15 +41,42 @@ class UnitTestMailer < ActionMailer::Base
 end
 
 describe 'Railgun::Mailer' do
+  describe 'config' do
+    before do
+      @config =
+        {
+          api_key: 'default_blah',
+          api_timeout: 60,
+          domains: {
+            'example.com' => {
+              api_key: 'example.com_blah',
+              api_version: 'v2'
+            }
+          }
+        }
+    end
 
-  it 'has a mailgun_client property which returns a Mailgun::Client' do
-    config = {
-      api_key:  {},
-      domain:   {}
-    }
-    @mailer_obj = Railgun::Mailer.new(config)
+    it 'has a mailgun_client property which returns a Mailgun::Client' do
+      @mailer_obj = Railgun::Mailer.new(@config)
 
-    expect(@mailer_obj.mailgun_client).to be_a(Mailgun::Client)
+      expect(@mailer_obj.mailgun_client).to be_a(Mailgun::Client)
+    end
+
+    it 'must use the provided default configuration' do
+      http_client = Railgun::Mailer.new(@config).mailgun_client.http_client
+
+      expect(http_client.options[:user]).to eq('api')
+      expect(http_client.options[:password]).to eq('default_blah')
+      expect(http_client.url).to end_with('/v3')
+    end
+
+    it 'must use the provided domain specific configuration' do
+      http_client = Railgun::Mailer.new(@config).mailgun_client('example.com').http_client
+      
+      expect(http_client.options[:user]).to eq('api')
+      expect(http_client.options[:password]).to eq('example.com_blah')
+      expect(http_client.url).to end_with('/v2')
+    end
   end
 
   it 'properly creates a message body' do
