@@ -40,7 +40,7 @@ module Railgun
     def domain_config(domain = nil)
       domain_config = DEFAULT_CONFIG.merge(@config.except(:domains))
 
-      if domain && @config[:domains][domain]
+      if domain && @config[:domains] && @config[:domains][domain]
         domain_config.merge(@config[:domains][domain])
       else
         domain_config
@@ -75,7 +75,7 @@ module Railgun
     def deliver!(mail)
       mg_message = Railgun.transform_for_mailgun(mail)
 
-      domain = mail.mailgun_domain || @domain # get the domain from the current message or from config
+      domain = mail.mailgun_domain || @config[:domain] # get the domain from the current message or from config
 
       response = mailgun_client(domain).send_message(domain, mg_message)
 
