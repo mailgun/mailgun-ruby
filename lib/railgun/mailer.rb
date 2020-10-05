@@ -75,7 +75,7 @@ module Railgun
     def deliver!(mail)
       mg_message = Railgun.transform_for_mailgun(mail)
 
-      domain = mail.mailgun_domain || @config[:domain] # get the domain from the current message or from config
+      domain = mail.mailgun_domain || @config[:domain] # get the domain from the current messte or from config
 
       response = mailgun_client(domain).send_message(domain, mg_message)
 
@@ -176,9 +176,13 @@ module Railgun
     mb.from mail[:from]
     mb.reply_to(mail[:reply_to].to_s) if mail[:reply_to].present?
     mb.subject mail.subject
-    mb.template(mail.mailgun_template) if mail.mailgun_template.present?
-    mb.body_html extract_body_html(mail)
-    mb.body_text extract_body_text(mail)
+
+    if mail.mailgun_template
+      mb.template(mail.mailgun_template)
+    else
+      mb.body_html extract_body_html(mail)
+      mb.body_text extract_body_text(mail)
+    end
 
     [:to, :cc, :bcc].each do |rcpt_type|
       addrs = mail[rcpt_type] || nil
