@@ -75,7 +75,7 @@ module Railgun
     def deliver!(mail)
       mg_message = Railgun.transform_for_mailgun(mail)
 
-      domain = mail.mailgun_domain || @config[:domain] # get the domain from the current messte or from config
+      domain = mail.mailgun_domain || @config[:domain] # get the domain from the current message or from config
 
       response = mailgun_client(domain).send_message(domain, mg_message)
 
