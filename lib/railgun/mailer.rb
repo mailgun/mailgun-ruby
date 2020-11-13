@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject reply-to ]
+    IGNORED_HEADERS = %w[ to from subject reply-to mime-version ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
