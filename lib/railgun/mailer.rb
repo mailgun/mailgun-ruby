@@ -32,6 +32,8 @@ module Railgun
         config[:api_host] || 'api.mailgun.net',
         config[:api_version] || 'v3',
         config[:api_ssl].nil? ? true : config[:api_ssl],
+        false,
+        config[:timeout],
       )
       @domain = @config[:domain]
 
