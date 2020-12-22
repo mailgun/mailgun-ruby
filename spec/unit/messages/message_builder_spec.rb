@@ -46,7 +46,7 @@ describe 'The method add_recipient' do
     recipient_type = :to
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type][0]).to eq("\"#{@variables['first']} #{@variables['last']}\" <#{@address}>")
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
@@ -54,7 +54,7 @@ describe 'The method add_recipient' do
     recipient_type = :cc
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type][0]).to eq("\"#{@variables['first']} #{@variables['last']}\" <#{@address}>")
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
@@ -62,7 +62,7 @@ describe 'The method add_recipient' do
     recipient_type = :bcc
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type][0]).to eq("\"#{@variables['first']} #{@variables['last']}\" <#{@address}>")
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
@@ -70,7 +70,7 @@ describe 'The method add_recipient' do
     recipient_type = 'h:reply-to'
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type]).to eq("\"#{@variables['first']} #{@variables['last']}\" <#{@address}>")
     @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
   end
 
@@ -78,7 +78,7 @@ describe 'The method add_recipient' do
     recipient_type = 'im-not-really-real'
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
-    expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
+    expect(@mb_obj.message[recipient_type][0]).to eq("\"#{@variables['first']} #{@variables['last']}\" <#{@address}>")
     @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
   end
   it 'adds too many to recipients and raises an exception.' do
@@ -202,7 +202,7 @@ describe 'The method from' do
     the_last_name = 'Gorilla'
     @mb_obj.from(the_from_address, {'first' => the_first_name, 'last' => the_last_name})
 
-    expect(@mb_obj.message[:from]).to eq(["'#{the_first_name} #{the_last_name}' <#{the_from_address}>"])
+    expect(@mb_obj.message[:from]).to eq(["\"#{the_first_name} #{the_last_name}\" <#{the_from_address}>"])
   end
 
   it 'sets the from address with full name metadata' do
@@ -210,7 +210,7 @@ describe 'The method from' do
     full_name = 'Magilla Gorilla'
     @mb_obj.from(the_from_address, {'full_name' => full_name})
 
-    expect(@mb_obj.message[:from]).to eq(["'#{full_name}' <#{the_from_address}>"])
+    expect(@mb_obj.message[:from]).to eq(["\"#{full_name}\" <#{the_from_address}>"])
   end
 
   it 'fails when first/last and full_name are used' do
