@@ -411,7 +411,8 @@ module Mailgun
       ) unless attachment.respond_to?(:read)
 
       if attachment.respond_to?(:path) && !attachment.respond_to?(:content_type)
-        content_type = MIME::Types.type_for(attachment.path)[0]&.content_type || 'application/octet-stream'
+        mime_types = MIME::Types.type_for(attachment.path)
+        content_type = mime_types.present? ? mime_types[0].content_type : 'application/octet-stream'
         attachment.instance_eval "def content_type; '#{content_type}'; end"
       end
 
