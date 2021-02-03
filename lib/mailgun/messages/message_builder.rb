@@ -1,3 +1,4 @@
+require 'mime/types'
 require 'time'
 
 module Mailgun
@@ -408,6 +409,12 @@ module Mailgun
       fail(Mailgun::ParameterError,
         'Unable to access attachment file object.'
       ) unless attachment.respond_to?(:read)
+
+      if attachment.respond_to?(:path) && !attachment.respond_to?(:content_type)
+        mime_types = MIME::Types.type_for(attachment.path)
+        content_type = mime_types.present? ? mime_types[0].content_type : 'application/octet-stream'
+        attachment.instance_eval "def content_type; '#{content_type}'; end"
+      end
 
       unless filename.nil?
         attachment.instance_variable_set :@original_filename, filename

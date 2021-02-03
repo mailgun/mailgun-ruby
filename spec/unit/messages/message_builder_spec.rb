@@ -246,6 +246,16 @@ describe 'The method add_attachment' do
     expect(@mb_obj.message[:attachment].length).to eq(1)
     expect(@mb_obj.message[:attachment].first.original_filename).to eq 'mailgun_icon.png'
   end
+
+  context 'when attachment has unknown type' do
+    it 'sets content type application/octet-stream for attachment' do
+      file = File.dirname(__FILE__) + "/sample_data/unknown.type"
+
+      @mb_obj.add_attachment(file)
+
+      expect(@mb_obj.message[:attachment][0].content_type).to eq('application/octet-stream')
+    end
+  end
 end
 
 describe 'The method add_inline_image' do
