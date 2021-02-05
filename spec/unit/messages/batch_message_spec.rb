@@ -95,6 +95,7 @@ describe 'The method add_recipient' do
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
     @mb_obj.finalize
 
+    expect(@mb_obj.recipient_variables).to eq({})
     expect(@mb_obj.message['recipient-variables'].length).to eq(0)
     expect(@mb_obj.message[:to].length).to eq(0)
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(0)
