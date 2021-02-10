@@ -198,7 +198,7 @@ module Mailgun
     # @param [Boolean] tracking Boolean true or false.
     # @return [void]
     def track_opens(mode)
-      set_multi_simple('o:tracking-opens', bool_lookup(mode))
+      set_single('o:tracking-opens', bool_lookup(mode))
     end
 
     # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
@@ -212,7 +212,7 @@ module Mailgun
     # @param [String] mode True, False, or HTML (for HTML only tracking)
     # @return [void]
     def track_clicks(mode)
-      set_multi_simple('o:tracking-clicks', bool_lookup(mode))
+      set_single('o:tracking-clicks', bool_lookup(mode))
     end
 
     # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.
@@ -412,7 +412,7 @@ module Mailgun
 
       if attachment.respond_to?(:path) && !attachment.respond_to?(:content_type)
         mime_types = MIME::Types.type_for(attachment.path)
-        content_type = mime_types.present? ? mime_types[0].content_type : 'application/octet-stream'
+        content_type = mime_types.empty? ? 'application/octet-stream' : mime_types[0].content_type
         attachment.instance_eval "def content_type; '#{content_type}'; end"
       end
 
