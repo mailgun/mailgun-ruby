@@ -450,19 +450,19 @@ describe 'The method track_opens' do
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.track_opens('Yes')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
 
     @mb_obj.track_opens('No')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
 
     @mb_obj.track_opens(true)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
 
     @mb_obj.track_opens(false)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
   end
 end
 
@@ -481,23 +481,23 @@ describe 'The method track_clicks' do
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.track_clicks('Yes')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
 
     @mb_obj.track_clicks('No')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks(true)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
 
     @mb_obj.track_clicks(false)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks('html')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("html")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("html")
   end
 end
 
