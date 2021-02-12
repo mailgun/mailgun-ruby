@@ -72,6 +72,18 @@ describe 'Railgun::Mailer' do
     expect(body['o:tracking-opens']).to eq('true')
   end
 
+  it 'accepts frozen options to message body' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {})
+    message.mailgun_options ||= {
+      'tags' => ['some-tag']
+    }
+
+    body = Railgun.transform_for_mailgun(message)
+
+    expect(body).to include('o:tags')
+    expect(body['o:tags']).to eq(['some-tag'])
+  end
+
   it 'adds variables to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_variables ||= {
