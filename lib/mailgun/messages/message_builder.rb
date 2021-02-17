@@ -390,7 +390,7 @@ module Mailgun
         full_name = "#{vars['first']} #{vars['last']}".strip
       end 
 
-      return "'#{full_name}' <#{address}>" if defined?(full_name)
+      return "'#{full_name}' <#{address}>" if full_name
       address
     end
 
