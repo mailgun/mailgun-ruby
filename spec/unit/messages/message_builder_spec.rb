@@ -50,6 +50,16 @@ describe 'The method add_recipient' do
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
+  context 'when variables is empty and recepeint type - "to"' do
+    it 'adds email address as "to" recipient type and increments counter' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address, {})
+
+      expect(@mb_obj.message[recipient_type][0]).to eq("#{@address}")
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
+    end
+  end
+
   it 'adds a "cc" recipient type to the message body and counter is incremented' do
     recipient_type = :cc
     @mb_obj.add_recipient(recipient_type, @address, @variables)
