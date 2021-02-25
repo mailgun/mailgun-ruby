@@ -50,6 +50,16 @@ describe 'The method add_recipient' do
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
+  context 'when variables is empty and recepeint type - "to"' do
+    it 'adds email address as "to" recipient type and increments counter' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address, {})
+
+      expect(@mb_obj.message[recipient_type][0]).to eq("#{@address}")
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
+    end
+  end
+
   it 'adds a "cc" recipient type to the message body and counter is incremented' do
     recipient_type = :cc
     @mb_obj.add_recipient(recipient_type, @address, @variables)
@@ -246,6 +256,16 @@ describe 'The method add_attachment' do
     expect(@mb_obj.message[:attachment].length).to eq(1)
     expect(@mb_obj.message[:attachment].first.original_filename).to eq 'mailgun_icon.png'
   end
+
+  context 'when attachment has unknown type' do
+    it 'sets content type application/octet-stream for attachment' do
+      file = File.dirname(__FILE__) + "/sample_data/unknown.type"
+
+      @mb_obj.add_attachment(file)
+
+      expect(@mb_obj.message[:attachment][0].content_type).to eq('application/octet-stream')
+    end
+  end
 end
 
 describe 'The method add_inline_image' do
@@ -440,19 +460,19 @@ describe 'The method track_opens' do
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.track_opens('Yes')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
 
     @mb_obj.track_opens('No')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
 
     @mb_obj.track_opens(true)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
 
     @mb_obj.track_opens(false)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
   end
 end
 
@@ -471,23 +491,23 @@ describe 'The method track_clicks' do
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.track_clicks('Yes')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
 
     @mb_obj.track_clicks('No')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks(true)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
 
     @mb_obj.track_clicks(false)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks('html')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("html")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("html")
   end
 end
 

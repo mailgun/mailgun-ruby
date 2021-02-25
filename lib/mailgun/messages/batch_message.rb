@@ -111,6 +111,7 @@ module Mailgun
     # This method resets the message object to prepare for the next batch
     # of recipients.
     def reset_message
+      @recipient_variables = {}
       @message.delete('recipient-variables')
       @message.delete(:to)
       @message.delete(:cc)

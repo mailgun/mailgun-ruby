@@ -85,7 +85,7 @@ module Railgun
 
     # o:* attributes (options)
     mail.mailgun_options.try(:each) do |k, v|
-      message["o:#{k}"] = v
+      message["o:#{k}"] = v.dup
     end
 
     # support for using ActionMailer's `headers()` inside of the mailer
