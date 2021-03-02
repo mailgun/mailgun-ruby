@@ -3,6 +3,7 @@ module Mailgun
   # A Mailgun::Webhooks object is a simple CRUD interface to Mailgun Webhooks.
   # Uses Mailgun
   class Webhooks
+    ACTIONS = %w(bounce click deliver drop open spam unsubscribe).freeze
 
     # Public creates a new Mailgun::Webhooks instance.
     #   Defaults to Mailgun::Client
@@ -58,7 +59,7 @@ module Mailgun
     #
     # Returns true or false
     def create_all(domain, url = '')
-      %w(bounce click deliver drop open spam unsubscribe).each do |action|
+      ACTIONS.each do |action|
         add_webhook domain, action, url
       end
       true
@@ -66,6 +67,36 @@ module Mailgun
       false
     end
     alias_method :add_all_webhooks, :create_all
+
+    # Public: Update webhook
+    #
+    # domain - A String of the domain name (ex. domain.com)
+    # action - A String of the action to create a webhook for
+    # url    - A String of the url of the webhook
+    #
+    # Returns a Boolean of whether the webhook was updated
+    def update(domain, action, url = '')
+      res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
+      res.to_h['webhook']['url'] == url && res.to_h['message'] == 'Webhook has been updated'
+    end
+    alias_method :update_webhook, :update
+
+    # Public: Updates all webhooks to the same URL
+    #
+    # domain - A String of the domain name
+    # url    - A String of the url to set all webhooks to
+    #
+    # Returns true or false
+    def update_all(domain, url = '')
+      ACTIONS.each do |action|
+        update_webhook domain, action, url
+      end
+      true
+    rescue => e
+      puts e
+      false
+    end
+    alias_method :update_all_webhooks, :update_all
 
     # Public: Delete a specific webhook
     #
@@ -90,7 +121,7 @@ module Mailgun
     # Returns a Boolean on the success
     def remove_all(domain)
       fail Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
-      %w(bounce click deliver drop open spam unsubscribe).each do |action|
+      ACTIONS.each do |action|
         delete_webhook domain, action
       end
     end
