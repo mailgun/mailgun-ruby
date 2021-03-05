@@ -191,6 +191,19 @@ describe 'Railgun::Mailer' do
     expect(body['h:reply-to']).to eq('dude@example.com.au')
   end
 
+  it 'ignores `mime-version` in headers' do
+    message = UnitTestMailer.plain_message('test@example.org', '', {
+      'mime-version' => '1.0',
+    })
+    message.mailgun_headers = {
+      'Mime-Version' => '1.1',
+    }
+    message.headers({'MIME-VERSION' => '1.2'})
+
+    body = Railgun.transform_for_mailgun(message)
+    expect(body).not_to include('h:mime-version')
+  end
+
   it 'treats `headers()` names as case-insensitve' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
       'X-BIG-VALUE' => 1,
