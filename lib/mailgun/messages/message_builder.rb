@@ -270,8 +270,12 @@ module Mailgun
     # @return [void]
     def variable(name, data)
       fail(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
-      jsondata = make_json data
-      set_single("v:#{name}", jsondata)
+      begin
+        jsondata = make_json data
+        set_single("v:#{name}", jsondata)
+      rescue Mailgun::ParameterError
+        set_single("v:#{name}", data)
+      end
     end
 
     # Add custom parameter to the message. A custom parameter is any parameter that
