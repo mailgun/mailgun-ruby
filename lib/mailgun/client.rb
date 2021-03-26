@@ -64,6 +64,8 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def send_message(working_domain, data)
+      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
+
       if test_mode? then
         Mailgun::Client.deliveries << data
         return Response.from_hash(
