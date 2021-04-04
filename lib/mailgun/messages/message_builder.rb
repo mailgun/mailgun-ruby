@@ -308,6 +308,38 @@ module Mailgun
       message_id data
     end
 
+    # Set name of a template stored via template API. See Templates for more information
+    # https://documentation.mailgun.com/en/latest/api-templates.html
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template(template_name = nil)
+      key = 'template'
+      return @message.delete(key) if template_name.to_s.empty?
+      set_single(key, template_name)
+    end
+
+    # Set specific template version.
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template_version(version = nil)
+      key = 't:version'
+      return @message.delete(key) if version.to_s.empty?
+      set_single(key, version)
+    end
+
+    # Turn off or on template rendering in the text part
+    # of the message in case of template sending.
+    #
+    # @param [Boolean] tracking Boolean true or false.
+    # @return [void]
+    def template_text(mode)
+      set_single('t:text', bool_lookup(mode))
+    end
+
     private
 
     # Sets a single value in the message hash where "multidict" features are not needed.
