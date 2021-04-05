@@ -567,9 +567,13 @@ describe 'The method variable' do
     expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
     expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
   end
-  it 'throws an exception on broken JSON.' do
-    data = 'This is some crappy JSON.'
-    expect {@mb_obj.variable('my-data', data)}.to raise_error(Mailgun::ParameterError)
+  it 'accepts string values' do
+    data = 'String Value.'
+
+    @mb_obj.variable('my-data', data)
+
+    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
+    expect(@mb_obj.message["v:my-data"].to_s).to eq('String Value.')
   end
 end
 
