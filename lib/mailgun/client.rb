@@ -70,7 +70,7 @@ module Mailgun
         Mailgun::Client.deliveries << data
         return Response.from_hash(
           {
-            :body => '{"id": "test-mode-mail@localhost", "message": "Queued. Thank you."}',
+            :body => "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
             :code => 200,
           }
         )
