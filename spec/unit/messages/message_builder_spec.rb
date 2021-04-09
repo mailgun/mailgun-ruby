@@ -621,3 +621,103 @@ describe 'The method message_id' do
     expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
   end
 end
+
+describe 'The method template' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  context 'when template name is passed' do
+    it 'sets `template` to the message' do
+      template_name = 'template.name'
+      @mb_obj.template(template_name)
+
+      expect(@mb_obj.message['template']).to eq(template_name)
+    end
+  end
+
+  context 'when multiple values are passed' do
+    it 'sets the last value as message template' do
+      template_name_1 = 'template.name_1'
+      template_name_2 = 'template.name_2'
+
+      @mb_obj.template(template_name_1)
+      @mb_obj.template(template_name_2)
+
+      expect(@mb_obj.message['template']).to eq(template_name_2)
+    end
+  end
+
+  context 'when template name is not passed' do
+    it 'it deletes `template` key from the message' do
+      @mb_obj.template('template.name')
+
+      expect(@mb_obj.message.has_key?('template')).to eq(true)
+
+      @mb_obj.template
+
+      expect(@mb_obj.message.has_key?('template')).to eq(false)
+    end
+  end
+end
+
+describe 'The method template_version' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  context 'when template version is passed' do
+    it 'adds `t:version` key value to the message' do
+      version = 'version_1'
+      @mb_obj.template_version(version)
+
+      expect(@mb_obj.message['t:version']).to eq(version)
+    end
+  end
+
+  context 'when multiple values are passed' do
+    it 'adds the last value as `t:version` key value to the message' do
+      version_1 = 'version_1'
+      version_2 = 'version_2'
+
+      @mb_obj.template_version(version_1)
+      @mb_obj.template_version(version_2)
+
+      expect(@mb_obj.message['t:version']).to eq(version_2)
+    end
+  end
+
+  context 'when version is not passed' do
+    it 'it deletes `t:version` key from the message' do
+      @mb_obj.template_version('version')
+
+      expect(@mb_obj.message.has_key?('t:version')).to eq(true)
+
+      @mb_obj.template_version
+
+      expect(@mb_obj.message.has_key?('t:version')).to eq(false)
+    end
+  end
+end
+
+describe 'The method template_text' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+
+  it 'enables/disables rendering in the text part of the message in case of template sending' do
+    @mb_obj.template_text('Yes')
+
+    expect(@mb_obj.message["t:text"]).to eq("yes")
+
+    @mb_obj.template_text('No')
+
+    expect(@mb_obj.message["t:text"]).to eq("no")
+
+    @mb_obj.template_text(true)
+
+    expect(@mb_obj.message["t:text"]).to eq("yes")
+
+    @mb_obj.template_text(false)
+
+    expect(@mb_obj.message["t:text"]).to eq("no")
+  end
+end

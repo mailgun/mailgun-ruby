@@ -31,6 +31,12 @@ class UnitTestMailer < ActionMailer::Base
     end
   end
 
+  def message_with_template(address, subject, template_name)
+    mail(to: address, subject: subject, template: template_name) do |format|
+      format.text { render plain: "Test!" }
+    end
+  end
+
 end
 
 describe 'Railgun::Mailer' do
@@ -238,5 +244,35 @@ describe 'Railgun::Mailer' do
     expect(body['h:x-neat-header']).to include('foo')
     expect(body['h:x-neat-header']).to include('bar')
     expect(body['h:x-neat-header']).to include('zoop')
+  end
+
+  context 'when message with template' do
+    it 'adds template header to message from mailer params' do
+      template_name = 'template.name'
+      message = UnitTestMailer.message_with_template('test@example.org', '', template_name)
+
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body).to include('template')
+      expect(body['template']).to eq(template_name)
+    end
+
+    context 'when mailgun_template_variables are assigned' do
+      it 'adds template variables to message body' do
+        message = UnitTestMailer.message_with_template('test@example.org', '', 'template.name')
+        version = 'version_1'
+        message.mailgun_template_variables ||= {
+          'version' => version,
+          'text' => 'yes'
+        }
+
+        body = Railgun.transform_for_mailgun(message)
+
+        expect(body).to include('t:version')
+        expect(body['t:version']).to eq('version_1')
+        expect(body).to include('t:text')
+        expect(body['t:text']).to eq('yes')
+      end
+    end
   end
 end

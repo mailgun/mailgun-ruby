@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject reply-to mime-version ]
+    IGNORED_HEADERS = %w[ to from subject reply-to mime-version template ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -88,6 +88,11 @@ module Railgun
       message["o:#{k}"] = v.dup
     end
 
+    # t:* attributes (options)
+    mail.mailgun_template_variables.try(:each) do |k, v|
+      message["t:#{k}"] = v.dup
+    end
+
     # support for using ActionMailer's `headers()` inside of the mailer
     # note: this will filter out parameters such as `from`, `to`, and so forth
     #       as they are accepted as POST parameters on the message endpoint.
@@ -153,6 +158,7 @@ module Railgun
 
     mb.from mail[:from]
     mb.reply_to(mail[:reply_to].to_s) if mail[:reply_to].present?
+    mb.template(mail[:template].to_s) if mail[:template].present?
     mb.subject mail.subject
     mb.body_html extract_body_html(mail)
     mb.body_text extract_body_text(mail)
