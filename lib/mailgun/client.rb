@@ -26,7 +26,7 @@ module Mailgun
       rest_client_params[:timeout] = timeout if timeout
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
-      RestClient.proxy = 'proxy_url'
+      RestClient.proxy = proxy_url
       @http_client = RestClient::Resource.new(endpoint, rest_client_params)
       @test_mode = test_mode
     end
