@@ -63,6 +63,9 @@ describe 'The method send_message()', vcr: vcr_opts do
              :to => "bob@#{@domain}",
              :subject => "Test",
              :text => "Test Data" }
+    uuid = 'uuid'
+
+    allow(SecureRandom).to receive(:uuid).and_return(uuid)
 
     result = @mg_obj.send_message(@domain, data)
 
@@ -72,7 +75,7 @@ describe 'The method send_message()', vcr: vcr_opts do
     expect(result.body).to include("id")
 
     expect(result.code).to eq(200)
-    expect(result.body['id']).to eq("test-mode-mail@localhost")
+    expect(result.body['id']).to eq("test-mode-mail-#{uuid}@localhost")
     expect(result.body['message']).to eq("Queued. Thank you.")
   end
 
