@@ -58,5 +58,12 @@ module Mailgun
     rescue => err
       raise ParseError.new(err), err
     end
+    
+    # Returns true if response code is 2xx
+    # 
+    # @return [Boolean] A boolean that binarizes the response code result.
+    def success?
+      (200..299).include?(code)
+    end
   end
 end
