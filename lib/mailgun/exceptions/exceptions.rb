@@ -34,6 +34,7 @@ module Mailgun
 
     # Public: fallback if there is no response code on the object
     NOCODE = 000
+    FORBIDDEN = 'Forbidden'
 
     # Public: initialization of new error given a message and/or object
     #
@@ -51,6 +52,7 @@ module Mailgun
       rescue NoMethodError
         api_message = "Unknown API error"
       end
+      api_message = api_message + ' - Invalid Domain or API key' if api_message == FORBIDDEN
 
       message = message || ''
       message = message + ': ' + api_message

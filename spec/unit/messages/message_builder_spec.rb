@@ -313,7 +313,7 @@ describe 'The method set_test_mode' do
   it 'warns of set_test_mode deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_test_mode 'warn on set_test_mode'
+    @mb_obj.set_test_mode 'Yes'
   end
 end
 
@@ -355,7 +355,7 @@ describe 'The method set_dkim' do
   it 'warns of set_dkim deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_dkim 'warn on set_dkim'
+    @mb_obj.set_dkim 'Yes'
   end
 end
 
@@ -449,7 +449,7 @@ describe 'The method set_open_tracking' do
   it 'warns of set_open_tracking deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_open_tracking 'warn on set_open_tracking'
+    @mb_obj.set_open_tracking 'Yes'
   end
 end
 
@@ -480,7 +480,7 @@ describe 'The method set_click_tracking' do
   it 'warns of set_click_tracking deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_click_tracking 'warn on set_click_tracking'
+    @mb_obj.set_click_tracking 'Yes'
   end
 end
 
@@ -508,6 +508,13 @@ describe 'The method track_clicks' do
     @mb_obj.track_clicks('html')
 
     expect(@mb_obj.message["o:tracking-clicks"]).to eq("html")
+  end
+
+  context 'when unexpected value is provided' do
+    it 'warns about prefered values' do
+      expect(@mb_obj).to receive :warn
+      @mb_obj.track_clicks('random')
+    end
   end
 end
 

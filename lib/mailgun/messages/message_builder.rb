@@ -379,6 +379,7 @@ module Mailgun
     def bool_lookup(value)
       return 'yes' if %w(true yes yep).include? value.to_s.downcase
       return 'no' if %w(false no nope).include? value.to_s.downcase
+      warn 'WARN: for bool type actions next values are prefered: true yes yep | false no nope | htmlonly'
       value
     end
 
