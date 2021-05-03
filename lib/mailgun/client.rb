@@ -66,7 +66,7 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def send_message(working_domain, data)
-      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
+      perform_data_validation(working_domain, data)
 
       if test_mode? then
         Mailgun::Client.deliveries << data
@@ -204,5 +204,17 @@ module Mailgun
       CommunicationError.new(e.message)
     end
 
+    def perform_data_validation(working_domain, data)
+      message = data.respond_to?(:message) ? data.message : data
+      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
+      fail ParameterError.new(
+        'Missing `to` recipient, message should containg at least 1 recipient',
+        working_domain
+      ) if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
+      fail ParameterError.new(
+        'Missing a `from` sender, message should containg at least 1 `from` sender',
+        working_domain
+      ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+    end
   end
 end
