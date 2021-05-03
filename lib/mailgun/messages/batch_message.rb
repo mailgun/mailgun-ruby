@@ -116,6 +116,7 @@ module Mailgun
       @message.delete(:to)
       @message.delete(:cc)
       @message.delete(:bcc)
+      @recipient_variables = {}
       @counters[:recipients][:to] = 0
       @counters[:recipients][:cc] = 0
       @counters[:recipients][:bcc] = 0
