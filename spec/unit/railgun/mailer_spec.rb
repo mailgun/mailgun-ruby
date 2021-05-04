@@ -163,6 +163,43 @@ describe 'Railgun::Mailer' do
     expect(body['h:x-source']).to eq('unit tests')
   end
 
+  context 'when mailgun_variables are present' do
+    it 'accepts valid JSON and stores it as message[param].' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => '{"key":"value"}'
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+    end
+
+    it 'accepts a hash and appends as data to the message.' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => {'key' => 'value'}
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+    end
+
+    it 'accepts string values' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => 'String Value.'
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('String Value.')
+    end
+  end
+
   it 'properly adds attachments' do
     message = UnitTestMailer.message_with_attachment('test@example.org', '')
     body = Railgun.transform_for_mailgun(message)

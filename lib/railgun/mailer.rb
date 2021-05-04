@@ -78,11 +78,6 @@ module Railgun
   def transform_for_mailgun(mail)
     message = build_message_object(mail)
 
-    # v:* attributes (variables)
-    mail.mailgun_variables.try(:each) do |k, v|
-      message["v:#{k}"] = JSON.dump(v)
-    end
-
     # o:* attributes (options)
     mail.mailgun_options.try(:each) do |k, v|
       message["o:#{k}"] = v.dup
@@ -176,6 +171,11 @@ module Railgun
       when Mail::Field
         mb.add_recipient rcpt_type.to_s, addrs.to_s
       end
+    end
+
+    # v:* attributes (variables)
+    mail.mailgun_variables.try(:each) do |name, value|
+      mb.variable(name, value)
     end
 
     return mb.message if mail.attachments.empty?
