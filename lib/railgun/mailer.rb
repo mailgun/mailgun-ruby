@@ -48,7 +48,8 @@ module Railgun
 
     def deliver!(mail)
       mg_message = Railgun.transform_for_mailgun(mail)
-      response = @mg_client.send_message(@domain, mg_message)
+      mg_domain = @domain.to_s == 'auto' ? extract_sender_domain(mail) : @domain
+      response = @mg_client.send_message(mg_domain, mg_message)
 
       if response.code == 200 then
         mg_id = response.to_h['id']
@@ -59,6 +60,12 @@ module Railgun
 
     def mailgun_client
       @mg_client
+    end
+
+    private
+
+    def extract_sender_domain(mail)
+      Mail::Address.new(mail.from_addrs[0]).domain
     end
 
   end

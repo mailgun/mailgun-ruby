@@ -84,6 +84,14 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   }
 ```
 
+Set the `domain` setting to `auto` to automatically set the Mailgun domain based on the from address.
+```ruby
+  config.action_mailer.mailgun_settings = {
+    api_key: 'api-myapikey',
+    domain: :auto,
+  }
+```
+
 To specify Mailgun options such as campaign or tags:
 ```ruby
 class UserMailer < ApplicationMailer
