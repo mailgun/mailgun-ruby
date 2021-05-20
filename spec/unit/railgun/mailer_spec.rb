@@ -37,6 +37,12 @@ class UnitTestMailer < ActionMailer::Base
     end
   end
 
+  def message_with_domain(address, subject, domain)
+    mail(to: address, subject: subject, domain: domain) do |format|
+      format.text { render plain: "Test!" }
+    end
+  end
+
 end
 
 describe 'Railgun::Mailer' do
@@ -364,6 +370,19 @@ describe 'Railgun::Mailer' do
     it 'returns response' do
       expect_any_instance_of(Mailgun::Client).to receive(:send_message).and_return(response)
       expect(Railgun::Mailer.new(config).deliver!(mail)).to eq(response)
+    end
+
+    context 'when domain is provided in arguments' do
+      let(:new_domain) { 'new_domain' }
+      let(:mail) { UnitTestMailer.message_with_domain('test@example.org', '', new_domain) }
+
+      it 'uses provided domain' do
+        result = { from: 'test@example.org' }
+        allow(Railgun).to receive(:transform_for_mailgun).and_return(result)
+        expect_any_instance_of(Mailgun::Client).to receive(:send_message)
+          .with(new_domain, result).and_return(response)
+        Railgun::Mailer.new(config).deliver!(mail)
+      end
     end
   end
 end
