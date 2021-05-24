@@ -47,8 +47,11 @@ module Railgun
     end
 
     def deliver!(mail)
+      @mg_domain = set_mg_domain(mail)
+      mail[:domain] = nil if mail[:domain].present?
+
       mg_message = Railgun.transform_for_mailgun(mail)
-      response = @mg_client.send_message(@domain, mg_message)
+      response = @mg_client.send_message(@mg_domain, mg_message)
 
       if response.code == 200 then
         mg_id = response.to_h['id']
@@ -59,6 +62,14 @@ module Railgun
 
     def mailgun_client
       @mg_client
+    end
+
+    private
+
+    # Set @mg_domain from mail[:domain] header if present, then remove it to prevent being sent.
+    def set_mg_domain(mail)
+      return mail[:domain].value if mail[:domain]
+      domain
     end
 
   end
@@ -239,5 +250,4 @@ module Railgun
     return mail.html_part if mail.multipart?
     (mail.mime_type =~ /^text\/html$/i) && mail
   end
-
 end
