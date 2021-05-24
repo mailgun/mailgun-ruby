@@ -199,6 +199,7 @@ module Mailgun
     # @return [void]
     def track_opens(mode)
       set_single('o:tracking-opens', bool_lookup(mode))
+      set_multi_simple('o:tracking', bool_lookup(mode))
     end
 
     # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
@@ -213,6 +214,7 @@ module Mailgun
     # @return [void]
     def track_clicks(mode)
       set_single('o:tracking-clicks', bool_lookup(mode))
+      set_multi_simple('o:tracking', bool_lookup(mode))
     end
 
     # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.

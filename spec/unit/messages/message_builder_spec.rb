@@ -461,6 +461,7 @@ describe 'The method track_opens' do
     @mb_obj.track_opens('Yes')
 
     expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
+    expect(@mb_obj.message["o:tracking"]).to eq("yes")
 
     @mb_obj.track_opens('No')
 
@@ -492,6 +493,7 @@ describe 'The method track_clicks' do
     @mb_obj.track_clicks('Yes')
 
     expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
+    expect(@mb_obj.message["o:tracking"]).to eq("yes")
 
     @mb_obj.track_clicks('No')
 
