@@ -198,7 +198,9 @@ module Mailgun
     # @param [Boolean] tracking Boolean true or false.
     # @return [void]
     def track_opens(mode)
-      set_single('o:tracking-opens', bool_lookup(mode))
+      value = bool_lookup(mode)
+      set_single('o:tracking-opens', value)
+      set_multi_simple('o:tracking', value)
     end
 
     # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
@@ -212,7 +214,9 @@ module Mailgun
     # @param [String] mode True, False, or HTML (for HTML only tracking)
     # @return [void]
     def track_clicks(mode)
-      set_single('o:tracking-clicks', bool_lookup(mode))
+      value = bool_lookup(mode)
+      set_single('o:tracking-clicks', value)
+      set_multi_simple('o:tracking', value)
     end
 
     # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.
@@ -308,6 +312,38 @@ module Mailgun
       message_id data
     end
 
+    # Set name of a template stored via template API. See Templates for more information
+    # https://documentation.mailgun.com/en/latest/api-templates.html
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template(template_name = nil)
+      key = 'template'
+      return @message.delete(key) if template_name.to_s.empty?
+      set_single(key, template_name)
+    end
+
+    # Set specific template version.
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template_version(version = nil)
+      key = 't:version'
+      return @message.delete(key) if version.to_s.empty?
+      set_single(key, version)
+    end
+
+    # Turn off or on template rendering in the text part
+    # of the message in case of template sending.
+    #
+    # @param [Boolean] tracking Boolean true or false.
+    # @return [void]
+    def template_text(mode)
+      set_single('t:text', bool_lookup(mode))
+    end
+
     private
 
     # Sets a single value in the message hash where "multidict" features are not needed.
@@ -347,6 +383,7 @@ module Mailgun
     def bool_lookup(value)
       return 'yes' if %w(true yes yep).include? value.to_s.downcase
       return 'no' if %w(false no nope).include? value.to_s.downcase
+      warn 'WARN: for bool type actions next values are prefered: true yes yep | false no nope | htmlonly'
       value
     end
 

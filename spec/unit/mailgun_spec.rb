@@ -37,14 +37,36 @@ describe 'The method send_message()' do
   end
 
   it 'opens the message MIME and sends the MIME message.' do
-    data = {'to' => 'joe@test.com',
-                    'message' => 'Sample Data/mime.txt'}
+    data = {
+      'to' => 'joe@test.com',
+      'message' => 'Sample Data/mime.txt',
+      'from' => 'joe@test.com'
+    }
     result = @mg_obj.send_message("testdomain.com", data)
 
     result.to_h!
 
     expect(result.body).to include("message")
     expect(result.body).to include("id")
+  end
+
+  context 'when domain is missing' do
+    it 'shows failure message' do
+      expect(@mg_obj).to receive(:fail)
+      @mg_obj.send_message(nil, {})
+    end
+  end
+
+  context 'when to is missing' do
+    it 'shows failure message' do
+    data = {
+      'to' => '',
+      'message' => 'Sample Data/mime.txt',
+      'from' => 'joe@test.com'
+    }
+    expect(@mg_obj).to receive(:fail)
+    @mg_obj.send_message("testdomain.com", data)
+    end
   end
 end
 
