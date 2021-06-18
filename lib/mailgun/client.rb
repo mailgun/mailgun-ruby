@@ -15,7 +15,8 @@ module Mailgun
                    api_version = 'v3',
                    ssl = true,
                    test_mode = false,
-                   timeout = nil)
+                   timeout = nil,
+                   proxy_url = nil)
 
       rest_client_params = {
         user: 'api',
@@ -25,6 +26,7 @@ module Mailgun
       rest_client_params[:timeout] = timeout if timeout
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
+      RestClient.proxy = proxy_url
       @http_client = RestClient::Resource.new(endpoint, rest_client_params)
       @test_mode = test_mode
     end
@@ -64,13 +66,13 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def send_message(working_domain, data)
-      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
+      perform_data_validation(working_domain, data)
 
       if test_mode? then
         Mailgun::Client.deliveries << data
         return Response.from_hash(
           {
-            :body => '{"id": "test-mode-mail@localhost", "message": "Queued. Thank you."}',
+            :body => "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
             :code => 200,
           }
         )
@@ -202,5 +204,17 @@ module Mailgun
       CommunicationError.new(e.message)
     end
 
+    def perform_data_validation(working_domain, data)
+      message = data.respond_to?(:message) ? data.message : data
+      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
+      fail ParameterError.new(
+        'Missing `to` recipient, message should containg at least 1 recipient',
+        working_domain
+      ) if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
+      fail ParameterError.new(
+        'Missing a `from` sender, message should containg at least 1 `from` sender',
+        working_domain
+      ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+    end
   end
 end

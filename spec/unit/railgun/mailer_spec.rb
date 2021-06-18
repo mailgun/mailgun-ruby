@@ -31,6 +31,18 @@ class UnitTestMailer < ActionMailer::Base
     end
   end
 
+  def message_with_template(address, subject, template_name)
+    mail(to: address, subject: subject, template: template_name) do |format|
+      format.text { render plain: "Test!" }
+    end
+  end
+
+  def message_with_domain(address, subject, domain)
+    mail(to: address, subject: subject, domain: domain) do |format|
+      format.text { render plain: "Test!" }
+    end
+  end
+
 end
 
 describe 'Railgun::Mailer' do
@@ -43,6 +55,31 @@ describe 'Railgun::Mailer' do
     @mailer_obj = Railgun::Mailer.new(config)
 
     expect(@mailer_obj.mailgun_client).to be_a(Mailgun::Client)
+  end
+
+  context 'when config does not have api_key or domain' do
+    it 'raises configuration error' do
+      config = {
+        api_key:  {}
+      }
+
+    expect { Railgun::Mailer.new(config) }.to raise_error(Railgun::ConfigurationError)
+    end
+  end
+
+  context 'when fake_message_send is present in config' do
+    it 'enables test mode' do
+      config = {
+        api_key:  {},
+        domain:   {},
+        fake_message_send: true
+      }
+      client_double = double(Mailgun::Client)
+      allow(Mailgun::Client).to receive(:new).and_return(client_double)
+      expect(client_double).to receive(:enable_test_mode!)
+
+      Railgun::Mailer.new(config)
+    end
   end
 
   it 'properly creates a message body' do
@@ -157,6 +194,43 @@ describe 'Railgun::Mailer' do
     expect(body['h:x-source']).to eq('unit tests')
   end
 
+  context 'when mailgun_variables are present' do
+    it 'accepts valid JSON and stores it as message[param].' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => '{"key":"value"}'
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+    end
+
+    it 'accepts a hash and appends as data to the message.' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => {'key' => 'value'}
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+    end
+
+    it 'accepts string values' do
+      message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
+        message.mailgun_variables = {
+          'my-data' => 'String Value.'
+        }
+      end
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body["v:my-data"]).to be_kind_of(String)
+      expect(body["v:my-data"].to_s).to eq('String Value.')
+    end
+  end
+
   it 'properly adds attachments' do
     message = UnitTestMailer.message_with_attachment('test@example.org', '')
     body = Railgun.transform_for_mailgun(message)
@@ -238,5 +312,77 @@ describe 'Railgun::Mailer' do
     expect(body['h:x-neat-header']).to include('foo')
     expect(body['h:x-neat-header']).to include('bar')
     expect(body['h:x-neat-header']).to include('zoop')
+  end
+
+  context 'when message with template' do
+    it 'adds template header to message from mailer params' do
+      template_name = 'template.name'
+      message = UnitTestMailer.message_with_template('test@example.org', '', template_name)
+
+      body = Railgun.transform_for_mailgun(message)
+
+      expect(body).to include('template')
+      expect(body['template']).to eq(template_name)
+    end
+
+    context 'when mailgun_template_variables are assigned' do
+      it 'adds template variables to message body' do
+        message = UnitTestMailer.message_with_template('test@example.org', '', 'template.name')
+        version = 'version_1'
+        message.mailgun_template_variables ||= {
+          'version' => version,
+          'text' => 'yes'
+        }
+
+        body = Railgun.transform_for_mailgun(message)
+
+        expect(body).to include('t:version')
+        expect(body['t:version']).to eq('version_1')
+        expect(body).to include('t:text')
+        expect(body['t:text']).to eq('yes')
+      end
+    end
+  end
+
+  describe 'deliver!' do
+    let(:config) do
+      {
+        api_key: 'api_key',
+        domain: 'domain'
+      }
+    end
+    let(:mail) { UnitTestMailer.plain_message('test@example.org', '', {}) }
+    let(:response) do
+      response = Struct.new(:code, :id)
+      response.new(200, rand(50..100))
+    end
+
+    it 'initiates client message send' do
+      result = { from: 'test@example.org' }
+      allow(Railgun).to receive(:transform_for_mailgun).and_return(result)
+
+      expect_any_instance_of(Mailgun::Client).to receive(:send_message)
+        .with(config[:domain], result)
+        .and_return(response)
+      Railgun::Mailer.new(config).deliver!(mail)
+    end
+
+    it 'returns response' do
+      expect_any_instance_of(Mailgun::Client).to receive(:send_message).and_return(response)
+      expect(Railgun::Mailer.new(config).deliver!(mail)).to eq(response)
+    end
+
+    context 'when domain is provided in arguments' do
+      let(:new_domain) { 'new_domain' }
+      let(:mail) { UnitTestMailer.message_with_domain('test@example.org', '', new_domain) }
+
+      it 'uses provided domain' do
+        result = { from: 'test@example.org' }
+        allow(Railgun).to receive(:transform_for_mailgun).and_return(result)
+        expect_any_instance_of(Mailgun::Client).to receive(:send_message)
+          .with(new_domain, result).and_return(response)
+        Railgun::Mailer.new(config).deliver!(mail)
+      end
+    end
   end
 end
