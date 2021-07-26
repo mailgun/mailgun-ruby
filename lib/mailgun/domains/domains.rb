@@ -52,7 +52,6 @@ module Mailgun
     #
     # domain  - [String] Name of the domain (ex. domain.com)
     # options - [Hash] of
-    #     smtp_password - [String] Password for SMTP authentication
     #     spam_action   - [String] disabled or tag
     #       Disable, no spam filtering will occur for inbound messages.
     #       Tag, messages will be tagged wtih a spam header. See Spam Filter.
@@ -61,7 +60,7 @@ module Mailgun
     # Returns [Hash] of created domain
     def create(domain, options = {})
       fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
-      options = { smtp_password: nil, spam_action: 'disabled', wildcard: false }.merge(options)
+      options = { spam_action: 'disabled', wildcard: false }.merge(options)
       options[:name] = domain
       @client.post('domains', options).to_h
     end
