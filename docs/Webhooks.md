@@ -36,5 +36,5 @@ hook.remove_all 'my.perfect.domain'
 
 More Documentation
 ------------------
-See the official [Mailgun Domain Docs](https://documentation.mailgun.com/api-webhooks.html)
+See the official [Mailgun Domain Docs](https://documentation.mailgun.com/en/latest/api-webhooks.html)
 for more information
