@@ -100,4 +100,4 @@ Available Functions
 
 More Documentation
 ------------------
-See the official [Mailgun Docs](https://documentation.mailgun.com/api-sending.html) for more information.
+See the official [Mailgun Docs](https://documentation.mailgun.com/) for more information.

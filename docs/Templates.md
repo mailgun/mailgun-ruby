@@ -48,5 +48,5 @@ templates.delete 'invitation.template'
 
 More Documentation
 ------------------
-See the official [Mailgun Domain Docs](https://documentation.mailgun.com/en/latest/api-templates.html)
+See the official [Mailgun Template Docs](https://documentation.mailgun.com/en/latest/api-templates.html)
 for more information
