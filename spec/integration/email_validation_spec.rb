@@ -7,6 +7,8 @@ vcr_opts = { :cassette_name => "email_validation" }
 
 describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
+    # @mg_client = Mailgun::Client.new(PUB_APIKEY, APIHOST, APIVERSION, SSL)
+    # @mg_obj = Mailgun::Address.new(@mg_client)
     @mg_obj = Mailgun::Address.new(PUB_APIKEY)
 
     @valid = ["Alice <alice@example.com>", "bob@example.com"]
@@ -28,18 +30,14 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     expected = {
         "address" => "alice@mailgun.net",
         "did_you_mean" => nil,
-        "is_disposable_address" => false,
-        "is_role_address" => false,
         "is_valid" => true,
-        "mailbox_verification" => "true",
-        "reason" => nil,
         "parts" => {
             "display_name" => nil,
             "domain" => "mailgun.net",
             "local_part" => "alice",
         },
     }
-    expect(res).to eq(expected)
+    expect(res).to match(hash_including(expected))
   end
 
   it 'performs mailbox validation for alice@mailgun.net' do
@@ -48,17 +46,13 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     expect(res["mailbox_verification"]).to eq("true")
   end
 
-  it 'fails to validate example.org' do
+  it 'marks example.org as not valid' do
     res = @mg_obj.validate("example.org")
 
     expected = {
         "address" => "example.org",
         "did_you_mean" => nil,
-        "is_disposable_address" => false,
-        "is_role_address" => false,
         "is_valid" => false,
-        "mailbox_verification" => "unknown",
-        "reason" => "Validation failed for 'example.org', reason: 'malformed address; missing @ sign'",
         "parts" => {
             "display_name" => nil,
             "domain" => nil,
