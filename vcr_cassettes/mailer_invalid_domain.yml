@@ -20,7 +20,7 @@ http_interactions:
       Host:
       - api.mailgun.net
       Authorization:
-      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 401
@@ -73,7 +73,7 @@ http_interactions:
       Host:
       - api.mailgun.net
       Authorization:
-      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 401

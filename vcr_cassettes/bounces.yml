@@ -2,174 +2,214 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces
     body:
       encoding: US-ASCII
-      string: address=integration-test-email%40DOMAIN.TEST&code=550&error=Integration%20Test
+      string: address=integration-test-email%40DOMAIN.TEST&code=550&error=Integration+Test
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '113'
+      - '116'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:33:28 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '139'
-      Connection:
-      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 26 Jul 2021 14:39:33 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '145'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Address
-        has been added to the bounces table"}'
+      string: |
+        {"message":"Address has been added to the bounces table","address":"integration-test-email@DOMAIN.TEST"}
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
+  recorded_at: Mon, 26 Jul 2021 14:39:32 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:33:28 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '168'
-      Connection:
-      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 26 Jul 2021 14:39:34 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '231'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration
-        Test","created_at":"Fri, 08 Jan 2016 20:33:28 UTC"}'
+      string: |
+        {"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration Test","created_at":"Mon, 26 Jul 2021 14:39:32 UTC","MessageHash":"4e7b5c06763fbd18060548d8b18687e492b255a7"}
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
+  recorded_at: Mon, 26 Jul 2021 14:39:33 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:33:29 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '819'
-      Connection:
-      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 26 Jul 2021 14:39:36 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '887'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"items":[{"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration
-        Test","created_at":"Fri, 08 Jan 2016 20:33:28 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=last\u0026limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=next\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=previous\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100"}}'
+      string: |
+        {"items":[{"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration Test","created_at":"Mon, 26 Jul 2021 14:39:32 UTC","MessageHash":"4e7b5c06763fbd18060548d8b18687e492b255a7"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=last&limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=next&address=integration-test-email%40DOMAIN.TEST&limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=previous&address=integration-test-email%40DOMAIN.TEST&limit=100"}}
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
+  recorded_at: Mon, 26 Jul 2021 14:39:35 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:33:29 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '128'
-      Connection:
-      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 26 Jul 2021 14:39:37 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '134'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Bounced
-        address has been removed"}'
+      string: |
+        {"address":"integration-test-email@DOMAIN.TEST","message":"Bounced address has been removed"}
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:33:30 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 26 Jul 2021 14:39:36 GMT
+recorded_with: VCR 3.0.3

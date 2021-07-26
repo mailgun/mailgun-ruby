@@ -2,19 +2,21 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@example.com%3E%3Bbob@example.com%3Bexample.org&syntax_only=true
+    uri: https://api.mailgun.net/v3/address/parse?addresses=Alice%20%3Calice@example.com%3E%3Bbob@example.com%3Bexample.org&syntax_only=true
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PUBLIC_KEY_AUTH>
   response:
     status:
       code: 200
@@ -33,7 +35,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -56,19 +58,21 @@ http_interactions:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/address/validate?address=alice@mailgun.net
+    uri: https://api.mailgun.net/v3/address/validate?address=alice@mailgun.net
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PUBLIC_KEY_AUTH>
   response:
     status:
       code: 200
@@ -87,7 +91,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -111,19 +115,21 @@ http_interactions:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/address/validate?address=example.org
+    uri: https://api.mailgun.net/v3/address/validate?address=example.org
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - rest-client/2.0.0 (linux-gnu x86_64) ruby/2.3.1p112
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PUBLIC_KEY_AUTH>
   response:
     status:
       code: 200
@@ -142,7 +148,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -166,38 +172,40 @@ http_interactions:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/address/validate?address=alice@mailgun.net&mailbox_verification=true
+    uri: https://api.mailgun.net/v3/address/validate?address=alice@mailgun.net&mailbox_verification=true
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - rest-client/2.0.2 (darwin16.7.0 x86_64) ruby/2.0.0p0
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PUBLIC_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      - Content-Type, x-requested-with, Authorization
       Access-Control-Allow-Methods:
       - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
-      Content-Disposition:
-      - inline
+      Cache-Control:
+      - no-store
       Content-Type:
-      - application/json
+      - application/json; charset=utf-8
       Date:
-      - Tue, 12 Sep 2017 16:55:09 GMT
+      - Mon, 26 Jul 2021 14:48:03 GMT
       Server:
       - nginx
       Content-Length:
@@ -206,10 +214,20 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"address": "alice@mailgun.net", "did_you_mean": null, "is_disposable_address":
-        false, "is_role_address": false, "is_valid": true, "mailbox_verification":
-        "true", "parts": {"display_name": null, "domain": "mailgun.net", "local_part":
-        "alice"}}'
+      string: |-
+        {
+          "address": "alice@mailgun.net",
+          "did_you_mean": null,
+          "is_disposable_address": false,
+          "is_role_address": false,
+          "is_valid": true,
+          "mailbox_verification": "true",
+          "parts": {
+            "display_name": null,
+            "domain": "mailgun.net",
+            "local_part": "alice"
+          }
+        }
     http_version: 
-  recorded_at: Tue, 12 Sep 2017 16:55:09 GMT
+  recorded_at: Mon, 26 Jul 2021 14:48:03 GMT
 recorded_with: VCR 3.0.3

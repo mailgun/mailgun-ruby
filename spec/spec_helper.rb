@@ -39,9 +39,8 @@ VCR.configure do |c|
   c.cassette_library_dir = 'vcr_cassettes'
   c.hook_into :webmock
   c.default_cassette_options = { record: :new_episodes }
-  c.filter_sensitive_data('<APIKEY>') { APIKEY }
   c.filter_sensitive_data('DOMAIN.TEST') { TESTDOMAIN }
-  c.filter_sensitive_data('<PUBKEY>') { PUB_APIKEY }
-
+  c.filter_sensitive_data('<ENCODED_PRIVATE_KEY_AUTH>') { Base64.strict_encode64 "api:#{APIKEY}" }
+  c.filter_sensitive_data('<ENCODED_PUBLIC_KEY_AUTH>') { Base64.strict_encode64 "api:#{PUB_APIKEY}" }
   c.configure_rspec_metadata!
 end
