@@ -11,11 +11,11 @@ describe 'For the domains endpoint', vcr: vcr_opts do
   end
 
   it 'creates the domain' do
-    result = @mg_obj.add_domain(@domain, { smtp_password: 'super_secret', spam_action: 'tag' })
+    result = @mg_obj.create(@domain, { spam_action: 'tag' })
 
     expect(result['domain']["name"]).to eq(@domain)
     expect(result['domain']["spam_action"]).to eq("tag")
-    expect(result['domain']["smtp_password"]).to eq("super_secret")
+    expect(result['domain']).to have_key('smtp_password')
   end
 
   it 'get the domain.' do
