@@ -11,8 +11,8 @@ module Mailgun
   class Client
 
     def initialize(api_key = Mailgun.api_key,
-                   api_host = 'api.mailgun.net',
-                   api_version = 'v3',
+                   api_host = Mailgun.api_host,
+                   api_version = Mailgun.api_version,
                    ssl = true,
                    test_mode = false,
                    timeout = nil,
