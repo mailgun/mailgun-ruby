@@ -31,7 +31,7 @@ describe 'Message deliver', vcr: vcr_opts do
       domain: domain
     }
   end
-  let(:mail) { UnitTestMailer.plain_message("bob@#{domain}", "bob@#{domain}", 'subject', {}) }
+  let(:mail) { UnitTestMailer.plain_message("bob@#{domain}", 'subject', {}) }
 
   it 'successfully delivers message' do
     result = Railgun::Mailer.new(config).deliver!(mail)
@@ -53,15 +53,9 @@ describe 'Invalid domain', vcr: vcr_opts do
       domain: domain
     }
   end
-  let(:mail) { UnitTestMailer.plain_message("bob@#{domain}", 'sally@not-our-doma.in' 'subject', {}) }
+  let(:mail) { UnitTestMailer.plain_message('sally@not-our-doma.in', 'subject', {}) }
 
   it 'raises expected error' do
-
-    Railgun::Mailer.new(config).deliver!(mail)
-  rescue Mailgun::CommunicationError => err
-    expect(err.message).to eq('401 Unauthorized: Forbidden - Invalid Domain or API key')
-  else
-    fail
-
+    expect { Railgun::Mailer.new(config).deliver!(mail) }.to raise_error Mailgun::CommunicationError, /Forbidden/
   end
 end
