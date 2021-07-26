@@ -15,6 +15,15 @@ Usage - Templates
 mg_client = Mailgun::Client.new('your-api-key')
 templates = Mailgun::Templates.new(mg_client, 'my.domain')
 
+# OR
+Mailgun.configure do |config|
+  config.api_key = 'your-api-key'
+  # config.api_host = 'api.eu.mailgun.net'
+  config.domain = 'your.only.domain'
+end
+
+templates = Mailgun::Templates.new
+
 # Get a list templates for a domain.
 templates.list
 
