@@ -2,46 +2,50 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes
+    uri: https://api.mailgun.net/v3/routes
     body:
       encoding: US-ASCII
-      string: priority=10&description=Integration%20Test%20Route&expression=match_recipient(%22alice%40DOMAIN.TEST%22)&action=forward(%22.*%40DOMAIN.TEST%22)
+      string: priority=10&description=Integration+Test+Route&expression=match_recipient%28%22alice%40DOMAIN.TEST%22%29&action=forward%28%22.*%40DOMAIN.TEST%22%29
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '213'
+      - '227'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:18 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '402'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:43:55 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '402'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -58,46 +62,56 @@ http_interactions:
             "priority": 10
           }
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:43:54 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes?limit=50
+    uri: https://api.mailgun.net/v3/routes?limit=50
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:18 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1155'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      - '1155'
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:43:56 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '37'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -136,46 +150,56 @@ http_interactions:
           ],
           "total_count": 3
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:43:55 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes?limit=1
+    uri: https://api.mailgun.net/v3/routes?limit=1
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:19 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '411'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:43:56 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '37'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -194,46 +218,50 @@ http_interactions:
           ],
           "total_count": 3
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:43:56 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes/5690173212573000be30671e
+    uri: https://api.mailgun.net/v3/routes/5690173212573000be30671e
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:19 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '363'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:47:43 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '363'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -249,50 +277,54 @@ http_interactions:
             "priority": 10
           }
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:47:43 GMT
 - request:
     method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes/5690173212573000be30671e
+    uri: https://api.mailgun.net/v3/routes/5690173212573000be30671e
     body:
       encoding: US-ASCII
-      string: priority=10&description=Integration%20Test%20Route%20Update&expression=match_recipient(%22alice%40DOMAIN.TEST%22)&action=forward(%22.*%40DOMAIN.TEST%22)
+      string: priority=10&description=Integration+Test+Route+Update&expression=match_recipient%28%22alice%40DOMAIN.TEST%22%29&action=forward%28%22.*%40DOMAIN.TEST%22%29
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '222'
+      - '234'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:19 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '376'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:47:44 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '376'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -307,46 +339,50 @@ http_interactions:
           "message": "Route has been updated",
           "priority": 10
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:19 GMT
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:47:43 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/routes/5690173212573000be30671e
+    uri: https://api.mailgun.net/v3/routes/5690173212573000be30671e
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:08:19 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '77'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:47:44 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '34'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -354,6 +390,6 @@ http_interactions:
           "id": "5690173212573000be30671e",
           "message": "Route has been deleted"
         }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 20:08:20 GMT
-recorded_with: VCR 3.0.1
+    http_version: 
+  recorded_at: Mon, 26 Jul 2021 17:47:43 GMT
+recorded_with: VCR 3.0.3
