@@ -33,7 +33,6 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   it 'deletes a domain.' do
     result = @mg_obj.delete(@domain)
-
-    expect(result).to be_truthy
+    expect(result['message']).to match(/Domain will be deleted/)
   end
 end

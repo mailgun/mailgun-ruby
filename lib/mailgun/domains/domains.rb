@@ -74,7 +74,7 @@ module Mailgun
     # Returns [Boolean] if successful or not
     def remove(domain)
       fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
-      @client.delete("domains/#{domain}").to_h['message'] == 'Domain has been deleted'
+      @client.delete("domains/#{domain}").to_h!
     end
     alias_method :delete, :remove
     alias_method :delete_domain, :remove
