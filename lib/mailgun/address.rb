@@ -7,12 +7,14 @@ module Mailgun
 
     # @param [String] api_key Mailgun API - public key
     def initialize(api_key = "")
-      if api_key == "" then
+      # Alternative invocation...(for consistency with the other classes)
+      if api_key.is_a?(Mailgun::Client)
+        @client = api_key
+      elsif api_key == "" then
         fail ParameterError.new('Public API key is required for Mailgun::Address.initialize()', nil)
+      else
+        @client = Mailgun::Client.new(api_key)
       end
-
-      @api_key = api_key
-      @client = Mailgun::Client.new(api_key = api_key)
     end
 
     # Given an arbitrary address, validates it based on defined checks.
