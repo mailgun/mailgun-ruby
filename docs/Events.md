@@ -42,5 +42,5 @@ last time you called "next".
 
 More Documentation
 ------------------
-See the official [Mailgun Docs](http://documentation.mailgun.com/api-sending.html)
+See the official [Mailgun Docs](https://documentation.mailgun.com/en/latest/api-events.html)
 for more information.
