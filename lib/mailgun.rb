@@ -23,9 +23,9 @@ module Mailgun
 
   class << self
     attr_accessor :api_key,
+                  :api_host,
                   :api_version,
                   :protocol,
-                  :mailgun_host,
                   :test_mode,
                   :domain
 
@@ -37,3 +37,7 @@ module Mailgun
   end
 
 end
+
+Mailgun.api_host = 'api.mailgun.net'
+Mailgun.test_mode = false
+Mailgun.api_version = 'v3'
