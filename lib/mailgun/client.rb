@@ -211,10 +211,17 @@ module Mailgun
         'Missing `to` recipient, message should containg at least 1 recipient',
         working_domain
       ) if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
-      fail ParameterError.new(
-        'Missing a `from` sender, message should containg at least 1 `from` sender',
-        working_domain
-      ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+      
+      if message.key?(:message) || message.key?('message')
+        mime_message = message.fetch(:message) { message['message'] }
+        fail no_sender(working_domain) unless mime_message =~ /\bFrom:/
+      else
+        fail no_sender(working_domain) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+      end
+    end
+    
+    def no_sender(working_domain)
+      ParameterError.new( 'Missing a `from` sender, message should containg at least 1 `from` sender', working_domain)
     end
   end
 end
