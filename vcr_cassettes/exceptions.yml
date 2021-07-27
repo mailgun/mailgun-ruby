@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/not-our-doma.in/messages
+    uri: https://api.mailgun.net/v3/not-our-doma.in/messages
     body:
       encoding: UTF-8
       string: from=sally%40not-our-doma.in&to=bob%40DOMAIN.TEST&subject=Exception+Integration+Test&text=INTEGRATION+TESTING
@@ -19,6 +19,9 @@ http_interactions:
       - application/x-www-form-urlencoded
       Host:
       - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
+
   response:
     status:
       code: 404

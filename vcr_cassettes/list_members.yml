@@ -2,46 +2,56 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists
+    uri: https://api.mailgun.net/v3/lists
     body:
       encoding: US-ASCII
-      string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List&description=This%20list%20should%20be%20deleted%20automatically.&access_level=members
+      string: address=integration_test_list%40DOMAIN.TEST&name=Integration+Test+List&description=This+list+should+be+deleted+automatically.&access_level=members
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '195'
+      - '186'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:43 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '361'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:03 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '398'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -49,57 +59,68 @@ http_interactions:
           "list": {
             "access_level": "members",
             "address": "integration_test_list@DOMAIN.TEST",
-            "created_at": "Fri, 08 Jan 2016 20:20:43 -0000",
+            "created_at": "Mon, 26 Jul 2021 17:09:02 -0000",
             "description": "This list should be deleted automatically.",
             "members_count": 0,
-            "name": "Integration Test List"
+            "name": "Integration Test List",
+            "reply_preference": "list"
           },
           "message": "Mailing list has been created"
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:43 GMT
+  recorded_at: Mon, 26 Jul 2021 17:09:02 GMT
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members
     body:
       encoding: US-ASCII
-      string: address=integration_test_member_member%40DOMAIN.TEST&name=Jane%20Doe&subscribed=true&upsert=no
+      string: address=integration_test_member_member%40DOMAIN.TEST&name=Jane+Doe&subscribed=true&upsert=no
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '129'
+      - '132'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:43 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '233'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:03 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '238'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -113,45 +134,55 @@ http_interactions:
           "message": "Mailing list member has been created"
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
+  recorded_at: Mon, 26 Jul 2021 17:09:03 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:43 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '180'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:04 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '185'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -164,49 +195,59 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
+  recorded_at: Mon, 26 Jul 2021 17:09:03 GMT
 - request:
     method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
     body:
       encoding: US-ASCII
-      string: name=Jane%20Doe%20Update&subscribed=false
+      string: name=Jane+Doe+Update&subscribed=false
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
+      User-Agent:
+      - mailgun-sdk-ruby/1.2.6
       Content-Length:
-      - '41'
+      - '37'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:44 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '241'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:05 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '246'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -220,45 +261,55 @@ http_interactions:
           "message": "Mailing list member has been updated"
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
+  recorded_at: Mon, 26 Jul 2021 17:09:04 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:44 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '169'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:06 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '174'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -269,45 +320,55 @@ http_interactions:
           "message": "Mailing list member has been deleted"
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
+  recorded_at: Mon, 26 Jul 2021 17:09:06 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 20:20:44 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '133'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Max-Age:
       - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jul 2021 17:09:07 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Content-Length:
+      - '138'
+      Connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: |-
@@ -316,5 +377,5 @@ http_interactions:
           "message": "Mailing list has been removed"
         }
     http_version: 
-  recorded_at: Fri, 08 Jan 2016 20:20:45 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 26 Jul 2021 17:09:06 GMT
+recorded_with: VCR 3.0.3

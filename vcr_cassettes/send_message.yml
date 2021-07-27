@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/messages
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages
     body:
       encoding: US-ASCII
       string: from=bob%40DOMAIN.TEST&to=sally%40DOMAIN.TEST&subject=Hash%20Integration%20Test&text=INTEGRATION%20TESTING&o%3Atestmode=true
@@ -17,6 +17,9 @@ http_interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - Ruby
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
+
   response:
     status:
       code: 200
@@ -53,7 +56,7 @@ http_interactions:
   recorded_at: Thu, 07 Jan 2016 22:08:03 GMT
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/messages.mime
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages.mime
     body:
       encoding: ASCII-8BIT
       string: "--896727\r\nContent-Disposition: form-data; name=\"to\"\r\n\r\nsally@DOMAIN.TEST\r\n--896727\r\nContent-Disposition:
@@ -70,6 +73,9 @@ http_interactions:
       - multipart/form-data; boundary=896727
       User-Agent:
       - Ruby
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
+
   response:
     status:
       code: 200

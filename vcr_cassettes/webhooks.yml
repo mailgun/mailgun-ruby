@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
     body:
       encoding: US-ASCII
       string: id=bounce&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fbounce
@@ -16,7 +16,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
@@ -59,7 +61,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 19:05:55 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
     body:
       encoding: US-ASCII
       string: ''
@@ -69,7 +71,9 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
@@ -111,7 +115,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
     body:
       encoding: US-ASCII
       string: ''
@@ -121,7 +125,9 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
@@ -165,7 +171,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
 - request:
     method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
     body:
       encoding: US-ASCII
       string: id=bounce&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fbounceup
@@ -179,7 +185,9 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
@@ -222,7 +230,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
     body:
       encoding: US-ASCII
       string: ''
@@ -232,7 +240,9 @@ http_interactions:
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
-      - Ruby
+      - mailgun-sdk-ruby/1.2.6
+      Authorization:
+      - Basic <ENCODED_PRIVATE_KEY_AUTH>
   response:
     status:
       code: 200
