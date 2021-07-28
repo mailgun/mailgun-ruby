@@ -21,7 +21,6 @@ require 'mailgun/templates/templates'
 #
 # See the Github documentation for full examples.
 module Mailgun
-
   class << self
     attr_accessor :api_key,
                   :api_host,
@@ -35,8 +34,13 @@ module Mailgun
       true
     end
     alias_method :config, :configure
+    
+    def testing
+      self.test_mode = true
+      yield
+      self.test_mode = false
+    end
   end
-
 end
 
 Mailgun.api_host = 'api.mailgun.net'

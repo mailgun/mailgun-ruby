@@ -28,7 +28,7 @@ module Mailgun
       endpoint = endpoint_generator(api_host, api_version, ssl)
       RestClient.proxy = proxy_url
       @http_client = RestClient::Resource.new(endpoint, rest_client_params)
-      @test_mode = test_mode
+      @test_mode = test_mode || Mailgun.test_mode
     end
 
     # Enable test mode
