@@ -46,7 +46,8 @@ module Mailgun
         Mailgun::Response.new(response_generator(@endpoint))
       rescue => e
         p e
-        raise CommunicationError.new(e), e.response
+        raise CommunicationError.new(e), e.response if e.respond_to? :response
+        raise CommunicationError.new(e.message)
       end
     end
 

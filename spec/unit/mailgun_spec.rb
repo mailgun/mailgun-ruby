@@ -87,6 +87,25 @@ describe 'The method post()' do
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
+
+  context 'when Unknown API error is raised' do
+    before do
+      allow(Mailgun::Response).to receive(:new).and_raise(StandardError, "message")
+      allow(JSON).to receive(:parse).and_raise('Unknown')
+    end
+
+    it 'adds Unknown API error to message' do
+      data = {'from' => 'joe@test.com',
+                    'to' => 'bob@example.com',
+                    'subject' => 'Test',
+                    'text' => 'Test Data'}
+      @mg_obj.post("#{@domain}/messages", data)
+    rescue Mailgun::CommunicationError => err
+      expect(err.message).to eq('message: Unknown API error')
+    else
+      fail
+    end
+  end
 end
 
 describe 'The method put()' do
