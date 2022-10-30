@@ -43,7 +43,11 @@ module Mailgun
     #
     def initialize(message = nil, response = nil)
       @response = response
-      @code = response.code || NOCODE
+      @code = if response.nil?
+                NOCODE
+              else
+                response.code
+              end
 
       begin
         api_message = JSON.parse(response.body)['message']
@@ -51,6 +55,8 @@ module Mailgun
         api_message = response.body
       rescue NoMethodError
         api_message = "Unknown API error"
+      rescue
+        api_message = 'Unknown API error'
       end
       api_message = api_message + ' - Invalid Domain or API key' if api_message == FORBIDDEN
 
