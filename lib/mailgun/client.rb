@@ -11,12 +11,12 @@ module Mailgun
   class Client
 
     def initialize(api_key = Mailgun.api_key,
-                   api_host = 'api.mailgun.net',
-                   api_version = 'v3',
+                   api_host = Mailgun.api_host || 'api.mailgun.net',
+                   api_version = Mailgun.api_version  || 'v3',
                    ssl = true,
                    test_mode = false,
                    timeout = nil,
-                   proxy_url = nil)
+                   proxy_url = Mailgun.proxy_url)
 
       rest_client_params = {
         user: 'api',
