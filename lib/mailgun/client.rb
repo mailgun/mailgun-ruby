@@ -45,6 +45,11 @@ module Mailgun
       @test_mode = false
     end
 
+    # Change API key
+    def set_api_key(api_key)
+      @http_client.options[:password] = api_key
+    end
+
     # Client is in test mode?
     #
     # @return [Boolean] Is the client set in test mode?
