@@ -83,11 +83,11 @@ module Mailgun
       message = data.respond_to?(:message) ? data.message : data
 
       fail ParameterError.new(
-        'Missing `to` recipient, message should containg at least 1 recipient',
+        'Missing `to` recipient, message should contain at least 1 recipient',
         working_domain
       ) if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
       fail ParameterError.new(
-        'Missing a `from` sender, message should containg at least 1 `from` sender',
+        'Missing a `from` sender, message should contain at least 1 `from` sender',
         working_domain
       ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
     end

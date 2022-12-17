@@ -55,7 +55,7 @@ module Mailgun
     #     smtp_password - [String] Password for SMTP authentication
     #     spam_action   - [String] disabled or tag
     #       Disable, no spam filtering will occur for inbound messages.
-    #       Tag, messages will be tagged wtih a spam header. See Spam Filter.
+    #       Tag, messages will be tagged with a spam header. See Spam Filter.
     #     wildcard      - [Boolean] true or false Determines whether the domain will accept email for sub-domains.
     #
     # Returns [Hash] of created domain

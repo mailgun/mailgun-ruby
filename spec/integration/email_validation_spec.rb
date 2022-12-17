@@ -19,7 +19,7 @@ describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
     res = @mg_obj.parse(@all_addrs)
 
     expect(res["parsed"]).to eq(@valid)
-    expect(res["unparseable"]).to eq(@invalid)
+    expect(res["unparsable"]).to eq(@invalid)
   end
 
   it 'validates alice@mailgun.net with info' do
