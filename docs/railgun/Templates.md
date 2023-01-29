@@ -28,7 +28,12 @@ mg_client.send_message "sending_domain.com", mb_obj
 ```ruby
 class UserMailer < ApplicationMailer
   def welcome_email
-    message = mail(from: "sender@example.com", to: "recipient@example.com", subject: "This is the subject!", template: 'example.template.name') do |format|
+    message = mail(
+    	from: "sender@example.com",
+    	to: "recipient@example.com",
+    	subject: "This is the subject!",
+    	template: 'example.template.name'
+    ) do |format|
       format.text { render plain: "Test!" }
     end
     message.tap do |message|
@@ -64,7 +69,12 @@ Also, Rails example:
 ```ruby
 class UserMailer < ApplicationMailer
   def welcome_email
-    message = mail(from: "sender@example.com", to: "recipient@example.com", subject: "This is the subject!", template: 'example.template.name') do |format|
+    message = mail(
+    	from: "sender@example.com",
+    	to: "recipient@example.com",
+    	subject: "This is the subject!",
+    	template: 'example.template.name'
+    ) do |format|
       format.text { render plain: "Test!" }
     end
     message.tap do |message|
@@ -78,5 +88,5 @@ end
 
 More Documentation
 ------------------
-See the official [Mailgun Templates Docs](https://documentation.mailgun.com/en/latest/api-templates.html?highlight=templates)
+See the official [Mailgun Templates Docs](https://documentation.mailgun.com/en/latest/api-templates.html)
 for more information
