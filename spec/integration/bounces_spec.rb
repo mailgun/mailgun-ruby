@@ -7,7 +7,7 @@ describe 'For the Bounces endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN
-    @email = "integration-test-email@#{TESTDOMAIN}"
+    @email = "integration-test+email@#{TESTDOMAIN}"
   end
 
   it 'creates a bounce' do
@@ -22,7 +22,7 @@ describe 'For the Bounces endpoint', order: :defined, vcr: vcr_opts do
   end
 
   it 'get a bounce.' do
-    result = @mg_obj.get("#{@domain}/bounces/#{@email}")
+    result = @mg_obj.get("#{@domain}/bounces/#{CGI.escape(@email)}")
 
     result.to_h!
     expect(result.body["code"]).to eq("550")
@@ -38,7 +38,7 @@ describe 'For the Bounces endpoint', order: :defined, vcr: vcr_opts do
   end
 
   it 'deletes a bounce' do
-    @mg_obj.delete("#{@domain}/bounces/#{@email}")
+    @mg_obj.delete("#{@domain}/bounces/#{CGI.escape(@email)}")
   end
 
 end
