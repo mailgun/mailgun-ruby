@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces
     body:
       encoding: US-ASCII
-      string: address=integration-test-email%40DOMAIN.TEST&code=550&error=Integration%20Test
+      string: address=integration-test%2Bemail%40DOMAIN.TEST&code=550&error=Integration%20Test
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -42,13 +42,13 @@ http_interactions:
       - Content-Type, x-requested-with
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Address
+      string: '{"address":"integration-test+email@DOMAIN.TEST","message":"Address
         has been added to the bounces table"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test+email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -84,9 +84,9 @@ http_interactions:
       - Content-Type, x-requested-with
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration
+      string: '{"address":"integration-test+email@DOMAIN.TEST","code":"550","error":"Integration
         Test","created_at":"Fri, 08 Jan 2016 20:33:28 UTC"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
 - request:
     method: get
@@ -126,13 +126,13 @@ http_interactions:
       - Content-Type, x-requested-with
     body:
       encoding: UTF-8
-      string: '{"items":[{"address":"integration-test-email@DOMAIN.TEST","code":"550","error":"Integration
-        Test","created_at":"Fri, 08 Jan 2016 20:33:28 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=last\u0026limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=next\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=previous\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100"}}'
-    http_version: 
+      string: '{"items":[{"address":"integration-test+email@DOMAIN.TEST","code":"550","error":"Integration
+        Test","created_at":"Fri, 08 Jan 2016 20:33:28 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=last\u0026limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=next\u0026address=integration-test%2Bemaill%40DOMAIN.TEST\u0026limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=previous\u0026address=integration-test%2Bemail%40DOMAIN.TEST\u0026limit=100"}}'
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:33:29 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test-email@DOMAIN.TEST
+    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test+email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -168,8 +168,8 @@ http_interactions:
       - Content-Type, x-requested-with
     body:
       encoding: UTF-8
-      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Bounced
+      string: '{"address":"integration-test+email@DOMAIN.TEST","message":"Bounced
         address has been removed"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:33:30 GMT
 recorded_with: VCR 3.0.1
