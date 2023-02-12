@@ -48,7 +48,10 @@ module Railgun
 
     def deliver!(mail)
       @mg_domain = set_mg_domain(mail)
+      @mg_client.set_api_key(mail[:api_key].value) if mail[:api_key].present?
+
       mail[:domain] = nil if mail[:domain].present?
+      mail[:api_key] = nil if mail[:api_key].present?
 
       mg_message = Railgun.transform_for_mailgun(mail)
       response = @mg_client.send_message(@mg_domain, mg_message)
