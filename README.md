@@ -188,6 +188,7 @@ This SDK includes the following components:
 - [Webhooks](docs/Webhooks.md)
 - [Events](docs/Events.md)
 - [Suppressions](docs/Suppressions.md)
+- [Templates](docs/Templates.md)
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.
