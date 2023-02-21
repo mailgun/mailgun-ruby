@@ -81,6 +81,7 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
     api_key: 'api-myapikey',
     domain: 'mydomain.com',
     # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+    # timeout: 20 # Default depends on rest-client, whose default is 60s. Added in 1.2.3.
   }
 ```
 
