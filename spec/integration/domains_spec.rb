@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'mailgun'
+require 'pry'
 
 vcr_opts = { :cassette_name => "domains" }
 
@@ -35,5 +36,13 @@ describe 'For the domains endpoint', vcr: vcr_opts do
     result = @mg_obj.delete(@domain)
 
     expect(result).to be_truthy
+  end
+
+  it 'updates the domain' do
+    result = @mg_obj.update(@domain, { spam_action: 'block', web_scheme: 'https', wildcard: true })
+
+    expect(result['domain']["spam_action"]).to eq('block')
+    expect(result['domain']["web_scheme"]).to eq('https')
+    expect(result['domain']["wildcard"]).to eq(true)
   end
 end
