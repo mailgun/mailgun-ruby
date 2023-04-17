@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'mailgun'
-require 'pry'
 
 vcr_opts = { :cassette_name => "domains" }
 
