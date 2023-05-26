@@ -7,19 +7,12 @@ vcr_opts = { :cassette_name => "email_validation" }
 
 describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
-    @mg_obj = Mailgun::Address.new(PUB_APIKEY)
+    @mg_obj = Mailgun::Address.new
 
     @valid = ["Alice <alice@example.com>", "bob@example.com"]
     @invalid = ["example.org"]
 
     @all_addrs = @valid + @invalid
-  end
-
-  it 'returns parsed and unparsable lists' do
-    res = @mg_obj.parse(@all_addrs)
-
-    expect(res["parsed"]).to eq(@valid)
-    expect(res["unparseable"]).to eq(@invalid)
   end
 
   it 'validates alice@mailgun.net with info' do
