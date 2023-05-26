@@ -406,7 +406,7 @@ module Mailgun
     def make_json(obj)
       return JSON.parse(obj).to_json if obj.is_a?(String)
       return obj.to_json if obj.is_a?(Hash)
-      return JSON.generate(obj).to_json
+      JSON.generate(obj).to_json
     rescue
       raise Mailgun::ParameterError, 'Provided data could not be made into JSON. Try a JSON string or Hash.', obj
     end
@@ -429,7 +429,7 @@ module Mailgun
         full_name = vars['full_name']
       elsif vars['first'] || vars['last']
         full_name = "#{vars['first']} #{vars['last']}".strip
-      end 
+      end
 
       return "'#{full_name}' <#{address}>" if full_name
       address
