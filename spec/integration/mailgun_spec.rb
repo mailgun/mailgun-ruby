@@ -34,6 +34,78 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
+vcr_opts = { :cassette_name => "exceptions-invalid-api-key" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'displays error information that API key is invalid' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "sally@#{@domain}",
+          :to => "sally@#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::Unauthorized => err
+      expect(err.message).to eq('401 Unauthorized - Invalid Domain or API key: Forbidden')
+    else
+      fail
+    end
+  end
+end
+
+vcr_opts = { :cassette_name => "exceptions-invalid-data" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'display useful error information' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "sally@#{@domain}",
+          :to => "sally#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::BadRequest => err
+      expect(err.message).to eq('400 Bad Request: to parameter is not a valid address. please check documentation')
+    else
+      fail
+    end
+  end
+end
+
+vcr_opts = { :cassette_name => "exceptions-not-allowed" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'display useful error information' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "invalid@#{@domain}",
+          :to => "invalid#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::CommunicationError => err
+      expect(err.message).to include('403 Forbidden')
+    else
+      fail
+    end
+  end
+end
+
 vcr_opts = { :cassette_name => "send_message" }
 
 describe 'The method send_message()', vcr: vcr_opts do
