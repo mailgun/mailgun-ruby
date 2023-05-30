@@ -205,7 +205,16 @@ module Mailgun
     #
     # @param [StandardException] e upstream exception object
     def communication_error(e)
-      return CommunicationError.new(e.message, e.response) if e.respond_to? :response
+      if e.respond_to?(:response)
+        return case e.response.code
+        when Unauthorized::CODE
+          Unauthorized.new(e.message, e.response)
+        when BadRequest::CODE
+          BadRequest.new(e.message, e.response)
+        else
+          CommunicationError.new(e.message, e.response)
+        end
+      end
       CommunicationError.new(e.message)
     end
 
