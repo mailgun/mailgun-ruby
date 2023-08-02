@@ -1,7 +1,7 @@
 require 'tempfile'
 require 'rest_client'
 require 'yaml'
-require 'json'
+require 'yajl'
 
 require 'mailgun/version'
 require 'mailgun/client'
@@ -20,7 +20,6 @@ require 'mailgun/webhooks/webhooks'
 #
 # See the Github documentation for full examples.
 module Mailgun
-
   class << self
     attr_accessor :api_host,
                   :api_key,

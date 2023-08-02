@@ -233,7 +233,7 @@ module Mailgun
     # @param [String] timestamp A date and time, including a timezone.
     # @return [void]
     def deliver_at(timestamp)
-      time_str = DateTime.parse(timestamp)
+      time_str = DateTime.iso8601(timestamp)
       set_multi_simple('o:deliverytime', time_str.rfc2822)
     end
 

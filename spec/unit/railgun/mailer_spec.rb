@@ -1,4 +1,4 @@
-require 'json'
+require 'yajl/json_gem'
 require 'logger'
 require 'spec_helper'
 require 'mailgun'

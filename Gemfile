@@ -3,4 +3,11 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in mailgun.gemspec
 gemspec
 
-gem 'json', '~> 2.1', platform: :mri_19
+gem 'yajl-ruby', require: 'yajl'
+gem 'mini_mime', '>= 0.1.1'
+
+
+gem 'memory_profiler'
+gem 'benchmark-ips'
+gem 'derailed_benchmarks'
+gem 'stackprof'

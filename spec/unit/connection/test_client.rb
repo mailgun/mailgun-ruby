@@ -1,5 +1,5 @@
 require 'time'
-require 'json'
+require 'yajl/json_gem'
 
 module Mailgun
   class UnitClient < Mailgun::Client

@@ -62,7 +62,7 @@ module Mailgun
     # Returns [Hash] of created domain
     def create(domain, options = {})
       fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
-      options = { smtp_password: nil, spam_action: 'disabled', wildcard: false }.merge(options)
+      options = { smtp_password: nil, spam_action: 'disabled', wildcard: false }.merge!(options)
       options[:name] = domain
       @client.post('domains', options).to_h
     end

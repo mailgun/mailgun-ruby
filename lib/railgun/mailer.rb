@@ -1,5 +1,5 @@
 require 'action_mailer'
-require 'json'
+require 'yajl/json_gem'
 require 'mailgun'
 require 'rails'
 require 'railgun/errors'
