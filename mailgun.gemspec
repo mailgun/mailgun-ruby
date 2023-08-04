@@ -22,16 +22,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = '>= 2.2.2'
+  spec.required_ruby_version = '>= 2.5'
 
-  spec.add_dependency "activesupport", ">= 5.0.0"
   spec.add_dependency "actionmailer", ">= 5.0.0"
   spec.add_dependency 'rest-client', '>= 2.0.2'
   spec.add_development_dependency 'bundler', '>= 1.16.2'
   spec.add_development_dependency 'rspec', '~> 3.8.0'
   spec.add_development_dependency 'rake', '~> 12.3.2'
   spec.add_development_dependency 'rails', ">= 5.0.0"
-  # spec.add_development_dependency "json"
   spec.add_development_dependency "yajl-ruby"
   spec.add_development_dependency 'webmock', '~> 3.4.2'
   spec.add_development_dependency 'pry', '~> 0.11.3'
