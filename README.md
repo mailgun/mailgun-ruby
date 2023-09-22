@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.2.10'
+gem 'mailgun-ruby', '~>1.2.11'
 ```
 
 Usage
@@ -97,7 +97,7 @@ class UserMailer < ApplicationMailer
       }
     end
   end
-end   
+end
 ```
 
 To get the Mailgun `message_id` after ActionMailer has successfully delivered the email:
