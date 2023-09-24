@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages
+    body:
+      encoding: UTF-8
+      string: from=sally%test.com&to=sally%test.com&subject=Exception+Integration+Test&text=INTEGRATION+TESTING
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Content-Length:
+      - '119'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2YwNS1mYTQ4MTZhMQ==
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '9'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Sun, 28 May 2023 11:29:25 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Www-Authenticate:
+      - Basic realm="MG API"
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: Forbidden
+    http_version: 
+  recorded_at: Sun, 28 May 2023 11:29:25 GMT
+recorded_with: VCR 3.0.3

@@ -53,8 +53,9 @@ module Mailgun
     # domain  - [String] Name of the domain (ex. domain.com)
     # options - [Hash] of
     #     smtp_password - [String] Password for SMTP authentication
-    #     spam_action   - [String] disabled or tag
+    #     spam_action   - [String] disabled, blocked or tag
     #       Disable, no spam filtering will occur for inbound messages.
+    #       Block, inbound spam messages will not be delivered.
     #       Tag, messages will be tagged with a spam header. See Spam Filter.
     #     wildcard      - [Boolean] true or false Determines whether the domain will accept email for sub-domains.
     #
@@ -80,5 +81,22 @@ module Mailgun
     alias_method :delete, :remove
     alias_method :delete_domain, :remove
 
+    # Public: Update domain
+    #
+    # domain  - [String] Name of the domain (ex. domain.com)
+    # options - [Hash] of
+    #     spam_action   - [String] disabled, blocked or tag
+    #       Disable, no spam filtering will occur for inbound messages.
+    #       Block, inbound spam messages will not be delivered.
+    #       Tag, messages will be tagged wtih a spam header. See Spam Filter.
+    #     web_scheme    - [String] http or https
+    #       Set your open, click and unsubscribe URLs to use http or https
+    #     wildcard      - [Boolean] true or false Determines whether the domain will accept email for sub-domains.
+    #
+    # Returns [Hash] of updated domain
+    def update(domain, options = {})
+      fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
+      @client.put("domains/#{domain}", options).to_h
+    end
   end
 end

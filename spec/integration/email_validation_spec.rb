@@ -7,7 +7,7 @@ vcr_opts = { :cassette_name => "email_validation" }
 
 describe 'For the email validation endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
-    @mg_obj = Mailgun::Address.new(PUB_APIKEY)
+    @mg_obj = Mailgun::Address.new
 
     @valid = ["Alice <alice@example.com>", "bob@example.com"]
     @invalid = ["example.org"]

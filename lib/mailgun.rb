@@ -22,10 +22,12 @@ require 'mailgun/webhooks/webhooks'
 module Mailgun
 
   class << self
-    attr_accessor :api_key,
+    attr_accessor :api_host,
+                  :api_key,
                   :api_version,
                   :protocol,
                   :mailgun_host,
+                  :proxy_url,
                   :test_mode,
                   :domain
 
