@@ -513,7 +513,7 @@ describe 'The method track_clicks' do
   end
 
   context 'when unexpected value is provided' do
-    it 'warns about prefered values' do
+    it 'warns about preferred values' do
       expect(@mb_obj).to receive :warn
       @mb_obj.track_clicks('random')
     end

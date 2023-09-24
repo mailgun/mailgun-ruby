@@ -125,7 +125,7 @@ module Mailgun
       add_file(:attachment, attachment, filename)
     end
 
-    # Adds an inline image to the mesage object.
+    # Adds an inline image to the message object.
     #
     # @param [String|File] inline_image A file object for attaching an inline image.
     # @param [String] filename The filename you wish the inline image to be.
@@ -383,7 +383,7 @@ module Mailgun
     def bool_lookup(value)
       return 'yes' if %w(true yes yep).include? value.to_s.downcase
       return 'no' if %w(false no nope).include? value.to_s.downcase
-      warn 'WARN: for bool type actions next values are prefered: true yes yep | false no nope | htmlonly'
+      warn 'WARN: for bool type actions next values are preferred: true yes yep | false no nope | htmlonly'
       value
     end
 

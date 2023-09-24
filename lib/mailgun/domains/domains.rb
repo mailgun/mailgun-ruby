@@ -56,7 +56,7 @@ module Mailgun
     #     spam_action   - [String] disabled, blocked or tag
     #       Disable, no spam filtering will occur for inbound messages.
     #       Block, inbound spam messages will not be delivered.
-    #       Tag, messages will be tagged wtih a spam header. See Spam Filter.
+    #       Tag, messages will be tagged with a spam header. See Spam Filter.
     #     wildcard      - [Boolean] true or false Determines whether the domain will accept email for sub-domains.
     #
     # Returns [Hash] of created domain

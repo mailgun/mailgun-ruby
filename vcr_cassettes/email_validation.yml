@@ -48,11 +48,11 @@ http_interactions:
             "Alice <alice@example.com>",
             "bob@example.com"
           ],
-          "unparseable": [
+          "unparsable": [
             "example.org"
           ]
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
@@ -107,7 +107,7 @@ http_interactions:
             "local_part": "alice"
           }
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
@@ -162,7 +162,7 @@ http_interactions:
             "local_part": null
           }
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 26 Oct 2016 22:44:50 GMT
 - request:
     method: get
@@ -210,6 +210,6 @@ http_interactions:
         false, "is_role_address": false, "is_valid": true, "mailbox_verification":
         "true", "parts": {"display_name": null, "domain": "mailgun.net", "local_part":
         "alice"}}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 12 Sep 2017 16:55:09 GMT
 recorded_with: VCR 3.0.3
