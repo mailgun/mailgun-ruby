@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
 
   spec.name             = 'mailgun-ruby'
   spec.version          = Mailgun::VERSION
-  spec.homepage         = 'http://www.mailgun.com'
+  spec.homepage         = 'https://www.mailgun.com/'
   spec.platform         = Gem::Platform::RUBY
   spec.license          = 'Apache-2.0'
 
@@ -16,6 +16,9 @@ Gem::Specification.new do |spec|
 
   spec.authors          = ['Mailgun', 'Travis Swientek']
   spec.email            = 'support@mailgunhq.com'
+
+  spec.metadata['documentation_uri'] = 'https://documentation.mailgun.com/'
+  spec.metadata['source_code_uri'] = 'https://github.com/mailgun/mailgun-ruby'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
