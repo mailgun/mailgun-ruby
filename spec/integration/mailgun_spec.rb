@@ -192,5 +192,21 @@ Testing some Mailgun awesomness!'
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
+  
+  it 'receives success response code' do
+    @mg_obj.enable_test_mode!
+
+    expect(@mg_obj.test_mode?).to eq(true)
+
+    data = { :from => "joe@#{@domain}",
+             :to => "bob@#{@domain}",
+             :subject => "Test",
+             :text => "Test Data" }
+
+    result = @mg_obj.send_message(@domain, data)
+    result.to_h!
+    
+    expect(result.success?).to be(true)
+  end
 end
 
