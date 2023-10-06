@@ -145,7 +145,7 @@ module Railgun
 
     # reject blank values
     message.delete_if do |k, v|
-      return true if v.nil?
+      next true if v.nil?
 
       # if it's an array remove empty elements
       v.delete_if { |i| i.respond_to?(:empty?) && i.empty? } if v.is_a?(Array)
