@@ -45,58 +45,143 @@ module Mailgun
       @client.get("#{domain}/templates/#{template_name}", options).to_h!
     end
 
-    # Public: Get Domains
+    # Public: Update the metadata information of the template
     #
-    # limit - [Integer] Maximum number of records to return. (100 by default)
-    # skip  - [Integer] Number of records to skip. (0 by default)
-    #
-    # Returns [Array] A list of domains (hash)
-    def list(options = {})
-      @client.get('domains', options).to_h['items']
-    end
-    alias_method :get_domains, :list
-
-    # Public: Verify domain, update domain records
-    #   Unknown status - this is not in the current Mailgun API
-    #   Do no rely on this being available in future releases.
-    #
-    # domain - [String] Domain name
-    #
-    # Returns [Hash] Information on the updated/verified domains
-    def verify(domain)
-      fail(ParameterError, 'No domain given to verify on Mailgun', caller) unless domain
-      @client.put("domains/#{domain}/verify", nil).to_h!
-    end
-    alias_method :verify_domain, :verify
-
-    # Public: Delete Domain
-    #
-    # domain - [String] domain name to delete (ex. domain.com)
-    #
-    # Returns [Boolean] if successful or not
-    def remove(domain)
-      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
-      @client.delete("domains/#{domain}").to_h['message'] == "Domain will be deleted on the background"
-    end
-    alias_method :delete, :remove
-    alias_method :delete_domain, :remove
-
-    # Public: Update domain
-    #
-    # domain  - [String] Name of the domain (ex. domain.com)
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
     # options - [Hash] of
-    #     spam_action   - [String] disabled, blocked or tag
-    #       Disable, no spam filtering will occur for inbound messages.
-    #       Block, inbound spam messages will not be delivered.
-    #       Tag, messages will be tagged wtih a spam header. See Spam Filter.
-    #     web_scheme    - [String] http or https
-    #       Set your open, click and unsubscribe URLs to use http or https
-    #     wildcard      - [Boolean] true or false Determines whether the domain will accept email for sub-domains.
+    #     description - [String] Updated description of the template
     #
     # Returns [Hash] of updated domain
-    def update(domain, options = {})
+    def update(domain, template_name, options = {})
       fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
-      @client.put("domains/#{domain}", options).to_h
+      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      @client.put("#{domain}/templates/#{template_name}", options).to_h
+    end
+
+    # Public: Delete Template
+    # NOTE: This method deletes all versions of the specified template.
+    #
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
+    #
+    # Returns [Boolean] if successful or not
+    def remove(domain, template_name)
+      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      @client.delete("#{domain}/templates/#{template_name}").to_h['message'] == 'template has been deleted'
+    end
+    alias_method :delete, :remove
+    alias_method :delete_template, :remove
+
+    # Public: Get Templates
+    #
+    # domain - [String] Domain name where template is stored
+    # page   - [String] Name of a page to retrieve. first, last, next, prev
+    # limit  - [Integer] Maximum number of records to return. (100 by default)
+    # p      - [Integer] Pivot is used to retrieve records in chronological order
+    #
+    # Returns [Array] A list of templates (hash)
+    def list(domain, options = {})
+      fail(ParameterError, 'No domain given.', caller) unless domain
+      @client.get("#{domain}/templates", options).to_h['items']
+    end
+    alias_method :get_templates, :list
+
+    # Public: Delete Templates
+    # NOTE: This method deletes all stored templates for the domain.
+    #
+    # domain        - [String] Domain name where template is stored
+    #
+    # Returns [Boolean] if successful or not
+    def remove_all(domain)
+      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+      @client.delete("#{domain}/templates").to_h['message'] == 'templates have been deleted'
+    end
+    alias_method :delete_templates, :remove_all
+
+    # Public: Create a new version of a template
+    #
+    # domain        - [String] Name of the domain for new template(ex. domain.com)
+    # template_name - [String] Template name to lookup for
+    # options - [Hash] of
+    #     template      - [String] Content of the template
+    #     tag           - [String] Initial tag of the created version.
+    #     comment       - [String] (Optional) Version comment.
+    #     active        - [Boolean] (Optional) If this flag is set to yes, this version becomes active
+    #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the template.
+    #                     ex.('{"Subject": "{{subject}}"}')
+    #
+    # Returns [Hash] of updated template
+    def create_version(domain, template_name, options = {})
+      fail(ParameterError, 'No domain given.', caller) unless domain
+      fail(ParameterError, 'No template name given.', caller) unless template_name
+      @client.post("#{domain}/templates/#{template_name}/versions", options).to_h
+    end
+
+    # Public: Get template version information
+    #
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
+    # tag           - [String] Version tag to lookup for
+    #
+    # Returns [Hash] Information on the requested template + version.
+    def info_version(domain, template_name, tag)
+      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      fail(ParameterError, 'No version tag given.', caller) unless tag
+      @client.get("#{domain}/templates/#{template_name}/versions/#{tag}").to_h!
+    end
+
+    # Public: Update the version of the template
+    #
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
+    # tag           - [String] Version tag to lookup for
+    # options - [Hash] of
+    #     template      - [String] Content of the template
+    #     comment       - [String] (Optional) Version comment.
+    #     active        - [Boolean] (Optional) If this flag is set to yes, this version becomes active
+    #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the template.
+    #                     ex.('{"Subject": "{{subject}}"}')
+    #
+    # Returns [Hash] of updated template's version
+    def update_version(domain, template_name, tag, options = {})
+      fail(ParameterError, 'No domain given.', caller) unless domain
+      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      fail(ParameterError, 'No version tag given.', caller) unless tag
+      @client.put("#{domain}/templates/#{template_name}/versions/#{tag}", options).to_h
+    end
+
+    # Public: Delete the version of the template
+    #
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
+    # tag           - [String] Version tag to lookup for
+    #
+    # Returns [Boolean] if successful or not
+    def delete_version(domain, template_name, tag)
+      fail(ParameterError, 'No domain given.', caller) unless domain
+      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      fail(ParameterError, 'No version tag given.', caller) unless tag
+      @client.delete("#{domain}/templates/#{template_name}/versions/#{tag}")
+        .to_h['message'] == 'version has been deleted'
+    end
+
+    # Public: Get Template's Versions list
+    #
+    # domain        - [String] Domain name where template is stored
+    # template_name - [String] Template name to lookup for
+    # options - [Hash] of
+    # page   - [String] Name of a page to retrieve. first, last, next, prev
+    # limit  - [Integer] Maximum number of records to return. (100 by default)
+    # p      - [Integer] Pivot is used to retrieve records in chronological order
+    #
+    # Returns [Array] A list of template's versions (hash)
+    def template_versions_list(domain, template_name, options = {})
+      fail(ParameterError, 'No domain given.', caller) unless domain
+      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      @client.get("#{domain}/templates/#{template_name}/versions", options).to_h
     end
   end
 end
