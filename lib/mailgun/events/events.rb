@@ -88,7 +88,7 @@ module Mailgun
     # Return is irrelevant.
     def extract_paging(response)
       paging            = response.to_h['paging']
-      next_page_url     = paging && paging['next']      # gives nil when any one of the keys doens't exist
+      next_page_url     = paging && paging['next']      # gives nil when any one of the keys doesn't exist
       previous_page_url = paging && paging['previous']  # can be replaced with Hash#dig for ruby >= 2.3.0
       @paging_next      = extract_endpoint_from(next_page_url)
       @paging_previous  = extract_endpoint_from(previous_page_url)

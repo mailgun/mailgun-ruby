@@ -1,0 +1,149 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages
+    body:
+      encoding: US-ASCII
+      string: from[]=bob%40DOMAIN.TEST&subject[]=subject&html[]=%3Cp%3ETest%21%3C%2Fp%3E&text[]=Test%21&to[]=bob%40DOMAIN.TEST&h%3Acontent-type=multipart%2Falternative%3B+boundary%3D%22--%3D%3D_mimepart_6098f913d64ca_62833fd4d74521802775%22%3B+charset%3DUTF-8
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin18.7.0 x86_64) ruby/2.2.2p95
+      Content-Length:
+      - '261'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 May 2021 09:12:52 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Ratelimit-Limit:
+      - '2000000'
+      X-Ratelimit-Remaining:
+      - '1999999'
+      X-Ratelimit-Reset:
+      - '1620637982656'
+      X-Recipient-Limit:
+      - '1000000'
+      X-Recipient-Remaining:
+      - '999999'
+      X-Recipient-Reset:
+      - '1620637982657'
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "<20210510091252.1.D6347B73DA43962E@DOMAIN.TEST>",
+          "message": "Queued. Thank you."
+        }
+    http_version:
+  recorded_at: Mon, 10 May 2021 09:12:52 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages
+    body:
+      encoding: US-ASCII
+      string: from[]=bob%40DOMAIN.TEST&subject[]=subject&html[]=%3Cp%3ETest%21%3C%2Fp%3E&text[]=Test%21&to[]=bob%40DOMAIN.TEST&h%3Amessage-id=%3C20210510091252.1.D6347B73DA43962E%40DOMAIN.TEST%3E&h%3Acontent-type=multipart%2Falternative%3B+boundary%3D%22--%3D%3D_mimepart_6098f913d64ca_62833fd4d74521802775%22%3B+charset%3DUTF-8
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin18.7.0 x86_64) ruby/2.2.2p95
+      Content-Length:
+      - '370'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 10 May 2021 09:12:56 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Ratelimit-Limit:
+      - '2000000'
+      X-Ratelimit-Remaining:
+      - '1999998'
+      X-Ratelimit-Reset:
+      - '1620637982656'
+      X-Recipient-Limit:
+      - '1000000'
+      X-Recipient-Remaining:
+      - '999998'
+      X-Recipient-Reset:
+      - '1620637982657'
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "<20210510091252.1.D6347B73DA43962E@DOMAIN.TEST>",
+          "message": "Queued. Thank you."
+        }
+    http_version:
+  recorded_at: Mon, 10 May 2021 09:12:56 GMT
+recorded_with: VCR 3.0.3

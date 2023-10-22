@@ -58,7 +58,7 @@ module Mailgun
     #
     # Returns true or false
     def create_all(domain, url = '')
-      %w(bounce click deliver drop open spam unsubscribe).each do |action|
+      %w(accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed).each do |action|
         add_webhook domain, action, url
       end
       true
@@ -90,7 +90,7 @@ module Mailgun
     # Returns a Boolean on the success
     def remove_all(domain)
       fail Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
-      %w(bounce click deliver drop open spam unsubscribe).each do |action|
+      %w(accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed).each do |action|
         delete_webhook domain, action
       end
     end

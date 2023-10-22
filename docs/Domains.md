@@ -28,6 +28,9 @@ domainer.create 'my.new.moreness', { some: 'options' }
 
 # Remove a domain
 domainer.remove 'this.one.is.not.needed.'
+
+# Update a domain
+domainer.update 'my.new.moreness', { some: 'options' }
 ```
 
 Suppressions for a Domain
