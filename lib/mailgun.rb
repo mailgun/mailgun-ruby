@@ -15,6 +15,7 @@ require 'mailgun/events/events'
 require 'mailgun/exceptions/exceptions'
 require 'mailgun/domains/domains'
 require 'mailgun/webhooks/webhooks'
+require 'mailgun/templates/templates'
 
 # Module for interacting with the sweet Mailgun API.
 #
@@ -22,10 +23,12 @@ require 'mailgun/webhooks/webhooks'
 module Mailgun
 
   class << self
-    attr_accessor :api_key,
+    attr_accessor :api_host,
+                  :api_key,
                   :api_version,
                   :protocol,
                   :mailgun_host,
+                  :proxy_url,
                   :test_mode,
                   :domain
 

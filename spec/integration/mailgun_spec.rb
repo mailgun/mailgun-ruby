@@ -34,6 +34,78 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
+vcr_opts = { :cassette_name => "exceptions-invalid-api-key" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'displays error information that API key is invalid' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "sally@#{@domain}",
+          :to => "sally@#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::Unauthorized => err
+      expect(err.message).to eq('401 Unauthorized - Invalid Domain or API key: Forbidden')
+    else
+      fail
+    end
+  end
+end
+
+vcr_opts = { :cassette_name => "exceptions-invalid-data" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'display useful error information' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "sally@#{@domain}",
+          :to => "sally#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::BadRequest => err
+      expect(err.message).to eq('400 Bad Request: to parameter is not a valid address. please check documentation')
+    else
+      fail
+    end
+  end
+end
+
+vcr_opts = { :cassette_name => "exceptions-not-allowed" }
+
+describe 'Client exceptions', vcr: vcr_opts do
+  before(:all) do
+    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
+    @domain = TESTDOMAIN
+  end
+
+  it 'display useful error information' do
+    begin
+      @mg_obj.send_message(@domain, {
+          :from => "invalid@#{@domain}",
+          :to => "invalid#{@domain}",
+          :subject => 'Exception Integration Test',
+          :text => 'INTEGRATION TESTING'
+      })
+    rescue Mailgun::CommunicationError => err
+      expect(err.message).to include('403 Forbidden')
+    else
+      fail
+    end
+  end
+end
+
 vcr_opts = { :cassette_name => "send_message" }
 
 describe 'The method send_message()', vcr: vcr_opts do
@@ -63,6 +135,9 @@ describe 'The method send_message()', vcr: vcr_opts do
              :to => "bob@#{@domain}",
              :subject => "Test",
              :text => "Test Data" }
+    uuid = 'uuid'
+
+    allow(SecureRandom).to receive(:uuid).and_return(uuid)
 
     result = @mg_obj.send_message(@domain, data)
 
@@ -72,7 +147,7 @@ describe 'The method send_message()', vcr: vcr_opts do
     expect(result.body).to include("id")
 
     expect(result.code).to eq(200)
-    expect(result.body['id']).to eq("test-mode-mail@localhost")
+    expect(result.body['id']).to eq("test-mode-mail-#{uuid}@localhost")
     expect(result.body['message']).to eq("Queued. Thank you.")
   end
 
@@ -116,6 +191,22 @@ Testing some Mailgun awesomness!'
     result.to_h!
     expect(result.body).to include("message")
     expect(result.body).to include("id")
+  end
+  
+  it 'receives success response code' do
+    @mg_obj.enable_test_mode!
+
+    expect(@mg_obj.test_mode?).to eq(true)
+
+    data = { :from => "joe@#{@domain}",
+             :to => "bob@#{@domain}",
+             :subject => "Test",
+             :text => "Test Data" }
+
+    result = @mg_obj.send_message(@domain, data)
+    result.to_h!
+    
+    expect(result.success?).to be(true)
   end
 end
 

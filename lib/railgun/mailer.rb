@@ -11,7 +11,7 @@ module Railgun
   class Mailer
 
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject reply-to ]
+    IGNORED_HEADERS = %w[ to from subject reply-to mime-version template ]
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -32,6 +32,8 @@ module Railgun
         config[:api_host] || 'api.mailgun.net',
         config[:api_version] || 'v3',
         config[:api_ssl].nil? ? true : config[:api_ssl],
+        false,
+        config[:timeout]
       )
       @domain = @config[:domain]
 
@@ -45,8 +47,14 @@ module Railgun
     end
 
     def deliver!(mail)
+      @mg_domain = set_mg_domain(mail)
+      @mg_client.set_api_key(mail[:api_key].value) if mail[:api_key].present?
+
+      mail[:domain] = nil if mail[:domain].present?
+      mail[:api_key] = nil if mail[:api_key].present?
+
       mg_message = Railgun.transform_for_mailgun(mail)
-      response = @mg_client.send_message(@domain, mg_message)
+      response = @mg_client.send_message(@mg_domain, mg_message)
 
       if response.code == 200 then
         mg_id = response.to_h['id']
@@ -57,6 +65,14 @@ module Railgun
 
     def mailgun_client
       @mg_client
+    end
+
+    private
+
+    # Set @mg_domain from mail[:domain] header if present, then remove it to prevent being sent.
+    def set_mg_domain(mail)
+      return mail[:domain].value if mail[:domain]
+      domain
     end
 
   end
@@ -76,14 +92,14 @@ module Railgun
   def transform_for_mailgun(mail)
     message = build_message_object(mail)
 
-    # v:* attributes (variables)
-    mail.mailgun_variables.try(:each) do |k, v|
-      message["v:#{k}"] = JSON.dump(v)
-    end
-
     # o:* attributes (options)
     mail.mailgun_options.try(:each) do |k, v|
-      message["o:#{k}"] = v
+      message["o:#{k}"] = v.dup
+    end
+
+    # t:* attributes (options)
+    mail.mailgun_template_variables.try(:each) do |k, v|
+      message["t:#{k}"] = v.dup
     end
 
     # support for using ActionMailer's `headers()` inside of the mailer
@@ -129,7 +145,7 @@ module Railgun
 
     # reject blank values
     message.delete_if do |k, v|
-      return true if v.nil?
+      next true if v.nil?
 
       # if it's an array remove empty elements
       v.delete_if { |i| i.respond_to?(:empty?) && i.empty? } if v.is_a?(Array)
@@ -151,6 +167,7 @@ module Railgun
 
     mb.from mail[:from]
     mb.reply_to(mail[:reply_to].to_s) if mail[:reply_to].present?
+    mb.template(mail[:template].to_s) if mail[:template].present?
     mb.subject mail.subject
     mb.body_html extract_body_html(mail)
     mb.body_text extract_body_text(mail)
@@ -169,6 +186,11 @@ module Railgun
       when Mail::Field
         mb.add_recipient rcpt_type.to_s, addrs.to_s
       end
+    end
+
+    # v:* attributes (variables)
+    mail.mailgun_variables.try(:each) do |name, value|
+      mb.variable(name, value)
     end
 
     return mb.message if mail.attachments.empty?
@@ -256,9 +278,8 @@ module Railgun
   # @return [Mail::Message] mail message with its content-type = text/x-amp-html
   def retrieve_amp_part(mail)
     # AMP emails should always be multipart, with an HTML fallback.
-    return nil unless mail.multipart?
+    return unless mail.multipart?
 
     mail.find_first_mime_type('text/x-amp-html')
   end
-
 end

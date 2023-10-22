@@ -357,4 +357,54 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 15 Jan 2016 20:12:54 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid
+    body:
+      encoding: UTF-8
+      string: spam_action=block&web_scheme=https&wildcard=true
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Content-Length:
+      - '48'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '445'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 17 Apr 2023 13:03:16 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain has been updated","domain":{"created_at":"Mon, 25
+        Jan 2021 10:11:26 GMT","id":"600e994e20b1a14a5990856d","is_disabled":false,"name":"integration-test.domain.invalid","require_tls":false,"skip_verification":false,"smtp_login":"postmaster@DOMAIN.TEST","spam_action":"block","state":"active","type":"sandbox","web_prefix":"email","web_scheme":"https","wildcard":true}}
+
+'
+    http_version: 
+  recorded_at: Mon, 17 Apr 2023 13:04:47 GMT
+recorded_with: VCR 3.0.3

@@ -37,14 +37,36 @@ describe 'The method send_message()' do
   end
 
   it 'opens the message MIME and sends the MIME message.' do
-    data = {'to' => 'joe@test.com',
-                    'message' => 'Sample Data/mime.txt'}
+    data = {
+      'to' => 'joe@test.com',
+      'message' => 'Sample Data/mime.txt',
+      'from' => 'joe@test.com'
+    }
     result = @mg_obj.send_message("testdomain.com", data)
 
     result.to_h!
 
     expect(result.body).to include("message")
     expect(result.body).to include("id")
+  end
+
+  context 'when domain is missing' do
+    it 'shows failure message' do
+      expect(@mg_obj).to receive(:fail)
+      @mg_obj.send_message(nil, {})
+    end
+  end
+
+  context 'when to is missing' do
+    it 'shows failure message' do
+    data = {
+      'to' => '',
+      'message' => 'Sample Data/mime.txt',
+      'from' => 'joe@test.com'
+    }
+    expect(@mg_obj).to receive(:fail)
+    @mg_obj.send_message("testdomain.com", data)
+    end
   end
 end
 
@@ -64,6 +86,25 @@ describe 'The method post()' do
 
     expect(result.body).to include("message")
     expect(result.body).to include("id")
+  end
+
+  context 'when Unknown API error is raised' do
+    before do
+      allow(Mailgun::Response).to receive(:new).and_raise(StandardError, "message")
+      allow(JSON).to receive(:parse).and_raise('Unknown')
+    end
+
+    it 'adds Unknown API error to message' do
+      data = {'from' => 'joe@test.com',
+                    'to' => 'bob@example.com',
+                    'subject' => 'Test',
+                    'text' => 'Test Data'}
+      @mg_obj.post("#{@domain}/messages", data)
+    rescue Mailgun::CommunicationError => err
+      expect(err.message).to eq('message: Unknown API error')
+    else
+      fail
+    end
   end
 end
 

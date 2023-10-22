@@ -72,60 +72,76 @@ describe 'The method add_recipient' do
     @address_3   = 'sam@example.com'
     @variables_3 = {'first' => 'Sam', 'last' => 'Doe', 'tracking' => 'GHI123'}
   end
-
-  it 'adds 1,000 recipients to the message body and validates counter is incremented then reset' do
-    recipient_type = :to
-    1000.times do
-      @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+  context 'when from is present' do
+    before(:each) do
+      @mb_obj.from('example@email.com')
     end
 
-    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
-    
-    @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-    
-    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
-  end
+    it 'adds 1,000 recipients to the message body and validates counter is incremented then reset' do
+      recipient_type = :to
+      1000.times do
+        @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      end
 
-  it 'adds recipients to the message, calls finalize, and cleans up' do
-    recipient_type = :to
-    1000.times do
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
+      
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
     end
 
-    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
-    @mb_obj.finalize
+    it 'adds recipients to the message, calls finalize, and cleans up' do
+      recipient_type = :to
+      1000.times do
+        @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      end
 
-    expect(@mb_obj.message['recipient-variables'].length).to eq(0)
-    expect(@mb_obj.message[:to].length).to eq(0)
-    expect(@mb_obj.counters[:recipients][recipient_type]).to eq(0)
-  end
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
+      @mb_obj.finalize
 
-  it 'adds 5,005 recipients to the message body and validates we receive message_ids back' do
-    recipient_type = :to
-    5005.times do
-      @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      expect(@mb_obj.recipient_variables).to eq({})
+      expect(@mb_obj.message['recipient-variables'].length).to eq(0)
+      expect(@mb_obj.message[:to].length).to eq(0)
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(0)
     end
-    @mb_obj.finalize
 
-    expect(@mb_obj.message_ids.length).to eq(6)
+    it 'adds 5,005 recipients to the message body and validates we receive message_ids back' do
+      recipient_type = :to
+      5005.times do
+        @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      end
+      @mb_obj.finalize
+
+      expect(@mb_obj.message_ids.length).to eq(6)
+    end
+
+    it 'sets recipient-variables, for batch expansion' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+
+      expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
+    end
+
+    it 'sets multiple recipient-variables, for batch expansion' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
+      @mb_obj.add_recipient(recipient_type, @address_3, @variables_3)
+      
+      expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
+      expect(@mb_obj.recipient_variables[@address_2]).to eq(@variables_2)
+      expect(@mb_obj.recipient_variables[@address_3]).to eq(@variables_3)
+    end
   end
 
-  it 'sets recipient-variables, for batch expansion' do
-    recipient_type = :to
-    @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-
-    expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
-  end
-
-  it 'sets multiple recipient-variables, for batch expansion' do
-    recipient_type = :to
-    @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-    @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
-    @mb_obj.add_recipient(recipient_type, @address_3, @variables_3)
-    
-    expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
-    expect(@mb_obj.recipient_variables[@address_2]).to eq(@variables_2)
-    expect(@mb_obj.recipient_variables[@address_3]).to eq(@variables_3)
+  context 'when from is empty' do
+    it 'shows error message' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
+      @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
+      expect(@mb_client).to receive(:fail)
+      @mb_obj.finalize
+    end
   end
 
 end
