@@ -16,6 +16,7 @@ require 'mailgun/exceptions/exceptions'
 require 'mailgun/domains/domains'
 require 'mailgun/webhooks/webhooks'
 require 'mailgun/templates/templates'
+require 'mailgun/subaccounts/subaccounts'
 
 # Module for interacting with the sweet Mailgun API.
 #
@@ -30,7 +31,8 @@ module Mailgun
                   :mailgun_host,
                   :proxy_url,
                   :test_mode,
-                  :domain
+                  :domain,
+                  :subaccount_id
 
     def configure
       yield self

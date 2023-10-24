@@ -9,6 +9,7 @@ module Mailgun
   #
   # See the Github documentation for full examples.
   class Client
+    SUBACCOUNT_HEADER = 'X-Mailgun-On-Behalf-Of'.freeze
 
     def initialize(api_key = Mailgun.api_key,
                    api_host = Mailgun.api_host || 'api.mailgun.net',
@@ -24,6 +25,7 @@ module Mailgun
         user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}"
       }
       rest_client_params[:timeout] = timeout if timeout
+      rest_client_params[SUBACCOUNT_HEADER] = Mailgun.subaccount_id if Mailgun.subaccount_id
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
       RestClient.proxy = proxy_url

@@ -188,6 +188,8 @@ This SDK includes the following components:
 - [Domains](docs/Domains.md)
 - [Webhooks](docs/Webhooks.md)
 - [Events](docs/Events.md)
+- [Snippets](docs/Snippets.md)
+- [Subaccounts](docs/Subaccounts.md)
 - [Suppressions](docs/Suppressions.md)
 - [Templates](docs/Templates.md)
 
