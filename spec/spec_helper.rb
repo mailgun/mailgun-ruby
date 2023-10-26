@@ -34,6 +34,7 @@ envs = File.exist?(envfile) ? YAML.load_file(envfile) : ENV
 APIKEY = envs['MAILGUN_APIKEY']
 PUB_APIKEY = envs['MAILGUN_PUB_APIKEY']
 TESTDOMAIN = envs['MAILGUN_TESTDOMAIN']
+SUBACCOUNT_ACCOUNT_ID = envs['MAILGUN_SUBACCOUNT_ACCOUNT_ID']
 
 VCR.configure do |c|
   c.cassette_library_dir = 'vcr_cassettes'

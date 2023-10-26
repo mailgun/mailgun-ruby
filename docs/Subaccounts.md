@@ -8,28 +8,25 @@ The library can be initialized with a Rails initializer containing similar:
 ```ruby
 Mailgun.configure do |config|
   config.api_key = 'your-secret-api-key'
-  config.subaccount_id = 'your-subaccount-id'
+  config.subaccount_account_id = 'your-subaccount-account-id'
 end
 ```
 Or have the initializer read your environment setting if you prefer.
 
 ```ruby
   Mailgun.api_key = 'your-secret-api-key'
-  Mailgun.subaccount_id = 'your-subaccount-id'
+  Mailgun.subaccount_account_id = 'your-subaccount-account-id'
 ```
 
 ```ruby
   mg_client = Mailgun::Client.new
-  mb_obj = Mailgun::Subaccounts.new
+  mb_obj = Mailgun::Subaccounts.new(mg_client)
 
   # Get subaccounts list
-  mb_obj.get_subaccounts
-
-  # Get subaccounts list
-  mb_obj.get_subaccounts
+  mb_obj.get_subaccounts(limit: 10, skip: 0, sort: 'ask', enabled: true)
 
   # Get subaccount information
-  mb_obj.info
+  mb_obj.info(subaccount_id)
 
   # Add Subaccount
   mb_obj.create(name)

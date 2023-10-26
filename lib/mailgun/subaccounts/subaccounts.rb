@@ -5,6 +5,7 @@ module Mailgun
   # A Mailgun::Subaccounts object is a simple CRUD interface to Mailgun Subaccounts.
   # Uses Mailgun
   class Subaccounts
+    attr_reader :client
 
     # Public: creates a new Mailgun::Subaccounts instance.
     # Defaults to Mailgun::Client
@@ -14,17 +15,11 @@ module Mailgun
     end
 
     # Public: Get subaccounts
-    #
-    # limit  - [Integer] Maximum number of records to return. (10 by default)
-    # skip     [Integer] Number of records to skip
-    # sort     [Array] “asc” or “desc”
-    # enabled  [boolean] (Optional) Returns all enabled/disabled subaccounts, defaults to all if omitted
     # options - [Hash] of
-    #     name - [String] Name of the subaccount being stored.
-    #     description   - [String] Description of the subaccount being stored
-    #     subaccount      - [String] (Optional) Content of the subaccount
-    #     tag           - [String] (Optional) Initial tag of the created version.
-    #     comment       - [String] (Optional) Version comment.
+    #     limit  - [Integer] Maximum number of records to return. (10 by default)
+    #     skip     [Integer] Number of records to skip
+    #     sort     [Array] “asc” or “desc”
+    #     enabled  [boolean] (Optional) Returns all enabled/disabled subaccounts, defaults to all if omitted
     #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the subaccount.
     #                     ex.('{"Subject": "{{subject}}"}')
     #
@@ -38,11 +33,6 @@ module Mailgun
     #
     # subaccount_id - [String] subaccount name to lookup for
     # options - [Hash] of
-    #     name - [String] Name of the subaccount being stored.
-    #     description   - [String] Description of the subaccount being stored
-    #     subaccount      - [String] (Optional) Content of the subaccount
-    #     tag           - [String] (Optional) Initial tag of the created version.
-    #     comment       - [String] (Optional) Version comment.
     #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the subaccount.
     #                     ex.('{"Subject": "{{subject}}"}')
     #
@@ -56,29 +46,20 @@ module Mailgun
     #
     # name  - [String] Name of the subaccount being created
     # options - [Hash] of
-    #     name - [String] Name of the subaccount being stored.
-    #     description   - [String] Description of the subaccount being stored
-    #     subaccount      - [String] (Optional) Content of the subaccount
-    #     tag           - [String] (Optional) Initial tag of the created version.
-    #     comment       - [String] (Optional) Version comment.
+    #     name - [String] Name of the subaccount being created.
     #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the subaccount.
     #                     ex.('{"Subject": "{{subject}}"}')
     #
     # Returns [Hash] of created subaccount
     def create(name, options = {})
       fail(ParameterError, 'No name given to create subaccount', caller) unless name
-      client.post("accounts/subaccounts", options).to_h!
+      client.post("accounts/subaccounts", options.merge!(name: name)).to_h!
     end
 
     # Public: Disable a subaccount
     #
     # subaccount_id - [String] subaccount name to disable
     # options - [Hash] of
-    #     name - [String] Name of the subaccount being stored.
-    #     description   - [String] Description of the subaccount being stored
-    #     subaccount      - [String] (Optional) Content of the subaccount
-    #     tag           - [String] (Optional) Initial tag of the created version.
-    #     comment       - [String] (Optional) Version comment.
     #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the subaccount.
     #                     ex.('{"Subject": "{{subject}}"}')
     #
@@ -92,11 +73,6 @@ module Mailgun
     #
     # subaccount_id - [String] subaccount name to enable
     # options - [Hash] of
-    #     name - [String] Name of the subaccount being stored.
-    #     description   - [String] Description of the subaccount being stored
-    #     subaccount      - [String] (Optional) Content of the subaccount
-    #     tag           - [String] (Optional) Initial tag of the created version.
-    #     comment       - [String] (Optional) Version comment.
     #     headers       - [String] (Optional) Key Value json dictionary of headers to be stored with the subaccount.
     #                     ex.('{"Subject": "{{subject}}"}')
     #

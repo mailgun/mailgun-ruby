@@ -32,7 +32,7 @@ module Mailgun
                   :proxy_url,
                   :test_mode,
                   :domain,
-                  :subaccount_id
+                  :subaccount_account_id
 
     def configure
       yield self

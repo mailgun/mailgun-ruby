@@ -25,7 +25,7 @@ module Mailgun
         user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}"
       }
       rest_client_params[:timeout] = timeout if timeout
-      rest_client_params[SUBACCOUNT_HEADER] = Mailgun.subaccount_id if Mailgun.subaccount_id
+      rest_client_params[SUBACCOUNT_HEADER] = Mailgun.subaccount_account_id if Mailgun.subaccount_account_id
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
       RestClient.proxy = proxy_url
