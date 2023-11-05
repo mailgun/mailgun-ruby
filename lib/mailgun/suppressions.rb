@@ -45,11 +45,11 @@ module Mailgun
     end
 
     def get_bounce(address)
-      @client.get("#{@domain}/bounces/#{address}", nil)
+      @client.get("#{@domain}/bounces/#{escape_address(address)}", nil)
     end
 
     def create_bounce(params = {})
-      @client.post("#{@domain/bounces}", params)
+      @client.post("#{@domain}/bounces", params)
     end
 
     # Creates multiple bounces on the Mailgun API.
@@ -100,7 +100,7 @@ module Mailgun
     end
 
     def delete_bounce(address)
-      @client.delete("#{@domain}/bounces/#{address}")
+      @client.delete("#{@domain}/bounces/#{escape_address(address)}")
     end
 
     def delete_all_bounces
@@ -118,7 +118,7 @@ module Mailgun
     end
 
     def get_unsubscribe(address)
-      @client.get("#{@domain}/unsubscribes/#{address}")
+      @client.get("#{@domain}/unsubscribes/#{escape_address(address)}")
     end
 
     def create_unsubscribe(params = {})
@@ -157,7 +157,10 @@ module Mailgun
 
         unsubscribe.each do |k, v|
           # Hash values MUST be strings.
-          if not v.is_a? String then
+          # However, unsubscribes contain an array of tags
+          if v.is_a? Array
+            unsubscribe[k] = v.map(&:to_s)
+          elsif !v.is_a? String
             unsubscribe[k] = v.to_s
           end
         end
@@ -170,7 +173,7 @@ module Mailgun
     end
 
     def delete_unsubscribe(address, params = {})
-      @client.delete("#{@domain}/unsubscribes/#{address}")
+      @client.delete("#{@domain}/unsubscribes/#{escape_address(address)}")
     end
 
     ####
@@ -184,7 +187,7 @@ module Mailgun
     end
 
     def get_complaint(address)
-      @client.get("#{@domain}/complaints/#{address}", nil)
+      @client.get("#{@domain}/complaints/#{escape_address(address)}", nil)
     end
 
     def create_complaint(params = {})
@@ -236,10 +239,14 @@ module Mailgun
     end
 
     def delete_complaint(address)
-      @client.delete("#{@domain}/complaints/#{address}")
+      @client.delete("#{@domain}/complaints/#{escape_address(address)}")
     end
 
     private
+
+    def escape_address(address)
+      CGI.escape address
+    end
 
     def get_from_paging(uri, params = {})
       @client.get(uri, params)

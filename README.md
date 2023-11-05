@@ -19,7 +19,7 @@ gem install mailgun-ruby
 Gemfile:
 
 ```ruby
-gem 'mailgun-ruby', '~>1.1.6'
+gem 'mailgun-ruby', '~>1.2.12'
 ```
 
 Usage
@@ -56,6 +56,12 @@ domain = 'example.com'
 result = mg_client.get("#{domain}/events", {:event => 'delivered'})
 ```
 
+If you're using the EU domains, make sure you specify it when creating the client:
+
+```
+mg_client = Mailgun::Client.new 'your-api-key', 'api.eu.mailgun.net'
+```
+
 Rails
 -----
 
@@ -74,6 +80,8 @@ and replace `api-myapikey` and `mydomain.com` with your secret API key and domai
   config.action_mailer.mailgun_settings = {
     api_key: 'api-myapikey',
     domain: 'mydomain.com',
+    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+    # timeout: 20 # Default depends on rest-client, whose default is 60s. Added in 1.2.3.
   }
 ```
 
@@ -89,7 +97,7 @@ class UserMailer < ApplicationMailer
       }
     end
   end
-end   
+end
 ```
 
 To get the Mailgun `message_id` after ActionMailer has successfully delivered the email:
@@ -175,12 +183,13 @@ pages. Or the [Snippets](docs/Snippets.md) file.
 This SDK includes the following components:
 - [Messages](docs/Messages.md)
 - [Message Builder](docs/MessageBuilder.md)
-- [Batch Message](docs/MessageBuilder.md)
+- [Batch Message](docs/MessageBuilder.md#usage---batch-message)
 - [Opt-In Handler](docs/OptInHandler.md)
 - [Domains](docs/Domains.md)
 - [Webhooks](docs/Webhooks.md)
 - [Events](docs/Events.md)
 - [Suppressions](docs/Suppressions.md)
+- [Templates](docs/Templates.md)
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.

@@ -1,3 +1,4 @@
+require 'mime/types'
 require 'time'
 
 module Mailgun
@@ -124,7 +125,7 @@ module Mailgun
       add_file(:attachment, attachment, filename)
     end
 
-    # Adds an inline image to the mesage object.
+    # Adds an inline image to the message object.
     #
     # @param [String|File] inline_image A file object for attaching an inline image.
     # @param [String] filename The filename you wish the inline image to be.
@@ -197,7 +198,9 @@ module Mailgun
     # @param [Boolean] tracking Boolean true or false.
     # @return [void]
     def track_opens(mode)
-      set_multi_simple('o:tracking-opens', bool_lookup(mode))
+      value = bool_lookup(mode)
+      set_single('o:tracking-opens', value)
+      set_multi_simple('o:tracking', value)
     end
 
     # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
@@ -211,7 +214,9 @@ module Mailgun
     # @param [String] mode True, False, or HTML (for HTML only tracking)
     # @return [void]
     def track_clicks(mode)
-      set_multi_simple('o:tracking-clicks', bool_lookup(mode))
+      value = bool_lookup(mode)
+      set_single('o:tracking-clicks', value)
+      set_multi_simple('o:tracking', value)
     end
 
     # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.
@@ -269,8 +274,12 @@ module Mailgun
     # @return [void]
     def variable(name, data)
       fail(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
-      jsondata = make_json data
-      set_single("v:#{name}", jsondata)
+      begin
+        jsondata = make_json data
+        set_single("v:#{name}", jsondata)
+      rescue Mailgun::ParameterError
+        set_single("v:#{name}", data)
+      end
     end
 
     # Add custom parameter to the message. A custom parameter is any parameter that
@@ -301,6 +310,38 @@ module Mailgun
     def set_message_id(data = nil)
       warn 'DEPRECATION: "set_message_id" is deprecated. Please use "message_id" instead.'
       message_id data
+    end
+
+    # Set name of a template stored via template API. See Templates for more information
+    # https://documentation.mailgun.com/en/latest/api-templates.html
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template(template_name = nil)
+      key = 'template'
+      return @message.delete(key) if template_name.to_s.empty?
+      set_single(key, template_name)
+    end
+
+    # Set specific template version.
+    #
+    # @param [String] tag A defined template name to use. Passing nil or
+    #   empty string will delete template key and value from @message hash.
+    # @return [void]
+    def template_version(version = nil)
+      key = 't:version'
+      return @message.delete(key) if version.to_s.empty?
+      set_single(key, version)
+    end
+
+    # Turn off or on template rendering in the text part
+    # of the message in case of template sending.
+    #
+    # @param [Boolean] tracking Boolean true or false.
+    # @return [void]
+    def template_text(mode)
+      set_single('t:text', bool_lookup(mode))
     end
 
     private
@@ -342,6 +383,7 @@ module Mailgun
     def bool_lookup(value)
       return 'yes' if %w(true yes yep).include? value.to_s.downcase
       return 'no' if %w(false no nope).include? value.to_s.downcase
+      warn 'WARN: for bool type actions next values are preferred: true yes yep | false no nope | htmlonly'
       value
     end
 
@@ -364,7 +406,7 @@ module Mailgun
     def make_json(obj)
       return JSON.parse(obj).to_json if obj.is_a?(String)
       return obj.to_json if obj.is_a?(Hash)
-      return JSON.generate(obj).to_json
+      JSON.generate(obj).to_json
     rescue
       raise Mailgun::ParameterError, 'Provided data could not be made into JSON. Try a JSON string or Hash.', obj
     end
@@ -387,9 +429,9 @@ module Mailgun
         full_name = vars['full_name']
       elsif vars['first'] || vars['last']
         full_name = "#{vars['first']} #{vars['last']}".strip
-      end 
+      end
 
-      return "'#{full_name}' <#{address}>" if defined?(full_name)
+      return "'#{full_name}' <#{address}>" if full_name
       address
     end
 
@@ -408,6 +450,12 @@ module Mailgun
       fail(Mailgun::ParameterError,
         'Unable to access attachment file object.'
       ) unless attachment.respond_to?(:read)
+
+      if attachment.respond_to?(:path) && !attachment.respond_to?(:content_type)
+        mime_types = MIME::Types.type_for(attachment.path)
+        content_type = mime_types.empty? ? 'application/octet-stream' : mime_types[0].content_type
+        attachment.instance_eval "def content_type; '#{content_type}'; end"
+      end
 
       unless filename.nil?
         attachment.instance_variable_set :@original_filename, filename

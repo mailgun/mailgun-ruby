@@ -50,6 +50,16 @@ describe 'The method add_recipient' do
     expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
   end
 
+  context 'when variables is empty and recepeint type - "to"' do
+    it 'adds email address as "to" recipient type and increments counter' do
+      recipient_type = :to
+      @mb_obj.add_recipient(recipient_type, @address, {})
+
+      expect(@mb_obj.message[recipient_type][0]).to eq("#{@address}")
+      expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
+    end
+  end
+
   it 'adds a "cc" recipient type to the message body and counter is incremented' do
     recipient_type = :cc
     @mb_obj.add_recipient(recipient_type, @address, @variables)
@@ -246,6 +256,16 @@ describe 'The method add_attachment' do
     expect(@mb_obj.message[:attachment].length).to eq(1)
     expect(@mb_obj.message[:attachment].first.original_filename).to eq 'mailgun_icon.png'
   end
+
+  context 'when attachment has unknown type' do
+    it 'sets content type application/octet-stream for attachment' do
+      file = File.dirname(__FILE__) + "/sample_data/unknown.type"
+
+      @mb_obj.add_attachment(file)
+
+      expect(@mb_obj.message[:attachment][0].content_type).to eq('application/octet-stream')
+    end
+  end
 end
 
 describe 'The method add_inline_image' do
@@ -293,7 +313,7 @@ describe 'The method set_test_mode' do
   it 'warns of set_test_mode deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_test_mode 'warn on set_test_mode'
+    @mb_obj.set_test_mode 'Yes'
   end
 end
 
@@ -335,7 +355,7 @@ describe 'The method set_dkim' do
   it 'warns of set_dkim deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_dkim 'warn on set_dkim'
+    @mb_obj.set_dkim 'Yes'
   end
 end
 
@@ -429,7 +449,7 @@ describe 'The method set_open_tracking' do
   it 'warns of set_open_tracking deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_open_tracking 'warn on set_open_tracking'
+    @mb_obj.set_open_tracking 'Yes'
   end
 end
 
@@ -440,19 +460,20 @@ describe 'The method track_opens' do
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.track_opens('Yes')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
+    expect(@mb_obj.message["o:tracking"]).to eq(["yes"])
 
     @mb_obj.track_opens('No')
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
 
     @mb_obj.track_opens(true)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
 
     @mb_obj.track_opens(false)
 
-    expect(@mb_obj.message["o:tracking-opens"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
   end
 end
 
@@ -460,7 +481,7 @@ describe 'The method set_click_tracking' do
   it 'warns of set_click_tracking deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
     expect(@mb_obj).to receive :warn
-    @mb_obj.set_click_tracking 'warn on set_click_tracking'
+    @mb_obj.set_click_tracking 'Yes'
   end
 end
 
@@ -471,23 +492,31 @@ describe 'The method track_clicks' do
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.track_clicks('Yes')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
+    expect(@mb_obj.message["o:tracking"]).to eq(["yes"])
 
     @mb_obj.track_clicks('No')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks(true)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("yes")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
 
     @mb_obj.track_clicks(false)
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("no")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
 
     @mb_obj.track_clicks('html')
 
-    expect(@mb_obj.message["o:tracking-clicks"][0]).to eq("html")
+    expect(@mb_obj.message["o:tracking-clicks"]).to eq("html")
+  end
+
+  context 'when unexpected value is provided' do
+    it 'warns about preferred values' do
+      expect(@mb_obj).to receive :warn
+      @mb_obj.track_clicks('random')
+    end
   end
 end
 
@@ -547,9 +576,13 @@ describe 'The method variable' do
     expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
     expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
   end
-  it 'throws an exception on broken JSON.' do
-    data = 'This is some crappy JSON.'
-    expect {@mb_obj.variable('my-data', data)}.to raise_error(Mailgun::ParameterError)
+  it 'accepts string values' do
+    data = 'String Value.'
+
+    @mb_obj.variable('my-data', data)
+
+    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
+    expect(@mb_obj.message["v:my-data"].to_s).to eq('String Value.')
   end
 end
 
@@ -595,5 +628,105 @@ describe 'The method message_id' do
     @mb_obj.message_id('')
 
     expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
+  end
+end
+
+describe 'The method template' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  context 'when template name is passed' do
+    it 'sets `template` to the message' do
+      template_name = 'template.name'
+      @mb_obj.template(template_name)
+
+      expect(@mb_obj.message['template']).to eq(template_name)
+    end
+  end
+
+  context 'when multiple values are passed' do
+    it 'sets the last value as message template' do
+      template_name_1 = 'template.name_1'
+      template_name_2 = 'template.name_2'
+
+      @mb_obj.template(template_name_1)
+      @mb_obj.template(template_name_2)
+
+      expect(@mb_obj.message['template']).to eq(template_name_2)
+    end
+  end
+
+  context 'when template name is not passed' do
+    it 'it deletes `template` key from the message' do
+      @mb_obj.template('template.name')
+
+      expect(@mb_obj.message.has_key?('template')).to eq(true)
+
+      @mb_obj.template
+
+      expect(@mb_obj.message.has_key?('template')).to eq(false)
+    end
+  end
+end
+
+describe 'The method template_version' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+  context 'when template version is passed' do
+    it 'adds `t:version` key value to the message' do
+      version = 'version_1'
+      @mb_obj.template_version(version)
+
+      expect(@mb_obj.message['t:version']).to eq(version)
+    end
+  end
+
+  context 'when multiple values are passed' do
+    it 'adds the last value as `t:version` key value to the message' do
+      version_1 = 'version_1'
+      version_2 = 'version_2'
+
+      @mb_obj.template_version(version_1)
+      @mb_obj.template_version(version_2)
+
+      expect(@mb_obj.message['t:version']).to eq(version_2)
+    end
+  end
+
+  context 'when version is not passed' do
+    it 'it deletes `t:version` key from the message' do
+      @mb_obj.template_version('version')
+
+      expect(@mb_obj.message.has_key?('t:version')).to eq(true)
+
+      @mb_obj.template_version
+
+      expect(@mb_obj.message.has_key?('t:version')).to eq(false)
+    end
+  end
+end
+
+describe 'The method template_text' do
+  before(:each) do
+    @mb_obj = Mailgun::MessageBuilder.new
+  end
+
+  it 'enables/disables rendering in the text part of the message in case of template sending' do
+    @mb_obj.template_text('Yes')
+
+    expect(@mb_obj.message["t:text"]).to eq("yes")
+
+    @mb_obj.template_text('No')
+
+    expect(@mb_obj.message["t:text"]).to eq("no")
+
+    @mb_obj.template_text(true)
+
+    expect(@mb_obj.message["t:text"]).to eq("yes")
+
+    @mb_obj.template_text(false)
+
+    expect(@mb_obj.message["t:text"]).to eq("no")
   end
 end

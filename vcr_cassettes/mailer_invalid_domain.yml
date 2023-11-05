@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/not-our-doma.in/messages
+    body:
+      encoding: US-ASCII
+      string: from[]=sally%40not-our-doma.in&subject[]=subject&html[]=%3Cp%3ETest%21%3C%2Fp%3E&text[]=Test%21&to[]=bob%40DOMAIN.TEST&h%3Acontent-type=multipart%2Falternative%3B+boundary%3D%22--%3D%3D_mimepart_6098fb5a12edf_78633ff4e00521889696a%22%3B+charset%3DUTF-8
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin18.7.0 x86_64) ruby/2.2.2p95
+      Content-Length:
+      - '262'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+  response:
+    status:
+      code: 401
+      message: UNAUTHORIZED
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Mon, 10 May 2021 09:22:34 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '9'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Forbidden
+    http_version:
+  recorded_at: Mon, 10 May 2021 09:22:34 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/not-our-doma.in/messages
+    body:
+      encoding: US-ASCII
+      string: from[]=sally%40not-our-doma.in&subject[]=subject&html[]=%3Cp%3ETest%21%3C%2Fp%3E&text[]=Test%21&to[]=bob%40DOMAIN.TEST&h%3Acontent-type=multipart%2Falternative%3B+boundary%3D%22--%3D%3D_mimepart_6098fb5a12edf_78633ff4e00521889696a%22%3B+charset%3DUTF-8
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin18.7.0 x86_64) ruby/2.2.2p95
+      Content-Length:
+      - '262'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmQ5MTViNWNkYjlhNTgzNjg1ZDhmM2ZiMWJlYzBmMjBmLTA3YmM3YjA1LWZhNDgxNmEx
+  response:
+    status:
+      code: 401
+      message: UNAUTHORIZED
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, x-requested-with, Authorization
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '600'
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Mon, 10 May 2021 09:22:40 GMT
+      Server:
+      - nginx
+      Www-Authenticate:
+      - Basic realm="MG API"
+      Content-Length:
+      - '9'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: Forbidden
+    http_version:
+  recorded_at: Mon, 10 May 2021 09:22:40 GMT
+recorded_with: VCR 3.0.3

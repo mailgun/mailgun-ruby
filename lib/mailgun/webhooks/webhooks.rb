@@ -3,7 +3,7 @@ module Mailgun
   # A Mailgun::Webhooks object is a simple CRUD interface to Mailgun Webhooks.
   # Uses Mailgun
   class Webhooks
-    ACTIONS = %w(bounce click deliver drop open spam unsubscribe).freeze
+    ACTIONS = %w(accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed).freeze
 
     # Public creates a new Mailgun::Webhooks instance.
     #   Defaults to Mailgun::Client
@@ -76,6 +76,8 @@ module Mailgun
     #
     # Returns a Boolean of whether the webhook was updated
     def update(domain, action, url = '')
+      fail Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
+      fail Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
       res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
       res.to_h['webhook']['url'] == url && res.to_h['message'] == 'Webhook has been updated'
     end
@@ -88,13 +90,11 @@ module Mailgun
     #
     # Returns true or false
     def update_all(domain, url = '')
+      fail Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
       ACTIONS.each do |action|
         update_webhook domain, action, url
       end
       true
-    rescue => e
-      puts e
-      false
     end
     alias_method :update_all_webhooks, :update_all
 
