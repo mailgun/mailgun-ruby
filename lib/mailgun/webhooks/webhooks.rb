@@ -32,7 +32,7 @@ module Mailgun
     #   empty String if one is not set
     def info(domain, action)
       res = @client.get("domains/#{domain}/webhooks/#{action}")
-      res.to_h['webhook']['url'] || ''
+      res.to_h['webhook']['urls'] || ''
     rescue NoMethodError
       ''
     end
@@ -47,7 +47,7 @@ module Mailgun
     # Returns a Boolean of whether the webhook was created
     def create(domain, action, url = '')
       res = @client.post("domains/#{domain}/webhooks", id: action, url: url)
-      res.to_h['webhook']['url'] == url && res.to_h['message'] == 'Webhook has been created'
+      res.to_h['webhook']['urls'].include?(url) && res.to_h['message'] == 'Webhook has been created'
     end
     alias_method :add, :create
     alias_method :add_webhook, :create
@@ -79,24 +79,9 @@ module Mailgun
       fail Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
       fail Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
       res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
-      res.to_h['webhook']['url'] == url && res.to_h['message'] == 'Webhook has been updated'
+      res.to_h['webhook']['urls'] == url && res.to_h['message'] == 'Webhook has been updated'
     end
     alias_method :update_webhook, :update
-
-    # Public: Updates all webhooks to the same URL
-    #
-    # domain - A String of the domain name
-    # url    - A String of the url to set all webhooks to
-    #
-    # Returns true or false
-    def update_all(domain, url = '')
-      fail Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
-      ACTIONS.each do |action|
-        update_webhook domain, action, url
-      end
-      true
-    end
-    alias_method :update_all_webhooks, :update_all
 
     # Public: Delete a specific webhook
     #

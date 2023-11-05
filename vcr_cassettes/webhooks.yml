@@ -2,275 +2,245 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
-    body:
-      encoding: US-ASCII
-      string: id=bounce&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fbounce
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      Content-Length:
-      - '66'
-      Content-Type:
-      - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 19:05:55 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '117'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
-      Access-Control-Allow-Origin:
-      - "*"
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-      - Content-Type, x-requested-with
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
     body:
       encoding: UTF-8
-      string: |-
-        {
-          "message": "Webhook has been created",
-          "webhook": {
-            "url": "http://example.com/mailgun/events/bounce"
-          }
-        }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 19:05:55 GMT
-- request:
-    method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
-    body:
-      encoding: US-ASCII
-      string: ''
+      string: id=accepted&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Faccepted
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 19:05:55 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '76'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
-      Access-Control-Allow-Origin:
-      - "*"
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-      - Content-Type, x-requested-with
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "webhook": {
-            "url": "http://example.com/mailgun/events/bounce"
-          }
-        }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
-- request:
-    method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 19:05:56 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '101'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
-      Access-Control-Allow-Origin:
-      - "*"
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-      - Content-Type, x-requested-with
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "webhooks": {
-            "bounce": {
-              "url": "http://example.com/mailgun/events/bounce"
-            }
-          }
-        }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
-- request:
-    method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
-    body:
-      encoding: US-ASCII
-      string: id=bounce&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fbounceup
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
       Content-Length:
       - '70'
       Content-Type:
       - application/x-www-form-urlencoded
-      User-Agent:
-      - Ruby
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmFjZWM0YzA1YjFmMmZjZWJjZjY4ZGE2NDVkYTAwMjMxLTQxM2UzNzNjLTBhYWQzYzM3
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 19:05:56 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '121'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
       Access-Control-Allow-Origin:
       - "*"
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '105'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Nov 2023 15:35:13 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 413e373c-0aad3c37
+      X-Xss-Protection:
+      - 1; mode=block
     body:
       encoding: UTF-8
-      string: |-
-        {
-          "message": "Webhook has been updated",
-          "webhook": {
-            "url": "http://example.com/mailgun/events/bounceup"
-          }
-        }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 19:05:56 GMT
+      string: '{"message":"Webhook has been created","webhook":{"urls":["http://example.com/mailgun/events/accepted"]}}
+
+'
+    http_version: 
+  recorded_at: Sun, 05 Nov 2023 15:35:13 GMT
 - request:
-    method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/bounce
+    method: get
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/accepted
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
+      - "*/*"
       User-Agent:
-      - Ruby
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmFjZWM0YzA1YjFmMmZjZWJjZjY4ZGE2NDVkYTAwMjMxLTQxM2UzNzNjLTBhYWQzYzM3
   response:
     status:
       code: 200
       message: OK
     headers:
-      Server:
-      - nginx
-      Date:
-      - Fri, 08 Jan 2016 19:05:56 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '121'
-      Connection:
-      - keep-alive
-      Content-Disposition:
-      - inline
+      Access-Control-Allow-Credentials:
+      - 'true'
       Access-Control-Allow-Origin:
       - "*"
-      - "*"
-      Access-Control-Max-Age:
-      - '600'
-      - '600'
-      Access-Control-Allow-Methods:
-      - GET, POST, PUT, DELETE, OPTIONS
-      - GET, POST, PUT, DELETE, OPTIONS
-      Access-Control-Allow-Headers:
-      - Content-Type, x-requested-with
-      - Content-Type, x-requested-with
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '68'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Nov 2023 15:35:14 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 413e373c-0aad3c37
+      X-Xss-Protection:
+      - 1; mode=block
     body:
       encoding: UTF-8
-      string: |-
-        {
-          "message": "Webhook has been deleted",
-          "webhook": {
-            "url": "http://example.com/mailgun/events/bounceup"
-          }
-        }
-    http_version:
-  recorded_at: Fri, 08 Jan 2016 19:05:57 GMT
-recorded_with: VCR 3.0.1
+      string: '{"webhook":{"urls":["http://example.com/mailgun/events/accepted"]}}
+
+'
+    http_version: 
+  recorded_at: Sun, 05 Nov 2023 15:35:14 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmFjZWM0YzA1YjFmMmZjZWJjZjY4ZGE2NDVkYTAwMjMxLTQxM2UzNzNjLTBhYWQzYzM3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '163'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Nov 2023 15:35:15 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 413e373c-0aad3c37
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"webhooks":{"accepted":{"urls":["http://example.com/mailgun/events/accepted"]},"clicked":{"urls":["https://webhook.site/096cdc2e-e460-450c-a008-36d6f0db71f4"]}}}
+
+'
+    http_version: 
+  recorded_at: Sun, 05 Nov 2023 15:35:14 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/accepted
+    body:
+      encoding: UTF-8
+      string: id=accepted&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Faccepted
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Content-Length:
+      - '70'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmFjZWM0YzA1YjFmMmZjZWJjZjY4ZGE2NDVkYTAwMjMxLTQxM2UzNzNjLTBhYWQzYzM3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '105'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Nov 2023 15:35:15 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 413e373c-0aad3c37
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Webhook has been updated","webhook":{"urls":["http://example.com/mailgun/events/accepted"]}}
+
+'
+    http_version: 
+  recorded_at: Sun, 05 Nov 2023 15:35:15 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/domains/DOMAIN.TEST/webhooks/accepted
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin21.6.0 x86_64) ruby/2.5.1p57
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic YXBpOmFjZWM0YzA1YjFmMmZjZWJjZjY4ZGE2NDVkYTAwMjMxLTQxM2UzNzNjLTBhYWQzYzM3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '105'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Nov 2023 15:35:16 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 413e373c-0aad3c37
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Webhook has been deleted","webhook":{"urls":["http://example.com/mailgun/events/accepted"]}}
+
+'
+    http_version: 
+  recorded_at: Sun, 05 Nov 2023 15:35:16 GMT
+recorded_with: VCR 3.0.3
