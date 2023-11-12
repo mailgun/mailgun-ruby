@@ -38,6 +38,16 @@ supp_client.list_complaints
 
 ----
 
+To get the next or previous suppressions page:
+
+```ruby
+supp_client.list_bounces # returns first *limit* records + next, previous pages urls
+supp_client.next # returns next *limit* records
+supp_client.prev # returns previous *limit* records
+```
+
+----
+
 To batch-add a set of bounces:
 
 ```ruby
