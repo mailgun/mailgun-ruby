@@ -10,7 +10,6 @@ module Mailgun
     # Public: creates a new Mailgun::Subaccounts instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new(Mailgun.api_key, Mailgun.api_host || 'api.mailgun.net', 'v5'))
-      validate!
       @client = client
     end
 
@@ -80,13 +79,6 @@ module Mailgun
     def enable(subaccount_id, options = {})
       fail(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
       client.post("accounts/subaccounts/#{subaccount_id}/enable", options).to_h!
-    end
-
-
-    private
-
-    def validate!
-      fail(ParameterError, 'Setup subaccount_id in config settings', caller) unless Mailgun.subaccount_id
     end
   end
 end
