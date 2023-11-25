@@ -25,7 +25,6 @@ module Mailgun
         user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}"
       }
       rest_client_params[:timeout] = timeout if timeout
-      rest_client_params[SUBACCOUNT_HEADER] = Mailgun.subaccount_account_id if Mailgun.subaccount_account_id
 
       endpoint = endpoint_generator(api_host, api_version, ssl)
       RestClient.proxy = proxy_url
@@ -50,6 +49,11 @@ module Mailgun
     # Change API key
     def set_api_key(api_key)
       @http_client.options[:password] = api_key
+    end
+
+    # Add subaccount id to headers
+    def set_subaccount(subaccount_id)
+      @http_client.options[:headers] = { SUBACCOUNT_HEADER => subaccount_id }
     end
 
     # Client is in test mode?
