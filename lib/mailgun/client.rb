@@ -56,6 +56,11 @@ module Mailgun
       @http_client.options[:headers] = { SUBACCOUNT_HEADER => subaccount_id }
     end
 
+    # Reset subaccount for primary usage
+    def reset_subaccount
+      @http_client.options[:headers].delete(SUBACCOUNT_HEADER)
+    end
+
     # Client is in test mode?
     #
     # @return [Boolean] Is the client set in test mode?

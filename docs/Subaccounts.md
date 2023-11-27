@@ -56,6 +56,9 @@ message_params = {  from: 'bob@SUBACCOUNT_DOMAIN',
 # Send your message through the client
 # Note: This will not actually hit the API, and will return a generic OK response.
 mg_client.send_message('SUBACCOUNT_DOMAIN', message_params)
+
+# Reset subaccount for primary usage
+mg_client.reset_subaccount
 ```
 
 
