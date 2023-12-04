@@ -9,6 +9,7 @@ module Mailgun
   #
   # See the Github documentation for full examples.
   class Client
+    SUBACCOUNT_HEADER = 'X-Mailgun-On-Behalf-Of'.freeze
 
     def initialize(api_key = Mailgun.api_key,
                    api_host = Mailgun.api_host || 'api.mailgun.net',
@@ -48,6 +49,16 @@ module Mailgun
     # Change API key
     def set_api_key(api_key)
       @http_client.options[:password] = api_key
+    end
+
+    # Add subaccount id to headers
+    def set_subaccount(subaccount_id)
+      @http_client.options[:headers] = { SUBACCOUNT_HEADER => subaccount_id }
+    end
+
+    # Reset subaccount for primary usage
+    def reset_subaccount
+      @http_client.options[:headers].delete(SUBACCOUNT_HEADER)
     end
 
     # Client is in test mode?

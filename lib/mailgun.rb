@@ -16,6 +16,7 @@ require 'mailgun/exceptions/exceptions'
 require 'mailgun/domains/domains'
 require 'mailgun/webhooks/webhooks'
 require 'mailgun/templates/templates'
+require 'mailgun/subaccounts/subaccounts'
 
 # Module for interacting with the sweet Mailgun API.
 #
