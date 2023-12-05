@@ -8,7 +8,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Subaccounts API support (https://github.com/mailgun/mailgun-ruby/pull/300).
+- Subaccounts API support (https://github.com/mailgun/mailgun-ruby/pull/310).
+
+## [1.2.12] - 2023-10-22
+
+### Added
+
+- Templates CRUD support (https://github.com/mailgun/mailgun-ruby/pull/300).
 
 ### Fixed
 
