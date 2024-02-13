@@ -421,7 +421,7 @@ module Mailgun
 
     # Parses the address and gracefully handles any
     # missing parameters. The result should be something like:
-    # "'First Last' <person@domain.com>"
+    # '"First Last" <person@domain.com>'
     #
     # @param [String] address The email address to parse.
     # @param [Hash] variables A list of recipient variables.
@@ -439,7 +439,7 @@ module Mailgun
         full_name = "#{vars['first']} #{vars['last']}".strip
       end
 
-      return "'#{full_name}' <#{address}>" if full_name
+      return "#{full_name.dump} <#{address}>" if full_name
       address
     end
 
