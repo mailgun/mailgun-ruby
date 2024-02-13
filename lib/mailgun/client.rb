@@ -30,6 +30,7 @@ module Mailgun
       RestClient.proxy = proxy_url
       @http_client = RestClient::Resource.new(endpoint, rest_client_params)
       @test_mode = test_mode
+      @api_version = api_version
     end
 
     # Enable test mode
@@ -66,6 +67,11 @@ module Mailgun
     # @return [Boolean] Is the client set in test mode?
     def test_mode?
       @test_mode
+    end
+
+    # @return [String] client api version
+    def api_version
+      @api_version
     end
 
     # Provides a store of all the emails sent in test mode so you can check them.
@@ -168,8 +174,12 @@ module Mailgun
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
     # @return [Mailgun::Response] A Mailgun::Response object.
-    def delete(resource_path)
-      response = @http_client[resource_path].delete
+    def delete(resource_path, params = nil)
+      if params
+        response = @http_client[resource_path].delete(params: params)
+      else
+        response = @http_client[resource_path].delete
+      end
       Response.new(response)
     rescue => err
       raise communication_error err
