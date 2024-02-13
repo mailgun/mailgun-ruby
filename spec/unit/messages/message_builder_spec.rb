@@ -186,6 +186,17 @@ describe 'The method body_text' do
   end
 end
 
+describe 'The method amp_html' do
+  it 'sets amp-html to a string, not an array' do
+    the_text = 'Don\'t mess with Texas!'
+    @mb_obj = Mailgun::MessageBuilder.new
+    @mb_obj.amp_html(the_text)
+    expect(@mb_obj.message['amp-html']).to be_a(String)
+    expect(@mb_obj.message['amp-html']).to eq(the_text)
+  end
+end
+    
+
 describe 'The method set_from_address' do
   it 'warns of set_from_address deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new

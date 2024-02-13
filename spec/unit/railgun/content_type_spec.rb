@@ -26,6 +26,17 @@ describe 'extract_body' do
   }
   let(:html_content) { '<h3> [TEST] </h3> <br/> Hello, world!' }
 
+  let(:amp_mail_option) {
+    {
+      from:        'bob@example.com',
+      to:          'sally@example.com',
+      subject:     'RAILGUN TEST SAMPLE',
+      body:         amp_content,
+      content_type: 'text/x-amp-html',
+    }
+  }
+  let(:amp_content) { '<h3> [TEST] </h3> <br/> Hello from AMP!' }
+
   context 'with <Content-Type: text/plain>' do
     let(:sample_mail) { Mail.new(text_mail_option) }
 
@@ -53,10 +64,12 @@ describe 'extract_body' do
   context 'with <Content-Type: multipart/alternative>' do
     let(:text_mail) { Mail.new(text_mail_option) }
     let(:html_mail) { Mail.new(html_mail_option) }
+    let(:amp_mail) { Mail.new(amp_mail_option) }
 
     before do
       @sample_mail = Mail::Part.new(content_type: "multipart/alternative")
       @sample_mail.add_part text_mail
+      @sample_mail.add_part amp_mail
       @sample_mail.add_part html_mail
     end
 
@@ -66,6 +79,10 @@ describe 'extract_body' do
 
     it 'should return body html' do
       expect(Railgun.extract_body_html(@sample_mail)).to eq(html_content)
+    end
+
+    it 'should return AMP html' do
+      expect(Railgun.extract_amp_html(@sample_mail)).to eq(amp_content)
     end
   end
 end
