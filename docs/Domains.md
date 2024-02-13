@@ -53,5 +53,5 @@ See the [Suppressions](/docs/Suppressions.md) for usage samples and
 
 More Documentation
 ------------------
-See the official [Mailgun Domain Docs](https://documentation.mailgun.com/api-domains.html)
+See the official [Mailgun Domain Docs](https://documentation.mailgun.com/en/latest/api-domains.html)
 for more information
