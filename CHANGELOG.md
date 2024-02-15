@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file.
 - Additional Domain Endpoints (https://github.com/mailgun/mailgun-ruby/pull/314)
 - Webhooks Update Method (https://github.com/mailgun/mailgun-ruby/pull/305)
 - Add support for AMP HTML (https://github.com/mailgun/mailgun-ruby/pull/304)
-- Add support for AMP HTML (https://github.com/mailgun/mailgun-ruby/pull/304)
 
 ### Fixed
 
