@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Mailgun
   # A Mailgun::Response object is instantiated for each response generated
   # by the Client request. The Response object supports deserialization of
@@ -12,9 +10,10 @@ module Mailgun
     #   slightly different
     attr_accessor :body, :code
 
+    ResponseHash = Struct.new(:body, :code)
     def self.from_hash(h)
       # Create a "fake" response object with the data passed from h
-      self.new OpenStruct.new(h)
+      self.new ResponseHash.new(h[:body], h[:code])
     end
 
     def initialize(response)

@@ -96,19 +96,19 @@ module Mailgun
       if resource_endpoint == "messages"
         t = Time.now
         id = "<#{t.to_i}.#{rand(99999999)}.5817@example.com>"
-        return OpenStruct.new({ "body" => JSON.generate({"message" => "Queued. Thank you.", "id" => id}) })
+        return Response.from_hash({ body: JSON.generate({"message" => "Queued. Thank you.", "id" => id}) })
       end
       if resource_endpoint == "bounces"
-        return OpenStruct.new({ "body" => JSON.generate({"total_count" => 1, "items" => {"created_at" => "Fri, 21 Oct 2011 11:02:55 GMT", "code" => 550, "address" => "baz@example.com", "error" => "Message was not accepted -- invalid mailbox. Local mailbox baz@example.com is unavailable: user not found"}}) })
+        return Response.from_hash({ body: JSON.generate({"total_count" => 1, "items" => {"created_at" => "Fri, 21 Oct 2011 11:02:55 GMT", "code" => 550, "address" => "baz@example.com", "error" => "Message was not accepted -- invalid mailbox. Local mailbox baz@example.com is unavailable: user not found"}}) })
       end
       if resource_endpoint == "lists"
-        return OpenStruct.new({ "body" => JSON.generate({"member" => {"vars" => {"age" => 26}, "name" => "Foo Bar", "subscribed" => false, "address" => "bar@example.com"}, "message" => "Mailing list member has been updated"}) })
+        return Response.from_hash({ body: JSON.generate({"member" => {"vars" => {"age" => 26}, "name" => "Foo Bar", "subscribed" => false, "address" => "bar@example.com"}, "message" => "Mailing list member has been updated"}) })
       end
       if resource_endpoint == "campaigns"
-        return OpenStruct.new({ "body" => JSON.generate({"message" => "Campaign has been deleted", "id" => "ABC123"}) })
+        return Response.from_hash({ body: JSON.generate({"message" => "Campaign has been deleted", "id" => "ABC123"}) })
       end
       if resource_endpoint == "events"
-        return OpenStruct.new({ "body" => JSON.generate({"items" => [], "paging" => {"next"=> "https://api.mailgun.net/v3/thisisatestdomainformailgun.com/events/W3siYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIHsiYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIFsiZiJdLCBudWxsLCB7ImFjY291bnQuaWQiOiAiNGU4MjMwZjYxNDc2ZDg2NzEzMDBjNDc2IiwgImRvbWFpbi5uYW1lIjogInRoaXNpc2F0ZXN0ZG9tYWluZm9ybWFpbGd1bi5jb20iLCAic2V2ZXJpdHkiOiAiTk9UIGludGVybmFsIn0sIDEwMCwgbnVsbF0=", "previous"=> "https://api.mailgun.net/v2/thisisatestdomainformailgun.com/events/W3siYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIHsiYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDdUMDA6NDU6NTEuNzQxODkyKzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIHsiYWNjb3VudC5pZCI6ICI0ZTgyMzBmNjE0NzZkODY3MTMwMGM0NzYiLCAiZG9tYWluLm5hbWUiOiAidGhpc2lzYXRlc3Rkb21haW5mb3JtYWlsZ3VuLmNvbSIsICJzZXZlcml0eSI6ICJOT1QgaW50ZXJuYWwifSwgMTAwLCBudWxsXQ=="}}) })
+        return Response.from_hash({ body: JSON.generate({"items" => [], "paging" => {"next"=> "https://api.mailgun.net/v3/thisisatestdomainformailgun.com/events/W3siYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIHsiYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIFsiZiJdLCBudWxsLCB7ImFjY291bnQuaWQiOiAiNGU4MjMwZjYxNDc2ZDg2NzEzMDBjNDc2IiwgImRvbWFpbi5uYW1lIjogInRoaXNpc2F0ZXN0ZG9tYWluZm9ybWFpbGd1bi5jb20iLCAic2V2ZXJpdHkiOiAiTk9UIGludGVybmFsIn0sIDEwMCwgbnVsbF0=", "previous"=> "https://api.mailgun.net/v2/thisisatestdomainformailgun.com/events/W3siYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDVUMDA6NDU6NTEuNzQwOTgzKzAwOjAwIn0sIHsiYiI6ICIyMDE0LTA1LTA3VDAwOjQ1OjUxLjc0MDg5MiswMDowMCIsICJlIjogIjIwMTQtMDUtMDdUMDA6NDU6NTEuNzQxODkyKzAwOjAwIn0sIFsicCIsICJmIl0sIG51bGwsIHsiYWNjb3VudC5pZCI6ICI0ZTgyMzBmNjE0NzZkODY3MTMwMGM0NzYiLCAiZG9tYWluLm5hbWUiOiAidGhpc2lzYXRlc3Rkb21haW5mb3JtYWlsZ3VuLmNvbSIsICJzZXZlcml0eSI6ICJOT1QgaW50ZXJuYWwifSwgMTAwLCBudWxsXQ=="}}) })
       end
     end
   end
