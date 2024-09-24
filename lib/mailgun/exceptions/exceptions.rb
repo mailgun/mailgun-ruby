@@ -50,7 +50,7 @@ module Mailgun
               end
 
       begin
-        api_message = JSON.parse(response.body)['message']
+        api_message = JSON.parse(response.body)['message'] || JSON.parse(response.body)['Error']
       rescue JSON::ParserError
         api_message = response.body
       rescue NoMethodError
