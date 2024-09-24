@@ -16,6 +16,15 @@ RSpec.describe Mailgun::CommunicationError do
           expect(subject.message).to eq("Boom!: unauthorized")
         end
       end
+
+      context "when the Response body has an `error` property" do
+        it "uses the `Error` property as the API message" do
+          subject = described_class.new('Boom!', Mailgun::Response.from_hash({ code: 401, body: '{"error":"not found"}' }))
+
+          expect(subject.message).to eq("Boom!: not found")
+        end
+      end
+
     end
   end
 end
