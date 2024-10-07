@@ -1,5 +1,4 @@
 require 'uri'
-require 'base64'
 require 'openssl'
 
 module Mailgun
@@ -20,14 +19,14 @@ module Mailgun
     def self.generate_hash(mailing_list, secret_app_id, recipient_address)
       inner_payload = { 'l' => mailing_list, 'r' => recipient_address }
 
-      inner_payload_encoded = Base64.encode64(JSON.generate(inner_payload))
+      inner_payload_encoded = base64_encode(JSON.generate(inner_payload))
 
       sha1_digest = OpenSSL::Digest.new('sha1')
       digest = OpenSSL::HMAC.hexdigest(sha1_digest, secret_app_id, inner_payload_encoded)
 
       outer_payload = { 'h' => digest, 'p' => inner_payload_encoded }
 
-      outer_payload_encoded = Base64.encode64(JSON.generate(outer_payload))
+      outer_payload_encoded = base64_encode(JSON.generate(outer_payload))
 
       CGI.escape(outer_payload_encoded)
     end
@@ -38,12 +37,12 @@ module Mailgun
     # @param [Hash] unique_hash The hash from the user. Likely via link click.
     # @return [Hash or Boolean] A hash with 'recipient_address' and 'mailing_list', if validates. Otherwise, boolean false.
     def self.validate_hash(secret_app_id, unique_hash)
-      outer_payload = JSON.parse(Base64.decode64(CGI.unescape(unique_hash)))
+      outer_payload = JSON.parse(base64_decode(CGI.unescape(unique_hash)))
 
       sha1_digest = OpenSSL::Digest.new('sha1')
       generated_hash = OpenSSL::HMAC.hexdigest(sha1_digest, secret_app_id, outer_payload['p'])
 
-      inner_payload = JSON.parse(Base64.decode64(CGI.unescape(outer_payload['p'])))
+      inner_payload = JSON.parse(base64_decode(CGI.unescape(outer_payload['p'])))
 
       hash_provided = outer_payload['h']
 
@@ -53,6 +52,22 @@ module Mailgun
       false
     end
 
+    # Equivalent to Base64.encode64
+    def self.base64_encode(input)
+      [input].pack('m')
+    end
+
+    # Equivalent to Base64.decode64
+    def self.base64_decode(input)
+      # TODO: Condition can be droped if Ruby >= 2.4.0
+      if input.respond_to?(:unpack1)
+        input.unpack1('m')
+      else
+        input.unpack('m').first
+      end
+    end
+
+    private_class_method :base64_encode, :base64_decode
   end
 
 end
