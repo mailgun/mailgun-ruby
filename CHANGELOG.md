@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.15] - 2024-02-13
+
+### Fixed
+
+- Remove Openstruct usage (- Remove OpenStruct usage, will warn in Ruby 3.4, raise in Ruby 3.5 (https://github.com/mailgun/mailgun-ruby/issues/321)).
+- Error handling (- Work around error responses without message property (https://github.com/mailgun/mailgun-ruby/pull/324)).
+
 ## [1.2.14] - 2024-02-13
 
 ### Added
