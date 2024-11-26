@@ -18,6 +18,7 @@ require 'mailgun/webhooks/webhooks'
 require 'mailgun/templates/templates'
 require 'mailgun/subaccounts/subaccounts'
 require 'mailgun/tags/tags'
+require 'mailgun/metrics/metrics'
 
 # Module for interacting with the sweet Mailgun API.
 #
