@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.16] - 2024-11-29
+
+### Added
+
+- Metrics API support (https://github.com/mailgun/mailgun-ruby/pull/326)
+
 ## [1.2.15] - 2024-02-13
 
 ### Fixed

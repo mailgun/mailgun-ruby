@@ -1,0 +1,116 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/analytics/metrics
+    body:
+      encoding: UTF-8
+      string: '{"resolution":"hour","metrics":["accepted_count","delivered_count","clicked_rate","opened_rate"],"include_aggregates":true,"start":"Tue,
+        26 Nov 2024 20:56:50 -0500","duration":"1m","filter":{"AND":[{"attribute":"domain","comparator":"!=","values":[{"label":"example.com","value":"example.com"}]}]},"dimensions":["time"],"end":"Tue,
+        30 Nov 2024 20:56:50 -0500","include_subaccounts":true}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin23 x86_64) ruby/3.1.4p223
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '387'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic xxx
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '1006'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 28 Nov 2024 18:20:22 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - c02fd0ba-d8dbad66
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"start":"Fri, 01 Nov 2024 01:00:00 +0000","end":"Sun, 01 Dec 2024
+        01:00:00 +0000","resolution":"hour","duration":"1m","dimensions":["time"],"pagination":{"sort":"","skip":0,"limit":1500,"total":3},"items":[{"dimensions":[{"dimension":"time","value":"Wed,
+        27 Nov 2024 12:00:00 +0000","display_value":"Wed, 27 Nov 2024 12:00:00 +0000"}],"metrics":{"accepted_count":1,"delivered_count":1,"opened_rate":"0.0000","clicked_rate":"0.0000"}},{"dimensions":[{"dimension":"time","value":"Wed,
+        27 Nov 2024 13:00:00 +0000","display_value":"Wed, 27 Nov 2024 13:00:00 +0000"}],"metrics":{"accepted_count":1,"delivered_count":1,"opened_rate":"0.0000","clicked_rate":"0.0000"}},{"dimensions":[{"dimension":"time","value":"Thu,
+        28 Nov 2024 15:00:00 +0000","display_value":"Thu, 28 Nov 2024 15:00:00 +0000"}],"metrics":{"accepted_count":1,"delivered_count":1,"opened_rate":"0.0000","clicked_rate":"0.0000"}}],"aggregates":{"metrics":{"accepted_count":3,"delivered_count":3,"opened_rate":"0.0000","clicked_rate":"0.0000"}}}
+
+        '
+    http_version:
+  recorded_at: Thu, 28 Nov 2024 18:20:22 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/analytics/usage/metrics
+    body:
+      encoding: UTF-8
+      string: '{"resolution":"hour","metrics":["email_preview_count","email_preview_failed_count","email_validation_bulk_count","email_validation_count","email_validation_list_count","email_validation_mailgun_count","email_validation_mailjet_count","email_validation_public_count","email_validation_single_count","email_validation_valid_count","link_validation_count","link_validation_failed_count","processed_count","seed_test_count"],"include_aggregates":true,"start":"Tue,
+        26 Nov 2024 20:56:50 -0500","duration":"1m","filter":{"AND":[{"attribute":"subaccount","comparator":"!=","values":[{"label":"12345","value":"12345"}]}]},"dimensions":["time"],"end":"Tue,
+        28 Nov 2024 20:56:50 -0500","include_subaccounts":true}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (darwin23 x86_64) ruby/3.1.4p223
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '703'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.mailgun.net
+      Authorization:
+      - Basic xxx
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '1795'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 28 Nov 2024 18:20:23 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - c02fd0ba-d8dbad66
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"start":"Tue, 29 Oct 2024 01:00:00 +0000","end":"Fri, 29 Nov 2024
+        01:00:00 +0000","resolution":"hour","duration":"1m","dimensions":["time"],"pagination":{"sort":"","skip":0,"limit":1500,"total":2},"items":[{"dimensions":[{"dimension":"time","value":"Wed,
+        27 Nov 2024 00:00:00 +0000","display_value":"Wed, 27 Nov 2024 00:00:00 +0000"}],"metrics":{"processed_count":2,"email_validation_count":0,"email_validation_public_count":0,"email_validation_valid_count":0,"email_validation_single_count":0,"email_validation_bulk_count":0,"email_validation_list_count":0,"email_validation_mailgun_count":0,"email_validation_mailjet_count":0,"email_preview_count":0,"email_preview_failed_count":0,"link_validation_count":0,"link_validation_failed_count":0,"seed_test_count":0}},{"dimensions":[{"dimension":"time","value":"Thu,
+        28 Nov 2024 00:00:00 +0000","display_value":"Thu, 28 Nov 2024 00:00:00 +0000"}],"metrics":{"processed_count":1,"email_validation_count":0,"email_validation_public_count":0,"email_validation_valid_count":0,"email_validation_single_count":0,"email_validation_bulk_count":0,"email_validation_list_count":0,"email_validation_mailgun_count":0,"email_validation_mailjet_count":0,"email_preview_count":0,"email_preview_failed_count":0,"link_validation_count":0,"link_validation_failed_count":0,"seed_test_count":0}}],"aggregates":{"metrics":{"permanent_failed_count":0,"processed_count":3,"email_validation_count":0,"email_validation_public_count":0,"email_validation_valid_count":0,"email_validation_single_count":0,"email_validation_bulk_count":0,"email_validation_list_count":0,"email_validation_mailgun_count":0,"email_validation_mailjet_count":0,"email_preview_count":0,"email_preview_failed_count":0,"link_validation_count":0,"link_validation_failed_count":0,"seed_test_count":0}}}
+
+        '
+    http_version:
+  recorded_at: Thu, 28 Nov 2024 18:20:23 GMT
+recorded_with: VCR 3.0.3
