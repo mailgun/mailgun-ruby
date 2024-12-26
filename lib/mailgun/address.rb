@@ -4,7 +4,7 @@ module Mailgun
 
   # Mailgun::Address is a simple interface to the Email Validation API.
   class Address
-    def initialize(api_key = Mailgun.api_key, api_host: Mailgun.api_host)
+    def initialize(api_key = Mailgun.api_key, api_host = Mailgun.api_host)
       @client = Mailgun::Client.new(api_key, api_host || 'api.mailgun.net', 'v4')
     end
 
