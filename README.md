@@ -193,6 +193,7 @@ This SDK includes the following components:
 - [Suppressions](docs/Suppressions.md)
 - [Templates](docs/Templates.md)
 - [EmailValidation](docs/EmailValidation.md)
+- [Metrics](docs/Metrics.md)
 
 Message Builder allows you to quickly create the array of parameters, required
 to send a message, by calling a methods for each parameter.
