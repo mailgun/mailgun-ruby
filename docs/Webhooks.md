@@ -4,8 +4,7 @@ Mailgun - Webhooks
 This is the Mailgun Ruby *Webhook* utilities.
 
 The below assumes you've already installed the Mailgun Ruby SDK in to your
-project. If not, go back to the master README for instructions. It currently supports
-all calls except updating webhooks.
+project. If not, go back to the master README for instructions.
 
 Usage - Webhooks
 -----------------------
@@ -26,6 +25,9 @@ hook.create_all 'my.perfect.domain', 'https://the.webhook.url/'
 
 # Add a url for a specific webhook
 hook.create 'my.perfect.domain', 'deliver', 'https://the.webhook.url/'
+
+# Update the url for a specific webhook
+hook.update 'my.perfect.domain', 'deliver', 'https://the.webhook.url/'
 
 # Remove a url for a specific webhook
 hook.remove 'my.perfect.domain', 'deliver'
