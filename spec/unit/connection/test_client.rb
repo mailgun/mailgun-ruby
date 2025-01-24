@@ -4,13 +4,13 @@ require 'json'
 module Mailgun
   class UnitClient < Mailgun::Client
 
-    attr_reader :options, :block, :body, :status, :response
+    attr_reader :options, :block, :body, :code, :response
 
     def initialize(endpoint, &block)
       @block = block
       @endpoint = endpoint
       @body = nil
-      @status = nil
+      @code = nil
     end
 
     def [](endpoint, &new_block)

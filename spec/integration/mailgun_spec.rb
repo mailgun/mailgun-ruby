@@ -146,7 +146,7 @@ describe 'The method send_message()', vcr: vcr_opts do
     expect(result.body).to include("message")
     expect(result.body).to include("id")
 
-    expect(result.status).to eq(200)
+    expect(result.code).to eq(200)
     expect(result.body['id']).to eq("test-mode-mail-#{uuid}@localhost")
     expect(result.body['message']).to eq("Queued. Thank you.")
   end

@@ -8,7 +8,7 @@ module Mailgun
   class Response
     # All responses have a payload and a status corresponding to http, though
     #   slightly different
-    attr_accessor :body, :status
+    attr_accessor :body, :status, :code
 
     ResponseHash = Struct.new(:body, :status)
     def self.from_hash(h)
@@ -19,6 +19,7 @@ module Mailgun
     def initialize(response)
       @body = response.body
       @status = response.status
+      @code = response.status
     end
 
     # Return response as Ruby Hash
