@@ -51,7 +51,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::Unauthorized => err
-      expect(err.message).to eq('401 Unauthorized - Invalid Domain or API key: Forbidden')
+      expect(err.message).to eq('the server responded with status 401 - Invalid Domain or API key')
     else
       fail
     end
@@ -75,7 +75,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::BadRequest => err
-      expect(err.message).to eq('400 Bad Request: to parameter is not a valid address. please check documentation')
+      expect(err.message).to eq('the server responded with status 400')
     else
       fail
     end
@@ -99,7 +99,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::CommunicationError => err
-      expect(err.message).to include('403 Forbidden')
+      expect(err.message).to include('403')
     else
       fail
     end
@@ -146,7 +146,7 @@ describe 'The method send_message()', vcr: vcr_opts do
     expect(result.body).to include("message")
     expect(result.body).to include("id")
 
-    expect(result.code).to eq(200)
+    expect(result.status).to eq(200)
     expect(result.body['id']).to eq("test-mode-mail-#{uuid}@localhost")
     expect(result.body['message']).to eq("Queued. Thank you.")
   end
@@ -192,7 +192,7 @@ Testing some Mailgun awesomness!'
     expect(result.body).to include("message")
     expect(result.body).to include("id")
   end
-  
+
   it 'receives success response code' do
     @mg_obj.enable_test_mode!
 
@@ -205,7 +205,7 @@ Testing some Mailgun awesomness!'
 
     result = @mg_obj.send_message(@domain, data)
     result.to_h!
-    
+
     expect(result.success?).to be(true)
   end
 end

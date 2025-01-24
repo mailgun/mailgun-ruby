@@ -27,7 +27,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     response, nested = @suppress.create_bounces bounces
     response.to_h!
 
-    expect(response.code).to eq(200)
+    expect(response.status).to eq(200)
     expect(response.body['message']).to eq('4 addresses have been added to the bounces table')
     expect(nested.length).to eq(0)
   end
@@ -47,7 +47,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
       response = @suppress.delete_bounce addr
       response.to_h!
 
-      expect(response.code).to eq(200)
+      expect(response.status).to eq(200)
       expect(response.body['message']).to eq('Bounced address has been removed')
     end
   end
@@ -64,7 +64,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     response, nested = @suppress.create_unsubscribes unsubscribes
     response.to_h!
 
-    expect(response.code).to eq(200)
+    expect(response.status).to eq(200)
     expect(response.body['message']).to eq('4 addresses have been added to the unsubscribes table')
     expect(nested.length).to eq(0)
   end
@@ -81,7 +81,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     response, nested = @suppress.create_unsubscribes unsubscribes
     response.to_h!
 
-    expect(response.code).to eq(200)
+    expect(response.status).to eq(200)
     expect(response.body['message']).to eq('4 addresses have been added to the unsubscribes table')
     expect(nested.length).to eq(0)
   end
@@ -100,7 +100,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
       response = @suppress.delete_unsubscribe addr
       response.to_h!
 
-      expect(response.code).to eq(200)
+      expect(response.status).to eq(200)
       expect(response.body['message']).to eq('Unsubscribe event has been removed')
     end
   end
@@ -114,7 +114,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     response, nested = @suppress.create_complaints complaints
     response.to_h!
 
-    expect(response.code).to eq(200)
+    expect(response.status).to eq(200)
     expect(response.body['message']).to eq('4 complaint addresses have been added to the complaints table')
     expect(nested.length).to eq(0)
   end
@@ -133,7 +133,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
       response = @suppress.delete_complaint addr
       response.to_h!
 
-      expect(response.code).to eq(200)
+      expect(response.status).to eq(200)
       expect(response.body['message']).to eq('Spam complaint has been removed')
     end
   end

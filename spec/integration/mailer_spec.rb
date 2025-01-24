@@ -39,7 +39,7 @@ describe 'Message deliver', vcr: vcr_opts do
 
     expect(result.body['message']).to eq('Queued. Thank you.')
     expect(result.body).to include('id')
-    expect(result.code).to eq(200)
+    expect(result.status).to eq(200)
   end
 end
 

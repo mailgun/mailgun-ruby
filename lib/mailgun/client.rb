@@ -19,16 +19,26 @@ module Mailgun
                    timeout = nil,
                    proxy_url = Mailgun.proxy_url)
 
-      rest_client_params = {
-        user: 'api',
-        password: api_key,
-        user_agent: "mailgun-sdk-ruby/#{Mailgun::VERSION}"
-      }
-      rest_client_params[:timeout] = timeout if timeout
-
       endpoint = endpoint_generator(api_host, api_version, ssl)
-      RestClient.proxy = proxy_url
-      @http_client = RestClient::Resource.new(endpoint, rest_client_params)
+
+      request_options = {
+        url: endpoint,
+        proxy: Mailgun.proxy_url,
+        ssl: {verify: ssl},
+        headers: {
+                   'User-Agent' => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
+                   'Accept' =>'*/*'
+                  }
+      }
+      request_options.merge!(request: {timeout: timeout}) if timeout
+
+      @http_client =  Faraday.new(request_options) do |conn|
+        conn.request :authorization, :basic, 'api', api_key
+        conn.request :url_encoded
+        conn.response :raise_error, include_request: true
+        conn.adapter Faraday.default_adapter
+      end
+
       @test_mode = test_mode
       @api_version = api_version
     end
@@ -49,17 +59,17 @@ module Mailgun
 
     # Change API key
     def set_api_key(api_key)
-      @http_client.options[:password] = api_key
+      @http_client.set_basic_auth('api', api_key)
     end
 
     # Add subaccount id to headers
     def set_subaccount(subaccount_id)
-      @http_client.options[:headers] = { SUBACCOUNT_HEADER => subaccount_id }
+      @http_client.headers = @http_client.headers.merge!({ SUBACCOUNT_HEADER => subaccount_id })
     end
 
     # Reset subaccount for primary usage
     def reset_subaccount
-      @http_client.options[:headers].delete(SUBACCOUNT_HEADER)
+      @http_client.headers.delete(SUBACCOUNT_HEADER)
     end
 
     # Client is in test mode?
@@ -95,7 +105,7 @@ module Mailgun
         return Response.from_hash(
           {
             :body => "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
-            :code => 200,
+            :status => 200,
           }
         )
       end
@@ -130,7 +140,7 @@ module Mailgun
     # @param [Hash] headers Additional headers to pass to the resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def post(resource_path, data, headers = {})
-      response = @http_client[resource_path].post(data, headers)
+      response = @http_client.post(resource_path, data, headers)
       Response.new(response)
     rescue => err
       raise communication_error err
@@ -138,21 +148,19 @@ module Mailgun
 
     # Generic Mailgun GET Handler
     #
-    # @param [String] resource_path This is the API resource you wish to interact
-    # with. Be sure to include your domain, where necessary.
-    # @param [Hash] params This should be a standard Hash
-    # containing required parameters for the requested resource.
-    # @param [String] accept Acceptable Content-Type of the response body.
-    # @return [Mailgun::Response] A Mailgun::Response object.
-    def get(resource_path, params = nil, accept = '*/*')
-      if params
-        response = @http_client[resource_path].get(params: params, accept: accept)
-      else
-        response = @http_client[resource_path].get(accept: accept)
-      end
+    # @param [String] resource_path The API resource path to request, including the domain if required.
+    # @param [Hash] params Optional request parameters, including query parameters and headers.
+    #   - `:headers` [Hash] (optional) Custom headers for the request.
+    # @param [String] accept The expected Content-Type of the response. Defaults to '*/*'.
+    # @return [Mailgun::Response] A response object containing the API response data.
+    # @raise [CommunicationError] If the request fails, raises a communication error.
+    def get(resource_path, params = {}, accept = '*/*')
+      headers = (params[:headers] || {}).merge(accept: accept)
+      response = @http_client.get(resource_path, params, headers)
+
       Response.new(response)
     rescue => err
-      raise communication_error err
+      raise communication_error(err)
     end
 
     # Generic Mailgun PUT Handler
@@ -163,7 +171,7 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def put(resource_path, data)
-      response = @http_client[resource_path].put(data)
+      response = @http_client.put(resource_path, data)
       Response.new(response)
     rescue => err
       raise communication_error err
@@ -176,9 +184,9 @@ module Mailgun
     # @return [Mailgun::Response] A Mailgun::Response object.
     def delete(resource_path, params = nil)
       if params
-        response = @http_client[resource_path].delete(params: params)
+        response = @http_client.delete(resource_path, params: params)
       else
-        response = @http_client[resource_path].delete
+        response = @http_client.delete(resource_path)
       end
       Response.new(response)
     rescue => err
@@ -227,7 +235,7 @@ module Mailgun
     # @param [StandardException] e upstream exception object
     def communication_error(e)
       if e.respond_to?(:response) && e.response
-        return case e.response.code
+        return case e.response_status
         when Unauthorized::CODE
           Unauthorized.new(e.message, e.response)
         when BadRequest::CODE

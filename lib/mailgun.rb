@@ -1,5 +1,5 @@
 require 'tempfile'
-require 'rest_client'
+require 'faraday'
 require 'yaml'
 require 'json'
 
