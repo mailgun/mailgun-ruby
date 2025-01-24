@@ -6,19 +6,20 @@ module Mailgun
   #
   # See the Github documentation for full examples.
   class Response
-    # All responses have a payload and a code corresponding to http, though
+    # All responses have a payload and a status corresponding to http, though
     #   slightly different
-    attr_accessor :body, :code
+    attr_accessor :body, :status, :code
 
-    ResponseHash = Struct.new(:body, :code)
+    ResponseHash = Struct.new(:body, :status)
     def self.from_hash(h)
       # Create a "fake" response object with the data passed from h
-      self.new ResponseHash.new(h[:body], h[:code])
+      self.new ResponseHash.new(h[:body], h[:status])
     end
 
     def initialize(response)
       @body = response.body
-      @code = response.code
+      @status = response.status
+      @code = response.status
     end
 
     # Return response as Ruby Hash
@@ -57,12 +58,12 @@ module Mailgun
     rescue => err
       raise ParseError.new(err), err
     end
-    
-    # Returns true if response code is 2xx
-    # 
-    # @return [Boolean] A boolean that binarizes the response code result.
+
+    # Returns true if response status is 2xx
+    #
+    # @return [Boolean] A boolean that binarizes the response status result.
     def success?
-      (200..299).include?(code)
+      (200..299).include?(status)
     end
   end
 end

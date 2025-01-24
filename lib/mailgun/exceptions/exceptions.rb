@@ -29,10 +29,10 @@ module Mailgun
   # Public: Class for managing communications (eg http) response errors
   # Inherits from Mailgun::Error
   class CommunicationError < Error
-    # Public: gets HTTP status code
-    attr_reader :code
+    # Public: gets HTTP status status
+    attr_reader :status
 
-    # Public: fallback if there is no response code on the object
+    # Public: fallback if there is no response status on the object
     NOCODE = 000
     FORBIDDEN = 'Forbidden'
 
@@ -43,17 +43,17 @@ module Mailgun
     #
     def initialize(message = nil, response = nil)
       @response = response
-      @code = if response.nil?
+      @status = if response.nil?
                 NOCODE
               else
-                response.code
+                response.status
               end
 
       begin
         json = JSON.parse(response.body)
         api_message = json['message'] || json['Error'] || json['error']
       rescue JSON::ParserError
-        api_message = response.body
+        api_message = response.response_body
       rescue NoMethodError
         api_message = "Unknown API error"
       rescue
@@ -65,7 +65,7 @@ module Mailgun
 
       super(message, response)
     rescue NoMethodError, JSON::ParserError
-      @code = NOCODE
+      @status = NOCODE
       super(message, response)
     end
   end

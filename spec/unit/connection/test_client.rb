@@ -99,7 +99,7 @@ module Mailgun
         return Response.from_hash({ body: JSON.generate({"message" => "Queued. Thank you.", "id" => id}) })
       end
       if resource_endpoint == "bounces"
-        return Response.from_hash({ body: JSON.generate({"total_count" => 1, "items" => {"created_at" => "Fri, 21 Oct 2011 11:02:55 GMT", "code" => 550, "address" => "baz@example.com", "error" => "Message was not accepted -- invalid mailbox. Local mailbox baz@example.com is unavailable: user not found"}}) })
+        return Response.from_hash({ body: JSON.generate({"total_count" => 1, "items" => {"created_at" => "Fri, 21 Oct 2011 11:02:55 GMT", "status" => 550, "address" => "baz@example.com", "error" => "Message was not accepted -- invalid mailbox. Local mailbox baz@example.com is unavailable: user not found"}}) })
       end
       if resource_endpoint == "lists"
         return Response.from_hash({ body: JSON.generate({"member" => {"vars" => {"age" => 26}, "name" => "Foo Bar", "subscribed" => false, "address" => "bar@example.com"}, "message" => "Mailing list member has been updated"}) })
