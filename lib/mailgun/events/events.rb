@@ -29,7 +29,7 @@ module Mailgun
     # params - a Hash of query options and/or filters.
     #
     # Returns a Mailgun::Response object.
-    def get(params = nil)
+    def get(params = {})
       self.next(params)
     end
 
@@ -40,7 +40,7 @@ module Mailgun
     # params - a Hash of query options and/or filters.
     #
     # Returns a Mailgun::Response object.
-    def next(params = nil)
+    def next(params = {})
       get_events(params, @paging_next)
     end
 
@@ -51,7 +51,7 @@ module Mailgun
     # params - a Hash of query options and/or filters.
     #
     # Returns Mailgun::Response object.
-    def previous(params = nil)
+    def previous(params = {})
       get_events(params, @paging_previous)
     end
 
@@ -75,7 +75,7 @@ module Mailgun
     # paging - the URL key used for previous/next requests
     #
     # Returns a Mailgun.Response object.
-    def get_events(params = nil, paging = nil)
+    def get_events(params = {}, paging = nil)
       response = @client.get(construct_url(paging), params)
       extract_paging(response)
       response

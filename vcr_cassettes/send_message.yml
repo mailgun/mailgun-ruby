@@ -49,7 +49,7 @@ http_interactions:
           "id": "<20160107220803.53710.46802@DOMAIN.TEST>",
           "message": "Queued. Thank you."
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Jan 2016 22:08:03 GMT
 - request:
     method: post
@@ -102,6 +102,57 @@ http_interactions:
           "id": "<20160107220803.17329.90097@DOMAIN.TEST>",
           "message": "Queued. Thank you."
         }
-    http_version: 
+    http_version:
   recorded_at: Thu, 07 Jan 2016 22:08:03 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/messages
+    body:
+      encoding: UTF-8
+      string: from=bob%40DOMAIN.TEST&o%3Atestmode=true&subject=Hash+Integration+Test&text=INTEGRATION+TESTING&to=sally%40DOMAIN.TEST
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '236'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:31 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Server:
+      - influx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain DOMAIN.TEST is not allowed to send: Sandbox subdomains
+        are for test purposes only. Please add your own domain or add the address
+        to authorized recipients in Account Settings."}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:31 GMT
+recorded_with: VCR 3.0.3

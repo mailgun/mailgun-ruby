@@ -40,6 +40,53 @@ http_interactions:
         {
           "message": "Domain not found: not-our-doma.in"
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 02 Nov 2016 19:43:40 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/not-our-doma.in/messages
+    body:
+      encoding: UTF-8
+      string: from=sally%40not-our-doma.in&subject=Exception+Integration+Test&text=INTEGRATION+TESTING&to=bob%40DOMAIN.TEST
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '9'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:30 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Www-Authenticate:
+      - Basic realm="MG API"
+      X-Server:
+      - influx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: Forbidden
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:30 GMT
 recorded_with: VCR 3.0.3

@@ -44,7 +44,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Address
         has been added to the complaints table"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:31:59 GMT
 - request:
     method: get
@@ -86,7 +86,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"integration-test-email@DOMAIN.TEST","created_at":"Fri,
         08 Jan 2016 20:31:59 UTC"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
 - request:
     method: get
@@ -128,7 +128,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"items":[{"address":"integration-test-email@DOMAIN.TEST","created_at":"Fri,
         08 Jan 2016 20:31:59 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?limit=100","last":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=last\u0026limit=100","next":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=next\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=previous\u0026address=integration-test-email%40DOMAIN.TEST\u0026limit=100"}}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
 - request:
     method: delete
@@ -170,6 +170,216 @@ http_interactions:
       encoding: UTF-8
       string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Spam complaint
         has been removed"}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:32:00 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/complaints
+    body:
+      encoding: UTF-8
+      string: address=integration-test-email%40DOMAIN.TEST
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '148'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:06 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2495'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Address
+        has been added to the complaints table"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:07 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/complaints/integration-test-email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '134'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:07 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2494'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","created_at":"Sun,
+        26 Jan 2025 07:29:06 UTC"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:07 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/complaints
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '826'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:08 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2493'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"address":"integration-test-email@DOMAIN.TEST","created_at":"Sun,
+        26 Jan 2025 07:29:06 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?limit=100&term=","last":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=last&limit=100&term=","next":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=next&address=integration-test-email%40DOMAIN.TEST&limit=100&term=","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/complaints?page=previous&address=integration-test-email%40DOMAIN.TEST&limit=100&term="}}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:08 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/complaints/integration-test-email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '133'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:08 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2492'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test-email@DOMAIN.TEST","message":"Spam complaint
+        has been removed"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:08 GMT
+recorded_with: VCR 3.0.3
