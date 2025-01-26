@@ -172,4 +172,213 @@ http_interactions:
         address has been removed"}'
     http_version:
   recorded_at: Fri, 08 Jan 2016 20:33:30 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces
+    body:
+      encoding: UTF-8
+      string: address=integration-test%2Bemail%40DOMAIN.TEST&code=550&error=Integration+Test
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '145'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:04 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2499'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Address has been added to the bounces table","address":"integration-test+email@DOMAIN.TEST"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:04 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test+email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '174'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:04 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2498'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test+email@DOMAIN.TEST","code":"550","error":"Integration
+        Test","created_at":"Sun, 26 Jan 2025 07:29:04 UTC"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:04 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '858'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:05 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2497'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"address":"integration-test+email@DOMAIN.TEST","code":"550","error":"Integration
+        Test","created_at":"Sun, 26 Jan 2025 07:29:04 UTC"}],"paging":{"first":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?limit=100&term=","last":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=last&limit=100&term=","next":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=next&address=integration-test%2Bemail%40DOMAIN.TEST&limit=100&term=","previous":"https://api.mailgun.net/v3/DOMAIN.TEST/bounces?page=previous&address=integration-test%2Bemail%40DOMAIN.TEST&limit=100&term="}}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:05 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/bounces/integration-test+email@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '134'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:06 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Request-Limit:
+      - '2500'
+      X-Request-Remaining:
+      - '2496'
+      X-Request-Reset:
+      - '1737876559178'
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration-test+email@DOMAIN.TEST","message":"Bounced
+        address has been removed"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:06 GMT
+recorded_with: VCR 3.0.3

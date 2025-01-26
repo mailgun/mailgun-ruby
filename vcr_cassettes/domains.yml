@@ -98,7 +98,7 @@ http_interactions:
             }
           ]
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
 - request:
     method: get
@@ -193,7 +193,7 @@ http_interactions:
             }
           ]
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
 - request:
     method: get
@@ -305,7 +305,7 @@ http_interactions:
           ],
           "total_count": 5
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 15 Jan 2016 20:11:29 GMT
 - request:
     method: delete
@@ -355,7 +355,7 @@ http_interactions:
         {
           "message": "Domain has been deleted"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 15 Jan 2016 20:12:54 GMT
 - request:
     method: put
@@ -404,8 +404,8 @@ http_interactions:
       string: '{"message":"Domain has been updated","domain":{"created_at":"Mon, 25
         Jan 2021 10:11:26 GMT","id":"600e994e20b1a14a5990856d","is_disabled":false,"name":"integration-test.domain.invalid","require_tls":false,"skip_verification":false,"smtp_login":"postmaster@DOMAIN.TEST","spam_action":"block","state":"active","type":"sandbox","web_prefix":"email","web_scheme":"https","wildcard":true}}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Mon, 17 Apr 2023 13:04:47 GMT
 - request:
     method: post
@@ -458,8 +458,8 @@ http_interactions:
         p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWCVG78+Mb0j0pL3PsG+sj24kWDWEjLhrsD5Kz7Ql4NXXRYe9vWFsZ7kbR84iiDDpmJpcW68C3QQ/pXaJDFp5v+jmfAG1zX5yiSVdpHmH71dCWq40iUJklH8bPp0S2GcXBOEY3JEV3zky2kejLYLItanUTY5f/zZ8zmCnen416+wIDAQAB"},{"is_active":true,"cached":[],"name":"integration-test.domain.invalid","record_type":"TXT","valid":"unknown","value":"v=spf1
         include:mailgun.org ~all"},{"is_active":true,"cached":[],"name":"email.integration-test.domain.invalid","record_type":"CNAME","valid":"unknown","value":"mailgun.org"}]}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:27:29 GMT
 - request:
     method: get
@@ -507,8 +507,8 @@ http_interactions:
         p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWCVG78+Mb0j0pL3PsG+sj24kWDWEjLhrsD5Kz7Ql4NXXRYe9vWFsZ7kbR84iiDDpmJpcW68C3QQ/pXaJDFp5v+jmfAG1zX5yiSVdpHmH71dCWq40iUJklH8bPp0S2GcXBOEY3JEV3zky2kejLYLItanUTY5f/zZ8zmCnen416+wIDAQAB"},{"is_active":true,"cached":[],"name":"integration-test.domain.invalid","record_type":"TXT","valid":"unknown","value":"v=spf1
         include:mailgun.org ~all"},{"is_active":true,"cached":[],"name":"email.integration-test.domain.invalid","record_type":"CNAME","valid":"unknown","value":"mailgun.org"}]}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:27:29 GMT
 - request:
     method: get
@@ -556,8 +556,8 @@ http_interactions:
         GMT","id":"659ab4d1240ce9cf67764a72","is_disabled":false,"name":"integration-test.domain.invalid","require_tls":false,"skip_verification":false,"smtp_login":"postmaster@integration-test.domain.invalid","spam_action":"tag","state":"unverified","type":"custom","web_prefix":"email","web_scheme":"http","wildcard":false},{"created_at":"Mon,
         25 Jan 2021 10:11:26 GMT","id":"600e994e20b1a14a5990856d","is_disabled":false,"name":"DOMAIN.TEST","require_tls":false,"skip_verification":false,"smtp_login":"postmaster@DOMAIN.TEST","spam_action":"block","state":"active","type":"sandbox","web_prefix":"email","web_scheme":"https","wildcard":true}]}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:27:29 GMT
 - request:
     method: delete
@@ -603,8 +603,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain will be deleted on the background"}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:27:30 GMT
 - request:
     method: post
@@ -658,7 +658,7 @@ http_interactions:
         {
           "message": "Created 1 credentials pair(s)"
         }
-    http_version: 
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:32:46 GMT
 - request:
     method: put
@@ -712,7 +712,7 @@ http_interactions:
         {
           "message": "Password changed"
         }
-    http_version: 
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:34:41 GMT
 - request:
     method: delete
@@ -760,7 +760,7 @@ http_interactions:
       encoding: UTF-8
       string: "{\n  \"message\": \"Credentials have been deleted\", \n  \"spec\":
         \"test_login@DOMAIN.TEST\"\n}\n"
-    http_version: 
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:35:46 GMT
 - request:
     method: get
@@ -806,8 +806,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"require_tls":false,"skip_verification":false}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:42:01 GMT
 - request:
     method: put
@@ -858,8 +858,8 @@ http_interactions:
       string: '{"message":"Domain connection settings have been updated, may take
         10 minutes to fully propagate","require_tls":true,"skip_verification":true}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:49:33 GMT
 - request:
     method: get
@@ -905,8 +905,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"tracking":{"open":{"active":true,"place_at_the_top":true},"click":{"active":true},"unsubscribe":{"active":true,"html_footer":"<p>unsubscribe</p>","text_footer":"unsubscribe"}}}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:51:15 GMT
 - request:
     method: put
@@ -956,8 +956,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain tracking settings have been updated","open":{"active":false,"place_at_the_top":true}}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 14:59:22 GMT
 - request:
     method: put
@@ -1007,8 +1007,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain tracking settings have been updated","click":{"active":false}}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:01:03 GMT
 - request:
     method: put
@@ -1058,8 +1058,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain tracking settings have been updated","unsubscribe":{"active":false,"html_footer":"<p>unsubscribe</p>","text_footer":"unsubscribe"}}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:13:04 GMT
 - request:
     method: put
@@ -1111,8 +1111,8 @@ http_interactions:
         include:mailgun.org ~all"],"name":"DOMAIN.TEST","record_type":"TXT","valid":"valid","value":"v=spf1
         include:mailgun.org ~all"},{"is_active":true,"cached":["mailgun.org"],"name":"email.DOMAIN.TEST","record_type":"CNAME","valid":"valid","value":"mailgun.org"}],"changed":true}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:14:24 GMT
 - request:
     method: put
@@ -1162,8 +1162,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain DKIM authority changed"}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:21:07 GMT
 - request:
     method: put
@@ -1213,8 +1213,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"Domain web prefix updated"}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:25:25 GMT
 - request:
     method: get
@@ -1260,8 +1260,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"items":[{"signing_domain":"DOMAIN.TEST","selector":"mailo1","dns_record":{"is_active":true,"cached":[],"name":"mailo1._domainkey.DOMAIN.TEST","record_type":"TXT","valid":"unknown","value":""}}]}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:34:00 GMT
 - request:
     method: put
@@ -1311,8 +1311,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"domain key activated","authority":"DOMAIN.TEST","selector":"smtp","active":true}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:51:11 GMT
 - request:
     method: put
@@ -1362,8 +1362,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"domain key deactivated","authority":"DOMAIN.TEST","selector":"smtp","active":false}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Sun, 07 Jan 2024 15:51:19 GMT
 - request:
     method: delete
@@ -1409,8 +1409,8 @@ http_interactions:
       encoding: UTF-8
       string: '{"message":"success"}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Wed, 10 Jan 2024 14:13:34 GMT
 - request:
     method: get
@@ -1471,7 +1471,739 @@ http_interactions:
         10 Jan 2024 12:00:00 UTC","clicked":{"total":0}},{"time":"Wed, 10 Jan 2024
         13:00:00 UTC","clicked":{"total":0}},{"time":"Wed, 10 Jan 2024 14:00:00 UTC","clicked":{"total":0}}]}
 
-'
-    http_version: 
+        '
+    http_version:
   recorded_at: Wed, 10 Jan 2024 14:40:47 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/credentials
+    body:
+      encoding: UTF-8
+      string: login=test_login&password=test_password
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:09 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:09 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/credentials/test_login
+    body:
+      encoding: UTF-8
+      string: password=test_password2
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:09 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:09 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/credentials/test_login
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:10 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:10 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/connection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:11 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:11 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/connection
+    body:
+      encoding: UTF-8
+      string: require_tls=true&skip_verification=true
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:11 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:11 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/tracking
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:12 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:12 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/tracking/open
+    body:
+      encoding: UTF-8
+      string: active=false
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:12 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:12 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/tracking/click
+    body:
+      encoding: UTF-8
+      string: active=false
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:13 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:13 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/tracking/unsubscribe
+    body:
+      encoding: UTF-8
+      string: active=false
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:14 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:14 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/dkim_authority
+    body:
+      encoding: UTF-8
+      string: active=false
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:14 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:14 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/dkim_selector
+    body:
+      encoding: UTF-8
+      string: dkim_selector=mailo1
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:15 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:15 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/domains/integration-test.domain.invalid/web_prefix
+    body:
+      encoding: UTF-8
+      string: web_prefix=email
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:15 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:15 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v4/domains/integration-test.domain.invalid/keys
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '13'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:16 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[]}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:16 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v4/domains/integration-test.domain.invalid/keys/smtp/activate
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '35'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:17 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"domain key not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:17 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v1/dkim/keys?params%5Bselector%5D=test&params%5Bsigning_domain%5D=integration-test.domain.invalid
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '58'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:17 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Missing mandatory parameter: signing_domain"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:17 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/integration-test.domain.invalid/stats/total?duration=24h&event=clicked&start=Sun,%2023%20Dec%202023%2001:23:45%20JST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Jan 2025 07:29:18 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"domain not found"}
+
+        '
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:18 GMT
 recorded_with: VCR 3.0.3

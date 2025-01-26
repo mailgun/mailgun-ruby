@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -33,7 +33,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -62,7 +62,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -87,7 +87,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -117,7 +117,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -142,7 +142,7 @@ http_interactions:
       Content-Disposition:
       - inline
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Access-Control-Allow-Methods:
@@ -172,7 +172,7 @@ http_interactions:
       string: ''
     headers:
       Accept:
-      - '*/*'
+      - "*/*"
       Accept-Encoding:
       - gzip, deflate
       User-Agent:
@@ -189,7 +189,7 @@ http_interactions:
       Access-Control-Allow-Methods:
       - GET, POST, PUT, DELETE, OPTIONS
       Access-Control-Allow-Origin:
-      - '*'
+      - "*"
       Access-Control-Max-Age:
       - '600'
       Content-Disposition:
@@ -212,4 +212,133 @@ http_interactions:
         "alice"}}'
     http_version:
   recorded_at: Tue, 12 Sep 2017 16:55:09 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v4/address/validate?address=alice@mailgun.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic YXBpOg==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:18 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Www-Authenticate:
+      - Basic realm="MG API"
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Need authorization header"}'
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:18 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v4/address/validate?address=alice@mailgun.net&mailbox_verification=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic YXBpOg==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:19 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Www-Authenticate:
+      - Basic realm="MG API"
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Need authorization header"}'
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:19 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v4/address/validate?address=example.org
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic YXBpOg==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '39'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:20 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Www-Authenticate:
+      - Basic realm="MG API"
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Need authorization header"}'
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:20 GMT
 recorded_with: VCR 3.0.3

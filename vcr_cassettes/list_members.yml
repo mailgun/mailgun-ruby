@@ -56,7 +56,7 @@ http_interactions:
           },
           "message": "Mailing list has been created"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:43 GMT
 - request:
     method: post
@@ -112,7 +112,7 @@ http_interactions:
           },
           "message": "Mailing list member has been created"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
 - request:
     method: get
@@ -163,7 +163,7 @@ http_interactions:
             "vars": {}
           }
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
 - request:
     method: put
@@ -219,7 +219,7 @@ http_interactions:
           },
           "message": "Mailing list member has been updated"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
 - request:
     method: delete
@@ -268,7 +268,7 @@ http_interactions:
           },
           "message": "Mailing list member has been deleted"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:44 GMT
 - request:
     method: delete
@@ -315,6 +315,342 @@ http_interactions:
           "address": "integration_test_list@DOMAIN.TEST",
           "message": "Mailing list has been removed"
         }
-    http_version: 
+    http_version:
   recorded_at: Fri, 08 Jan 2016 20:20:45 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/lists
+    body:
+      encoding: UTF-8
+      string: access_level=members&address=integration_test_list%40DOMAIN.TEST&description=This+list+should+be+deleted+automatically.&name=Integration+Test+List
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '398'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:23 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "list": {
+            "access_level": "members",
+            "address": "integration_test_list@DOMAIN.TEST",
+            "created_at": "Sun, 26 Jan 2025 07:29:23 -0000",
+            "description": "This list should be deleted automatically.",
+            "members_count": 0,
+            "name": "Integration Test List",
+            "reply_preference": "list"
+          },
+          "message": "Mailing list has been created"
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:23 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members
+    body:
+      encoding: UTF-8
+      string: address=integration_test_member_member%40DOMAIN.TEST&name=Jane+Doe&subscribed=true&upsert=no
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '238'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:23 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "member": {
+            "address": "integration_test_member_member@DOMAIN.TEST",
+            "name": "Jane Doe",
+            "subscribed": true,
+            "vars": {}
+          },
+          "message": "Mailing list member has been created"
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:23 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '185'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:24 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "member": {
+            "address": "integration_test_member_member@DOMAIN.TEST",
+            "name": "Jane Doe",
+            "subscribed": true,
+            "vars": {}
+          }
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:24 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    body:
+      encoding: UTF-8
+      string: name=Jane+Doe+Update&subscribed=false
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '246'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:24 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "member": {
+            "address": "integration_test_member_member@DOMAIN.TEST",
+            "name": "Jane Doe Update",
+            "subscribed": false,
+            "vars": {}
+          },
+          "message": "Mailing list member has been updated"
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:25 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST/members/integration_test_member_member@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '174'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:25 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "member": {
+            "address": "integration_test_member_member@DOMAIN.TEST"
+          },
+          "message": "Mailing list member has been deleted"
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:26 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.0
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Disposition:
+      - inline
+      Content-Length:
+      - '138'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 26 Jan 2025 07:29:26 GMT
+      Server:
+      - TwistedWeb/20.3.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 90b59dea-f2d12a53
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "address": "integration_test_list@DOMAIN.TEST",
+          "message": "Mailing list has been removed"
+        }
+    http_version:
+  recorded_at: Sun, 26 Jan 2025 07:29:26 GMT
+recorded_with: VCR 3.0.3
