@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'mailgun'
 
-vcr_opts = { :cassette_name => "routes" }
+vcr_opts = { :cassette_name => "routes", :match_requests_on => [:uri, :method, :body] }
 
 describe 'For the Routes endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
@@ -21,6 +21,22 @@ describe 'For the Routes endpoint', order: :defined, vcr: vcr_opts do
     expect(result.body["message"]).to eq("Route has been created")
     expect(result.body["route"]["description"]).to eq("Integration Test Route")
     expect(result.body["route"]["actions"]).to include("forward(\"#{@recipient}\")")
+    expect(result.body["route"]["expression"]).to include("match_recipient(\"#{@forward_to}\")")
+    expect(result.body["route"]["priority"]).to eq(10)
+  end
+
+  it 'creates a route with multiple actions' do
+    result = @mg_obj.post("routes",  { priority: 10,
+                                       description: 'Integration Test Route',
+                                       expression: "match_recipient(\"#{@forward_to}\")",
+                                       action: ["forward(\"#{@recipient}\")", "stop()"] })
+
+    result.to_h!
+    expect(result.body["message"]).to eq("Route has been created")
+    expect(result.body["route"]["description"]).to eq("Integration Test Route")
+    expect(result.body["route"]["actions"].count).to eq 2
+    expect(result.body["route"]["actions"][0]).to include("forward(\"#{@recipient}\")")
+    expect(result.body["route"]["actions"][1]).to include("stop()")
     expect(result.body["route"]["expression"]).to include("match_recipient(\"#{@forward_to}\")")
     expect(result.body["route"]["priority"]).to eq(10)
   end
