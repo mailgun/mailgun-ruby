@@ -37,6 +37,7 @@ module Mailgun
         conn.request :url_encoded
         conn.response :raise_error, include_request: true
         conn.adapter Faraday.default_adapter
+        conn.options.params_encoder = Faraday::FlatParamsEncoder
       end
 
       @test_mode = test_mode
