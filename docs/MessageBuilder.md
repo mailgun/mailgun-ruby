@@ -31,11 +31,17 @@ mb_obj.add_recipient(:to, "john.doe@example.com", {"first" => "John", "last" => 
 # Define a cc recipient.
 mb_obj.add_recipient(:cc, "sally.doe@example.com", {"first" => "Sally", "last" => "Doe"});
 
+# Define the reply-to address.
+mb_obj.reply_to("bob.doe@example.com", {"first" => "Bob", "last" => "Doe"});
+
 # Define the subject.
 mb_obj.subject("A message from the Ruby SDK using Message Builder!");
 
 # Define the body of the message.
 mb_obj.body_text("This is the text body of the message!");
+
+# Define the HTML text of the message
+mb_obj.body_html("<html><body><p>This is the text body of the message</p></body></html>");
 
 # Set the Message-Id header, provide a valid Message-Id.
 mb_obj.message_id("<20141014000000.11111.11111@example.com>")
@@ -62,6 +68,12 @@ mb_obj.add_inline_image "/path/to/file/header.png"
 
 # Schedule message in the future
 mb_obj.deliver_at("tomorrow 8:00AM PST");
+
+# Turn Click Tracking on
+mb_obj.track_clicks(true)
+
+# Turn Click Tracking off
+mb_obj.track_clicks(false)
 
 # Finally, send your message using the client
 result = mg_client.send_message("sending_domain.com", mb_obj)
