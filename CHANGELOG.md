@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.2] - 2025-01-30
+
+### Fixed
+
+- Use Faraday::FlatParamsEncoder (https://github.com/mailgun/mailgun-ruby/pull/334)
+- Update Message Builder doc (https://github.com/mailgun/mailgun-ruby/pull/338)
+- Add Domain api version warnings (https://github.com/mailgun/mailgun-ruby/pull/339)
+
+## [1.3.1] - 2025-01-26
+
+### Fixed
+
+- Fix mock mailgun responds (https://github.com/mailgun/mailgun-ruby/pull/331)
+- Change mime-types to runtime dependency (https://github.com/mailgun/mailgun-ruby/pull/332)
+
+## [1.3.0] - 2025-01-26
+
+### Added
+
+- Faraday as http client (https://github.com/mailgun/mailgun-ruby/pull/330)
+
+### Fixed
+
+- Added documentation for updating webhook (https://github.com/mailgun/mailgun-ruby/pull/325)
+- Remove duplicated entry from CHANGELOG (https://github.com/mailgun/mailgun-ruby/pull/318)
+- Update template and metrics docs (https://github.com/mailgun/mailgun-ruby/pull/329)
+
 ## [1.2.16] - 2024-11-29
 
 ### Added
