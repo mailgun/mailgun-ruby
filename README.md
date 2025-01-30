@@ -181,7 +181,6 @@ For usage examples on each API endpoint, head over to our official documentation
 pages. Or the [Snippets](docs/Snippets.md) file.
 
 This SDK includes the following components:
-- [Messages](docs/Messages.md)
 - [Message Builder](docs/MessageBuilder.md)
 - [Batch Message](docs/MessageBuilder.md#usage---batch-message)
 - [Opt-In Handler](docs/OptInHandler.md)
