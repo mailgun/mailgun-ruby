@@ -23,7 +23,7 @@ module Mailgun
 
       request_options = {
         url: endpoint,
-        proxy: Mailgun.proxy_url,
+        proxy: proxy_url,
         ssl: {verify: ssl},
         headers: {
                    'User-Agent' => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
