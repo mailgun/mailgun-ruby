@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists
+    uri: https://api.mailgun.net/v3/lists
     body:
       encoding: US-ASCII
       string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List&description=This%20list%20should%20be%20deleted%20automatically.&access_level=members
@@ -60,7 +60,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:22:43 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    uri: https://api.mailgun.net/v3/lists/
     body:
       encoding: US-ASCII
       string: ''
@@ -97,7 +97,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:22:43 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists?limit=50
+    uri: https://api.mailgun.net/v3/lists?limit=50
     body:
       encoding: US-ASCII
       string: ''
@@ -153,7 +153,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:22:44 GMT
 - request:
     method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    uri: https://api.mailgun.net/v3/lists/
     body:
       encoding: US-ASCII
       string: address=&name=Integration%20Test%20List%20Update&description=This%20list%20should%20be%20deleted%20automatically.&access_level=readonly
@@ -194,7 +194,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:22:45 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/
+    uri: https://api.mailgun.net/v3/lists/
     body:
       encoding: US-ASCII
       string: ''
@@ -231,7 +231,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:22:45 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -284,7 +284,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:23:02 GMT
 - request:
     method: put
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: address=integration_test_list%40DOMAIN.TEST&name=Integration%20Test%20List%20Update&description=This%20list%20should%20be%20deleted%20automatically.&access_level=readonly
@@ -342,7 +342,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 20:23:03 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/lists/integration_test_list@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''

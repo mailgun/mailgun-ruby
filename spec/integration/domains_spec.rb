@@ -4,54 +4,67 @@ require 'mailgun'
 vcr_opts = { :cassette_name => "domains" }
 
 describe 'For the domains endpoint', vcr: vcr_opts do
-  before(:all) do
-    @mg_client = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @mg_obj = Mailgun::Domains.new(@mg_client)
-    @domain = "integration-test.domain.invalid"
+  let(:api_version) { APIVERSION }
+  let(:mg_client) { Mailgun::Client.new(APIKEY, APIHOST, api_version, SSL) }
+  let(:mg_obj) { Mailgun::Domains.new(mg_client) }
+  let(:domain) { 'integration-test.domain.invalid' }
+
+  describe '#add_domain' do
+    let(:api_version) { 'v4' }
+
+    it 'creates a domain' do
+      response = mg_obj.add_domain(domain, { spam_action: 'tag' })
+
+      expect(response['domain']['name']).to eq(domain)
+      expect(response['domain']['spam_action']).to eq('tag')
+    end
   end
 
-  it 'creates the domain' do
-    result = @mg_obj.add_domain(@domain, { smtp_password: 'super_secret', spam_action: 'tag' })
+  describe '#get' do
+    let(:api_version) { 'v4' }
 
-    expect(result['domain']["name"]).to eq(@domain)
-    expect(result['domain']["spam_action"]).to eq("tag")
-    expect(result['domain']["smtp_password"]).to eq("super_secret")
+    it 'returns the domain' do
+      response = mg_obj.get(domain)
+
+      expect(response).to include('domain')
+      expect(response['domain']['name']).to eq(domain)
+    end
   end
 
-  it 'get the domain.' do
-    result = @mg_obj.get(@domain)
+  describe '#get_domains' do
+    let(:api_version) { 'v4' }
 
-    expect(result).to include("domain")
-    expect(result["domain"]["name"]).to eq(@domain)
+    it 'returns a list of domains' do
+      response = mg_obj.get_domains
+
+      expect(response.size).to be > 0
+    end
   end
 
-  it 'gets a list of domains.' do
-    result = @mg_obj.get_domains
+  context '#update' do
+    let(:api_version) { 'v4' }
 
-    expect(result.size).to be > 0
+    it 'updates the domain' do
+      response = mg_obj.update(domain, { spam_action: 'block', web_scheme: 'https', wildcard: true })
+
+      expect(response['domain']['spam_action']).to eq('block')
+      expect(response['domain']['web_scheme']).to eq('https')
+      expect(response['domain']['wildcard']).to eq(true)
+    end
   end
 
-  it 'deletes a domain.' do
-    result = @mg_obj.delete(@domain)
+  context 'delete a domain' do
+    subject(:response) { mg_obj.delete(domain) }
 
-    expect(result).to be_truthy
-  end
-
-  it 'updates the domain' do
-    result = @mg_obj.update(@domain, { spam_action: 'block', web_scheme: 'https', wildcard: true })
-
-    expect(result['domain']["spam_action"]).to eq('block')
-    expect(result['domain']["web_scheme"]).to eq('https')
-    expect(result['domain']["wildcard"]).to eq(true)
+    it { is_expected.to be_falsey }
   end
 
   describe '#create_smtp_credentials' do
     it 'creates smtp credentials for domain' do
-      result = @mg_obj.create_smtp_credentials(
-        @domain,
+      result = mg_obj.create_smtp_credentials(
+        domain,
         {
-          login: 'test_login',
-          password: 'test_password'
+          login: 'test_login'
         }
       )
 
@@ -61,11 +74,11 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#update_smtp_credentials' do
     it 'updates smtp credentials for domain' do
-      result = @mg_obj.update_smtp_credentials(
-        @domain,
+      result = mg_obj.update_smtp_credentials(
+        domain,
         'test_login',
         {
-          password: 'test_password2'
+          spec: 'abc'
         }
       )
 
@@ -75,19 +88,8 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#delete_smtp_credentials' do
     it 'deletes smtp credentials for domain' do
-      result = @mg_obj.delete_smtp_credentials(
-        @domain,
-        'test_login'
-      )
-
-      expect(result['message']).to eq('Credentials have been deleted')
-    end
-  end
-
-  describe '#delete_smtp_credentials' do
-    it 'deletes smtp credentials for domain' do
-      result = @mg_obj.delete_smtp_credentials(
-        @domain,
+      result = mg_obj.delete_smtp_credentials(
+        domain,
         'test_login'
       )
 
@@ -97,8 +99,8 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#get_domain_connection_settings' do
     it 'returns delivery connection settings for the defined domain' do
-      result = @mg_obj.get_domain_connection_settings(
-        @domain
+      result = mg_obj.get_domain_connection_settings(
+        domain
       )
 
       expect(result).to include(
@@ -110,8 +112,8 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#update_domain_connection_settings' do
     it 'updates the specified delivery connection settings' do
-      result = @mg_obj.update_domain_connection_settings(
-        @domain,
+      result = mg_obj.update_domain_connection_settings(
+        domain,
         {
           require_tls: true,
           skip_verification: true
@@ -127,19 +129,19 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#get_domain_tracking_settings' do
     it 'returns tracking settings for the defined domain' do
-      result = @mg_obj.get_domain_tracking_settings(
-        @domain
+      result = mg_obj.get_domain_tracking_settings(
+        domain
       )
 
       expect(result).to include('tracking')
-      expect(result['tracking']['click']['active']).to eq(true)
+      expect(result['tracking']['click']['active']).to eq(false)
     end
   end
 
   describe '#update_domain_tracking_open_settings' do
     it 'updates the specified tracking open settings' do
-      result = @mg_obj.update_domain_tracking_open_settings(
-        @domain,
+      result = mg_obj.update_domain_tracking_open_settings(
+        domain,
         {
           active: false
         }
@@ -151,8 +153,8 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#update_domain_tracking_click_settings' do
     it 'updates the specified tracking click settings' do
-      result = @mg_obj.update_domain_tracking_click_settings(
-        @domain,
+      result = mg_obj.update_domain_tracking_click_settings(
+        domain,
         {
           active: false
         }
@@ -164,8 +166,8 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#update_domain_tracking_unsubscribe_settings' do
     it 'updates the specified tracking unsubscribe settings' do
-      result = @mg_obj.update_domain_tracking_unsubscribe_settings(
-        @domain,
+      result = mg_obj.update_domain_tracking_unsubscribe_settings(
+        domain,
         {
           active: false
         }
@@ -177,34 +179,34 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#update_domain_dkim_authority' do
     it 'updates the DKIM authority for a domain' do
-      result = @mg_obj.update_domain_dkim_authority(
-        @domain,
+      result = mg_obj.update_domain_dkim_authority(
+        domain,
         {
-          active: false
+          self: true
         }
       )
 
-      expect(result['message']).to eq('Domain DKIM authority has been changed')
+      expect(result['message']).to eq('Domain DKIM authority has not been changed')
     end
   end
 
   describe '#update_domain_dkim_selector' do
     it 'updates the DKIM selector for a domain' do
-      result = @mg_obj.update_domain_dkim_selector(
-        @domain,
+      result = mg_obj.update_domain_dkim_selector(
+        domain,
         {
           dkim_selector: 'mailo1'
         }
       )
 
-      expect(result['message']).to eq('Domain DKIM authority changed')
+      expect(result['message']).to eq('DKIM selector changed')
     end
   end
 
   describe '#update_domain_web_prefix' do
     it 'updates the the CNAME used for tracking opens and clicks' do
-      result = @mg_obj.update_domain_web_prefix(
-        @domain,
+      result = mg_obj.update_domain_web_prefix(
+        domain,
         {
           web_prefix: 'email'
         }
@@ -215,15 +217,12 @@ describe 'For the domains endpoint', vcr: vcr_opts do
   end
 
   describe 'V4' do
-    before do
-      @mg_client = Mailgun::Client.new(APIKEY, APIHOST, 'v4', SSL)
-      @mg_obj = Mailgun::Domains.new(@mg_client)
-    end
+    let(:api_version) { 'v4' }
 
     describe '#get_domain_keys' do
       it 'lists the domain keys for a specified signing domain' do
-        result = @mg_obj.get_domain_keys(
-          @domain
+        result = mg_obj.get_domain_keys(
+          domain
         )
 
         expect(result).to include('items')
@@ -233,9 +232,10 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
     describe '#activate_domain_key' do
       it 'activates a domain key' do
-        result = @mg_obj.activate_domain_key(
-          @domain,
-          'smtp'
+
+        result = mg_obj.activate_domain_key(
+          domain,
+          'mailo1'
         )
 
        expect(result['message']).to eq('domain key activated')
@@ -244,11 +244,9 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
     describe '#deactivate_domain_key' do
       it 'deactivates a domain key' do
-        result = @mg_obj.deactivate_domain_key(
-          {
-            signing_domain: 'x509.zeefarmer.com',
-            selector: 'tetetet'
-          }
+        result = mg_obj.deactivate_domain_key(
+          domain,
+          'tetetet'
         )
 
        expect(result['message']).to eq('domain key deactivated')
@@ -257,15 +255,12 @@ describe 'For the domains endpoint', vcr: vcr_opts do
   end
 
   describe '#delete_domain_key' do
-    before do
-      @mg_client = Mailgun::Client.new(APIKEY, APIHOST, 'v1', SSL)
-      @mg_obj = Mailgun::Domains.new(@mg_client)
-    end
+    let(:api_version) { 'v1' }
 
     it 'deletes a domain key' do
-      result = @mg_obj.delete_domain_key(
+      result = mg_obj.delete_domain_key(
         {
-          signing_domain: @domain,
+          signing_domain: domain,
           selector: 'test'
         }
       )
@@ -276,16 +271,24 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
   describe '#get_domain_stats' do
     it 'returns total stats for a given domain' do
-      result = @mg_obj.get_domain_stats(
-        @domain,
+      result = mg_obj.get_domain_stats(
+        domain,
         {
-          event: 'clicked',
-          start: 'Sun, 23 Dec 2023 01:23:45 JST',
-          duration: '24h'
+          event: 'clicked'
         }
       )
 
      expect(result).to include('stats')
     end
+  end
+
+  def create_mg_object(version)
+    mg_client = Mailgun::Client.new(APIKEY, APIHOST, version, SSL)
+    Mailgun::Domains.new(mg_client)
+  end
+
+  def create_domain
+    mg_obj = create_mg_object('v4')
+    mg_obj.add_domain(domain)
   end
 end

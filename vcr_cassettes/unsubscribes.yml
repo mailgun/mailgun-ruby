@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
     body:
       encoding: US-ASCII
       string: address=integration-test-email%40DOMAIN.TEST&tag=*
@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 18:55:05 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/integration-test-email@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/integration-test-email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -98,7 +98,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 18:55:05 GMT
 - request:
     method: get
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/unsubscribes
     body:
       encoding: US-ASCII
       string: ''
@@ -144,7 +144,7 @@ http_interactions:
   recorded_at: Fri, 08 Jan 2016 18:55:28 GMT
 - request:
     method: delete
-    uri: https://api:<APIKEY>@api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/integration-test-email@DOMAIN.TEST
+    uri: https://api.mailgun.net/v3/DOMAIN.TEST/unsubscribes/integration-test-email@DOMAIN.TEST
     body:
       encoding: US-ASCII
       string: ''

@@ -20,7 +20,7 @@ describe 'Pagination' do
     json = JSON.parse(result.body)
     expect(json).to include("paging")
     expect(json["paging"]).to include("next")
-    expect(json["paging"]).to include{"previous"}
+    expect(json["paging"]).to include("previous")
   end
 
   it 'should calculate proper next-page url' do

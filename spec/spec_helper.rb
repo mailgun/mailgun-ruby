@@ -13,6 +13,7 @@ require 'mailgun'
 
 require 'vcr'
 require 'webmock/rspec'
+require 'rspec/its'
 
 #WebMock.disable_net_connect!(allow_localhost: true)
 require_relative 'unit/connection/test_client'

@@ -6,7 +6,7 @@ vcr_opts = { :cassette_name => "webhooks" }
 describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = 'DOMAIN.TEST'
     @testhook = 'accepted'
     @testhookup = 'accepted'
   end
