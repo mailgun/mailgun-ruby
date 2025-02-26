@@ -4,7 +4,7 @@ require 'mailgun/exceptions/exceptions'
 
 module Mailgun
   # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
-  # wrapper around RestClient so you don't have to worry about the HTTP aspect
+  # wrapper around Faraday so you don't have to worry about the HTTP aspect
   # of communicating with our API.
   #
   # See the Github documentation for full examples.
@@ -23,7 +23,7 @@ module Mailgun
 
       request_options = {
         url: endpoint,
-        proxy: Mailgun.proxy_url,
+        proxy: proxy_url,
         ssl: {verify: ssl},
         headers: {
                    'User-Agent' => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
