@@ -6,7 +6,7 @@ vcr_opts = { :cassette_name => "stats" }
 describe 'For the Stats endpoint', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'get some stats.' do

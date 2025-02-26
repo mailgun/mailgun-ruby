@@ -9,7 +9,7 @@ ActionMailer::Base.raise_delivery_errors = true
 Rails.logger = Logger.new('/dev/null')
 Rails.logger.level = Logger::DEBUG
 
-class UnitTestMailer < ActionMailer::Base
+class IntegrationUnitTestMailer < ActionMailer::Base
   default from: 'unittest@example.org'
 
   def plain_message(address, from, subject, headers)
@@ -24,14 +24,14 @@ end
 vcr_opts = { :cassette_name => 'message_deliver' }
 
 describe 'Message deliver', vcr: vcr_opts do
-  let(:domain) { TESTDOMAIN }
+  let(:domain) { TESTDOMAIN || 'DOMAIN.TEST' }
   let(:config) do
     {
       api_key: APIKEY,
       domain: domain
     }
   end
-  let(:mail) { UnitTestMailer.plain_message("bob@#{domain}", "bob@#{domain}", 'subject', {}) }
+  let!(:mail) { IntegrationUnitTestMailer.plain_message("bob@#{domain}", "bob@#{domain}", 'subject', {}) }
 
   it 'successfully delivers message' do
     result = Railgun::Mailer.new(config).deliver!(mail)
@@ -53,9 +53,9 @@ describe 'Invalid domain', vcr: vcr_opts do
       domain: domain
     }
   end
-  let(:mail) { UnitTestMailer.plain_message('sally@not-our-doma.in', "bob@#{domain}", 'subject', {}) }
+  let(:mail) { IntegrationUnitTestMailer.plain_message('sally@not-our-doma.in', "bob@#{domain}", 'subject', {}) }
 
   it 'raises expected error' do
-    expect { Railgun::Mailer.new(config).deliver!(mail) }.to raise_error Mailgun::CommunicationError, /Forbidden/
+    expect { Railgun::Mailer.new(config).deliver!(mail) }.to raise_error Mailgun::Unauthorized, /Invalid Domain or API key/
   end
 end

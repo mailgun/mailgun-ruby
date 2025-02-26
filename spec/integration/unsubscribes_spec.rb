@@ -6,8 +6,8 @@ vcr_opts = { :cassette_name => "unsubscribes" }
 describe 'For the Unsubscribes endpoint', order: :defined, vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
-    @email = "integration-test-email@#{TESTDOMAIN}"
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
+    @email = "integration-test-email@#{@domain}"
   end
 
   it 'adds an unsubscriber' do

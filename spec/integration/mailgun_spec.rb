@@ -15,7 +15,7 @@ vcr_opts = { :cassette_name => "exceptions" }
 describe 'Client exceptions', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
@@ -27,7 +27,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::CommunicationError => err
-      expect(err.message).to eq('404 Not Found: Domain not found: not-our-doma.in')
+      expect(err.message).to eq('the server responded with status 404')
     else
       fail
     end
@@ -39,7 +39,7 @@ vcr_opts = { :cassette_name => "exceptions-invalid-api-key" }
 describe 'Client exceptions', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'displays error information that API key is invalid' do
@@ -63,7 +63,7 @@ vcr_opts = { :cassette_name => "exceptions-invalid-data" }
 describe 'Client exceptions', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
@@ -87,7 +87,7 @@ vcr_opts = { :cassette_name => "exceptions-not-allowed" }
 describe 'Client exceptions', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
@@ -111,10 +111,11 @@ vcr_opts = { :cassette_name => "send_message" }
 describe 'The method send_message()', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'sends a standard message in test mode.' do
+    @mg_obj.enable_test_mode!
     result = @mg_obj.send_message(@domain, {:from => "bob@#{@domain}",
                                     :to => "sally@#{@domain}",
                                     :subject => 'Hash Integration Test',
@@ -183,7 +184,8 @@ Sender: me@samples.mailgun.org
 
 Testing some Mailgun awesomness!'
 
-    message_params = {:to => "sally@#{@domain}",
+    message_params = {:from => "bobby@#{@domain}",
+                      :to => "sally@#{@domain}",
                       :message => mime_string}
 
     result = @mg_obj.send_message(@domain, message_params)

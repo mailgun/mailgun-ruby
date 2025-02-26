@@ -6,7 +6,7 @@ vcr_opts = { :cassette_name => "mailing_list" }
 describe 'For the Mailing Lists endpoint', vcr: vcr_opts do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = TESTDOMAIN
+    @domain = TESTDOMAIN || 'DOMAIN.TEST'
     @ml_address = "integration_test_list@#{@domain}"
   end
 
