@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'base64'
 require 'bundler'
 require 'bundler/setup'
 Bundler.setup(:development)
