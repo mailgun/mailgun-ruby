@@ -33,6 +33,7 @@ module Mailgun
       request_options.merge!(request: {timeout: timeout}) if timeout
 
       @http_client =  Faraday.new(request_options) do |conn|
+        conn.request :multipart
         conn.request :authorization, :basic, 'api', api_key
         conn.request :url_encoded
         conn.response :raise_error, include_request: true

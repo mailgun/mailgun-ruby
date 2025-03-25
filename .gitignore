@@ -21,3 +21,4 @@ ruby
 .ruby-env.yml
 .rspec-local
 .tool-versions
+.idea
