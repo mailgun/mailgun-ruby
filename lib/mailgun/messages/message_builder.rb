@@ -1,5 +1,6 @@
 require 'mime/types'
 require 'time'
+require 'faraday/multipart'
 
 module Mailgun
 
@@ -384,6 +385,16 @@ module Mailgun
       @message[parameter] << (value || '')
     end
 
+    # Adds multipart attachment using Faraday::Multipart::FilePart
+    #
+    # @param [String] parameter The message object parameter name.
+    # @param [String] value The attachment.
+    # @return [void]
+    def add_faraday_attachment(parameter, attachment)
+      content_type = attachment.respond_to?(:content_type) ? attachment.content_type : nil
+      @message[parameter] << Faraday::Multipart::FilePart.new(attachment, content_type)
+    end
+
     # Converts boolean type to string
     #
     # @param [String] value The item to convert
@@ -469,7 +480,7 @@ module Mailgun
         attachment.instance_variable_set :@original_filename, filename
         attachment.instance_eval 'def original_filename; @original_filename; end'
       end
-      set_multi_complex(disposition, attachment)
+      add_faraday_attachment(disposition, attachment)
     end
   end
 
