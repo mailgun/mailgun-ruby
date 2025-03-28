@@ -190,7 +190,7 @@ module Mailgun
       @counters[:attributes][:campaign_id] += 1
     end
 
-    # Add tags to message. Limit of 3 per message.
+    # Add tags to message. Limit of 10 per message.
     #
     # @param [String] tag A defined campaign ID to add to the message.
     # @return [void]
