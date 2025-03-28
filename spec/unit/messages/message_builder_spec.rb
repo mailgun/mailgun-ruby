@@ -450,7 +450,7 @@ describe 'The method add_tag' do
   end
   it 'adds too many tags to the message' do
     expect{
-      10.times do
+      12.times do
         @mb_obj.add_tag('My-Tag')
     end }.to raise_error(Mailgun::ParameterError)
   end
