@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.3.4] - 2025-03-28
+
+### Added
+
+- Increase max tag limit to 10 per message (https://github.com/mailgun/mailgun-ruby/pull/350)
+
+## [1.3.3] - 2025-03-25
+
+### Fixed
+
+- Fix specs (https://github.com/mailgun/mailgun-ruby/pull/345)
+- Fix sending attachments via faraday (https://github.com/mailgun/mailgun-ruby/pull/347)
+
 ## [1.3.2] - 2025-01-30
 
 ### Fixed
