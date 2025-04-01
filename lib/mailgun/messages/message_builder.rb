@@ -390,9 +390,9 @@ module Mailgun
     # @param [String] parameter The message object parameter name.
     # @param [String] value The attachment.
     # @return [void]
-    def add_faraday_attachment(parameter, attachment)
+    def add_faraday_attachment(parameter, attachment, filename)
       content_type = attachment.respond_to?(:content_type) ? attachment.content_type : nil
-      @message[parameter] << Faraday::Multipart::FilePart.new(attachment, content_type)
+      @message[parameter] << Faraday::Multipart::FilePart.new(attachment, content_type, filename)
     end
 
     # Converts boolean type to string
@@ -480,7 +480,7 @@ module Mailgun
         attachment.instance_variable_set :@original_filename, filename
         attachment.instance_eval 'def original_filename; @original_filename; end'
       end
-      add_faraday_attachment(disposition, attachment)
+      add_faraday_attachment(disposition, attachment, filename)
     end
   end
 
