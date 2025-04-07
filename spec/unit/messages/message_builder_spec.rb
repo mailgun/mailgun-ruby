@@ -262,10 +262,11 @@ describe 'The method add_attachment' do
     io = StringIO.new
     io << File.binread(File.dirname(__FILE__) + "/sample_data/mailgun_icon.png")
 
-    @mb_obj.add_attachment io, 'mailgun_icon.png'
+    @mb_obj.add_attachment io, 'cool_attachment.png'
 
     expect(@mb_obj.message[:attachment].length).to eq(1)
-    expect(@mb_obj.message[:attachment].first.io.original_filename).to eq 'mailgun_icon.png'
+    expect(@mb_obj.message[:attachment].first.io.original_filename).to eq 'cool_attachment.png'
+    expect(@mb_obj.message[:attachment].first.original_filename).to eq 'cool_attachment.png'
   end
 
   context 'when attachment has unknown type' do
