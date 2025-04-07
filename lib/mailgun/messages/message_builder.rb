@@ -389,6 +389,7 @@ module Mailgun
     #
     # @param [String] parameter The message object parameter name.
     # @param [String] value The attachment.
+    # @param [String] filename Filename of the attachment.
     # @return [void]
     def add_faraday_attachment(parameter, attachment, filename)
       content_type = attachment.respond_to?(:content_type) ? attachment.content_type : nil
