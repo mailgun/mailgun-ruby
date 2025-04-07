@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.3.5] - 2025-04-07
+
+### Fixed
+
+- Set attachment filename on upload IO (https://github.com/mailgun/mailgun-ruby/pull/351)
 
 ## [1.3.4] - 2025-03-28
 
