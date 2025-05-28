@@ -1,7 +1,7 @@
 Mailgun-Ruby
 ============
 
-[![CI](https://github.com/mailgun/mailgun-ruby/actions/workflows/ci.yml/badge.svg)](https://github.com/mailgun/mailgun-ruby/actions/workflows/ci.yml) [![Gem Version](https://badge.fury.io/rb/mailgun-ruby.svg)](http://badge.fury.io/rb/mailgun-ruby)
+[![CI](https://github.com/mailgun/mailgun-ruby/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mailgun/mailgun-ruby/actions/workflows/ci.yml) [![Gem Version](https://badge.fury.io/rb/mailgun-ruby.svg)](http://badge.fury.io/rb/mailgun-ruby)
 
 This is the Mailgun Ruby Library. This library contains methods for easily interacting
 with the Mailgun API.
