@@ -261,14 +261,14 @@ module Mailgun
       # Build the `next` endpoint
       page_next = URI.parse(page_info["next"])
       @paging_next = {
-        :path => page_next.path[/\/v[\d](.+)/, 1],
+        :path => page_next.path[/\/v[\d]\/(.+)/, 1],
         :params => Hash[URI.decode_www_form page_next.query],
       }
 
       # Build the `prev` endpoint
       page_prev = URI.parse(page_info["previous"])
       @paging_prev = {
-        :path => page_prev.path[/\/v[\d](.+)/, 1],
+        :path => page_prev.path[/\/v[\d]\/(.+)/, 1],
         :params => Hash[URI.decode_www_form page_prev.query],
       }
     end
