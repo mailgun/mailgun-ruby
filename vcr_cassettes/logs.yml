@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/analytics/logs
+    body:
+      encoding: UTF-8
+      string: '{"start":"Wed, 25 Jun 2025 00:00:00 -0000","end":"Wed, 25 Jun 2025
+        23:00:00 -0000","filter":{"AND":[{"attribute":"domain","comparator":"!=","values":[{"label":"example.com","value":"example.com"}]}]},"include_subaccounts":true,"pagination":{"sort":"timestamp:asc","limit":50}}'
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.3.7
+      Accept:
+      - "*/*"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 25 Jun 2025 17:47:38 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - XXX
+      X-Xss-Protection:
+      - 1; mode=block
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"start":"Wed, 25 Jun 2025 00:00:00 -0000","end":"Wed, 25 Jun 2025
+        23:00:00 -0000","items":[{"id":"123","event":"accepted","@timestamp":"2025-06-25T17:19:51.166Z","account":{"id":"123"},"method":"HTTP","originating-ip":"123.123.12.123","api-key-id":"xxx","domain":{"name":"example.mailgun.org"},"recipient":"alex@example.com","recipient-domain":"example.com","envelope":{"sender":"example.mailgun.org","transport":"smtp","targets":"alex@example.com"},"storage":{"region":"us-east4","env":"production","key":"xxx","url":["https://storage.api.mailgun.net/v3/domains/example.mailgun.org/messages/123"]},"log-level":"info","user-variables":"{}","message":{"headers":{"to":"alex@example.com","message-id":"123@example.mailgun.org","from":"bob@sending_domain.com+4","subject":"The
+        Ruby SDK is awesome!"},"attachments":[{"filename":"image.jpg","content-type":"image/jpeg","size":16712}],"size":23476},"flags":{"is-authenticated":true,"is-system-test":false,"is-routed":false,"is-test-mode":false,"is-delayed-bounce":false,"is-callback":false}}],"pagination":{},"aggregates":{}}
+
+        '
+    http_version:
+  recorded_at: Wed, 25 Jun 2025 17:47:38 GMT
+recorded_with: VCR 3.0.3

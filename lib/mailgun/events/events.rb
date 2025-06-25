@@ -76,6 +76,7 @@ module Mailgun
     #
     # Returns a Mailgun.Response object.
     def get_events(params = {}, paging = nil)
+      warn('WARN: This API is deprecated in favor of our Logs API')
       response = @client.get(construct_url(paging), params)
       extract_paging(response)
       response
