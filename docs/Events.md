@@ -1,6 +1,8 @@
 Mailgun - Events
 ====================
 
+_WARNING: This API is deprecated in favor of our Logs API._
+
 This is the Mailgun Ruby *Events* utility.
 
 The below assumes you've already installed the Mailgun Ruby SDK in your project.

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6] - 2025-05-30
+
+### Fixed
+
+- Fix Suppressions paging not working (https://github.com/mailgun/mailgun-ruby/pull/355)
+- CI improvements
+
 ## [1.3.5] - 2025-04-07
 
 ### Fixed
