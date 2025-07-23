@@ -27,7 +27,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::CommunicationError => err
-      expect(err.message).to eq('the server responded with status 404')
+      expect(err.message).to eq('the server responded with status 404: Domain not found: not-our-doma.in')
     else
       fail
     end
@@ -75,7 +75,7 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::BadRequest => err
-      expect(err.message).to eq('the server responded with status 400')
+      expect(err.message).to eq('the server responded with status 400: to parameter is not a valid address. please check documentation')
     else
       fail
     end
