@@ -46,11 +46,11 @@ module Mailgun
       @status = if response.nil?
                 NOCODE
               else
-                response.status
+                response[:status]
               end
 
       begin
-        json = JSON.parse(response.body)
+        json = JSON.parse(response[:body])
         api_message = json['message'] || json['Error'] || json['error']
       rescue JSON::ParserError
         api_message = response.response_body

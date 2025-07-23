@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2025-07-23
+
+- Respond with error message for 400 Bad Request
+
+## [1.3.7] - 2025-06-29
+
+- Use proxy_url passed to constructor (https://github.com/mailgun/mailgun-ruby/pull/342)
+- Refactor to use UserNotifier instead of UserMailer for consistency (https://github.com/mailgun/mailgun-ruby/pull/323)
+- Add option to specify api key and host when initializing Address api (https://github.com/mailgun/mailgun-ruby/pull/328)
+- Remove base64 dependency (https://github.com/mailgun/mailgun-ruby/pull/313)
+- DE-1547: Support for the logs API (https://github.com/mailgun/mailgun-ruby/pull/356)
+
 ## [1.3.6] - 2025-05-30
 
 ### Fixed
