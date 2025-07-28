@@ -121,7 +121,8 @@ module Mailgun
 
         if data.key?(:message)
           if data[:message].is_a?(String)
-            data[:message] = convert_string_to_file(data[:message])
+            file = convert_string_to_file(data[:message])
+            data[:message] = Faraday::Multipart::FilePart.new(file, 'multipart/form-data')
           end
           return post("#{working_domain}/messages.mime", data)
         end
