@@ -103,7 +103,7 @@ module Mailgun
       perform_data_validation(working_domain, data)
 
       if test_mode? then
-        Mailgun::Client.deliveries << data
+        Mailgun::Client.deliveries << data.dup
         return Response.from_hash(
           {
             :body => "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
