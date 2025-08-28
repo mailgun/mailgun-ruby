@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9] - 2025-07-28
+
+ - Fix messages.mime broken by @alex-leb in (https://github.com/mailgun/mailgun-ruby/pull/361)
+ - Fix BatchMessage modifies stored test deliveries by @alex-leb in (https://github.com/mailgun/mailgun-ruby/pull/362)
+
 ## [1.3.8] - 2025-07-23
 
 - Respond with error message for 400 Bad Request
