@@ -1000,17 +1000,17 @@ http_interactions:
   recorded_at: Wed, 26 Feb 2025 21:54:43 GMT
 - request:
     method: delete
-    uri: https://api.mailgun.net/v1/dkim/keys?params=%7Bsigning_domain:%20%22integration-test.domain.invalid%22,%20selector:%20%22test%22%7D
+    uri: https://api.mailgun.net/v1/dkim/keys?params=%7B:signing_domain=%3E%22integration-test.domain.invalid%22,%20:selector=%3E%22test%22%7D
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - mailgun-sdk-ruby/1.3.2
+      - mailgun-sdk-ruby/1.3.10
       Accept:
       - "*/*"
       Authorization:
-      - Basic xxx
+      - Basic YXBpOg==
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -1025,15 +1025,15 @@ http_interactions:
       Cache-Control:
       - no-store
       Content-Length:
-      - '58'
+      - '39'
       Content-Type:
-      - application/json; charset=utf-8
+      - application/json
       Date:
-      - Wed, 26 Feb 2025 21:57:39 GMT
+      - Thu, 28 Aug 2025 12:45:35 GMT
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
-      X-Mailgun-Key-Id:
-      - c02fd0ba-d8dbad66
+      Www-Authenticate:
+      - Basic realm="MG API"
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -1042,5 +1042,5 @@ http_interactions:
 
         '
     http_version:
-  recorded_at: Wed, 26 Feb 2025 21:57:39 GMT
+  recorded_at: Thu, 28 Aug 2025 12:45:35 GMT
 recorded_with: VCR 3.0.3
