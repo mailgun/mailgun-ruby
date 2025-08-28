@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr', '~> 3.0.3'
   spec.add_development_dependency 'simplecov', '~> 0.16.1'
   spec.add_development_dependency 'rails'
-  spec.add_dependency 'mime-types'
+  spec.add_dependency 'mini_mime'
   spec.add_dependency 'faraday', "~> 2.1"
   spec.add_dependency 'faraday-multipart', '~> 1.1.0'
 
