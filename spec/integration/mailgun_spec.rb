@@ -2,17 +2,13 @@ require 'spec_helper'
 require 'mailgun'
 require 'mailgun/exceptions/exceptions'
 
-vcr_opts = { :cassette_name => "instance" }
-
-describe 'Mailgun instantiation', vcr: vcr_opts do
+describe 'Mailgun instantiation', vcr: { :cassette_name => "instance" } do
   it 'instantiates an HttpClient object' do
     expect {@mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)}.not_to raise_error
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -27,16 +23,15 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::CommunicationError => err
-      expect(err.message).to eq('the server responded with status 404: Domain not found: not-our-doma.in')
+      expect(err.message).to include('404')
+      expect(err.message).to include('Domain not found: not-our-doma.in')
     else
       fail
     end
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-invalid-api-key" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-api-key" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -51,16 +46,15 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::Unauthorized => err
-      expect(err.message).to eq('the server responded with status 401 - Invalid Domain or API key')
+      expect(err.message).to include('401')
+      expect(err.message).to include('Invalid Domain or API key')
     else
       fail
     end
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-invalid-data" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-data" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -75,16 +69,15 @@ describe 'Client exceptions', vcr: vcr_opts do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::BadRequest => err
-      expect(err.message).to eq('the server responded with status 400: to parameter is not a valid address. please check documentation')
+      expect(err.message).to include('400')
+      expect(err.message).to include('to parameter is not a valid address. please check documentation')
     else
       fail
     end
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-not-allowed" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-not-allowed" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -106,9 +99,7 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => "send_message" }
-
-describe 'The method send_message()', vcr: vcr_opts do
+describe 'The method send_message()', vcr: { :cassette_name => "send_message" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'

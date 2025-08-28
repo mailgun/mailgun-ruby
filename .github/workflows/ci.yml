@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['3.1', '3.4']
+        ruby-version: [ '2.6', '2.7', '3.0', '3.1', '3.4' ]
 
     steps:
     - uses: actions/checkout@v4
@@ -25,4 +25,4 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true 
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec rake spec:all
