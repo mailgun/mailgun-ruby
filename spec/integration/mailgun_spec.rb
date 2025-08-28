@@ -2,17 +2,13 @@ require 'spec_helper'
 require 'mailgun'
 require 'mailgun/exceptions/exceptions'
 
-vcr_opts = { :cassette_name => "instance" }
-
-describe 'Mailgun instantiation', vcr: vcr_opts do
+describe 'Mailgun instantiation', vcr: { :cassette_name => "instance" } do
   it 'instantiates an HttpClient object' do
     expect {@mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)}.not_to raise_error
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -34,9 +30,7 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-invalid-api-key" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-api-key" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -58,9 +52,7 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-invalid-data" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-data" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -82,9 +74,7 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => "exceptions-not-allowed" }
-
-describe 'Client exceptions', vcr: vcr_opts do
+describe 'Client exceptions', vcr: { :cassette_name => "exceptions-not-allowed" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -106,9 +96,7 @@ describe 'Client exceptions', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => "send_message" }
-
-describe 'The method send_message()', vcr: vcr_opts do
+describe 'The method send_message()', vcr: { :cassette_name => "send_message" } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
