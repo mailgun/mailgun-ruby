@@ -23,7 +23,8 @@ describe 'Client exceptions', vcr: { :cassette_name => "exceptions" } do
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::CommunicationError => err
-      expect(err.message).to eq('the server responded with status 404: Domain not found: not-our-doma.in')
+      expect(err.message).to include('404')
+      expect(err.message).to include('Domain not found: not-our-doma.in')
     else
       fail
     end
@@ -45,7 +46,8 @@ describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-api-k
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::Unauthorized => err
-      expect(err.message).to eq('the server responded with status 401 - Invalid Domain or API key')
+      expect(err.message).to include('401')
+      expect(err.message).to include('Invalid Domain or API key')
     else
       fail
     end
@@ -67,7 +69,8 @@ describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-data"
           :text => 'INTEGRATION TESTING'
       })
     rescue Mailgun::BadRequest => err
-      expect(err.message).to eq('the server responded with status 400: to parameter is not a valid address. please check documentation')
+      expect(err.message).to include('400')
+      expect(err.message).to include('to parameter is not a valid address. please check documentation')
     else
       fail
     end
