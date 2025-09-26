@@ -5,6 +5,20 @@ module Mailgun
   # A Mailgun::Domains object is a simple CRUD interface to Mailgun Domains.
   # Uses Mailgun
   class Domains
+    include ApiVersionChecker
+
+    # Declare API version requirements upfront (Rails-like declarative style)
+    requires_api_version 'v4', :list, :info, :verify, :create, :update
+    requires_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
+                         :delete_smtp_credentials, :get_domain_connection_settings,
+                         :update_domain_connection_settings, :get_domain_tracking_settings,
+                         :update_domain_tracking_open_settings, :update_domain_tracking_click_settings,
+                         :update_domain_tracking_unsubscribe_settings, :update_domain_dkim_authority,
+                         :update_domain_dkim_selector, :update_domain_web_prefix, :get_domain_stats
+
+    # Methods that should enforce (raise errors) rather than warn
+    enforces_api_version 'v4', :get_domain_keys, :activate_domain_key, :deactivate_domain_key
+    enforces_api_version 'v1', :create_domain_key, :delete_domain_key
 
     # Public: creates a new Mailgun::Domains instance.
     #   Defaults to Mailgun::Client
@@ -19,7 +33,6 @@ module Mailgun
     #
     # Returns [Array] A list of domains (hash)
     def list(options = {})
-      warn('WARN: Client api version must be v4') unless @client.api_version == 'v4'
       @client.get('domains', options).to_h['items']
     end
     alias_method :get_domains, :list
@@ -30,7 +43,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested domains.
     def info(domain)
-      warn('WARN: Client api version must be v4') unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       @client.get("domains/#{domain}").to_h!
     end
@@ -45,7 +57,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the updated/verified domains
     def verify(domain)
-      warn('WARN: Client api version must be v4') unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to verify on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/verify", nil).to_h!
     end
@@ -64,7 +75,6 @@ module Mailgun
     #
     # Returns [Hash] of created domain
     def create(domain, options = {})
-      warn('WARN: Client api version must be v4') unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
       options = { smtp_password: nil, spam_action: 'disabled', wildcard: false }.merge(options)
       options[:name] = domain
@@ -79,7 +89,6 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def remove(domain)
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
       @client.delete("domains/#{domain}").to_h['message'] == 'Domain has been deleted'
     end
@@ -100,7 +109,6 @@ module Mailgun
     #
     # Returns [Hash] of updated domain
     def update(domain, options = {})
-      warn('WARN: Client api version must be v4') unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to update on Mailgun', caller) unless domain
       @client.put("domains/#{domain}", options).to_h
     end
@@ -114,7 +122,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def create_smtp_credentials(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to create credentials on Mailgun', caller) unless domain
       @client.post("domains/#{domain}/credentials", options).to_h
     end
@@ -128,7 +135,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def update_smtp_credentials(domain, login, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update credentials on Mailgun', caller) unless domain
       fail(ParameterError, 'No login given to update credentials on Mailgun', caller) unless login
       @client.put("domains/#{domain}/credentials/#{login}", options).to_h
@@ -141,7 +147,6 @@ module Mailgun
     #
     # Returns [Hash] with message and spec keys
     def delete_smtp_credentials(domain, login)
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to delete credentials on Mailgun', caller) unless domain
       fail(ParameterError, 'No login given to delete credentials on Mailgun', caller) unless login
       @client.delete("domains/#{domain}/credentials/#{login}").to_h
@@ -153,7 +158,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the delivery connection settings
     def get_domain_connection_settings(domain)
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to retrieve connections on Mailgun', caller) unless domain
       @client.get("domains/#{domain}/connection").to_h
     end
@@ -168,7 +172,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the delivery connection settings
     def update_domain_connection_settings(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update connections on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/connection", options).to_h
     end
@@ -179,7 +182,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the tracking settings
     def get_domain_tracking_settings(domain)
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to retrieve tracking settings on Mailgun', caller) unless domain
       @client.get("domains/#{domain}/tracking").to_h
     end
@@ -193,7 +195,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the tracking open settings
     def update_domain_tracking_open_settings(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/tracking/open", options).to_h
     end
@@ -206,7 +207,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the tracking click settings
     def update_domain_tracking_click_settings(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/tracking/click", options).to_h
     end
@@ -221,7 +221,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the tracking unsubscribe settings
     def update_domain_tracking_unsubscribe_settings(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/tracking/unsubscribe", options).to_h
     end
@@ -235,7 +234,6 @@ module Mailgun
     #
     # Returns [Hash] Information on the DKIM authority
     def update_domain_dkim_authority(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/dkim_authority", options).to_h
     end
@@ -248,7 +246,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def update_domain_dkim_selector(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/dkim_selector", options).to_h
     end
@@ -261,7 +258,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def update_domain_web_prefix(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       @client.put("domains/#{domain}/web_prefix", options).to_h
     end
@@ -272,7 +268,6 @@ module Mailgun
     #
     # Returns [Hash] with domain keys data
     def get_domain_keys(domain)
-      fail(ParameterError, 'Client api version must be v4', caller) unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to retrieve keys on Mailgun', caller) unless domain
       @client.get("domains/#{domain}/keys").to_h
     end
@@ -284,7 +279,6 @@ module Mailgun
     #
     # Returns [Hash] with message key and autority + selector data
     def activate_domain_key(domain, selector)
-      fail(ParameterError, 'Client api version must be v4', caller) unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       fail(ParameterError, 'No selector given to activate key on Mailgun', caller) unless selector
       @client.put("domains/#{domain}/keys/#{selector}/activate", {}).to_h
@@ -297,7 +291,6 @@ module Mailgun
     #
     # Returns [Hash] with message key and autority + selector data
     def deactivate_domain_key(domain, selector)
-      fail(ParameterError, 'Client api version must be v4', caller) unless @client.api_version == 'v4'
       fail(ParameterError, 'No domain given to update tracking settings on Mailgun', caller) unless domain
       fail(ParameterError, 'No selector given to activate key on Mailgun', caller) unless selector
       @client.put("domains/#{domain}/keys/#{selector}/deactivate", {}).to_h
@@ -313,7 +306,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def create_domain_key(options = {})
-      fail(ParameterError, 'Client api version must be v1', caller) unless @client.api_version == 'v1'
       @client.post("dkim/keys", options).to_h
     end
 
@@ -325,7 +317,6 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def delete_domain_key(options = {})
-      fail(ParameterError, 'Client api version must be v1', caller) unless @client.api_version == 'v1'
       @client.delete("dkim/keys", options).to_h
     end
 
@@ -341,7 +332,6 @@ module Mailgun
     #
     # Returns [Array] A list of domains (hash)
     def get_domain_stats(domain, options = {})
-      warn('WARN: Client api version must be v3') unless @client.api_version == 'v3'
       fail(ParameterError, 'No domain given to list stats on Mailgun', caller) unless domain
       @client.get("#{domain}/stats/total", options).to_h
     end
