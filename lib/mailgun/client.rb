@@ -15,7 +15,7 @@ module Mailgun
                    api_host = Mailgun.api_host || 'api.mailgun.net',
                    api_version = Mailgun.api_version  || 'v3',
                    ssl = true,
-                   test_mode = false,
+                   test_mode = !!Mailgun.test_mode,
                    timeout = nil,
                    proxy_url = Mailgun.proxy_url)
 
