@@ -135,6 +135,20 @@ module Mailgun
 
     # ==== Domain::Keys methods ====
 
+    # Public: List keys for all domains
+    #
+
+    # options - [Hash] of
+    #   page - [String] Encoded paging information, provided via 'next', 'previous' links
+    #   limit - [Integer] Limits the number of items returned in a request
+    #   signing_domain  - [String] Filter by signing domain
+    #   selector - [String] Filter by selector
+    #
+    # Returns [Hash] with message key
+    def list_domain_keys(options = {})
+      @client.get("dkim/keys", options).to_h
+    end
+
     # Public: Create a domain key
     #
     # options - [Hash] of
@@ -260,17 +274,59 @@ module Mailgun
       @client.put("domains/#{domain}/tracking/unsubscribe", options).to_h
     end
 
+    # Public: Tracking Certificate: Get certificate and status
+    #
+    # domain - [String] The tracking domain of the TLS certificate, formatted as web_prefix.domain_name
+    #
+    # Returns [Hash] Status of certificate. Either 'expired' 'processing' 'active' or 'error'
+    def get_domain_tracking_certificate(domain)
+      @client.get("x509/#{domain}/status").to_h
+    end
+
+    # Tracking Certificate: Regenerate expired certificate
+    #
+    # domain - [String] The tracking domain of the TLS certificate, formatted as web_prefix.domain_name
+    #
+    # Returns [Hash] A message indicating the status of the request.
+    def regenerate_domain_tracking_certificate(domain, options = {})
+      @client.put("x509/#{domain}", options).to_h
+    end
+
+    # Public: Tracking Certificate: Generate
+    #
+    # domain - [String] The tracking domain of the TLS certificate, formatted as web_prefix.domain_name
+    #
+    # Returns [Hash] A message indicating the status of the request.
+    def generate_domain_tracking_certificate(domain, options = {})
+      @client.post("x509/#{domain}", options).to_h
+    end
+
     # ==== End of Domain::Tracking methods ====
 
 
     # ==== Domain::DKIM_Security methods ====
 
-    def dkim_rotation
-
+    # Public: Tracking Certificate: Generate
+    #
+    # domain - [String] The Domain name
+    # rotation_enabled - [Boolean] If true, enables DKIM Auto-Rotation. If false, disables it
+    #
+    # options - [Hash] of
+    #   rotation_interval - [String] The interval at which to rotate keys. Example, '5d' for five days
+    #
+    # Returns [Hash] domain object
+    def dkim_rotation(domain, rotation_enabled, options = {})
+      options = { rotation_enabled: rotation_enabled }.merge(options)
+      @client.put("dkim_management/domains/#{domain}/rotation", options)
     end
 
-    def dkim_rotate
-
+    # Public: Rotate Automatic Sender Security DKIM key for a domain
+    #
+    # domain - [String] The Domain name
+    #
+    # Returns [Hash] Response message
+    def dkim_rotate(domain)
+      @client.post("dkim_management/domains/#{domain}/rotate", {})
     end
 
     # ==== End of Domain::DKIM_Security methods ====
@@ -373,7 +429,10 @@ module Mailgun
 
 
 
-    enforces_api_version 'v1', :create_domain_key, :delete_domain_key
+    enforces_api_version 'v1', :list_domain_keys, :create_domain_key, :delete_domain_key, :dkim_rotation,
+                         :dkim_rotate
+    enforces_api_version 'v2', :get_domain_tracking_certificate, :regenerate_domain_tracking_certificate,
+                         :generate_domain_tracking_certificate
     enforces_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
                          :delete_smtp_credentials, :get_domain_connection_settings,
                          :update_domain_connection_settings, :get_domain_tracking_settings,
