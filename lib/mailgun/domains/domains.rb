@@ -394,17 +394,17 @@ module Mailgun
 
     # ==== End of Deprecated methods ====
 
-    # Declare API version requirements upfront (Rails-like declarative style)
-    requires_api_version 'v4', :list, :info, :verify, :create, :update
-    requires_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
+
+
+
+    enforces_api_version 'v1', :create_domain_key, :delete_domain_key
+    enforces_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
                          :delete_smtp_credentials, :get_domain_connection_settings,
                          :update_domain_connection_settings, :get_domain_tracking_settings,
                          :update_domain_tracking_open_settings, :update_domain_tracking_click_settings,
                          :update_domain_tracking_unsubscribe_settings, :update_domain_dkim_authority,
                          :update_domain_dkim_selector, :update_domain_web_prefix, :get_domain_stats
-
-    # Methods that should enforce (raise errors) rather than warn
-    enforces_api_version 'v4', :get_domain_keys, :activate_domain_key, :deactivate_domain_key
-    enforces_api_version 'v1', :create_domain_key, :delete_domain_key
+    enforces_api_version 'v4', :get_domain_keys, :activate_domain_key, :deactivate_domain_key,
+                         :list, :info, :verify, :create, :update
   end
 end
