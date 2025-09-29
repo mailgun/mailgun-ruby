@@ -2,10 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2025-09-22
+
+ - Domains - Add missing endpoints and refactor existing ones in (https://github.com/mailgun/mailgun-ruby/pull/365)
+
+## [1.3.10] - 2025-08-28
+
+ - Switch to mini_mime for memory savings in (https://github.com/mailgun/mailgun-ruby/pull/363)
+ - Add backwards compatibility for previous ruby versions in (https://github.com/mailgun/mailgun-ruby/pull/364)
+
 ## [1.3.9] - 2025-07-28
 
- - Fix messages.mime broken by @alex-leb in (https://github.com/mailgun/mailgun-ruby/pull/361)
- - Fix BatchMessage modifies stored test deliveries by @alex-leb in (https://github.com/mailgun/mailgun-ruby/pull/362)
+ - Fix messages.mime broken in (https://github.com/mailgun/mailgun-ruby/pull/361)
+ - Fix BatchMessage modifies stored test deliveries in (https://github.com/mailgun/mailgun-ruby/pull/362)
 
 ## [1.3.8] - 2025-07-23
 
