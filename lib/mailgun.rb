@@ -18,6 +18,7 @@ require 'mailgun/webhooks/webhooks'
 require 'mailgun/templates/templates'
 require 'mailgun/subaccounts/subaccounts'
 require 'mailgun/tags/tags'
+require 'mailgun/tags/analytics_tags'
 require 'mailgun/metrics/metrics'
 require 'mailgun/logs/logs'
 
