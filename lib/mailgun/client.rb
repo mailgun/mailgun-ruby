@@ -174,7 +174,10 @@ module Mailgun
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
     def put(resource_path, data)
-      response = @http_client.put(resource_path, data)
+      response = @http_client.put(resource_path) do |request|
+        request['Content-Type'] = 'application/json'
+        request.body = data.to_json
+      end
       Response.new(response)
     rescue => err
       raise communication_error err
@@ -187,7 +190,9 @@ module Mailgun
     # @return [Mailgun::Response] A Mailgun::Response object.
     def delete(resource_path, params = nil)
       if params
-        response = @http_client.delete(resource_path, params: params)
+        response = @http_client.delete(resource_path) do |request|
+          request.body = params.to_json
+        end
       else
         response = @http_client.delete(resource_path)
       end
