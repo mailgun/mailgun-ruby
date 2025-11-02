@@ -1,7 +1,3 @@
-require 'mailgun/chains'
-require 'mailgun/suppressions'
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
   # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
   # wrapper around Faraday so you don't have to worry about the HTTP aspect

@@ -1,6 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-require 'mailgun/helpers/api_version_checker'
-
 module Mailgun
 
   # A Mailgun::Domains object is a simple CRUD interface to Mailgun Domains.

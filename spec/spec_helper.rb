@@ -1,8 +1,3 @@
-require 'rubygems'
-require 'bundler'
-require 'bundler/setup'
-Bundler.setup(:development)
-
 require 'simplecov'
 SimpleCov.start do
   add_filter "/spec/"

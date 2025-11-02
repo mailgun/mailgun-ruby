@@ -1,6 +1,3 @@
-require 'uri'
-require 'openssl'
-
 module Mailgun
 
   # Public: Provides methods for creating and handling opt-in URLs,
