@@ -15,7 +15,7 @@ module Mailgun
     end
 
     def update(tag, description)
-      @client.put('analytics/tags', { tag: tag, description: description } ).to_h['message'] == 'Tag updated'
+      @client.put('analytics/tags', { tag: tag, description: description }, body_params: true ).to_h['message'] == 'Tag updated'
     end
 
     def list(options = {})
@@ -23,7 +23,7 @@ module Mailgun
     end
 
     def remove(tag)
-      @client.delete('analytics/tags', { tag: tag }).to_h['message'] == 'Tag deleted'
+      @client.delete('analytics/tags', { tag: tag }, body_params: true).to_h['message'] == 'Tag deleted'
     end
 
     def limits
