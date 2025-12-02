@@ -45,7 +45,7 @@ module Mailgun
     end
 
     def get_bounce(address)
-      @client.get("#{@domain}/bounces/#{escape_address(address)}", nil)
+      @client.get("#{@domain}/bounces/#{escape_address(address)}")
     end
 
     def create_bounce(params = {})
@@ -187,7 +187,7 @@ module Mailgun
     end
 
     def get_complaint(address)
-      @client.get("#{@domain}/complaints/#{escape_address(address)}", nil)
+      @client.get("#{@domain}/complaints/#{escape_address(address)}")
     end
 
     def create_complaint(params = {})
