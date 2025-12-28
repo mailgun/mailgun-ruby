@@ -1,5 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
   # A Mailgun::Logs object is a simple interface to Mailgun Logs.
   # Uses Mailgun

@@ -1,5 +1,3 @@
-require 'mailgun/messages/message_builder'
-
 module Mailgun
 
   # A Mailgun::BatchMessage object is used to create a valid payload

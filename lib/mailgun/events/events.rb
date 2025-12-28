@@ -1,5 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
 
   # A Mailgun::Events object makes it really simple to consume

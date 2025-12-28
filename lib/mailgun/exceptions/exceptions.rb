@@ -1,4 +1,6 @@
 module Mailgun
+  module Exceptions
+  end
 
   # Public: A basic class for mananging errors.
   # Inherits from StandardError (previously RuntimeError) as not all errors are

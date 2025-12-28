@@ -1,9 +1,3 @@
-require 'action_mailer'
-require 'json'
-require 'mailgun'
-require 'rails'
-require 'railgun/errors'
-
 module Railgun
 
   # Railgun::Mailer is an ActionMailer provider for sending mail through
