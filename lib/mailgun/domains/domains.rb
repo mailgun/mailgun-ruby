@@ -23,11 +23,6 @@ module Mailgun
       @client.get('domains', options).to_h['items']
     end
 
-    def get_domains
-      warn('The `get_domains` method will be deprecated in future versions of Mailgun. Please use `list` instead.')
-      list
-    end
-
     # Public: Add domain
     #
     # domain  - [String] Name of the domain (ex. domain.com)
@@ -46,16 +41,6 @@ module Mailgun
       @client.post('domains', options).to_h
     end
 
-    def add(domain, options = {})
-      warn('The `add` method will be deprecated in future versions of Mailgun. Please use `create` instead.')
-      create(domain, options)
-    end
-
-    def add_domain(domain, options = {})
-      warn('The `add_domain` method will be deprecated in future versions of Mailgun. Please use `create` instead.')
-      create(domain, options)
-    end
-
     # Public: Get domain information
     #
     # domain - [String] Domain name to lookup
@@ -63,16 +48,6 @@ module Mailgun
     # Returns [Hash] Information on the requested domains.
     def get(domain)
       @client.get("domains/#{domain}").to_h!
-    end
-
-    def info(domain)
-      warn('The `info` method will be deprecated in future versions of Mailgun. Please use `get` instead.')
-      get(domain)
-    end
-
-    def get_domain(domain)
-      warn('The `get_domain` method will be deprecated in future versions of Mailgun. Please use `get` instead.')
-      get(domain)
     end
 
     # Public: Update domain
@@ -102,11 +77,6 @@ module Mailgun
       @client.put("domains/#{domain}/verify", nil).to_h!
     end
 
-    def verify_domain(domain)
-      warn('The `verify_domain` method will be deprecated in future versions of Mailgun. Please use `verify` instead.')
-      verify(domain)
-    end
-
     # Public: Delete Domain
     #
     # domain - [String] domain name to delete (ex. domain.com)
@@ -114,16 +84,6 @@ module Mailgun
     # Returns [Boolean] if successful or not
     def remove(domain)
       @client.delete("domains/#{domain}").to_h['message'] == 'Domain has been deleted'
-    end
-
-    def delete(domain)
-      warn('The `delete` method will be deprecated in future versions of Mailgun. Please use `remove` instead.')
-      remove(domain)
-    end
-
-    def delete_domain(domain)
-      warn('The `delete_domain` method will be deprecated in future versions of Mailgun. Please use `remove` instead.')
-      remove(domain)
     end
 
     # ==== End of Core Domains methods ====
@@ -384,60 +344,17 @@ module Mailgun
 
     # ==== End of Reporting::Stats methods ====
 
-    # ==== Deprecated methods ====
-
-    # Public: Returns delivery connection settings for the defined domain.
-    #
-    # domain  - [String] Name of the domain (ex. domain.com)
-    #
-    # Returns [Hash] Information on the delivery connection settings
-    def get_domain_connection_settings(domain)
-      warn('The `get_domain_connection_settings` method is deprecated in and wiil be removed in the future version of Mailgun.')
-      @client.get("domains/#{domain}/connection").to_h
-    end
-
-    # Public: Updates the specified delivery connection settings for the defined domain.d
-    #
-    # domain  - [String] Name of the domain (ex. domain.com)
-    # options - [Hash] of
-    #   require_tls  - [Boolean] true or false. If true - requires the message only be sent over a TLS connection
-    #   skip_verification  - [Boolean] true or false. If true - the certificate and hostname will not be verified
-    #     when trying to establish a TLS connection
-    #
-    # Returns [Hash] Information on the delivery connection settings
-    def update_domain_connection_settings(domain, options = {})
-      warn('The `update_domain_connection_settings` method is deprecated in and wiil be removed in the future version of Mailgun.')
-      @client.put("domains/#{domain}/connection", options).to_h
-    end
-
-    # Public: Update the CNAME used for tracking opens and clicks
-    #
-    # domain  - [String] Name of the domain (ex. domain.com)
-    # options - [Hash] of
-    #   web_prefix  - [String] change the tracking CNAME for a domain.
-    #
-    # Returns [Hash] with message key
-    def update_domain_web_prefix(domain, options = {})
-      warn('The `update_domain_web_prefix` method is deprecated in and wiil be removed in the future version of Mailgun.')
-      @client.put("domains/#{domain}/web_prefix", options).to_h
-    end
-
-    # ==== End of Deprecated methods ====
-
-
-
 
     enforces_api_version 'v1', :list_domain_keys, :create_domain_key, :delete_domain_key, :dkim_rotation,
                          :dkim_rotate
     enforces_api_version 'v2', :get_domain_tracking_certificate, :regenerate_domain_tracking_certificate,
                          :generate_domain_tracking_certificate
     enforces_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
-                         :delete_smtp_credentials, :get_domain_connection_settings,
-                         :update_domain_connection_settings, :get_domain_tracking_settings,
+                         :delete_smtp_credentials, :get_domain_tracking_settings,
                          :update_domain_tracking_open_settings, :update_domain_tracking_click_settings,
                          :update_domain_tracking_unsubscribe_settings, :update_domain_dkim_authority,
-                         :update_domain_dkim_selector, :update_domain_web_prefix, :get_domain_stats
+                         :update_domain_dkim_selector, :get_domain_stats
     enforces_api_version 'v4', :get_domain_keys, :activate_domain_key, :deactivate_domain_key,
-                         :list, :info, :verify, :create, :update
+                         :list, :verify, :create, :update
   end
 end
