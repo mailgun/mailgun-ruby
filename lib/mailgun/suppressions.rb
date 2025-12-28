@@ -1,7 +1,3 @@
-require 'uri'
-
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
 
   # The Mailgun::Suppressions object makes it easy to manage "suppressions"

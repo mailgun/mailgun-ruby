@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mini_mime'
   spec.add_dependency 'faraday', "~> 2.1"
   spec.add_dependency 'faraday-multipart', '< 2'
-
+  spec.add_dependency 'zeitwerk'
 end

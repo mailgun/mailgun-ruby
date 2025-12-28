@@ -1,5 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
 
   # A Mailgun::Templates object is a simple CRUD interface to Mailgun Templates.

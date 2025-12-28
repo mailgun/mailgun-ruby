@@ -1,5 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
 
   # Mailgun::Address is a simple interface to the Email Validation API.

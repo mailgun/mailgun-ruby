@@ -1,7 +1,3 @@
-require 'mailgun/chains'
-require 'mailgun/suppressions'
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
   # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
   # wrapper around Faraday so you don't have to worry about the HTTP aspect
@@ -32,14 +28,7 @@ module Mailgun
       }
       request_options.merge!(request: {timeout: timeout}) if timeout
 
-      @http_client =  Faraday.new(request_options) do |conn|
-        conn.request :multipart
-        conn.request :authorization, :basic, 'api', api_key
-        conn.request :url_encoded
-        conn.response :raise_error, include_request: true
-        conn.adapter Faraday.default_adapter
-        conn.options.params_encoder = Faraday::FlatParamsEncoder
-      end
+      @http_client = build_http_client(api_key, request_options)
 
       @test_mode = test_mode
       @api_version = api_version
@@ -276,6 +265,17 @@ module Mailgun
         'Missing a `from` sender, message should contain at least 1 `from` sender',
         working_domain
       ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+    end
+
+    def build_http_client(api_key, request_options)
+      Faraday.new(request_options) do |conn|
+        conn.request :multipart
+        conn.request :authorization, :basic, 'api', api_key
+        conn.request :url_encoded
+        conn.response :raise_error, include_request: true
+        conn.adapter Faraday.default_adapter
+        conn.options.params_encoder = Faraday::FlatParamsEncoder
+      end
     end
   end
 end

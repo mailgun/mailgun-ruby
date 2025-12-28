@@ -1,7 +1,3 @@
-require 'mini_mime'
-require 'time'
-require 'faraday/multipart'
-
 module Mailgun
 
   # A Mailgun::MessageBuilder object is used to create a valid payload

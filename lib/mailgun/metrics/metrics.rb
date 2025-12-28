@@ -1,5 +1,3 @@
-require 'mailgun/exceptions/exceptions'
-
 module Mailgun
   # A Mailgun::Metrics object is a simple interface to Mailgun Metrics.
   # Uses Mailgun
