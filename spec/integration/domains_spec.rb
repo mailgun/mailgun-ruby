@@ -54,21 +54,55 @@ describe 'For the domains endpoint', vcr: vcr_opts do
       end
     end
 
+    context '#verify' do
+      let(:api_version) { 'v4' }
+
+      it 'verifies the domain' do
+        response = mg_obj.verify(domain)
+
+        expect(response['message']).to eq('Domain DNS records have been updated')
+      end
+    end
+
     context 'delete a domain' do
       subject(:response) { mg_obj.remove(domain) }
 
       it { is_expected.to be_falsey }
     end
-
-    # TODO add verify
   end
 
 
   context 'Domain::Keys methods' do
-    # TODO add missing:
-    # - list_domain_keys
-    # - create_domain_key
-    # - get_domain_keys
+    describe '#list_domain_keys' do
+      let(:api_version) { 'v1' }
+
+      it 'lists all domain keys' do
+        result = mg_obj.list_domain_keys(
+          {
+            signing_domain: domain
+          }
+        )
+
+        expect(result).to include('items')
+        expect(result['items'].first['selector']).to eq('k1')
+      end
+    end
+
+    describe '#create_domain_key' do
+      let(:api_version) { 'v1' }
+
+      it 'creates a domain key' do
+        result = mg_obj.create_domain_key(
+          {
+            signing_domain: domain,
+            selector: 'test'
+          }
+        )
+
+        expect(result['signing_domain']).to eq(domain)
+        expect(result['selector']).to eq('test')
+      end
+    end
 
     describe '#delete_domain_key' do
       let(:api_version) { 'v1' }
