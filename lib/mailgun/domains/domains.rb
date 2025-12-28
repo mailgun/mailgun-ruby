@@ -93,9 +93,7 @@ module Mailgun
     end
 
 
-    # Public: Verify domain, update domain records
-    #   Unknown status - this is not in the current Mailgun API
-    #   Do no rely on this being available in future releases.
+    # Public: Verify domain
     #
     # domain - [String] Domain name
     #
@@ -394,6 +392,7 @@ module Mailgun
     #
     # Returns [Hash] Information on the delivery connection settings
     def get_domain_connection_settings(domain)
+      warn('The `get_domain_connection_settings` method is deprecated in and wiil be removed in the future version of Mailgun.')
       @client.get("domains/#{domain}/connection").to_h
     end
 
@@ -407,6 +406,7 @@ module Mailgun
     #
     # Returns [Hash] Information on the delivery connection settings
     def update_domain_connection_settings(domain, options = {})
+      warn('The `update_domain_connection_settings` method is deprecated in and wiil be removed in the future version of Mailgun.')
       @client.put("domains/#{domain}/connection", options).to_h
     end
 
@@ -418,6 +418,7 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def update_domain_web_prefix(domain, options = {})
+      warn('The `update_domain_web_prefix` method is deprecated in and wiil be removed in the future version of Mailgun.')
       @client.put("domains/#{domain}/web_prefix", options).to_h
     end
 

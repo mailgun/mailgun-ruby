@@ -50,7 +50,7 @@ mb_obj.message_id("<20141014000000.11111.11111@example.com>")
 mb_obj.message_id(nil)
 mb_obj.message_id('')
 
-# Set the Message-tags at most 3.
+# Set the Message-tags at most 10.
 mb_obj.add_tag("You can track mails as tag-units!")
 
 # Campaigns and headers.

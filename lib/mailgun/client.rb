@@ -162,8 +162,16 @@ module Mailgun
     # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
-    def put(resource_path, data)
-      response = @http_client.put(resource_path, data)
+    def put(resource_path, params, body_params = false)
+      response =
+        if body_params
+          @http_client.put(resource_path) do |request|
+            request['Content-Type'] = 'application/json'
+            request.params = params.to_json
+          end
+        else
+          @http_client.put(resource_path, params)
+        end
       Response.new(response)
     rescue => err
       raise communication_error err
@@ -174,12 +182,19 @@ module Mailgun
     # @param [String] resource_path This is the API resource you wish to interact
     # with. Be sure to include your domain, where necessary.
     # @return [Mailgun::Response] A Mailgun::Response object.
-    def delete(resource_path, params = nil)
-      if params
-        response = @http_client.delete(resource_path, params: params)
-      else
-        response = @http_client.delete(resource_path)
-      end
+    def delete(resource_path, params = nil, body_params = false)
+      response =
+        if params
+          if body_params
+            @http_client.delete(resource_path) do |request|
+              request.body = params.to_json
+            end
+          else
+            @http_client.delete(resource_path, params: params)
+          end
+        else
+          @http_client.delete(resource_path)
+        end
       Response.new(response)
     rescue => err
       raise communication_error err

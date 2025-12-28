@@ -21,6 +21,7 @@ Zeitwerk::Loader.for_gem.tap do |loader| # rubocop:disable Style/SymbolProc
   loader.ignore("#{__dir__}/railgun.rb")
   loader.ignore("#{__dir__}/railgun")
 
+  loader.collapse("#{__dir__}/mailgun/analytics_tags")
   loader.collapse("#{__dir__}/mailgun/domains")
   loader.collapse("#{__dir__}/mailgun/events")
   loader.collapse("#{__dir__}/mailgun/exceptions")
