@@ -162,16 +162,8 @@ module Mailgun
     # @param [Hash] data This should be a standard Hash
     # containing required parameters for the requested resource.
     # @return [Mailgun::Response] A Mailgun::Response object.
-    def put(resource_path, params, body_params = false)
-      response =
-        if body_params
-          @http_client.put(resource_path) do |request|
-            request['Content-Type'] = 'application/json'
-            request.params = params.to_json
-          end
-        else
-          @http_client.put(resource_path, params)
-        end
+    def put(resource_path, data, headers = {})
+      response = @http_client.put(resource_path, data, headers)
       Response.new(response)
     rescue => err
       raise communication_error err

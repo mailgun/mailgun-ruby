@@ -12,7 +12,7 @@ module Mailgun
     end
 
     def update(tag, description)
-      @client.put('analytics/tags', { tag: tag, description: description }, body_params: true ).to_h['message'] == 'Tag updated'
+      @client.put('analytics/tags', { tag: tag, description: description }.to_json, { "Content-Type" => "application/json" } ).to_h['message'] == 'Tag updated'
     end
 
     def list(options = {})
