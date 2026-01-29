@@ -140,7 +140,7 @@ describe 'The method add_recipient' do
       recipient_type = :to
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
       @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
-      expect(@mb_client).to receive(:fail)
+      expect(@mb_client).to receive(:raise)
       @mb_obj.finalize
     end
   end

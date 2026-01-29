@@ -54,7 +54,7 @@ describe 'The method send_message()' do
 
   context 'when domain is missing' do
     it 'shows failure message' do
-      expect(@mg_obj).to receive(:fail)
+      expect(@mg_obj).to receive(:raise)
       @mg_obj.send_message(nil, {})
     end
   end
@@ -66,7 +66,7 @@ describe 'The method send_message()' do
         'message' => 'Sample Data/mime.txt',
         'from' => 'joe@test.com'
       }
-      expect(@mg_obj).to receive(:fail)
+      expect(@mg_obj).to receive(:raise)
       @mg_obj.send_message('testdomain.com', data)
     end
   end
