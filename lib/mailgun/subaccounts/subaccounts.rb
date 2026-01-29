@@ -1,5 +1,4 @@
 module Mailgun
-
   # A Mailgun::Subaccounts object is a simple CRUD interface to Mailgun Subaccounts.
   # Uses Mailgun
   class Subaccounts
@@ -22,9 +21,9 @@ module Mailgun
     #
     # Returns [Array] A list of subaccounts (hash)
     def list(options = {})
-      client.get("accounts/subaccounts", options).to_h!
+      client.get('accounts/subaccounts', options).to_h!
     end
-    alias_method :get_subaccounts, :list
+    alias get_subaccounts list
 
     # Public: Get subaccount information
     #
@@ -35,7 +34,8 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested subaccount.
     def info(subaccount_id, options = {})
-      fail(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+      raise(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+
       client.get("accounts/subaccounts/#{subaccount_id}", options).to_h!
     end
 
@@ -49,8 +49,9 @@ module Mailgun
     #
     # Returns [Hash] of created subaccount
     def create(name, options = {})
-      fail(ParameterError, 'No name given to create subaccount', caller) unless name
-      client.post("accounts/subaccounts", options.merge!(name: name)).to_h!
+      raise(ParameterError, 'No name given to create subaccount', caller) unless name
+
+      client.post('accounts/subaccounts', options.merge!(name: name)).to_h!
     end
 
     # Public: Disable a subaccount
@@ -62,7 +63,8 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested subaccount.
     def disable(subaccount_id, options = {})
-      fail(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+      raise(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+
       client.post("accounts/subaccounts/#{subaccount_id}/disable", options).to_h!
     end
 
@@ -75,7 +77,8 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested subaccount.
     def enable(subaccount_id, options = {})
-      fail(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+      raise(ParameterError, 'No Id of subaccount specified', caller) unless subaccount_id
+
       client.post("accounts/subaccounts/#{subaccount_id}/enable", options).to_h!
     end
   end

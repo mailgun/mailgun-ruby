@@ -1,7 +1,5 @@
 module Railgun
-
   class Error < StandardError
-
     attr_reader :object
 
     def initialize(message = nil, object = nil)
@@ -15,7 +13,6 @@ module Railgun
   end
 
   class InternalError < Error
-
     attr_reader :source_exception
 
     def initialize(source_exc, message = nil, object = nil)

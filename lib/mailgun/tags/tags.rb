@@ -1,9 +1,7 @@
 module Mailgun
-
   # A Mailgun::Tags object is a simple CRUD interface to Mailgun Tags.
   # Uses Mailgun
   class Tags
-
     # Public: creates a new Mailgun::Tags instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -22,7 +20,8 @@ module Mailgun
     # Returns [Array] A list of tags (hash)
     def get_tags(domain, options = {})
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to store template on', caller) unless domain
+      raise(ParameterError, 'No domain given to store template on', caller) unless domain
+
       @client.get("#{domain}/tags", options).to_h['items']
     end
 
@@ -34,8 +33,9 @@ module Mailgun
     # Returns [Hash] Information on the requested tag.
     def get_tag(domain, tag)
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.get("#{domain}/tags/#{tag}").to_h!
     end
 
@@ -49,8 +49,9 @@ module Mailgun
     # Returns [Boolean] if successful or not
     def update(domain, tag, options = {})
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.put("#{domain}/tags/#{tag}", options).to_h['message'] == 'Tag updated'
     end
 
@@ -68,8 +69,9 @@ module Mailgun
     # Returns [Hash] of tag stats info
     def get_tag_stats(domain, tag, options = {})
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.get("#{domain}/tags/#{tag}/stats", options).to_h
     end
 
@@ -82,8 +84,9 @@ module Mailgun
     # Returns [Boolean] if successful or not
     def remove(domain, tag)
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain', caller) unless tag
+
       @client.delete("#{domain}/tags/#{tag}").to_h['message'] == 'Tag deleted'
     end
 
@@ -95,8 +98,9 @@ module Mailgun
     # Returns [Hash] of countries of origin for a given domain
     def get_countries_aggregated_stats(domain, tag)
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.get("#{domain}/tags/#{tag}/stats/aggregates/countries").to_h
     end
 
@@ -108,8 +112,9 @@ module Mailgun
     # Returns [Hash] of email providers for a given domain
     def get_providers_aggregated_stats(domain, tag)
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.get("#{domain}/tags/#{tag}/stats/aggregates/providers").to_h
     end
 
@@ -121,8 +126,9 @@ module Mailgun
     # Returns [Hash] of devices for a given domain
     def get_devices_aggregated_stats(domain, tag)
       warn('This API is deprecated in favor of our new analytics Tags API')
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
+
       @client.get("#{domain}/tags/#{tag}/stats/aggregates/devices").to_h
     end
   end

@@ -2,104 +2,96 @@ require 'spec_helper'
 require 'mailgun'
 require 'mailgun/exceptions/exceptions'
 
-describe 'Mailgun instantiation', vcr: { :cassette_name => "instance" } do
+describe 'Mailgun instantiation', vcr: { cassette_name: 'instance' } do
   it 'instantiates an HttpClient object' do
-    expect {@mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)}.not_to raise_error
+    expect { @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL) }.not_to raise_error
   end
 end
 
-describe 'Client exceptions', vcr: { :cassette_name => "exceptions" } do
+describe 'Client exceptions', vcr: { cassette_name: 'exceptions' } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
-    begin
-      @mg_obj.send_message("not-our-doma.in", {
-          :from => "sally@not-our-doma.in",
-          :to => "bob@#{@domain}",
-          :subject => 'Exception Integration Test',
-          :text => 'INTEGRATION TESTING'
-      })
-    rescue Mailgun::CommunicationError => err
-      expect(err.message).to include('404')
-      expect(err.message).to include('Domain not found: not-our-doma.in')
-    else
-      fail
-    end
+    @mg_obj.send_message('not-our-doma.in', {
+                           from: 'sally@not-our-doma.in',
+                           to: "bob@#{@domain}",
+                           subject: 'Exception Integration Test',
+                           text: 'INTEGRATION TESTING'
+                         })
+  rescue Mailgun::CommunicationError => e
+    expect(e.message).to include('404')
+    expect(e.message).to include('Domain not found: not-our-doma.in')
+  else
+    raise
   end
 end
 
-describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-api-key" } do
+describe 'Client exceptions', vcr: { cassette_name: 'exceptions-invalid-api-key' } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'displays error information that API key is invalid' do
-    begin
-      @mg_obj.send_message(@domain, {
-          :from => "sally@#{@domain}",
-          :to => "sally@#{@domain}",
-          :subject => 'Exception Integration Test',
-          :text => 'INTEGRATION TESTING'
-      })
-    rescue Mailgun::Unauthorized => err
-      expect(err.message).to include('401')
-      expect(err.message).to include('Invalid Domain or API key')
-    else
-      fail
-    end
+    @mg_obj.send_message(@domain, {
+                           from: "sally@#{@domain}",
+                           to: "sally@#{@domain}",
+                           subject: 'Exception Integration Test',
+                           text: 'INTEGRATION TESTING'
+                         })
+  rescue Mailgun::Unauthorized => e
+    expect(e.message).to include('401')
+    expect(e.message).to include('Invalid Domain or API key')
+  else
+    raise
   end
 end
 
-describe 'Client exceptions', vcr: { :cassette_name => "exceptions-invalid-data" } do
+describe 'Client exceptions', vcr: { cassette_name: 'exceptions-invalid-data' } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
-    begin
-      @mg_obj.send_message(@domain, {
-          :from => "sally@#{@domain}",
-          :to => "sally#{@domain}",
-          :subject => 'Exception Integration Test',
-          :text => 'INTEGRATION TESTING'
-      })
-    rescue Mailgun::BadRequest => err
-      expect(err.message).to include('400')
-      expect(err.message).to include('to parameter is not a valid address. please check documentation')
-    else
-      fail
-    end
+    @mg_obj.send_message(@domain, {
+                           from: "sally@#{@domain}",
+                           to: "sally#{@domain}",
+                           subject: 'Exception Integration Test',
+                           text: 'INTEGRATION TESTING'
+                         })
+  rescue Mailgun::BadRequest => e
+    expect(e.message).to include('400')
+    expect(e.message).to include('to parameter is not a valid address. please check documentation')
+  else
+    raise
   end
 end
 
-describe 'Client exceptions', vcr: { :cassette_name => "exceptions-not-allowed" } do
+describe 'Client exceptions', vcr: { cassette_name: 'exceptions-not-allowed' } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
   end
 
   it 'display useful error information' do
-    begin
-      @mg_obj.send_message(@domain, {
-          :from => "invalid@#{@domain}",
-          :to => "invalid#{@domain}",
-          :subject => 'Exception Integration Test',
-          :text => 'INTEGRATION TESTING'
-      })
-    rescue Mailgun::CommunicationError => err
-      expect(err.message).to include('403')
-    else
-      fail
-    end
+    @mg_obj.send_message(@domain, {
+                           from: "invalid@#{@domain}",
+                           to: "invalid#{@domain}",
+                           subject: 'Exception Integration Test',
+                           text: 'INTEGRATION TESTING'
+                         })
+  rescue Mailgun::CommunicationError => e
+    expect(e.message).to include('403')
+  else
+    raise
   end
 end
 
-describe 'The method send_message()', vcr: { :cassette_name => "send_message" } do
+describe 'The method send_message()', vcr: { cassette_name: 'send_message' } do
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
     @domain = TESTDOMAIN || 'DOMAIN.TEST'
@@ -107,15 +99,14 @@ describe 'The method send_message()', vcr: { :cassette_name => "send_message" } 
 
   it 'sends a standard message in test mode.' do
     @mg_obj.enable_test_mode!
-    result = @mg_obj.send_message(@domain, {:from => "bob@#{@domain}",
-                                    :to => "sally@#{@domain}",
-                                    :subject => 'Hash Integration Test',
-                                    :text => 'INTEGRATION TESTING',
-                                    'o:testmode' => true}
-                                  )
+    result = @mg_obj.send_message(@domain, { :from => "bob@#{@domain}",
+                                             :to => "sally@#{@domain}",
+                                             :subject => 'Hash Integration Test',
+                                             :text => 'INTEGRATION TESTING',
+                                             'o:testmode' => true })
     result.to_h!
-    expect(result.body).to include("message")
-    expect(result.body).to include("id")
+    expect(result.body).to include('message')
+    expect(result.body).to include('id')
   end
 
   it 'fakes message send while in *client* test mode' do
@@ -123,10 +114,10 @@ describe 'The method send_message()', vcr: { :cassette_name => "send_message" } 
 
     expect(@mg_obj.test_mode?).to eq(true)
 
-    data = { :from => "joe@#{@domain}",
-             :to => "bob@#{@domain}",
-             :subject => "Test",
-             :text => "Test Data" }
+    data = { from: "joe@#{@domain}",
+             to: "bob@#{@domain}",
+             subject: 'Test',
+             text: 'Test Data' }
     uuid = 'uuid'
 
     allow(SecureRandom).to receive(:uuid).and_return(uuid)
@@ -135,27 +126,27 @@ describe 'The method send_message()', vcr: { :cassette_name => "send_message" } 
 
     result.to_h!
 
-    expect(result.body).to include("message")
-    expect(result.body).to include("id")
+    expect(result.body).to include('message')
+    expect(result.body).to include('id')
 
     expect(result.code).to eq(200)
     expect(result.body['id']).to eq("test-mode-mail-#{uuid}@localhost")
-    expect(result.body['message']).to eq("Queued. Thank you.")
+    expect(result.body['message']).to eq('Queued. Thank you.')
   end
 
   it 'sends a message builder message in test mode.' do
-    mb_obj = Mailgun::MessageBuilder.new()
-    mb_obj.from("sender@#{@domain}", {'first' => 'Sending', 'last' => 'User'})
-    mb_obj.add_recipient(:to, "recipient@#{@domain}", {'first' => 'Recipient', 'last' => 'User'})
-    mb_obj.subject("Message Builder Integration Test")
-    mb_obj.body_text("This is the text body.")
+    mb_obj = Mailgun::MessageBuilder.new
+    mb_obj.from("sender@#{@domain}", { 'first' => 'Sending', 'last' => 'User' })
+    mb_obj.add_recipient(:to, "recipient@#{@domain}", { 'first' => 'Recipient', 'last' => 'User' })
+    mb_obj.subject('Message Builder Integration Test')
+    mb_obj.body_text('This is the text body.')
     mb_obj.test_mode(true)
 
     result = @mg_obj.send_message(@domain, mb_obj)
 
     result.to_h!
-    expect(result.body).to include("message")
-    expect(result.body).to include("id")
+    expect(result.body).to include('message')
+    expect(result.body).to include('id')
   end
 
   it 'sends a custom MIME message in test mode.' do
@@ -175,15 +166,15 @@ Sender: me@samples.mailgun.org
 
 Testing some Mailgun awesomness!'
 
-    message_params = {:from => "bobby@#{@domain}",
-                      :to => "sally@#{@domain}",
-                      :message => mime_string}
+    message_params = { from: "bobby@#{@domain}",
+                       to: "sally@#{@domain}",
+                       message: mime_string }
 
     result = @mg_obj.send_message(@domain, message_params)
 
     result.to_h!
-    expect(result.body).to include("message")
-    expect(result.body).to include("id")
+    expect(result.body).to include('message')
+    expect(result.body).to include('id')
   end
 
   it 'receives success response code' do
@@ -191,10 +182,10 @@ Testing some Mailgun awesomness!'
 
     expect(@mg_obj.test_mode?).to eq(true)
 
-    data = { :from => "joe@#{@domain}",
-             :to => "bob@#{@domain}",
-             :subject => "Test",
-             :text => "Test Data" }
+    data = { from: "joe@#{@domain}",
+             to: "bob@#{@domain}",
+             subject: 'Test',
+             text: 'Test Data' }
 
     result = @mg_obj.send_message(@domain, data)
     result.to_h!
@@ -202,4 +193,3 @@ Testing some Mailgun awesomness!'
     expect(result.success?).to be(true)
   end
 end
-

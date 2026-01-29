@@ -1,5 +1,4 @@
 module Mailgun
-
   # A Mailgun::BatchMessage object is used to create a valid payload
   # for Batch Sending. Batch Sending can be difficult to implement, therefore
   # this code makes it dead simple to send millions of messages in batches of
@@ -18,7 +17,6 @@ module Mailgun
   #
   # See the Github documentation for full examples.
   class BatchMessage < MessageBuilder
-
     attr_reader :message_ids, :domain, :recipient_variables
 
     # Public: Creates a new BatchMessage object.
@@ -71,6 +69,7 @@ module Mailgun
       return true if @counters[:recipients][:to] > 0
       return true if @counters[:recipients][:cc] > 0
       return true if @counters[:recipients][:bcc] > 0
+
       false
     end
 
@@ -86,7 +85,7 @@ module Mailgun
       @message[rkey] = @message[rkey].first if @message.key?(rkey)
 
       response = @client.send_message(@domain, @message).to_h!
-      message_id = response['id'].gsub(/\>|\</, '')
+      message_id = response['id'].gsub(/>|</, '')
       @message_ids[message_id] = count_recipients
       reset_message
     end
@@ -94,7 +93,7 @@ module Mailgun
     # This method stores recipient variables for each recipient added, if
     # variables exist.
     def store_recipient_variables(recipient_type, address, variables)
-      variables = { id: @counters[:recipients][recipient_type] } unless variables
+      variables ||= { id: @counters[:recipients][recipient_type] }
       @recipient_variables[address] = variables
     end
 
@@ -118,7 +117,5 @@ module Mailgun
       @counters[:recipients][:cc] = 0
       @counters[:recipients][:bcc] = 0
     end
-
   end
-
 end

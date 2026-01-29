@@ -1,11 +1,9 @@
 module Mailgun
-
   # Public: Provides methods for creating and handling opt-in URLs,
   #   particularlly for mailing lists.
   #
   # See: https://github.com/mailgun/mailgun-ruby/blob/master/OptInHandler.md
   class OptInHandler
-
     # Generates a hash that can be used to validate opt-in recipients. Encodes
     # all the necessary data in the URL.
     #
@@ -46,6 +44,7 @@ module Mailgun
       if generated_hash == hash_provided
         return { 'recipient_address' => inner_payload['r'], 'mailing_list' => inner_payload['l'] }
       end
+
       false
     end
 
@@ -60,11 +59,10 @@ module Mailgun
       if input.respond_to?(:unpack1)
         input.unpack1('m')
       else
-        input.unpack('m').first
+        input.unpack1('m')
       end
     end
 
     private_class_method :base64_encode, :base64_decode
   end
-
 end

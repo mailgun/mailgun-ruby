@@ -1,12 +1,10 @@
 module Mailgun
-
   # A Mailgun::MessageBuilder object is used to create a valid payload
   # for the Mailgun API messages endpoint. If you prefer step by step message
   # generation through your code, this class is for you.
   #
   # See the Github documentation for full examples.
   class MessageBuilder
-
     attr_reader :message, :counters
 
     # Public: Creates a new MessageBuilder object.
@@ -28,13 +26,13 @@ module Mailgun
     # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
-      if recipient_type == "h:reply-to"
+      if recipient_type == 'h:reply-to'
         warn 'DEPRECATION: "add_recipient("h:reply-to", ...)" is deprecated. Please use "reply_to" instead.'
         return reply_to(address, variables)
       end
 
       if (@counters[:recipients][recipient_type] || 0) >= Mailgun::Chains::MAX_RECIPIENTS
-        fail Mailgun::ParameterError, 'Too many recipients added to message.', address
+        raise Mailgun::ParameterError, 'Too many recipients added to message.', address
       end
 
       compiled_address = parse_address(address, variables)
@@ -68,7 +66,7 @@ module Mailgun
     # @return [void]
     def reply_to(address, variables = nil)
       compiled_address = parse_address(address, variables)
-      header("reply-to", compiled_address)
+      header('reply-to', compiled_address)
     end
 
     # Set a subject for the message object
@@ -180,7 +178,10 @@ module Mailgun
     # @param [String] campaign_id A defined campaign ID to add to the message.
     # @return [void]
     def add_campaign_id(campaign_id)
-      fail(Mailgun::ParameterError, 'Too many campaigns added to message.', campaign_id) if @counters[:attributes][:campaign_id] >= Mailgun::Chains::MAX_CAMPAIGN_IDS
+      if @counters[:attributes][:campaign_id] >= Mailgun::Chains::MAX_CAMPAIGN_IDS
+        raise(Mailgun::ParameterError, 'Too many campaigns added to message.',
+              campaign_id)
+      end
 
       set_multi_complex('o:campaign', campaign_id)
       @counters[:attributes][:campaign_id] += 1
@@ -192,8 +193,9 @@ module Mailgun
     # @return [void]
     def add_tag(tag)
       if @counters[:attributes][:tag] >= Mailgun::Chains::MAX_TAGS
-        fail Mailgun::ParameterError, 'Too many tags added to message.', tag
+        raise Mailgun::ParameterError, 'Too many tags added to message.', tag
       end
+
       set_multi_complex('o:tag', tag)
       @counters[:attributes][:tag] += 1
     end
@@ -255,7 +257,8 @@ module Mailgun
     # @param [Hash] data Either a hash or JSON string.
     # @return [void]
     def header(name, data)
-      fail(Mailgun::ParameterError, 'Header name for message must be specified') if name.to_s.empty?
+      raise(Mailgun::ParameterError, 'Header name for message must be specified') if name.to_s.empty?
+
       begin
         jsondata = make_json data
         set_single("h:#{name}", jsondata)
@@ -278,7 +281,8 @@ module Mailgun
     #                           can not be converted to JSON, ParameterError will be raised.
     # @return [void]
     def variable(name, data)
-      fail(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
+      raise(Mailgun::ParameterError, 'Variable name must be specified') if name.to_s.empty?
+
       begin
         jsondata = make_json data
         set_single("v:#{name}", jsondata)
@@ -308,6 +312,7 @@ module Mailgun
     def message_id(data = nil)
       key = 'h:Message-Id'
       return @message.delete(key) if data.to_s.empty?
+
       set_single(key, data)
     end
 
@@ -326,6 +331,7 @@ module Mailgun
     def template(template_name = nil)
       key = 'template'
       return @message.delete(key) if template_name.to_s.empty?
+
       set_single(key, template_name)
     end
 
@@ -337,6 +343,7 @@ module Mailgun
     def template_version(version = nil)
       key = 't:version'
       return @message.delete(key) if version.to_s.empty?
+
       set_single(key, version)
     end
 
@@ -358,7 +365,7 @@ module Mailgun
     # @param [String] value The value of the parameter.
     # @return [void]
     def set_single(parameter, value)
-      @message[parameter] = value ? value : ''
+      @message[parameter] = value || ''
     end
 
     # Sets values within the multidict, however, prevents
@@ -397,8 +404,9 @@ module Mailgun
     # @param [String] value The item to convert
     # @return [void]
     def bool_lookup(value)
-      return 'yes' if %w(true yes yep).include? value.to_s.downcase
-      return 'no' if %w(false no nope).include? value.to_s.downcase
+      return 'yes' if %w[true yes yep].include? value.to_s.downcase
+      return 'no' if %w[false no nope].include? value.to_s.downcase
+
       warn 'WARN: for bool type actions next values are preferred: true yes yep | false no nope | htmlonly'
       value
     end
@@ -409,7 +417,7 @@ module Mailgun
     # @return [void]
     def valid_json?(json_)
       JSON.parse(json_)
-      return true
+      true
     rescue JSON::ParserError
       false
     end
@@ -422,8 +430,9 @@ module Mailgun
     def make_json(obj)
       return JSON.parse(obj).to_json if obj.is_a?(String)
       return obj.to_json if obj.is_a?(Hash)
+
       JSON.generate(obj).to_json
-    rescue
+    rescue StandardError
       raise Mailgun::ParameterError, 'Provided data could not be made into JSON. Try a JSON string or Hash.', obj
     end
 
@@ -436,9 +445,9 @@ module Mailgun
     # @return [void]
     def parse_address(address, vars)
       return address unless vars.is_a? Hash
-      fail(Mailgun::ParameterError, 'Email address not specified') unless address.is_a? String
-      if vars['full_name'] != nil && (vars['first'] != nil || vars['last'] != nil)
-        fail(Mailgun::ParameterError, 'Must specify at most one of full_name or first/last. Vars passed: #{vars}')
+      raise(Mailgun::ParameterError, 'Email address not specified') unless address.is_a? String
+      if !vars['full_name'].nil? && (!vars['first'].nil? || !vars['last'].nil?)
+        raise(Mailgun::ParameterError, 'Must specify at most one of full_name or first/last. Vars passed: #{vars}')
       end
 
       if vars['full_name']
@@ -448,6 +457,7 @@ module Mailgun
       end
 
       return "'#{full_name}' <#{address}>" if full_name
+
       address
     end
 
@@ -461,24 +471,24 @@ module Mailgun
     # Returns nothing
     def add_file(disposition, filedata, filename)
       attachment = File.open(filedata, 'r') if filedata.is_a?(String)
-      attachment = filedata.dup unless attachment
+      attachment ||= filedata.dup
 
-      fail(Mailgun::ParameterError,
-        'Unable to access attachment file object.'
-      ) unless attachment.respond_to?(:read)
+      unless attachment.respond_to?(:read)
+        raise(Mailgun::ParameterError,
+              'Unable to access attachment file object.')
+      end
 
       if attachment.respond_to?(:path) && !attachment.respond_to?(:content_type)
         mime_types = MiniMime.lookup_by_filename(attachment.path)
         content_type = mime_types.nil? ? 'application/octet-stream' : mime_types.content_type
-        attachment.instance_eval "def content_type; '#{content_type}'; end"
+        attachment.instance_eval "def content_type; '#{content_type}'; end", __FILE__, __LINE__
       end
 
       unless filename.nil?
         attachment.instance_variable_set :@original_filename, filename
-        attachment.instance_eval 'def original_filename; @original_filename; end'
+        attachment.instance_eval 'def original_filename; @original_filename; end', __FILE__, __LINE__
       end
       add_faraday_attachment(disposition, attachment, filename)
     end
   end
-
 end

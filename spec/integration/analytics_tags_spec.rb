@@ -20,13 +20,14 @@ describe 'AnalyticsTags', vcr: vcr_opts do
   describe '#list' do
     it 'returns a list of tags' do
       response = mg_obj.list(
-      {
-        pagination: {
-          sort: 'lastseen:desc',
-          limit: 10
-        },
-        include_subaccounts: true
-      })
+        {
+          pagination: {
+            sort: 'lastseen:desc',
+            limit: 10
+          },
+          include_subaccounts: true
+        }
+      )
 
       expect(response[0]['account_id']).to eq('test')
       expect(response[0]['tag']).to eq('test1')
@@ -45,7 +46,7 @@ describe 'AnalyticsTags', vcr: vcr_opts do
     it 'returns limits' do
       response = mg_obj.limits
 
-      expect(response['limit']).to eq(100000)
+      expect(response['limit']).to eq(100_000)
     end
   end
 end

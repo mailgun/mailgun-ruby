@@ -1,5 +1,4 @@
 module Mailgun
-
   # A Mailgun::AnalyticsTags object is a simple CRUD interface to Mailgun Tags.
   # Uses Mailgun
   class AnalyticsTags
@@ -18,7 +17,8 @@ module Mailgun
     #
     # Returns [Boolean] true or false
     def update(tag, description)
-      @client.put('analytics/tags', { tag: tag, description: description }.to_json, { "Content-Type" => "application/json" } ).to_h['message'] == 'Tag updated'
+      @client.put('analytics/tags', { tag: tag, description: description }.to_json,
+                  { 'Content-Type' => 'application/json' }).to_h['message'] == 'Tag updated'
     end
 
     # Public: Post query to list account tags or search for single tag

@@ -1,9 +1,7 @@
 module Mailgun
-
   # A Mailgun::Templates object is a simple CRUD interface to Mailgun Templates.
   # Uses Mailgun
   class Templates
-
     # Public: creates a new Mailgun::Templates instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -24,7 +22,8 @@ module Mailgun
     #
     # Returns [Hash] of created template
     def create(domain, options = {})
-      fail(ParameterError, 'No domain given to store template on', caller) unless domain
+      raise(ParameterError, 'No domain given to store template on', caller) unless domain
+
       @client.post("#{domain}/templates", options).to_h
     end
 
@@ -38,8 +37,9 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested template.
     def info(domain, template_name, options = {})
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+
       @client.get("#{domain}/templates/#{template_name}", options).to_h!
     end
 
@@ -52,8 +52,9 @@ module Mailgun
     #
     # Returns [Hash] of updated domain
     def update(domain, template_name, options = {})
-      fail(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      raise(ParameterError, 'No domain given to add on Mailgun', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+
       @client.put("#{domain}/templates/#{template_name}", options).to_h
     end
 
@@ -65,12 +66,13 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def remove(domain, template_name)
-      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      raise(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+
       @client.delete("#{domain}/templates/#{template_name}").to_h['message'] == 'template has been deleted'
     end
-    alias_method :delete, :remove
-    alias_method :delete_template, :remove
+    alias delete remove
+    alias delete_template remove
 
     # Public: Get Templates
     #
@@ -81,10 +83,11 @@ module Mailgun
     #
     # Returns [Array] A list of templates (hash)
     def list(domain, options = {})
-      fail(ParameterError, 'No domain given.', caller) unless domain
+      raise(ParameterError, 'No domain given.', caller) unless domain
+
       @client.get("#{domain}/templates", options).to_h['items']
     end
-    alias_method :get_templates, :list
+    alias get_templates list
 
     # Public: Delete Templates
     # NOTE: This method deletes all stored templates for the domain.
@@ -93,10 +96,11 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def remove_all(domain)
-      fail(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+      raise(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
+
       @client.delete("#{domain}/templates").to_h['message'] == 'templates have been deleted'
     end
-    alias_method :delete_templates, :remove_all
+    alias delete_templates remove_all
 
     # Public: Create a new version of a template
     #
@@ -112,8 +116,9 @@ module Mailgun
     #
     # Returns [Hash] of updated template
     def create_version(domain, template_name, options = {})
-      fail(ParameterError, 'No domain given.', caller) unless domain
-      fail(ParameterError, 'No template name given.', caller) unless template_name
+      raise(ParameterError, 'No domain given.', caller) unless domain
+      raise(ParameterError, 'No template name given.', caller) unless template_name
+
       @client.post("#{domain}/templates/#{template_name}/versions", options).to_h
     end
 
@@ -125,9 +130,10 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested template + version.
     def info_version(domain, template_name, tag)
-      fail(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
-      fail(ParameterError, 'No version tag given.', caller) unless tag
+      raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain', caller) unless template_name
+      raise(ParameterError, 'No version tag given.', caller) unless tag
+
       @client.get("#{domain}/templates/#{template_name}/versions/#{tag}").to_h!
     end
 
@@ -145,9 +151,10 @@ module Mailgun
     #
     # Returns [Hash] of updated template's version
     def update_version(domain, template_name, tag, options = {})
-      fail(ParameterError, 'No domain given.', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
-      fail(ParameterError, 'No version tag given.', caller) unless tag
+      raise(ParameterError, 'No domain given.', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      raise(ParameterError, 'No version tag given.', caller) unless tag
+
       @client.put("#{domain}/templates/#{template_name}/versions/#{tag}", options).to_h
     end
 
@@ -159,11 +166,12 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def delete_version(domain, template_name, tag)
-      fail(ParameterError, 'No domain given.', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
-      fail(ParameterError, 'No version tag given.', caller) unless tag
+      raise(ParameterError, 'No domain given.', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      raise(ParameterError, 'No version tag given.', caller) unless tag
+
       @client.delete("#{domain}/templates/#{template_name}/versions/#{tag}")
-        .to_h['message'] == 'version has been deleted'
+             .to_h['message'] == 'version has been deleted'
     end
 
     # Public: Get Template's Versions list
@@ -177,8 +185,9 @@ module Mailgun
     #
     # Returns [Array] A list of template's versions (hash)
     def template_versions_list(domain, template_name, options = {})
-      fail(ParameterError, 'No domain given.', caller) unless domain
-      fail(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+      raise(ParameterError, 'No domain given.', caller) unless domain
+      raise(ParameterError, 'No template name given to find on provided domain.', caller) unless template_name
+
       @client.get("#{domain}/templates/#{template_name}/versions", options).to_h
     end
   end

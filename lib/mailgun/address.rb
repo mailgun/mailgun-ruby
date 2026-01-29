@@ -1,5 +1,4 @@
 module Mailgun
-
   # Mailgun::Address is a simple interface to the Email Validation API.
   class Address
     def initialize(api_key = Mailgun.api_key, api_host = Mailgun.api_host)
@@ -10,12 +9,11 @@ module Mailgun
     #
     # @param [String] address Email address to validate (max 512 chars.)
     def validate(address, mailbox_verification = false)
-      params = {address:  address}
+      params = { address: address }
       params[:mailbox_verification] = true if mailbox_verification
 
-      res = @client.get "address/validate", params
-      return res.to_h!
+      res = @client.get 'address/validate', params
+      res.to_h!
     end
   end
-
 end

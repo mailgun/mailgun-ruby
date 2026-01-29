@@ -35,7 +35,10 @@ module Mailgun
     end
 
     def require_api_version(expected_version)
-      fail(ParameterError, "Client api version must be #{expected_version}", caller) unless @client.api_version == expected_version
+      return if @client.api_version == expected_version
+
+      raise(ParameterError, "Client api version must be #{expected_version}",
+            caller)
     end
   end
 end

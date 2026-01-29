@@ -9,24 +9,23 @@ module Mailgun
 
     def initialize(api_key = Mailgun.api_key,
                    api_host = Mailgun.api_host || 'api.mailgun.net',
-                   api_version = Mailgun.api_version  || 'v3',
+                   api_version = Mailgun.api_version || 'v3',
                    ssl = true,
                    test_mode = !!Mailgun.test_mode,
                    timeout = nil,
                    proxy_url = Mailgun.proxy_url)
-
       endpoint = endpoint_generator(api_host, api_version, ssl)
 
       request_options = {
         url: endpoint,
         proxy: proxy_url,
-        ssl: {verify: ssl},
+        ssl: { verify: ssl },
         headers: {
-                   'User-Agent' => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
-                   'Accept' =>'*/*'
-                  }
+          'User-Agent' => "mailgun-sdk-ruby/#{Mailgun::VERSION}",
+          'Accept' => '*/*'
+        }
       }
-      request_options.merge!(request: {timeout: timeout}) if timeout
+      request_options.merge!(request: { timeout: timeout }) if timeout
 
       @http_client = build_http_client(api_key, request_options)
 
@@ -71,9 +70,7 @@ module Mailgun
     end
 
     # @return [String] client api version
-    def api_version
-      @api_version
-    end
+    attr_reader :api_version
 
     # Provides a store of all the emails sent in test mode so you can check them.
     #
@@ -91,12 +88,12 @@ module Mailgun
     def send_message(working_domain, data)
       perform_data_validation(working_domain, data)
 
-      if test_mode? then
+      if test_mode?
         Mailgun::Client.deliveries << data.dup
         return Response.from_hash(
           {
-            :body => "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
-            :status => 200,
+            body: "{\"id\": \"test-mode-mail-#{SecureRandom.uuid}@localhost\", \"message\": \"Queued. Thank you.\"}",
+            status: 200
           }
         )
       end
@@ -106,7 +103,7 @@ module Mailgun
         # Remove nil values from the data hash
         # Submitting nils to the API will likely cause an error.
         #  See also: https://github.com/mailgun/mailgun-ruby/issues/32
-        data = data.select { |k, v| v != nil }
+        data = data.select { |_k, v| !v.nil? }
 
         if data.key?(:message)
           if data[:message].is_a?(String)
@@ -119,7 +116,7 @@ module Mailgun
       when MessageBuilder
         post("#{working_domain}/messages", data.message)
       else
-        fail ParameterError.new('Unknown data type for data parameter.', data)
+        raise ParameterError.new('Unknown data type for data parameter.', data)
       end
     end
 
@@ -134,8 +131,8 @@ module Mailgun
     def post(resource_path, data, headers = {})
       response = @http_client.post(resource_path, data, headers)
       Response.new(response)
-    rescue => err
-      raise communication_error err
+    rescue StandardError => e
+      raise communication_error e
     end
 
     # Generic Mailgun GET Handler
@@ -151,8 +148,8 @@ module Mailgun
       response = @http_client.get(resource_path, params, headers)
 
       Response.new(response)
-    rescue => err
-      raise communication_error(err)
+    rescue StandardError => e
+      raise communication_error(e)
     end
 
     # Generic Mailgun PUT Handler
@@ -165,8 +162,8 @@ module Mailgun
     def put(resource_path, data, headers = {})
       response = @http_client.put(resource_path, data, headers)
       Response.new(response)
-    rescue => err
-      raise communication_error err
+    rescue StandardError => e
+      raise communication_error e
     end
 
     # Generic Mailgun DELETE Handler
@@ -188,8 +185,8 @@ module Mailgun
           @http_client.delete(resource_path)
         end
       Response.new(response)
-    rescue => err
-      raise communication_error err
+    rescue StandardError => e
+      raise communication_error e
     end
 
     # Constructs a Suppressions client for the given domain.
@@ -221,7 +218,7 @@ module Mailgun
     # @param [Boolean] ssl True, SSL. False, No SSL.
     # @return [string] concatenated URL string
     def endpoint_generator(api_host, api_version, ssl)
-      ssl ? scheme = 'https' : scheme = 'http'
+      scheme = ssl ? 'https' : 'http'
       if api_version
         "#{scheme}://#{api_host}/#{api_version}"
       else
@@ -235,28 +232,33 @@ module Mailgun
     def communication_error(e)
       if e.respond_to?(:response) && e.response
         return case e.response_status
-        when Unauthorized::CODE
-          Unauthorized.new(e.message, e.response)
-        when BadRequest::CODE
-          BadRequest.new(e.message, e.response)
-        else
-          CommunicationError.new(e.message, e.response)
-        end
+               when Unauthorized::CODE
+                 Unauthorized.new(e.message, e.response)
+               when BadRequest::CODE
+                 BadRequest.new(e.message, e.response)
+               else
+                 CommunicationError.new(e.message, e.response)
+               end
       end
       CommunicationError.new(e.message)
     end
 
     def perform_data_validation(working_domain, data)
       message = data.respond_to?(:message) ? data.message : data
-      fail ParameterError.new('Missing working domain', working_domain) unless working_domain
-      fail ParameterError.new(
-        'Missing `to` recipient, message should contain at least 1 recipient',
-        working_domain
-      ) if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
-      fail ParameterError.new(
+      raise ParameterError.new('Missing working domain', working_domain) unless working_domain
+
+      if message.fetch('to', []).empty? && message.fetch(:to, []).empty?
+        raise ParameterError.new(
+          'Missing `to` recipient, message should contain at least 1 recipient',
+          working_domain
+        )
+      end
+      return unless message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+
+      raise ParameterError.new(
         'Missing a `from` sender, message should contain at least 1 `from` sender',
         working_domain
-      ) if message.fetch('from', []).empty? && message.fetch(:from, []).empty?
+      )
     end
 
     def build_http_client(api_key, request_options)

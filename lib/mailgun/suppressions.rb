@@ -1,9 +1,7 @@
 module Mailgun
-
   # The Mailgun::Suppressions object makes it easy to manage "suppressions"
   # attached to an account. "Suppressions" means bounces, unsubscribes, and complaints.
   class Suppressions
-
     # @param [Mailgun::Client] client API client to use for requests
     # @param [String] domain Domain name to use for the suppression endpoints.
     def initialize(client, domain)
@@ -60,12 +58,12 @@ module Mailgun
     def create_bounces(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
-      if data.length >= 1000 then
+      if data.length >= 1000
         resp, resp_l = create_bounces data[999..-1]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0 then
+      elsif data.length == 0
         return nil, []
       end
 
@@ -74,25 +72,23 @@ module Mailgun
       # NOTE: `data` could potentially be very large (1000 elements) so it is
       # more efficient to pop from data and push into a different array as
       # opposed to possibly copying the entire array to another array.
-      while not data.empty? do
+      until data.empty?
         bounce = data.pop
         # Bounces MUST contain a `address` key.
-        if not bounce.include? :address then
+        unless bounce.include? :address
           raise Mailgun::ParameterError.new "Bounce MUST include a :address key: #{bounce}"
         end
 
         bounce.each do |k, v|
           # Hash values MUST be strings.
-          if not v.is_a? String then
-            bounce[k] = v.to_s
-          end
+          bounce[k] = v.to_s unless v.is_a? String
         end
 
         valid.push bounce
       end
 
-      response = @client.post("#{@domain}/bounces", valid.to_json, { "Content-Type" => "application/json" })
-      return response, split_return
+      response = @client.post("#{@domain}/bounces", valid.to_json, { 'Content-Type' => 'application/json' })
+      [response, split_return]
     end
 
     def delete_bounce(address)
@@ -133,21 +129,21 @@ module Mailgun
     def create_unsubscribes(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
-      if data.length >= 1000 then
+      if data.length >= 1000
         resp, resp_l = create_unsubscribes data[999..-1]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0 then
+      elsif data.length == 0
         return nil, []
       end
 
       valid = []
       # Validate the unsubscribes given
-      while not data.empty? do
+      until data.empty?
         unsubscribe = data.pop
         # unsubscribes MUST contain a `address` key.
-        if not unsubscribe.include? :address then
+        unless unsubscribe.include? :address
           raise Mailgun::ParameterError.new "Unsubscribe MUST include a :address key: #{unsubscribe}"
         end
 
@@ -164,11 +160,11 @@ module Mailgun
         valid.push unsubscribe
       end
 
-      response = @client.post("#{@domain}/unsubscribes", valid.to_json, { "Content-Type" => "application/json" })
-      return response, split_return
+      response = @client.post("#{@domain}/unsubscribes", valid.to_json, { 'Content-Type' => 'application/json' })
+      [response, split_return]
     end
 
-    def delete_unsubscribe(address, params = {})
+    def delete_unsubscribe(address, _params = {})
       @client.delete("#{@domain}/unsubscribes/#{escape_address(address)}")
     end
 
@@ -202,36 +198,34 @@ module Mailgun
     def create_complaints(data)
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
-      if data.length >= 1000 then
+      if data.length >= 1000
         resp, resp_l = create_complaints data[999..-1]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0 then
+      elsif data.length == 0
         return nil, []
       end
 
       valid = []
       # Validate the complaints given
-      while not data.empty? do
+      until data.empty?
         complaint = data.pop
         # complaints MUST contain a `address` key.
-        if not complaint.include? :address then
+        unless complaint.include? :address
           raise Mailgun::ParameterError.new "Complaint MUST include a :address key: #{complaint}"
         end
 
         complaint.each do |k, v|
           # Hash values MUST be strings.
-          if not v.is_a? String then
-            complaint[k] = v.to_s
-          end
+          complaint[k] = v.to_s unless v.is_a? String
         end
 
         valid.push complaint
       end
 
-      response = @client.post("#{@domain}/complaints", valid.to_json, { "Content-Type" => "application/json" })
-      return response, split_return
+      response = @client.post("#{@domain}/complaints", valid.to_json, { 'Content-Type' => 'application/json' })
+      [response, split_return]
     end
 
     def delete_complaint(address)
@@ -250,24 +244,23 @@ module Mailgun
 
     def extract_paging(response)
       rhash = response.to_h
-      return nil unless rhash.include? "paging"
+      return nil unless rhash.include? 'paging'
 
-      page_info = rhash["paging"]
+      page_info = rhash['paging']
 
       # Build the `next` endpoint
-      page_next = URI.parse(page_info["next"])
+      page_next = URI.parse(page_info['next'])
       @paging_next = {
-        :path => page_next.path[/\/v[\d]\/(.+)/, 1],
-        :params => Hash[URI.decode_www_form page_next.query],
+        path: page_next.path[%r{/v\d/(.+)}, 1],
+        params: Hash[URI.decode_www_form page_next.query]
       }
 
       # Build the `prev` endpoint
-      page_prev = URI.parse(page_info["previous"])
+      page_prev = URI.parse(page_info['previous'])
       @paging_prev = {
-        :path => page_prev.path[/\/v[\d]\/(.+)/, 1],
-        :params => Hash[URI.decode_www_form page_prev.query],
+        path: page_prev.path[%r{/v\d/(.+)}, 1],
+        params: Hash[URI.decode_www_form page_prev.query]
       }
     end
-
   end
 end

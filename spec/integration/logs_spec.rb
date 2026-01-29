@@ -37,65 +37,65 @@ describe Mailgun::Logs, vcr: vcr_opts do
     it 'responds with account logs' do
       expect(logs.account_logs(options)).to eq(
         {
-          "start" => "Wed, 25 Jun 2025 00:00:00 -0000",
-          "end" => "Wed, 25 Jun 2025 23:00:00 -0000",
-          "items" => [
+          'start' => 'Wed, 25 Jun 2025 00:00:00 -0000',
+          'end' => 'Wed, 25 Jun 2025 23:00:00 -0000',
+          'items' => [
             {
-              "id" => "123",
-              "event" => "accepted",
-              "@timestamp" => "2025-06-25T17:19:51.166Z",
-              "account" => {
-                "id" => "123"
+              'id' => '123',
+              'event' => 'accepted',
+              '@timestamp' => '2025-06-25T17:19:51.166Z',
+              'account' => {
+                'id' => '123'
               },
-              "method" => "HTTP",
-              "originating-ip" => "123.123.12.123",
-              "api-key-id" => "xxx",
-              "domain" => {
-                "name" => "example.mailgun.org"
+              'method' => 'HTTP',
+              'originating-ip' => '123.123.12.123',
+              'api-key-id' => 'xxx',
+              'domain' => {
+                'name' => 'example.mailgun.org'
               },
-              "recipient" => "alex@example.com",
-              "recipient-domain" => "example.com",
-              "envelope" => {
-                "sender" => "example.mailgun.org",
-                "transport" => "smtp",
-                "targets" => "alex@example.com"
+              'recipient' => 'alex@example.com',
+              'recipient-domain' => 'example.com',
+              'envelope' => {
+                'sender' => 'example.mailgun.org',
+                'transport' => 'smtp',
+                'targets' => 'alex@example.com'
               },
-              "storage" => {
-                "region" => "us-east4",
-                "env" => "production",
-                "key" => "xxx",
-                "url" => ["https://storage.api.mailgun.net/v3/domains/example.mailgun.org/messages/123"]
+              'storage' => {
+                'region' => 'us-east4',
+                'env' => 'production',
+                'key' => 'xxx',
+                'url' => ['https://storage.api.mailgun.net/v3/domains/example.mailgun.org/messages/123']
               },
-              "log-level" => "info",
-              "user-variables" => "{}",
-              "message" => {
-                "headers" => {
-                  "to" => "alex@example.com",
-                  "message-id" => "123@example.mailgun.org",
-                  "from" => "bob@sending_domain.com+4",
-                  "subject" => "The Ruby SDK is awesome!"
+              'log-level' => 'info',
+              'user-variables' => '{}',
+              'message' => {
+                'headers' => {
+                  'to' => 'alex@example.com',
+                  'message-id' => '123@example.mailgun.org',
+                  'from' => 'bob@sending_domain.com+4',
+                  'subject' => 'The Ruby SDK is awesome!'
                 },
-                "attachments" => [
+                'attachments' => [
                   {
-                    "filename" => "image.jpg",
-                    "content-type" => "image/jpeg",
-                    "size" => 16712
+                    'filename' => 'image.jpg',
+                    'content-type' => 'image/jpeg',
+                    'size' => 16_712
                   }
                 ],
-                "size" => 23476
+                'size' => 23_476
               },
-              "flags" => {
-                "is-authenticated" => true,
-                "is-system-test" => false,
-                "is-routed" => false,
-                "is-test-mode" => false,
-                "is-delayed-bounce" => false,
-                "is-callback" => false
+              'flags' => {
+                'is-authenticated' => true,
+                'is-system-test' => false,
+                'is-routed' => false,
+                'is-test-mode' => false,
+                'is-delayed-bounce' => false,
+                'is-callback' => false
               }
             }
           ],
-          "pagination" => {},
-          "aggregates" => {}
+          'pagination' => {},
+          'aggregates' => {}
         }
       )
     end

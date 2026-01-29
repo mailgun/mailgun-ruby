@@ -3,10 +3,9 @@ require 'spec_helper'
 require 'mailgun'
 require 'mailgun/suppressions'
 
-vcr_opts = { :cassette_name => 'suppressions' }
+vcr_opts = { cassette_name: 'suppressions' }
 
 describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts do
-
   before(:all) do
     @mg_obj = Mailgun::Client.new(APIKEY)
     @suppress = Mailgun::Suppressions.new(@mg_obj, TESTDOMAIN)
@@ -18,10 +17,10 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     bounces = []
     @addresses.each do |addr|
       bounces.push({
-        :address => addr,
-        :code => 500,
-        :error => 'integration testing',
-      })
+                     address: addr,
+                     code: 500,
+                     error: 'integration testing'
+                   })
     end
 
     response, nested = @suppress.create_bounces bounces
@@ -35,9 +34,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'raises ParameterError if no bounce[:address] is present' do
     bounces = []
     bounces.push({
-      :code => 500,
-      :error => 'integration testing',
-    })
+                   code: 500,
+                   error: 'integration testing'
+                 })
 
     expect { @suppress.create_bounces bounces }.to raise_error(Mailgun::ParameterError)
   end
@@ -56,9 +55,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     unsubscribes = []
     @addresses.each do |addr|
       unsubscribes.push({
-        :address => addr,
-        :tag => 'integration',
-      })
+                          address: addr,
+                          tag: 'integration'
+                        })
     end
 
     response, nested = @suppress.create_unsubscribes unsubscribes
@@ -73,9 +72,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
     unsubscribes = []
     @addresses.each do |addr|
       unsubscribes.push({
-        :address => addr,
-        :tags => ['integration'],
-      })
+                          address: addr,
+                          tags: ['integration']
+                        })
     end
 
     response, nested = @suppress.create_unsubscribes unsubscribes
@@ -89,8 +88,8 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'raises ParameterError if no unsubscribe[:address] is present' do
     unsubscribes = []
     unsubscribes.push({
-      :tag => 'integration',
-    })
+                        tag: 'integration'
+                      })
 
     expect { @suppress.create_unsubscribes unsubscribes }.to raise_error(Mailgun::ParameterError)
   end
@@ -108,7 +107,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'can batch-add complaints' do
     complaints = []
     @addresses.each do |addr|
-      complaints.push :address => addr
+      complaints.push address: addr
     end
 
     response, nested = @suppress.create_complaints complaints
@@ -122,8 +121,8 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'raises ParameterError if no complaint[:address] is present' do
     complaints = []
     complaints.push({
-      :tag => 'integration',
-    })
+                      tag: 'integration'
+                    })
 
     expect { @suppress.create_complaints complaints }.to raise_error(Mailgun::ParameterError)
   end

@@ -1,9 +1,8 @@
 module Mailgun
-
   # A Mailgun::Webhooks object is a simple CRUD interface to Mailgun Webhooks.
   # Uses Mailgun
   class Webhooks
-    ACTIONS = %w(accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed).freeze
+    ACTIONS = %w[accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed].freeze
 
     # Public creates a new Mailgun::Webhooks instance.
     #   Defaults to Mailgun::Client
@@ -21,7 +20,7 @@ module Mailgun
       res = @client.get("domains/#{domain}/webhooks", options)
       res.to_h['webhooks']
     end
-    alias_method :get_webhooks, :list
+    alias get_webhooks list
 
     # Public: Get webook information for a specific action
     #
@@ -36,7 +35,7 @@ module Mailgun
     rescue NoMethodError
       ''
     end
-    alias_method :get_webhook_url, :info
+    alias get_webhook_url info
 
     # Public: Add webhook
     #
@@ -49,8 +48,8 @@ module Mailgun
       res = @client.post("domains/#{domain}/webhooks", id: action, url: url)
       res.to_h['webhook']['urls'].include?(url) && res.to_h['message'] == 'Webhook has been created'
     end
-    alias_method :add, :create
-    alias_method :add_webhook, :create
+    alias add create
+    alias add_webhook create
 
     # Public: Sets all webhooks to the same URL
     #
@@ -63,10 +62,10 @@ module Mailgun
         add_webhook domain, action, url
       end
       true
-    rescue
+    rescue StandardError
       false
     end
-    alias_method :add_all_webhooks, :create_all
+    alias add_all_webhooks create_all
 
     # Public: Update webhook
     #
@@ -76,12 +75,13 @@ module Mailgun
     #
     # Returns a Boolean of whether the webhook was updated
     def update(domain, action, url = '')
-      fail Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
-      fail Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
+      raise Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
+      raise Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
+
       res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
       res.to_h['webhook']['urls'] == url && res.to_h['message'] == 'Webhook has been updated'
     end
-    alias_method :update_webhook, :update
+    alias update_webhook update
 
     # Public: Delete a specific webhook
     #
@@ -90,14 +90,15 @@ module Mailgun
     #
     # Returns a Boolean of the success
     def remove(domain, action)
-      fail Mailgun::ParameterError('Domain not provided to remove webhook from') unless domain
-      fail Mailgun::ParameterError('Action not provided to identify webhook to remove') unless action
+      raise Mailgun::ParameterError('Domain not provided to remove webhook from') unless domain
+      raise Mailgun::ParameterError('Action not provided to identify webhook to remove') unless action
+
       @client.delete("domains/#{domain}/webhooks/#{action}").to_h['message'] == 'Webhook has been deleted'
     rescue Mailgun::CommunicationError
       false
     end
-    alias_method :delete, :remove
-    alias_method :delete_webhook, :remove
+    alias delete remove
+    alias delete_webhook remove
 
     # Public: Delete all webhooks for a domain
     #
@@ -105,13 +106,13 @@ module Mailgun
     #
     # Returns a Boolean on the success
     def remove_all(domain)
-      fail Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
+      raise Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
+
       ACTIONS.each do |action|
         delete_webhook domain, action
       end
     end
-    alias_method :delete_all, :remove_all
-    alias_method :delete_all_webooks, :remove_all
-
+    alias delete_all remove_all
+    alias delete_all_webooks remove_all
   end
 end

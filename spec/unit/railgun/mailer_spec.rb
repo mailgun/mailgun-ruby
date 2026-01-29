@@ -15,42 +15,40 @@ class UnitTestMailer < ActionMailer::Base
   def plain_message(address, subject, headers)
     headers(headers)
     mail(to: address, subject: subject) do |format|
-      format.text { render plain: "Test!" }
-      format.html { render html: "<p>Test!</p>".html_safe }
+      format.text { render plain: 'Test!' }
+      format.html { render html: '<p>Test!</p>'.html_safe }
     end
   end
 
   def message_with_attachment(address, subject)
     attachments['info.txt'] = {
-      :content => File.read('docs/railgun/Overview.md'),
-      :mime_type => 'text/plain',
+      content: File.read('docs/railgun/Overview.md'),
+      mime_type: 'text/plain'
     }
     mail(to: address, subject: subject) do |format|
-      format.text { render plain: "Test!" }
-      format.html { render html: "<p>Test!</p>".html_safe }
+      format.text { render plain: 'Test!' }
+      format.html { render html: '<p>Test!</p>'.html_safe }
     end
   end
 
   def message_with_template(address, subject, template_name)
     mail(to: address, subject: subject, template: template_name) do |format|
-      format.text { render plain: "Test!" }
+      format.text { render plain: 'Test!' }
     end
   end
 
   def message_with_domain(address, subject, domain)
     mail(to: address, subject: subject, domain: domain) do |format|
-      format.text { render plain: "Test!" }
+      format.text { render plain: 'Test!' }
     end
   end
-
 end
 
 describe 'Railgun::Mailer' do
-
   it 'has a mailgun_client property which returns a Mailgun::Client' do
     config = {
-      api_key:  {},
-      domain:   {}
+      api_key: {},
+      domain: {}
     }
     @mailer_obj = Railgun::Mailer.new(config)
 
@@ -60,18 +58,18 @@ describe 'Railgun::Mailer' do
   context 'when config does not have api_key or domain' do
     it 'raises configuration error' do
       config = {
-        api_key:  {}
+        api_key: {}
       }
 
-    expect { Railgun::Mailer.new(config) }.to raise_error(Railgun::ConfigurationError)
+      expect { Railgun::Mailer.new(config) }.to raise_error(Railgun::ConfigurationError)
     end
   end
 
   context 'when fake_message_send is present in config' do
     it 'enables test mode' do
       config = {
-        api_key:  {},
-        domain:   {},
+        api_key: {},
+        domain: {},
         fake_message_send: true
       }
       client_double = double(Mailgun::Client)
@@ -100,7 +98,7 @@ describe 'Railgun::Mailer' do
   it 'adds options to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_options ||= {
-      'tracking-opens' => 'true',
+      'tracking-opens' => 'true'
     }
 
     body = Railgun.transform_for_mailgun(message)
@@ -124,7 +122,7 @@ describe 'Railgun::Mailer' do
   it 'adds variables to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_variables ||= {
-      'user' => {:id => '1', :name => 'tstark'},
+      'user' => { id: '1', name: 'tstark' }
     }
 
     body = Railgun.transform_for_mailgun(message)
@@ -141,7 +139,7 @@ describe 'Railgun::Mailer' do
   it 'adds headers to message body' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_headers ||= {
-      'x-unit-test' => 'true',
+      'x-unit-test' => 'true'
     }
 
     body = Railgun.transform_for_mailgun(message)
@@ -152,8 +150,8 @@ describe 'Railgun::Mailer' do
 
   it 'adds headers to message body from mailer' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
-      'x-unit-test-2' => 'true',
-    })
+                                             'x-unit-test-2' => 'true'
+                                           })
 
     body = Railgun.transform_for_mailgun(message)
 
@@ -163,20 +161,20 @@ describe 'Railgun::Mailer' do
 
   it 'properly handles headers that are passed as separate POST params' do
     message = UnitTestMailer.plain_message('test@example.org', 'Test!', {
-      # `From`, `To`, and `Subject` are set on the envelope, so they should be ignored as headers
-      'From' => 'units@example.net',
-      'To' => 'user@example.com',
-      'Subject' => 'This should disappear',
-      # If `Bcc` or `Cc` are set as headers, they should be carried over as POST params, not headers
-      'Bcc' => ['list@example.org'],
-      'Cc' => ['admin@example.com'],
-      # This is an arbitrary header and should be carried over properly
-      'X-Source' => 'unit tests',
-    })
+                                             # `From`, `To`, and `Subject` are set on the envelope, so they should be ignored as headers
+                                             'From' => 'units@example.net',
+                                             'To' => 'user@example.com',
+                                             'Subject' => 'This should disappear',
+                                             # If `Bcc` or `Cc` are set as headers, they should be carried over as POST params, not headers
+                                             'Bcc' => ['list@example.org'],
+                                             'Cc' => ['admin@example.com'],
+                                             # This is an arbitrary header and should be carried over properly
+                                             'X-Source' => 'unit tests'
+                                           })
 
     body = Railgun.transform_for_mailgun(message)
 
-    ['From', 'To', 'Subject'].each do |header|
+    %w[From To Subject].each do |header|
       expect(body).not_to include("h:#{header}")
     end
 
@@ -202,20 +200,20 @@ describe 'Railgun::Mailer' do
         }
       end
       body = Railgun.transform_for_mailgun(message)
-      expect(body["v:my-data"]).to be_kind_of(String)
-      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data'].to_s).to eq('{"key":"value"}')
     end
 
     it 'accepts a hash and appends as data to the message.' do
       message = UnitTestMailer.plain_message('test@example.org', '', {}).tap do |message|
         message.mailgun_variables = {
-          'my-data' => {'key' => 'value'}
+          'my-data' => { 'key' => 'value' }
         }
       end
       body = Railgun.transform_for_mailgun(message)
 
-      expect(body["v:my-data"]).to be_kind_of(String)
-      expect(body["v:my-data"].to_s).to eq('{"key":"value"}')
+      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data'].to_s).to eq('{"key":"value"}')
     end
 
     it 'accepts string values' do
@@ -226,8 +224,8 @@ describe 'Railgun::Mailer' do
       end
       body = Railgun.transform_for_mailgun(message)
 
-      expect(body["v:my-data"]).to be_kind_of(String)
-      expect(body["v:my-data"].to_s).to eq('String Value.')
+      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data'].to_s).to eq('String Value.')
     end
   end
 
@@ -251,13 +249,13 @@ describe 'Railgun::Mailer' do
 
   it 'ignores `reply-to` in headers' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
-      'reply-to' => 'user@example.com',
-    })
+                                             'reply-to' => 'user@example.com'
+                                           })
     message.mailgun_headers = {
-      'Reply-To' => 'administrator@example.org',
+      'Reply-To' => 'administrator@example.org'
     }
-    message.headers({'REPLY-TO' => 'admin@example.net'})
-    message.reply_to = "dude@example.com.au"
+    message.headers({ 'REPLY-TO' => 'admin@example.net' })
+    message.reply_to = 'dude@example.com.au'
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:reply-to')
@@ -267,12 +265,12 @@ describe 'Railgun::Mailer' do
 
   it 'ignores `mime-version` in headers' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
-      'mime-version' => '1.0',
-    })
+                                             'mime-version' => '1.0'
+                                           })
     message.mailgun_headers = {
-      'Mime-Version' => '1.1',
+      'Mime-Version' => '1.1'
     }
-    message.headers({'MIME-VERSION' => '1.2'})
+    message.headers({ 'MIME-VERSION' => '1.2' })
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).not_to include('h:mime-version')
@@ -280,32 +278,32 @@ describe 'Railgun::Mailer' do
 
   it 'treats `headers()` names as case-insensitve' do
     message = UnitTestMailer.plain_message('test@example.org', '', {
-      'X-BIG-VALUE' => 1,
-    })
+                                             'X-BIG-VALUE' => 1
+                                           })
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:x-big-value')
-    expect(body['h:x-big-value']).to eq("1")
+    expect(body['h:x-big-value']).to eq('1')
   end
 
   it 'treats `mailgun_headers` names as case-insensitive' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.mailgun_headers = {
-      'X-BIG-VALUE' => 1,
+      'X-BIG-VALUE' => 1
     }
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:x-big-value')
-    expect(body['h:x-big-value']).to eq("1")
+    expect(body['h:x-big-value']).to eq('1')
   end
 
   it 'handles multi-value, mixed case headers correctly' do
     message = UnitTestMailer.plain_message('test@example.org', '', {})
     message.headers({
-      'x-neat-header' => 'foo',
-      'X-Neat-Header' => 'bar',
-      'X-NEAT-HEADER' => 'zoop',
-    })
+                      'x-neat-header' => 'foo',
+                      'X-Neat-Header' => 'bar',
+                      'X-NEAT-HEADER' => 'zoop'
+                    })
 
     body = Railgun.transform_for_mailgun(message)
     expect(body).to include('h:x-neat-header')
