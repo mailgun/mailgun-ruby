@@ -1,0 +1,187 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/analytics/tags
+    body:
+      encoding: UTF-8
+      string: include_subaccounts=true&pagination=%7Bsort%3A+%22lastseen%3Adesc%22%2C+limit%3A+10%7D
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.1
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '317'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 28 Jan 2026 18:49:42 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"account_id":"test","parent_account_id":"test","tag":"test1","description":"","first_seen":"Wed,
+        28 Jan 2026 18:27:11 +0000","last_seen":"Wed, 28 Jan 2026 18:00:00 +0000","metrics":{},"account_name":"Alex
+        Lebedev"}],"pagination":{"sort":"lastseen:desc","limit":10}}
+
+        '
+  recorded_at: Wed, 28 Jan 2026 18:49:42 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v1/analytics/tags/limits
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.1
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '49'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 28 Jan 2026 18:55:47 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"limit":100000,"count":1,"limit_reached":false}
+
+        '
+  recorded_at: Wed, 28 Jan 2026 18:55:47 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v1/analytics/tags
+    body:
+      encoding: UTF-8
+      string: '{"tag":"test1","description":"test_description"}'
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.2
+      Accept:
+      - "*/*"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 28 Jan 2026 20:04:23 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Tag updated"}
+
+        '
+  recorded_at: Wed, 28 Jan 2026 20:04:23 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v1/analytics/tags
+    body:
+      encoding: UTF-8
+      string: '{"tag":"test1"}'
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.2
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 28 Jan 2026 20:05:54 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Tag deleted"}
+
+        '
+  recorded_at: Wed, 28 Jan 2026 20:05:54 GMT
+recorded_with: VCR 6.4.0
