@@ -1,8 +1,0 @@
-inherit_from: .rubocop_todo.yml
-
-Metrics/LineLength:
-  Enabled: false
-Style/EmptyLinesAroundModuleBody:
-  Enabled: false
-Style/EmptyLinesAroundClassBody:
-  Enabled: false

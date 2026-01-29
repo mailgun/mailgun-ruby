@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   module Exceptions
   end
@@ -6,7 +8,6 @@ module Mailgun
   # Inherits from StandardError (previously RuntimeError) as not all errors are
   # runtime errors.
   class Error < StandardError
-
     # Public: get an object an error is instantiated with
     attr_reader :object
 
@@ -35,7 +36,7 @@ module Mailgun
     attr_reader :status
 
     # Public: fallback if there is no response status on the object
-    NOCODE = 000
+    NOCODE = 0o00
     FORBIDDEN = 'Forbidden'
 
     # Public: initialization of new error given a message and/or object
@@ -46,10 +47,10 @@ module Mailgun
     def initialize(message = nil, response = nil)
       @response = response
       @status = if response.nil?
-                NOCODE
-              else
-                response[:status]
-              end
+                  NOCODE
+                else
+                  response[:status]
+                end
 
       begin
         json = JSON.parse(response[:body])
@@ -57,13 +58,13 @@ module Mailgun
       rescue JSON::ParserError
         api_message = response.response_body
       rescue NoMethodError
-        api_message = "Unknown API error"
-      rescue
+        api_message = 'Unknown API error'
+      rescue StandardError
         api_message = 'Unknown API error'
       end
 
-      message = message || ''
-      message = message + ': ' + (api_message || "")
+      message ||= ''
+      message = "#{message}: #{api_message || ''}"
 
       super(message, response)
     rescue NoMethodError, JSON::ParserError
@@ -78,7 +79,7 @@ module Mailgun
     CODE = 401
 
     def initialize(error_message, response)
-      error_message = error_message + ' - Invalid Domain or API key'
+      error_message += ' - Invalid Domain or API key'
       super(error_message, response)
     end
   end
@@ -87,9 +88,5 @@ module Mailgun
   # Inherits from Mailgun::CommunicationError
   class BadRequest < CommunicationError
     CODE = 400
-
-    def initialize(error_message, response)
-      super(error_message, response)
-    end
   end
 end

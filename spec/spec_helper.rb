@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 
 SimpleCov.start do
-  add_filter "/spec/"
+  add_filter '/spec/'
 end
 
 require 'mailgun'
@@ -10,22 +12,20 @@ require 'vcr'
 require 'webmock/rspec'
 require 'rspec/its'
 
-#WebMock.disable_net_connect!(allow_localhost: true)
+# WebMock.disable_net_connect!(allow_localhost: true)
 require_relative 'unit/connection/test_client'
 
-RSpec.configure do |c|
-  c.raise_errors_for_deprecations!
-end
+RSpec.configure(&:raise_errors_for_deprecations!)
 
-APIHOST = "api.mailgun.net"
-APIVERSION = "v3"
+APIHOST = 'api.mailgun.net'
+APIVERSION = 'v3'
 SSL = true
 
 # For integration tests modify .ruby-env.yml
 # use .ruby-env.yml.example for an example
 # alternatively
 # set environment variables as named in .ruby-env.yml.example
-envfile = File.join(File.dirname(__FILE__), '..','.ruby-env.yml')
+envfile = File.join(File.dirname(__FILE__), '..', '.ruby-env.yml')
 envs = File.exist?(envfile) ? YAML.load_file(envfile) : ENV
 APIKEY = envs['MAILGUN_APIKEY']
 PUB_APIKEY = envs['MAILGUN_PUB_APIKEY']

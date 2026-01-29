@@ -1,5 +1,6 @@
-module Mailgun
+# frozen_string_literal: true
 
+module Mailgun
   # A Mailgun::Domains object is a simple CRUD interface to Mailgun Domains.
   # Uses Mailgun
   class Domains
@@ -67,7 +68,6 @@ module Mailgun
       @client.put("domains/#{domain}", options).to_h
     end
 
-
     # Public: Verify domain
     #
     # domain - [String] Domain name
@@ -101,7 +101,7 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def list_domain_keys(options = {})
-      @client.get("dkim/keys", options).to_h
+      @client.get('dkim/keys', options).to_h
     end
 
     # Public: Create a domain key
@@ -114,7 +114,7 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def create_domain_key(options = {})
-      @client.post("dkim/keys", options).to_h
+      @client.post('dkim/keys', options).to_h
     end
 
     # Public: Delete a domain key.
@@ -125,7 +125,7 @@ module Mailgun
     #
     # Returns [Hash] with message key
     def delete_domain_key(options = {})
-      @client.delete("dkim/keys", options).to_h
+      @client.delete('dkim/keys', options).to_h
     end
 
     # Public: Activate a domain key for a specified authority and selector.
@@ -258,7 +258,6 @@ module Mailgun
 
     # ==== End of Domain::Tracking methods ====
 
-
     # ==== Domain::DKIM_Security methods ====
 
     # Public: Tracking Certificate: Generate
@@ -338,12 +337,12 @@ module Mailgun
     #
     # Returns [Array] A list of domains (hash)
     def get_domain_stats(domain, options = {})
-      fail(ParameterError, 'No domain given to list stats on Mailgun', caller) unless domain
+      raise(ParameterError, 'No domain given to list stats on Mailgun', caller) unless domain
+
       @client.get("#{domain}/stats/total", options).to_h
     end
 
     # ==== End of Reporting::Stats methods ====
-
 
     enforces_api_version 'v1', :list_domain_keys, :create_domain_key, :delete_domain_key, :dkim_rotation,
                          :dkim_rotate

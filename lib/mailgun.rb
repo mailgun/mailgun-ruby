@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require ruby dependencies
 require 'json'
 require 'openssl'
@@ -16,7 +18,7 @@ require 'mailgun/exceptions/exceptions'
 require 'mailgun/helpers/api_version_checker'
 
 # load zeitwerk
-Zeitwerk::Loader.for_gem.tap do |loader| # rubocop:disable Style/SymbolProc
+Zeitwerk::Loader.for_gem.tap do |loader|
   loader.ignore("#{__dir__}/mailgun-ruby.rb")
   loader.ignore("#{__dir__}/railgun.rb")
   loader.ignore("#{__dir__}/railgun")
@@ -41,7 +43,6 @@ end
 #
 # See the Github documentation for full examples.
 module Mailgun
-
   class << self
     attr_accessor :api_host,
                   :api_key,
@@ -56,7 +57,6 @@ module Mailgun
       yield self
       true
     end
-    alias_method :config, :configure
+    alias config configure
   end
-
 end

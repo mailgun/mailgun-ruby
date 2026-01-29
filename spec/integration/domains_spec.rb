@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'mailgun'
 
-vcr_opts = { :cassette_name => "domains" }
+vcr_opts = { cassette_name: 'domains' }
 
 describe 'For the domains endpoint', vcr: vcr_opts do
   let(:api_version) { APIVERSION }
@@ -71,7 +73,6 @@ describe 'For the domains endpoint', vcr: vcr_opts do
     end
   end
 
-
   context 'Domain::Keys methods' do
     describe '#list_domain_keys' do
       let(:api_version) { 'v1' }
@@ -123,7 +124,6 @@ describe 'For the domains endpoint', vcr: vcr_opts do
       let(:api_version) { 'v4' }
 
       it 'activates a domain key' do
-
         result = mg_obj.activate_domain_key(
           domain,
           'mailo1'
@@ -187,7 +187,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
   end
 
   context 'Domain::Tracking methods' do
-    # TODO add missing:
+    # TODO: add missing:
     # get_domain_tracking_certificate
     # regenerate_domain_tracking_certificate
     # generate_domain_tracking_certificate
@@ -244,7 +244,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
   end
 
   context 'Domain::DKIM_Security methods' do
-    # TODO add missing:
+    # TODO: add missing:
     # dkim_rotation
     # dkim_rotate
   end
@@ -261,7 +261,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
           }
         )
 
-        expect(result['message']).to eq("Created 1 credentials pair(s)")
+        expect(result['message']).to eq('Created 1 credentials pair(s)')
       end
     end
 

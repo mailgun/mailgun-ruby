@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Logs object is a simple interface to Mailgun Logs.
   # Uses Mailgun
@@ -30,8 +32,8 @@ module Mailgun
     #         limit - [Integer] The maximum number of items returned (100 max).
     #
     # Returns [Hash] Logs
-    def account_logs(options={})
-      @client.post('analytics/logs', options.to_json, { "Content-Type" => "application/json" }).to_h!
+    def account_logs(options = {})
+      @client.post('analytics/logs', options.to_json, { 'Content-Type' => 'application/json' }).to_h!
     end
   end
 end

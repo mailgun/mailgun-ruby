@@ -1,40 +1,41 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'mailgun'
 require 'railgun'
 
 describe 'extract_body' do
-
-  let(:text_mail_option) {
+  let(:text_mail_option) do
     {
-      from:        'bob@example.com',
-      to:          'sally@example.com',
-      subject:     'RAILGUN TEST SAMPLE',
-      body:         text_content,
-      content_type: 'text/plain',
+      from: 'bob@example.com',
+      to: 'sally@example.com',
+      subject: 'RAILGUN TEST SAMPLE',
+      body: text_content,
+      content_type: 'text/plain'
     }
-  }
+  end
   let(:text_content) { '[TEST] Hello, world.' }
 
-  let(:html_mail_option) {
+  let(:html_mail_option) do
     {
-      from:        'bob@example.com',
-      to:          'sally@example.com',
-      subject:     'RAILGUN TEST SAMPLE',
-      body:         html_content,
-      content_type: 'text/html',
+      from: 'bob@example.com',
+      to: 'sally@example.com',
+      subject: 'RAILGUN TEST SAMPLE',
+      body: html_content,
+      content_type: 'text/html'
     }
-  }
+  end
   let(:html_content) { '<h3> [TEST] </h3> <br/> Hello, world!' }
 
-  let(:amp_mail_option) {
+  let(:amp_mail_option) do
     {
-      from:        'bob@example.com',
-      to:          'sally@example.com',
-      subject:     'RAILGUN TEST SAMPLE',
-      body:         amp_content,
-      content_type: 'text/x-amp-html',
+      from: 'bob@example.com',
+      to: 'sally@example.com',
+      subject: 'RAILGUN TEST SAMPLE',
+      body: amp_content,
+      content_type: 'text/x-amp-html'
     }
-  }
+  end
   let(:amp_content) { '<h3> [TEST] </h3> <br/> Hello from AMP!' }
 
   context 'with <Content-Type: text/plain>' do
@@ -67,7 +68,7 @@ describe 'extract_body' do
     let(:amp_mail) { Mail.new(amp_mail_option) }
 
     before do
-      @sample_mail = Mail::Part.new(content_type: "multipart/alternative")
+      @sample_mail = Mail::Part.new(content_type: 'multipart/alternative')
       @sample_mail.add_part text_mail
       @sample_mail.add_part amp_mail
       @sample_mail.add_part html_mail

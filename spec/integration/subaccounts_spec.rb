@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'mailgun'
 
-vcr_opts = { :cassette_name => "subaccounts" }
+vcr_opts = { cassette_name: 'subaccounts' }
 
 describe 'For the subaccounts endpoints', vcr: vcr_opts do
   let(:name) { 'test.subaccount' }
@@ -16,7 +18,8 @@ describe 'For the subaccounts endpoints', vcr: vcr_opts do
     it 'returns a list of templates' do
       result = @mg_obj.list
 
-      expect(result).to eq({"subaccounts"=>[{"id"=>"xxx", "name"=>"test-ruby-lib", "status"=>"open"}], "total"=>1})
+      expect(result).to eq({ 'subaccounts' => [{ 'id' => 'xxx', 'name' => 'test-ruby-lib', 'status' => 'open' }],
+                             'total' => 1 })
     end
   end
 
@@ -24,26 +27,23 @@ describe 'For the subaccounts endpoints', vcr: vcr_opts do
     it 'creates the subaccount' do
       result = @mg_obj.create(name)
 
-      expect(result).to eq({"subaccount"=>{"id"=>"xxx", "name"=>"test.subaccount", "status"=>"open"}})
+      expect(result).to eq({ 'subaccount' => { 'id' => 'xxx', 'name' => 'test.subaccount', 'status' => 'open' } })
     end
   end
-
 
   describe '#info' do
     it 'gets the templates info' do
       result = @mg_obj.info(subaccount_id)
 
-      expect(result).to eq({"subaccount"=>{"id"=>"xxx", "name"=>"test-ruby-lib", "status"=>"open"}})
+      expect(result).to eq({ 'subaccount' => { 'id' => 'xxx', 'name' => 'test-ruby-lib', 'status' => 'open' } })
     end
   end
-
-
 
   describe '#enable' do
     it 'enables the subaccount' do
       result = @mg_obj.enable(subaccount_id)
 
-      expect(result).to eq({"subaccount"=>{"id"=>"xxx", "name"=>"test-ruby-lib", "status"=>"open"}})
+      expect(result).to eq({ 'subaccount' => { 'id' => 'xxx', 'name' => 'test-ruby-lib', 'status' => 'open' } })
     end
   end
 
@@ -51,8 +51,7 @@ describe 'For the subaccounts endpoints', vcr: vcr_opts do
     it 'disables the subaccount' do
       result = @mg_obj.disable(subaccount_id)
 
-      expect(result).to eq({"subaccount"=>{"id"=>"xxx", "name"=>"test-ruby-lib", "status"=>"disabled"}})
+      expect(result).to eq({ 'subaccount' => { 'id' => 'xxx', 'name' => 'test-ruby-lib', 'status' => 'disabled' } })
     end
   end
-
 end

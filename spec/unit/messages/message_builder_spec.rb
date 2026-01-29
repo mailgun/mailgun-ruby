@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'stringio'
 
 describe 'MessageBuilder attribute readers' do
   it 'should be readable' do
-    @mb_obj = Mailgun::MessageBuilder.new()
+    @mb_obj = Mailgun::MessageBuilder.new
 
     expect(@mb_obj).to respond_to(:message)
     expect(@mb_obj).to respond_to(:counters)
@@ -11,9 +13,8 @@ describe 'MessageBuilder attribute readers' do
 end
 
 describe 'The instantiation of MessageBuilder' do
-
   before(:each) do
-    @mb_obj = Mailgun::MessageBuilder.new()
+    @mb_obj = Mailgun::MessageBuilder.new
   end
 
   it 'contains counters, which should be of type hash and contain several important counters' do
@@ -39,7 +40,7 @@ describe 'The method add_recipient' do
   before(:each) do
     @mb_obj = Mailgun::MessageBuilder.new
     @address = 'jane@example.com'
-    @variables = {'first' => 'Jane', 'last' => 'Doe'}
+    @variables = { 'first' => 'Jane', 'last' => 'Doe' }
   end
 
   it 'adds a "to" recipient type to the message body and counter is incremented' do
@@ -55,7 +56,7 @@ describe 'The method add_recipient' do
       recipient_type = :to
       @mb_obj.add_recipient(recipient_type, @address, {})
 
-      expect(@mb_obj.message[recipient_type][0]).to eq("#{@address}")
+      expect(@mb_obj.message[recipient_type][0]).to eq(@address.to_s)
       expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
     end
   end
@@ -81,7 +82,7 @@ describe 'The method add_recipient' do
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
     expect(@mb_obj.message[recipient_type]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
-    @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
+    @mb_obj.counters[:recipients].each_value { |value| expect(value).to eq(0) }
   end
 
   it 'ensures a random recipient type is added to the message body and counters are not incremented' do
@@ -89,31 +90,34 @@ describe 'The method add_recipient' do
     @mb_obj.add_recipient(recipient_type, @address, @variables)
 
     expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
-    @mb_obj.counters[:recipients].each_value{|value| expect(value).to eq(0)}
+    @mb_obj.counters[:recipients].each_value { |value| expect(value).to eq(0) }
   end
   it 'adds too many to recipients and raises an exception.' do
     recipient_type = :to
 
-    expect{
+    expect do
       1001.times do
         @mb_obj.add_recipient(recipient_type, @address, @variables)
-    end }.to raise_error(Mailgun::ParameterError)
+      end
+    end.to raise_error(Mailgun::ParameterError)
   end
   it 'adds too many cc recipients and raises an exception.' do
     recipient_type = :cc
 
-    expect{
+    expect do
       1001.times do
         @mb_obj.add_recipient(recipient_type, @address, @variables)
-    end }.to raise_error(Mailgun::ParameterError)
+      end
+    end.to raise_error(Mailgun::ParameterError)
   end
   it 'adds too many bcc recipients and raises an exception.' do
     recipient_type = :bcc
 
-    expect{
+    expect do
       1001.times do
         @mb_obj.add_recipient(recipient_type, @address, @variables)
-    end }.to raise_error(Mailgun::ParameterError)
+      end
+    end.to raise_error(Mailgun::ParameterError)
   end
 end
 
@@ -195,7 +199,6 @@ describe 'The method amp_html' do
     expect(@mb_obj.message['amp-html']).to eq(the_text)
   end
 end
-    
 
 describe 'The method set_from_address' do
   it 'warns of set_from_address deprecation' do
@@ -221,7 +224,7 @@ describe 'The method from' do
     the_from_address = 'test@mailgun.com'
     the_first_name = 'Magilla'
     the_last_name = 'Gorilla'
-    @mb_obj.from(the_from_address, {'first' => the_first_name, 'last' => the_last_name})
+    @mb_obj.from(the_from_address, { 'first' => the_first_name, 'last' => the_last_name })
 
     expect(@mb_obj.message[:from]).to eq(["'#{the_first_name} #{the_last_name}' <#{the_from_address}>"])
   end
@@ -229,7 +232,7 @@ describe 'The method from' do
   it 'sets the from address with full name metadata' do
     the_from_address = 'test@mailgun.com'
     full_name = 'Magilla Gorilla'
-    @mb_obj.from(the_from_address, {'full_name' => full_name})
+    @mb_obj.from(the_from_address, { 'full_name' => full_name })
 
     expect(@mb_obj.message[:from]).to eq(["'#{full_name}' <#{the_from_address}>"])
   end
@@ -238,7 +241,7 @@ describe 'The method from' do
     the_from_address = 'test@mailgun.com'
     full_name = 'Magilla Gorilla'
     first_name = 'Magilla'
-    expect{@mb_obj.from(the_from_address, {'full_name' => full_name, 'first' => first_name})}.to raise_error(Mailgun::ParameterError)
+    expect { @mb_obj.from(the_from_address, { 'full_name' => full_name, 'first' => first_name }) }.to raise_error(Mailgun::ParameterError)
   end
 end
 
@@ -247,20 +250,19 @@ describe 'The method add_attachment' do
     @mb_obj = Mailgun::MessageBuilder.new
   end
   it 'adds a few file paths to the message object' do
-
-    file1 = File.dirname(__FILE__) + "/sample_data/mailgun_icon.png"
-    file2 = File.dirname(__FILE__) + "/sample_data/rackspace_logo.jpg"
+    file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
+    file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
 
     file_paths = [file1, file2]
 
-    file_paths.each {|item| @mb_obj.add_attachment(item)}
+    file_paths.each { |item| @mb_obj.add_attachment(item) }
 
     expect(@mb_obj.message[:attachment].length).to eq(2)
   end
 
   it 'adds file-like objects to the message object' do
     io = StringIO.new
-    io << File.binread(File.dirname(__FILE__) + "/sample_data/mailgun_icon.png")
+    io << File.binread("#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png")
 
     @mb_obj.add_attachment io, 'cool_attachment.png'
 
@@ -271,7 +273,7 @@ describe 'The method add_attachment' do
 
   context 'when attachment has unknown type' do
     it 'sets content type application/octet-stream for attachment' do
-      file = File.dirname(__FILE__) + "/sample_data/unknown.type"
+      file = "#{File.dirname(__FILE__)}/sample_data/unknown.type"
 
       @mb_obj.add_attachment(file)
 
@@ -285,12 +287,12 @@ describe 'The method add_inline_image' do
     @mb_obj = Mailgun::MessageBuilder.new
   end
   it 'adds a few file paths to the message object' do
-    file1 = File.dirname(__FILE__) + "/sample_data/mailgun_icon.png"
-    file2 = File.dirname(__FILE__) + "/sample_data/rackspace_logo.jpg"
+    file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
+    file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
 
     file_paths = [file1, file2]
 
-    file_paths.each {|item| @mb_obj.add_inline_image(item)}
+    file_paths.each { |item| @mb_obj.add_inline_image(item) }
 
     expect(@mb_obj.message[:inline].length).to eq(2)
   end
@@ -313,7 +315,7 @@ describe 'The method list_unsubscribe' do
   end
 
   it 'sets the message list_unsubscribe if called with many list_unsubscribe parameters' do
-    unsubscribe_to = %w(http://example.com/stop-hassle mailto:stop-hassle@example.com)
+    unsubscribe_to = %w[http://example.com/stop-hassle mailto:stop-hassle@example.com]
     @mb_obj.list_unsubscribe(*unsubscribe_to)
     expect(@mb_obj.message['h:List-Unsubscribe']).to eq(
       unsubscribe_to.map { |var| "<#{var}>" }.join(',')
@@ -336,30 +338,30 @@ describe 'The method test_mode' do
   it 'turns on test mode with boolean true' do
     @mb_obj.test_mode(true)
 
-    expect(@mb_obj.message["o:testmode"][0]).to eq("yes")
+    expect(@mb_obj.message['o:testmode'][0]).to eq('yes')
   end
   it 'turns on test mode with string true' do
-    @mb_obj.test_mode("true")
+    @mb_obj.test_mode('true')
 
-    expect(@mb_obj.message["o:testmode"][0]).to eq("yes")
+    expect(@mb_obj.message['o:testmode'][0]).to eq('yes')
   end
   it 'turns off test mode with boolean false' do
     @mb_obj.test_mode(false)
 
-    expect(@mb_obj.message["o:testmode"][0]).to eq("no")
+    expect(@mb_obj.message['o:testmode'][0]).to eq('no')
   end
   it 'turns off test mode with string false' do
-    @mb_obj.test_mode("false")
+    @mb_obj.test_mode('false')
 
-    expect(@mb_obj.message["o:testmode"][0]).to eq("no")
+    expect(@mb_obj.message['o:testmode'][0]).to eq('no')
   end
   it 'does not allow multiple values' do
-    @mb_obj.test_mode("false")
-    @mb_obj.test_mode("true")
-    @mb_obj.test_mode("false")
+    @mb_obj.test_mode('false')
+    @mb_obj.test_mode('true')
+    @mb_obj.test_mode('false')
 
-    expect(@mb_obj.message["o:testmode"].length).to eq(1)
-    expect(@mb_obj.message["o:testmode"][0]).to eq("no")
+    expect(@mb_obj.message['o:testmode'].length).to eq(1)
+    expect(@mb_obj.message['o:testmode'][0]).to eq('no')
   end
 end
 
@@ -378,30 +380,30 @@ describe 'The method dkim' do
   it 'turns on dkim with boolean true' do
     @mb_obj.dkim(true)
 
-    expect(@mb_obj.message["o:dkim"][0]).to eq("yes")
+    expect(@mb_obj.message['o:dkim'][0]).to eq('yes')
   end
   it 'turns on dkim with string true' do
-    @mb_obj.dkim("true")
+    @mb_obj.dkim('true')
 
-    expect(@mb_obj.message["o:dkim"][0]).to eq("yes")
+    expect(@mb_obj.message['o:dkim'][0]).to eq('yes')
   end
   it 'turns off dkim with boolean false' do
     @mb_obj.dkim(false)
 
-    expect(@mb_obj.message["o:dkim"][0]).to eq("no")
+    expect(@mb_obj.message['o:dkim'][0]).to eq('no')
   end
   it 'turns off dkim with string false' do
-    @mb_obj.dkim("false")
+    @mb_obj.dkim('false')
 
-    expect(@mb_obj.message["o:dkim"][0]).to eq("no")
+    expect(@mb_obj.message['o:dkim'][0]).to eq('no')
   end
   it 'does not allow multiple values' do
-    @mb_obj.dkim("false")
-    @mb_obj.dkim("true")
-    @mb_obj.dkim("false")
+    @mb_obj.dkim('false')
+    @mb_obj.dkim('true')
+    @mb_obj.dkim('false')
 
-    expect(@mb_obj.message["o:dkim"].length).to eq(1)
-    expect(@mb_obj.message["o:dkim"][0]).to eq("no")
+    expect(@mb_obj.message['o:dkim'].length).to eq(1)
+    expect(@mb_obj.message['o:dkim'][0]).to eq('no')
   end
 end
 
@@ -412,22 +414,23 @@ describe 'The method add_campaign_id' do
   it 'adds a campaign ID to the message' do
     @mb_obj.add_campaign_id('My-Campaign-Id-1')
 
-    expect(@mb_obj.message["o:campaign"][0]).to eq ("My-Campaign-Id-1")
+    expect(@mb_obj.message['o:campaign'][0]).to eq('My-Campaign-Id-1')
   end
   it 'adds a few more campaign IDs to the message' do
     @mb_obj.add_campaign_id('My-Campaign-Id-1')
     @mb_obj.add_campaign_id('My-Campaign-Id-2')
     @mb_obj.add_campaign_id('My-Campaign-Id-3')
 
-    expect(@mb_obj.message["o:campaign"][0]).to eq("My-Campaign-Id-1")
-    expect(@mb_obj.message["o:campaign"][1]).to eq("My-Campaign-Id-2")
-    expect(@mb_obj.message["o:campaign"][2]).to eq("My-Campaign-Id-3")
+    expect(@mb_obj.message['o:campaign'][0]).to eq('My-Campaign-Id-1')
+    expect(@mb_obj.message['o:campaign'][1]).to eq('My-Campaign-Id-2')
+    expect(@mb_obj.message['o:campaign'][2]).to eq('My-Campaign-Id-3')
   end
   it 'adds too many campaign IDs to the message' do
-    expect{
+    expect do
       10.times do
         @mb_obj.add_campaign_id('Test-Campaign-ID')
-    end }.to raise_error(Mailgun::ParameterError)
+      end
+    end.to raise_error(Mailgun::ParameterError)
   end
 end
 
@@ -438,22 +441,23 @@ describe 'The method add_tag' do
   it 'adds a tag to the message' do
     @mb_obj.add_tag('My-Tag-1')
 
-    expect(@mb_obj.message["o:tag"][0]).to eq("My-Tag-1")
+    expect(@mb_obj.message['o:tag'][0]).to eq('My-Tag-1')
   end
   it 'adds a few more tags to the message' do
     @mb_obj.add_tag('My-Tag-1')
     @mb_obj.add_tag('My-Tag-2')
     @mb_obj.add_tag('My-Tag-3')
 
-    expect(@mb_obj.message["o:tag"][0]).to eq("My-Tag-1")
-    expect(@mb_obj.message["o:tag"][1]).to eq("My-Tag-2")
-    expect(@mb_obj.message["o:tag"][2]).to eq("My-Tag-3")
+    expect(@mb_obj.message['o:tag'][0]).to eq('My-Tag-1')
+    expect(@mb_obj.message['o:tag'][1]).to eq('My-Tag-2')
+    expect(@mb_obj.message['o:tag'][2]).to eq('My-Tag-3')
   end
   it 'adds too many tags to the message' do
-    expect{
+    expect do
       12.times do
         @mb_obj.add_tag('My-Tag')
-    end }.to raise_error(Mailgun::ParameterError)
+      end
+    end.to raise_error(Mailgun::ParameterError)
   end
 end
 
@@ -472,20 +476,20 @@ describe 'The method track_opens' do
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.track_opens('Yes')
 
-    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
-    expect(@mb_obj.message["o:tracking"]).to eq(["yes"])
+    expect(@mb_obj.message['o:tracking-opens']).to eq('yes')
+    expect(@mb_obj.message['o:tracking']).to eq(['yes'])
 
     @mb_obj.track_opens('No')
 
-    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
+    expect(@mb_obj.message['o:tracking-opens']).to eq('no')
 
     @mb_obj.track_opens(true)
 
-    expect(@mb_obj.message["o:tracking-opens"]).to eq("yes")
+    expect(@mb_obj.message['o:tracking-opens']).to eq('yes')
 
     @mb_obj.track_opens(false)
 
-    expect(@mb_obj.message["o:tracking-opens"]).to eq("no")
+    expect(@mb_obj.message['o:tracking-opens']).to eq('no')
   end
 end
 
@@ -504,24 +508,24 @@ describe 'The method track_clicks' do
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.track_clicks('Yes')
 
-    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
-    expect(@mb_obj.message["o:tracking"]).to eq(["yes"])
+    expect(@mb_obj.message['o:tracking-clicks']).to eq('yes')
+    expect(@mb_obj.message['o:tracking']).to eq(['yes'])
 
     @mb_obj.track_clicks('No')
 
-    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
+    expect(@mb_obj.message['o:tracking-clicks']).to eq('no')
 
     @mb_obj.track_clicks(true)
 
-    expect(@mb_obj.message["o:tracking-clicks"]).to eq("yes")
+    expect(@mb_obj.message['o:tracking-clicks']).to eq('yes')
 
     @mb_obj.track_clicks(false)
 
-    expect(@mb_obj.message["o:tracking-clicks"]).to eq("no")
+    expect(@mb_obj.message['o:tracking-clicks']).to eq('no')
 
     @mb_obj.track_clicks('html')
 
-    expect(@mb_obj.message["o:tracking-clicks"]).to eq("html")
+    expect(@mb_obj.message['o:tracking-clicks']).to eq('html')
   end
 
   context 'when unexpected value is provided' do
@@ -547,7 +551,7 @@ describe 'The method deliver_at' do
   it 'defines a time/date to deliver a message in RFC2822 format.' do
     @mb_obj.deliver_at('October 25, 2013 10:00PM CST')
 
-    expect(@mb_obj.message["o:deliverytime"][0]).to eq("Fri, 25 Oct 2013 22:00:00 -0600")
+    expect(@mb_obj.message['o:deliverytime'][0]).to eq('Fri, 25 Oct 2013 22:00:00 -0600')
   end
 end
 
@@ -566,8 +570,8 @@ describe 'The method header' do
   it 'accepts valid JSON and appends as data to the message.' do
     @mb_obj.header('my-data', '{"key":"value"}')
 
-    expect(@mb_obj.message["h:my-data"]).to be_kind_of(String)
-    expect(@mb_obj.message["h:my-data"].to_s).to eq('{"key":"value"}')
+    expect(@mb_obj.message['h:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['h:my-data'].to_s).to eq('{"key":"value"}')
   end
 end
 
@@ -578,23 +582,23 @@ describe 'The method variable' do
   it 'accepts valid JSON and stores it as message[param].' do
     @mb_obj.variable('my-data', '{"key":"value"}')
 
-    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
-    expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
+    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data'].to_s).to eq('{"key":"value"}')
   end
   it 'accepts a hash and appends as data to the message.' do
-    data = {'key' => 'value'}
+    data = { 'key' => 'value' }
     @mb_obj.variable('my-data', data)
 
-    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
-    expect(@mb_obj.message["v:my-data"].to_s).to eq('{"key":"value"}')
+    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data'].to_s).to eq('{"key":"value"}')
   end
   it 'accepts string values' do
     data = 'String Value.'
 
     @mb_obj.variable('my-data', data)
 
-    expect(@mb_obj.message["v:my-data"]).to be_kind_of(String)
-    expect(@mb_obj.message["v:my-data"].to_s).to eq('String Value.')
+    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data'].to_s).to eq('String Value.')
   end
 end
 
@@ -605,7 +609,7 @@ describe 'The method add_custom_parameter' do
   it 'adds an undefined parameter to the message.' do
     @mb_obj.add_custom_parameter('h:my-sweet-header', 'datagoeshere')
 
-    expect(@mb_obj.message["h:my-sweet-header"][0]).to eq("datagoeshere")
+    expect(@mb_obj.message['h:my-sweet-header'][0]).to eq('datagoeshere')
   end
 end
 
@@ -630,16 +634,16 @@ describe 'The method message_id' do
   it 'correctly clears the Message-Id header when passed nil' do
     @mb_obj.message_id(nil)
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
   end
   it 'correctly sets the Message-Id header when passed an empty string' do
     @mb_obj.message_id(@the_message_id)
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(true)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(true)
 
     @mb_obj.message_id('')
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
   end
 end
 
@@ -672,11 +676,11 @@ describe 'The method template' do
     it 'it deletes `template` key from the message' do
       @mb_obj.template('template.name')
 
-      expect(@mb_obj.message.has_key?('template')).to eq(true)
+      expect(@mb_obj.message.key?('template')).to eq(true)
 
       @mb_obj.template
 
-      expect(@mb_obj.message.has_key?('template')).to eq(false)
+      expect(@mb_obj.message.key?('template')).to eq(false)
     end
   end
 end
@@ -710,11 +714,11 @@ describe 'The method template_version' do
     it 'it deletes `t:version` key from the message' do
       @mb_obj.template_version('version')
 
-      expect(@mb_obj.message.has_key?('t:version')).to eq(true)
+      expect(@mb_obj.message.key?('t:version')).to eq(true)
 
       @mb_obj.template_version
 
-      expect(@mb_obj.message.has_key?('t:version')).to eq(false)
+      expect(@mb_obj.message.key?('t:version')).to eq(false)
     end
   end
 end
@@ -727,18 +731,18 @@ describe 'The method template_text' do
   it 'enables/disables rendering in the text part of the message in case of template sending' do
     @mb_obj.template_text('Yes')
 
-    expect(@mb_obj.message["t:text"]).to eq("yes")
+    expect(@mb_obj.message['t:text']).to eq('yes')
 
     @mb_obj.template_text('No')
 
-    expect(@mb_obj.message["t:text"]).to eq("no")
+    expect(@mb_obj.message['t:text']).to eq('no')
 
     @mb_obj.template_text(true)
 
-    expect(@mb_obj.message["t:text"]).to eq("yes")
+    expect(@mb_obj.message['t:text']).to eq('yes')
 
     @mb_obj.template_text(false)
 
-    expect(@mb_obj.message["t:text"]).to eq("no")
+    expect(@mb_obj.message['t:text']).to eq('no')
   end
 end

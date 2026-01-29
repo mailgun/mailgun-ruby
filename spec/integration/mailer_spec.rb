@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'json'
 require 'logger'
@@ -21,7 +23,7 @@ class IntegrationUnitTestMailer < ActionMailer::Base
   end
 end
 
-vcr_opts = { :cassette_name => 'message_deliver' }
+vcr_opts = { cassette_name: 'message_deliver' }
 
 describe 'Message deliver', vcr: vcr_opts do
   let(:domain) { TESTDOMAIN || 'DOMAIN.TEST' }
@@ -43,7 +45,7 @@ describe 'Message deliver', vcr: vcr_opts do
   end
 end
 
-vcr_opts = { :cassette_name => 'mailer_invalid_domain' }
+vcr_opts = { cassette_name: 'mailer_invalid_domain' }
 
 describe 'Invalid domain', vcr: vcr_opts do
   let(:domain) { 'not-our-doma.in' }
@@ -56,6 +58,8 @@ describe 'Invalid domain', vcr: vcr_opts do
   let(:mail) { IntegrationUnitTestMailer.plain_message('sally@not-our-doma.in', "bob@#{domain}", 'subject', {}) }
 
   it 'raises expected error' do
-    expect { Railgun::Mailer.new(config).deliver!(mail) }.to raise_error Mailgun::Unauthorized, /Invalid Domain or API key/
+    expect do
+      Railgun::Mailer.new(config).deliver!(mail)
+    end.to raise_error Mailgun::Unauthorized, /Invalid Domain or API key/
   end
 end

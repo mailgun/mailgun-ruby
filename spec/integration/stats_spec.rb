@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'mailgun'
 
-vcr_opts = { :cassette_name => "stats" }
+vcr_opts = { cassette_name: 'stats' }
 
 describe 'For the Stats endpoint', vcr: vcr_opts do
   before(:all) do
@@ -10,6 +12,6 @@ describe 'For the Stats endpoint', vcr: vcr_opts do
   end
 
   it 'get some stats.' do
-    @mg_obj.get("#{@domain}/stats", {:limit => 50, :skip => 10, :event => 'sent'})
+    @mg_obj.get("#{@domain}/stats", { limit: 50, skip: 10, event: 'sent' })
   end
 end

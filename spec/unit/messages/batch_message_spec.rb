@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'BatchMessage attribute readers' do
   it 'should be readable' do
-    @mb_client = Mailgun::UnitClient.new("messages")
-    @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
+    @mb_client = Mailgun::UnitClient.new('messages')
+    @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
 
     expect(@mb_obj).to respond_to(:message_ids)
     expect(@mb_obj).to respond_to(:message)
@@ -14,10 +16,9 @@ describe 'BatchMessage attribute readers' do
 end
 
 describe 'The instantiation of Batch Message' do
-
   before(:each) do
-    @mb_client = Mailgun::UnitClient.new("messages")
-    @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
+    @mb_client = Mailgun::UnitClient.new('messages')
+    @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
   end
 
   it 'contains Message, which should be of type Hash and empty' do
@@ -63,14 +64,14 @@ end
 
 describe 'The method add_recipient' do
   before(:each) do
-    @mb_client = Mailgun::UnitClient.new("messages")
-    @mb_obj = Mailgun::BatchMessage.new(@mb_client, "example.com")
+    @mb_client = Mailgun::UnitClient.new('messages')
+    @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
     @address_1   = 'jane@example.com'
-    @variables_1 = {'first' => 'Jane', 'last' => 'Doe', 'tracking' => 'ABC123'}
+    @variables_1 = { 'first' => 'Jane', 'last' => 'Doe', 'tracking' => 'ABC123' }
     @address_2   = 'bob@example.com'
-    @variables_2 = {'first' => 'Bob', 'last' => 'Doe', 'tracking' => 'DEF123'}
+    @variables_2 = { 'first' => 'Bob', 'last' => 'Doe', 'tracking' => 'DEF123' }
     @address_3   = 'sam@example.com'
-    @variables_3 = {'first' => 'Sam', 'last' => 'Doe', 'tracking' => 'GHI123'}
+    @variables_3 = { 'first' => 'Sam', 'last' => 'Doe', 'tracking' => 'GHI123' }
   end
   context 'when from is present' do
     before(:each) do
@@ -84,9 +85,9 @@ describe 'The method add_recipient' do
       end
 
       expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1000)
-      
+
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
-      
+
       expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
     end
 
@@ -127,7 +128,7 @@ describe 'The method add_recipient' do
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
       @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
       @mb_obj.add_recipient(recipient_type, @address_3, @variables_3)
-      
+
       expect(@mb_obj.recipient_variables[@address_1]).to eq(@variables_1)
       expect(@mb_obj.recipient_variables[@address_2]).to eq(@variables_2)
       expect(@mb_obj.recipient_variables[@address_3]).to eq(@variables_3)
@@ -139,9 +140,8 @@ describe 'The method add_recipient' do
       recipient_type = :to
       @mb_obj.add_recipient(recipient_type, @address_1, @variables_1)
       @mb_obj.add_recipient(recipient_type, @address_2, @variables_2)
-      expect(@mb_client).to receive(:fail)
+      expect(@mb_client).to receive(:raise)
       @mb_obj.finalize
     end
   end
-
 end

@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 module Railgun
-
   class Attachment < StringIO
-
     attr_reader :filename, :content_type, :path,
                 :original_filename, :overwritten_filename
 
@@ -9,17 +9,15 @@ module Railgun
       @path = ''
       @inline = args.detect { |opt| opt[:inline] }
 
-      if @inline
-        @filename = attachment.cid
-      else
-        @filename = attachment.filename
-      end
+      @filename = if @inline
+                    attachment.cid
+                  else
+                    attachment.filename
+                  end
 
       @original_filename = @filename
 
-      if args.detect { |opt| opt[:filename] }
-        @filename = opt[:filename]
-      end
+      @filename = opt[:filename] if args.detect { |opt| opt[:filename] }
 
       @overwritten_filename = @filename
 
@@ -41,9 +39,7 @@ module Railgun
     end
 
     def attach_to_message!(mb)
-      if mb.nil?
-        nil
-      end
+      nil if mb.nil?
 
       if inline?
         mb.add_inline_image self, @filename
@@ -51,6 +47,5 @@ module Railgun
         mb.add_attachment self, @filename
       end
     end
-
   end
 end

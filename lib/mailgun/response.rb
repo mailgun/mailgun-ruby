@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Response object is instantiated for each response generated
   # by the Client request. The Response object supports deserialization of
@@ -13,7 +15,7 @@ module Mailgun
     ResponseHash = Struct.new(:body, :status)
     def self.from_hash(h)
       # Create a "fake" response object with the data passed from h
-      self.new ResponseHash.new(h[:body], h[:status])
+      new ResponseHash.new(h[:body], h[:status])
     end
 
     def initialize(response)
@@ -28,8 +30,8 @@ module Mailgun
 
     def to_h
       JSON.parse(@body)
-    rescue => err
-      raise ParseError.new(err), err
+    rescue StandardError => e
+      raise ParseError.new(e), e
     end
 
     # Replace @body with Ruby Hash
@@ -37,8 +39,8 @@ module Mailgun
     # @return [Hash] A standard Ruby Hash containing the HTTP result.
     def to_h!
       @body = JSON.parse(@body)
-    rescue => err
-      raise ParseError.new(err), err
+    rescue StandardError => e
+      raise ParseError.new(e), e
     end
 
     # Return response as Yaml
@@ -46,8 +48,8 @@ module Mailgun
     # @return [String] A string containing response as YAML
     def to_yaml
       YAML.dump(to_h)
-    rescue => err
-      raise ParseError.new(err), err
+    rescue StandardError => e
+      raise ParseError.new(e), e
     end
 
     # Replace @body with YAML
@@ -55,8 +57,8 @@ module Mailgun
     # @return [String] A string containing response as YAML
     def to_yaml!
       @body = YAML.dump(to_h)
-    rescue => err
-      raise ParseError.new(err), err
+    rescue StandardError => e
+      raise ParseError.new(e), e
     end
 
     # Returns true if response status is 2xx

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Metrics object is a simple interface to Mailgun Metrics.
   # Uses Mailgun
@@ -28,8 +30,8 @@ module Mailgun
     #     include_aggregates - [Boolean] Include top-level aggregate metrics.
     #
     # Returns [Hash] Metrics
-    def account_metrics(options={})
-      @client.post('analytics/metrics', options.to_json, { "Content-Type" => "application/json" }).to_h!
+    def account_metrics(options = {})
+      @client.post('analytics/metrics', options.to_json, { 'Content-Type' => 'application/json' }).to_h!
     end
 
     # Public: Post query to get account usage metrics
@@ -52,8 +54,8 @@ module Mailgun
     #     include_aggregates - [Boolean] Include top-level aggregate metrics.
     #
     # Returns [Hash] Metrics
-    def account_usage_metrics(options={})
-      @client.post('analytics/usage/metrics', options.to_json, { "Content-Type" => "application/json" }).to_h!
+    def account_usage_metrics(options = {})
+      @client.post('analytics/usage/metrics', options.to_json, { 'Content-Type' => 'application/json' }).to_h!
     end
   end
 end

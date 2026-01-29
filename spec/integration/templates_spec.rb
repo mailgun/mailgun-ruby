@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'mailgun'
 
-vcr_opts = { :cassette_name => "templates" }
+vcr_opts = { cassette_name: 'templates' }
 
 describe 'For the templates endpoints', vcr: vcr_opts do
   let(:template_name) { 'test.template' }
-  let(:domain) { "integration-test.domain.invalid" }
+  let(:domain) { 'integration-test.domain.invalid' }
   let(:tag) { 'v2' }
 
   before(:all) do
@@ -21,14 +23,14 @@ describe 'For the templates endpoints', vcr: vcr_opts do
           name: template_name,
           description: 'Test',
           template: '{{fname}} {{lname}}',
-            comment: 'test comment',
-            headers: '{"Subject": "{{subject}}"}',
-            tag: 'V1'
+          comment: 'test comment',
+          headers: '{"Subject": "{{subject}}"}',
+          tag: 'V1'
         }
       )
 
-      expect(result['template']["name"]).to eq('test.template')
-      expect(result['template']["description"]).to eq("Test")
+      expect(result['template']['name']).to eq('test.template')
+      expect(result['template']['description']).to eq('Test')
     end
   end
 
@@ -36,8 +38,8 @@ describe 'For the templates endpoints', vcr: vcr_opts do
     it 'gets the templates info' do
       result = @mg_obj.info(domain, 'test.template')
 
-      expect(result).to include("template")
-      expect(result["template"]["name"]).to eq(template_name)
+      expect(result).to include('template')
+      expect(result['template']['name']).to eq(template_name)
     end
   end
 
@@ -88,7 +90,7 @@ describe 'For the templates endpoints', vcr: vcr_opts do
         }
       )
 
-      expect(result['template']["version"]['tag']).to eq(tag)
+      expect(result['template']['version']['tag']).to eq(tag)
     end
   end
 
@@ -96,7 +98,7 @@ describe 'For the templates endpoints', vcr: vcr_opts do
     it "gets the template's version info" do
       result = @mg_obj.info_version(domain, template_name, tag)
 
-      expect(result["template"]["version"]['tag']).to eq(tag)
+      expect(result['template']['version']['tag']).to eq(tag)
     end
   end
 
@@ -121,7 +123,7 @@ describe 'For the templates endpoints', vcr: vcr_opts do
     it "returns template's versions" do
       result = @mg_obj.template_versions_list(domain, template_name)
 
-      expect(result["template"]["versions"].first).to include('tag')
+      expect(result['template']['versions'].first).to include('tag')
     end
   end
 

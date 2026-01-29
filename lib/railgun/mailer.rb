@@ -1,11 +1,11 @@
-module Railgun
+# frozen_string_literal: true
 
+module Railgun
   # Railgun::Mailer is an ActionMailer provider for sending mail through
   # Mailgun.
   class Mailer
-
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[ to from subject reply-to mime-version template ]
+    IGNORED_HEADERS = %w[to from subject reply-to mime-version template].freeze
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -17,15 +17,15 @@ module Railgun
     def initialize(config)
       @config = config
 
-      [:api_key, :domain].each do |k|
-        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
+      %i[api_key domain].each do |k|
+        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.key?(k)
       end
 
       @mg_client = Mailgun::Client.new(
         config[:api_key],
         config[:api_host] || 'api.mailgun.net',
         config[:api_version] || 'v3',
-        config[:api_ssl].nil? ? true : config[:api_ssl],
+        config[:api_ssl].nil? || config[:api_ssl],
         false,
         config[:timeout]
       )
@@ -34,10 +34,10 @@ module Railgun
       # To avoid exception in mail gem v2.6
       @settings = { return_response: true }
 
-      if (@config[:fake_message_send] || false)
-        Rails.logger.info "NOTE: fake message sending has been enabled for mailgun-ruby!"
-        @mg_client.enable_test_mode!
-      end
+      return unless @config[:fake_message_send] || false
+
+      Rails.logger.info 'NOTE: fake message sending has been enabled for mailgun-ruby!'
+      @mg_client.enable_test_mode!
     end
 
     def deliver!(mail)
@@ -52,7 +52,7 @@ module Railgun
       mg_message = Railgun.transform_for_mailgun(mail)
       response = @mg_client.send_message(@mg_domain, mg_message)
 
-      if response.code == 200 then
+      if response.code == 200
         mg_id = response.to_h['id']
         mail.message_id = mg_id
       end
@@ -68,9 +68,9 @@ module Railgun
     # Set @mg_domain from mail[:domain] header if present, then remove it to prevent being sent.
     def set_mg_domain(mail)
       return mail[:domain].value if mail[:domain]
+
       domain
     end
-
   end
 
   module_function
@@ -102,7 +102,7 @@ module Railgun
     # note: this will filter out parameters such as `from`, `to`, and so forth
     #       as they are accepted as POST parameters on the message endpoint.
 
-    msg_headers = Hash.new
+    msg_headers = {}
 
     # h:* attributes (headers)
 
@@ -111,11 +111,11 @@ module Railgun
     mail.headers(mail.mailgun_headers || {})
     mail.header_fields.each do |field|
       header = field.name.downcase
-      if msg_headers.include? header
-        msg_headers[header] = [msg_headers[header], field.value].flatten
-      else
-        msg_headers[header] = field.value
-      end
+      msg_headers[header] = if msg_headers.include? header
+                              [msg_headers[header], field.value].flatten
+                            else
+                              field.value
+                            end
     end
 
     msg_headers.each do |k, v|
@@ -140,7 +140,7 @@ module Railgun
     message['recipient-variables'] = mail.mailgun_recipient_variables.to_json if mail.mailgun_recipient_variables
 
     # reject blank values
-    message.delete_if do |k, v|
+    message.delete_if do |_k, v|
       next true if v.nil?
 
       # if it's an array remove empty elements
@@ -149,7 +149,7 @@ module Railgun
       v.respond_to?(:empty?) && v.empty?
     end
 
-    return message
+    message
   end
 
   # Acts on a Rails/ActionMailer message object and uses Mailgun::MessageBuilder
@@ -169,7 +169,7 @@ module Railgun
     mb.body_text extract_body_text(mail)
     mb.amp_html extract_amp_html(mail)
 
-    [:to, :cc, :bcc].each do |rcpt_type|
+    %i[to cc bcc].each do |rcpt_type|
       addrs = mail[rcpt_type] || nil
       case addrs
       when String
@@ -196,7 +196,7 @@ module Railgun
       attach.attach_to_message! mb
     end
 
-    return mb.message
+    mb.message
   end
 
   # Returns the decoded HTML body from the Mail::Message object if available,
@@ -206,11 +206,9 @@ module Railgun
   #
   # @return [String]
   def extract_body_html(mail)
-    begin
-      retrieve_html_part(mail).body.decoded || nil
-    rescue
-      nil
-    end
+    retrieve_html_part(mail).body.decoded || nil
+  rescue StandardError
+    nil
   end
 
   # Returns the decoded text body from the Mail::Message object if it is available,
@@ -220,11 +218,9 @@ module Railgun
   #
   # @return [String]
   def extract_body_text(mail)
-    begin
-      retrieve_text_part(mail).body.decoded || nil
-    rescue
-      nil
-    end
+    retrieve_text_part(mail).body.decoded || nil
+  rescue StandardError
+    nil
   end
 
   # Returns the decoded AMP HTML from the Mail::Message object if it is available,
@@ -234,11 +230,9 @@ module Railgun
   #
   # @return [String]
   def extract_amp_html(mail)
-    begin
-      retrieve_amp_part(mail).body.decoded || nil
-    rescue
-      nil
-    end
+    retrieve_amp_part(mail).body.decoded || nil
+  rescue StandardError
+    nil
   end
 
   # Returns the mail object from the Mail::Message object if text part exists,
@@ -250,7 +244,8 @@ module Railgun
   # @return [Mail::Message] mail message with its content-type = text/plain
   def retrieve_text_part(mail)
     return mail.text_part if mail.multipart?
-    (mail.mime_type =~ /^text\/plain$/i) && mail
+
+    (mail.mime_type =~ %r{^text/plain$}i) && mail
   end
 
   # Returns the mail object from the Mail::Message object if html part exists,
@@ -262,7 +257,8 @@ module Railgun
   # @return [Mail::Message] mail message with its content-type = text/html
   def retrieve_html_part(mail)
     return mail.html_part if mail.multipart?
-    (mail.mime_type =~ /^text\/html$/i) && mail
+
+    (mail.mime_type =~ %r{^text/html$}i) && mail
   end
 
   # Returns the mail object from the Mail::Message object if AMP part exists,
