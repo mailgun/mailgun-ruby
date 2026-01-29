@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Metrics object is a simple interface to Mailgun Metrics.
   # Uses Mailgun

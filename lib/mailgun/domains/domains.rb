@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Domains object is a simple CRUD interface to Mailgun Domains.
   # Uses Mailgun

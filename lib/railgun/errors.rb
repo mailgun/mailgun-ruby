@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Railgun
   class Error < StandardError
     attr_reader :object

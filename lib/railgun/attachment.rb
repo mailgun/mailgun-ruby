@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Railgun
   class Attachment < StringIO
     attr_reader :filename, :content_type, :path,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Railgun
   class Railtie < ::Rails::Railtie
     ActiveSupport.on_load(:action_mailer) do

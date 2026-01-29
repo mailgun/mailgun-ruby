@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # Public constants used throughout
   class Chains

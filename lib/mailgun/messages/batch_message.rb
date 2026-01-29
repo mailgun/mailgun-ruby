@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::BatchMessage object is used to create a valid payload
   # for Batch Sending. Batch Sending can be difficult to implement, therefore
@@ -66,9 +68,9 @@ module Mailgun
     #
     # @return [Boolean]
     def any_recipients_left?
-      return true if @counters[:recipients][:to] > 0
-      return true if @counters[:recipients][:cc] > 0
-      return true if @counters[:recipients][:bcc] > 0
+      return true if @counters[:recipients][:to].positive?
+      return true if @counters[:recipients][:cc].positive?
+      return true if @counters[:recipients][:bcc].positive?
 
       false
     end

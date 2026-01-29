@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Tags object is a simple CRUD interface to Mailgun Tags.
   # Uses Mailgun

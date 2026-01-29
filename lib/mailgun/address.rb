@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # Mailgun::Address is a simple interface to the Email Validation API.
   class Address

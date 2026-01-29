@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   module Exceptions
   end
@@ -62,7 +64,7 @@ module Mailgun
       end
 
       message ||= ''
-      message = message + ': ' + (api_message || '')
+      message = "#{message}: #{api_message || ''}"
 
       super(message, response)
     rescue NoMethodError, JSON::ParserError
@@ -86,9 +88,5 @@ module Mailgun
   # Inherits from Mailgun::CommunicationError
   class BadRequest < CommunicationError
     CODE = 400
-
-    def initialize(error_message, response)
-      super(error_message, response)
-    end
   end
 end

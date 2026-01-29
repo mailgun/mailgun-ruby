@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Subaccounts object is a simple CRUD interface to Mailgun Subaccounts.
   # Uses Mailgun

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Events object makes it really simple to consume
   #   Mailgun's events from the Events endpoint.

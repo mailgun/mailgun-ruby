@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::MessageBuilder object is used to create a valid payload
   # for the Mailgun API messages endpoint. If you prefer step by step message
@@ -447,7 +449,7 @@ module Mailgun
       return address unless vars.is_a? Hash
       raise(Mailgun::ParameterError, 'Email address not specified') unless address.is_a? String
       if !vars['full_name'].nil? && (!vars['first'].nil? || !vars['last'].nil?)
-        raise(Mailgun::ParameterError, 'Must specify at most one of full_name or first/last. Vars passed: #{vars}')
+        raise(Mailgun::ParameterError, "Must specify at most one of full_name or first/last. Vars passed: #{vars}")
       end
 
       if vars['full_name']

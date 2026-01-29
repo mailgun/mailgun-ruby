@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'stringio'
 
@@ -54,7 +56,7 @@ describe 'The method add_recipient' do
       recipient_type = :to
       @mb_obj.add_recipient(recipient_type, @address, {})
 
-      expect(@mb_obj.message[recipient_type][0]).to eq("#{@address}")
+      expect(@mb_obj.message[recipient_type][0]).to eq(@address.to_s)
       expect(@mb_obj.counters[:recipients][recipient_type]).to eq(1)
     end
   end
@@ -248,8 +250,8 @@ describe 'The method add_attachment' do
     @mb_obj = Mailgun::MessageBuilder.new
   end
   it 'adds a few file paths to the message object' do
-    file1 = File.dirname(__FILE__) + '/sample_data/mailgun_icon.png'
-    file2 = File.dirname(__FILE__) + '/sample_data/rackspace_logo.jpg'
+    file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
+    file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
 
     file_paths = [file1, file2]
 
@@ -260,7 +262,7 @@ describe 'The method add_attachment' do
 
   it 'adds file-like objects to the message object' do
     io = StringIO.new
-    io << File.binread(File.dirname(__FILE__) + '/sample_data/mailgun_icon.png')
+    io << File.binread("#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png")
 
     @mb_obj.add_attachment io, 'cool_attachment.png'
 
@@ -271,7 +273,7 @@ describe 'The method add_attachment' do
 
   context 'when attachment has unknown type' do
     it 'sets content type application/octet-stream for attachment' do
-      file = File.dirname(__FILE__) + '/sample_data/unknown.type'
+      file = "#{File.dirname(__FILE__)}/sample_data/unknown.type"
 
       @mb_obj.add_attachment(file)
 
@@ -285,8 +287,8 @@ describe 'The method add_inline_image' do
     @mb_obj = Mailgun::MessageBuilder.new
   end
   it 'adds a few file paths to the message object' do
-    file1 = File.dirname(__FILE__) + '/sample_data/mailgun_icon.png'
-    file2 = File.dirname(__FILE__) + '/sample_data/rackspace_logo.jpg'
+    file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
+    file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
 
     file_paths = [file1, file2]
 
@@ -632,16 +634,16 @@ describe 'The method message_id' do
   it 'correctly clears the Message-Id header when passed nil' do
     @mb_obj.message_id(nil)
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
   end
   it 'correctly sets the Message-Id header when passed an empty string' do
     @mb_obj.message_id(@the_message_id)
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(true)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(true)
 
     @mb_obj.message_id('')
 
-    expect(@mb_obj.message.has_key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
   end
 end
 
@@ -674,11 +676,11 @@ describe 'The method template' do
     it 'it deletes `template` key from the message' do
       @mb_obj.template('template.name')
 
-      expect(@mb_obj.message.has_key?('template')).to eq(true)
+      expect(@mb_obj.message.key?('template')).to eq(true)
 
       @mb_obj.template
 
-      expect(@mb_obj.message.has_key?('template')).to eq(false)
+      expect(@mb_obj.message.key?('template')).to eq(false)
     end
   end
 end
@@ -712,11 +714,11 @@ describe 'The method template_version' do
     it 'it deletes `t:version` key from the message' do
       @mb_obj.template_version('version')
 
-      expect(@mb_obj.message.has_key?('t:version')).to eq(true)
+      expect(@mb_obj.message.key?('t:version')).to eq(true)
 
       @mb_obj.template_version
 
-      expect(@mb_obj.message.has_key?('t:version')).to eq(false)
+      expect(@mb_obj.message.key?('t:version')).to eq(false)
     end
   end
 end

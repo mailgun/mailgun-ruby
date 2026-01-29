@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # The Mailgun::Suppressions object makes it easy to manage "suppressions"
   # attached to an account. "Suppressions" means bounces, unsubscribes, and complaints.
@@ -59,11 +61,11 @@ module Mailgun
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000
-        resp, resp_l = create_bounces data[999..-1]
+        resp, resp_l = create_bounces data[999..]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0
+      elsif data.empty?
         return nil, []
       end
 
@@ -75,9 +77,7 @@ module Mailgun
       until data.empty?
         bounce = data.pop
         # Bounces MUST contain a `address` key.
-        unless bounce.include? :address
-          raise Mailgun::ParameterError.new "Bounce MUST include a :address key: #{bounce}"
-        end
+        raise Mailgun::ParameterError, "Bounce MUST include a :address key: #{bounce}" unless bounce.include? :address
 
         bounce.each do |k, v|
           # Hash values MUST be strings.
@@ -130,11 +130,11 @@ module Mailgun
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000
-        resp, resp_l = create_unsubscribes data[999..-1]
+        resp, resp_l = create_unsubscribes data[999..]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0
+      elsif data.empty?
         return nil, []
       end
 
@@ -144,7 +144,7 @@ module Mailgun
         unsubscribe = data.pop
         # unsubscribes MUST contain a `address` key.
         unless unsubscribe.include? :address
-          raise Mailgun::ParameterError.new "Unsubscribe MUST include a :address key: #{unsubscribe}"
+          raise Mailgun::ParameterError, "Unsubscribe MUST include a :address key: #{unsubscribe}"
         end
 
         unsubscribe.each do |k, v|
@@ -199,11 +199,11 @@ module Mailgun
       # `data` should be a list of hashes, with each hash containing *at least* an `address` key.
       split_return = []
       if data.length >= 1000
-        resp, resp_l = create_complaints data[999..-1]
+        resp, resp_l = create_complaints data[999..]
         split_return.push(resp)
         split_return.concat(resp_l)
         data = data[0..998]
-      elsif data.length == 0
+      elsif data.empty?
         return nil, []
       end
 
@@ -213,7 +213,7 @@ module Mailgun
         complaint = data.pop
         # complaints MUST contain a `address` key.
         unless complaint.include? :address
-          raise Mailgun::ParameterError.new "Complaint MUST include a :address key: #{complaint}"
+          raise Mailgun::ParameterError, "Complaint MUST include a :address key: #{complaint}"
         end
 
         complaint.each do |k, v|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   module ApiVersionChecker
     def self.included(base)

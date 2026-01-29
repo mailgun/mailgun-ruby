@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'time'
 require 'json'
 
@@ -26,7 +28,7 @@ module Mailgun
       perform_data_validation(working_domain, data)
       case data
       when Hash
-        if data.has_key?(:message)
+        if data.key?(:message)
           data[:message] = convert_string_to_file(data[:message]) if data[:message].is_a?(String)
           post("#{working_domain}/messages.mime", data)
         else
@@ -45,7 +47,7 @@ module Mailgun
       p e
       raise CommunicationError.new(e), e.response if e.respond_to? :response
 
-      raise CommunicationError.new(e.message)
+      raise CommunicationError, e.message
     end
 
     def get(_path, _query_string = nil)

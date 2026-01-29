@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # Public: Provides methods for creating and handling opt-in URLs,
   #   particularlly for mailing lists.
@@ -57,10 +59,8 @@ module Mailgun
     def self.base64_decode(input)
       # TODO: Condition can be droped if Ruby >= 2.4.0
       if input.respond_to?(:unpack1)
-        input.unpack1('m')
-      else
-        input.unpack1('m')
       end
+      input.unpack1('m')
     end
 
     private_class_method :base64_encode, :base64_decode

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 
 SimpleCov.start do
@@ -13,9 +15,7 @@ require 'rspec/its'
 # WebMock.disable_net_connect!(allow_localhost: true)
 require_relative 'unit/connection/test_client'
 
-RSpec.configure do |c|
-  c.raise_errors_for_deprecations!
-end
+RSpec.configure(&:raise_errors_for_deprecations!)
 
 APIHOST = 'api.mailgun.net'
 APIVERSION = 'v3'

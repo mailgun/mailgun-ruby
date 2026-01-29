@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Railgun
   # Railgun::Mailer is an ActionMailer provider for sending mail through
   # Mailgun.
   class Mailer
     # List of the headers that will be ignored when copying headers from `mail.header_fields`
-    IGNORED_HEADERS = %w[to from subject reply-to mime-version template]
+    IGNORED_HEADERS = %w[to from subject reply-to mime-version template].freeze
 
     # [Hash] config ->
     #   Requires *at least* `api_key` and `domain` keys.
@@ -16,7 +18,7 @@ module Railgun
       @config = config
 
       %i[api_key domain].each do |k|
-        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.has_key?(k)
+        raise Railgun::ConfigurationError.new("Config requires `#{k}` key", @config) unless @config.key?(k)
       end
 
       @mg_client = Mailgun::Client.new(

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'logger'
 require 'spec_helper'
@@ -129,7 +131,7 @@ describe 'Railgun::Mailer' do
 
     expect(body).to include('v:user')
 
-    var_body = JSON.load(body['v:user'])
+    var_body = JSON.parse(body['v:user'])
     expect(var_body).to include('id')
     expect(var_body).to include('name')
     expect(var_body['id']).to eq('1')

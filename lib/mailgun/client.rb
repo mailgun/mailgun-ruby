@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Client object is used to communicate with the Mailgun API. It is a
   # wrapper around Faraday so you don't have to worry about the HTTP aspect
@@ -5,13 +7,13 @@ module Mailgun
   #
   # See the Github documentation for full examples.
   class Client
-    SUBACCOUNT_HEADER = 'X-Mailgun-On-Behalf-Of'.freeze
+    SUBACCOUNT_HEADER = 'X-Mailgun-On-Behalf-Of'
 
     def initialize(api_key = Mailgun.api_key,
                    api_host = Mailgun.api_host || 'api.mailgun.net',
                    api_version = Mailgun.api_version || 'v3',
                    ssl = true,
-                   test_mode = !!Mailgun.test_mode,
+                   test_mode = !Mailgun.test_mode.nil?,
                    timeout = nil,
                    proxy_url = Mailgun.proxy_url)
       endpoint = endpoint_generator(api_host, api_version, ssl)
@@ -54,7 +56,7 @@ module Mailgun
 
     # Add subaccount id to headers
     def set_subaccount(subaccount_id)
-      @http_client.headers = @http_client.headers.merge!({ SUBACCOUNT_HEADER => subaccount_id })
+      @http_client.headers.merge!({ SUBACCOUNT_HEADER => subaccount_id })
     end
 
     # Reset subaccount for primary usage
@@ -103,7 +105,7 @@ module Mailgun
         # Remove nil values from the data hash
         # Submitting nils to the API will likely cause an error.
         #  See also: https://github.com/mailgun/mailgun-ruby/issues/32
-        data = data.select { |_k, v| !v.nil? }
+        data = data.reject { |_k, v| v.nil? }
 
         if data.key?(:message)
           if data[:message].is_a?(String)

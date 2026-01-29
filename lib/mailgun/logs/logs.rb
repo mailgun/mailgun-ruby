@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Logs object is a simple interface to Mailgun Logs.
   # Uses Mailgun

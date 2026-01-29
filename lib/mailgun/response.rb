@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mailgun
   # A Mailgun::Response object is instantiated for each response generated
   # by the Client request. The Response object supports deserialization of
