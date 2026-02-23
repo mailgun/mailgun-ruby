@@ -41,7 +41,7 @@ module Railgun
     end
 
     def deliver!(mail)
-      @mg_domain = set_mg_domain(mail)
+      @mg_domain = mg_domain(mail)
       @mg_client.set_api_key(mail[:api_key].value) if mail[:api_key].present?
       @mg_client.set_subaccount(mail[:subaccount_id].value) if mail[:subaccount_id].present?
 
@@ -66,7 +66,7 @@ module Railgun
     private
 
     # Set @mg_domain from mail[:domain] header if present, then remove it to prevent being sent.
-    def set_mg_domain(mail)
+    def mg_domain(mail)
       return mail[:domain].value if mail[:domain]
 
       domain

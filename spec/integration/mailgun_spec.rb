@@ -109,6 +109,7 @@ describe 'The method send_message()', vcr: { cassette_name: 'send_message' } do
     result.to_h!
     expect(result.body).to include('message')
     expect(result.body).to include('id')
+    expect(Mailgun::Client.deliveries.size).to eq(1)
   end
 
   it 'fakes message send while in *client* test mode' do

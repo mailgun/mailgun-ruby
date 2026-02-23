@@ -197,7 +197,8 @@ module Mailgun
     #
     # domain  - [String] Name of the domain (ex. domain.com)
     # options - [Hash] of
-    #   active  - [Boolean] yes or no. If set to yes, links will be overwritten and pointed to our servers so we can track clicks.
+    #   active  - [Boolean] yes or no. If set to yes, links will be overwritten and pointed to our servers
+    #                       so we can track clicks.
     #
     # Returns [Hash] Information on the tracking click settings
     def update_domain_tracking_click_settings(domain, options = {})
@@ -209,7 +210,8 @@ module Mailgun
     # domain  - [String] Name of the domain (ex. domain.com)
     # options - [Hash] of
     #   active  - [Boolean] yes or no. If set to yes, a tracking pixel will be inserted below your HTML content.
-    #   place_at_the_top  - [Boolean] yes or no. If set to yes, tracking pixel will be moved to top of your HTML content.
+    #   place_at_the_top  - [Boolean] yes or no. If set to yes, tracking pixel will be moved
+    #                                 to top of your HTML content.
     #
     # Returns [Hash] Information on the tracking open settings
     def update_domain_tracking_open_settings(domain, options = {})

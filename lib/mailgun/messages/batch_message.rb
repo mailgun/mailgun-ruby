@@ -39,7 +39,8 @@ module Mailgun
     #
     # @param [String] recipient_type The type of recipient. "to".
     # @param [String] address The email address of the recipient to add to the message object.
-    # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
+    # @param [Hash] variables A hash of the variables associated with the recipient.
+    #                         We recommend "first" and "last" at a minimum!
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
       # send the message when we have 1000, not before

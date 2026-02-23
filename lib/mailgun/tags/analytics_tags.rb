@@ -26,15 +26,19 @@ module Mailgun
     # Public: Post query to list account tags or search for single tag
     #
     # options - [Hash] of
-    #     include_subaccounts  - [Boolean] Boolean indicating whether or not to include data from all subaccounts. Default false.
-    #     include_metrics      - [Boolean] Boolean indicating whether or not to include metrics for tags. Default false. When true max limit is 20.
-    #     tag                  - [string] The tag or tag prefix.
+    #     include_subaccounts  - [Boolean] Boolean indicating whether or not to include data from all subaccounts.
+    #                                      Default false.
+    #     include_metrics      - [Boolean] Boolean indicating whether or not to include metrics for tags.
+    #                                      Default false. When true max limit is 20.
+    #     tag                  - [String]  The tag or tag prefix.
     #     pagination           - [Object]
-    #         sort          - [String] Colon-separated value indicating column name and sort direction e.g. 'timestamp:desc'.
+    #         sort          - [String]  Colon-separated value indicating column name and sort direction
+    #                                   e.g. 'timestamp:desc'.
     #         skip          - [Integer] The number of items to skip over when satisfying the request.
     #         limit         - [Integer] The maximum number of items returned (100 max).
     #         total         - [Integer] The total number of tags matching the search criteria.
-    #         include_total - [Boolean] Boolean indicating whether or not to include total number of items. Default false.
+    #         include_total - [Boolean] Boolean indicating whether or not to include total number of items.
+    #                                   Default false.
 
     #
     # Returns [Hash] Information on the requested tags.

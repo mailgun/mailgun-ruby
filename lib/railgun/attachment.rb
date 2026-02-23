@@ -30,7 +30,7 @@ module Railgun
       @inline
     end
 
-    def is_original_filename
+    def original_filename?
       @original_filename == @overwritten_filename
     end
 
@@ -38,13 +38,11 @@ module Railgun
       @filename
     end
 
-    def attach_to_message!(mb)
-      nil if mb.nil?
-
+    def attach_to_message!(m_body)
       if inline?
-        mb.add_inline_image self, @filename
+        m_body.add_inline_image self, @filename
       else
-        mb.add_attachment self, @filename
+        m_body.add_attachment self, @filename
       end
     end
   end

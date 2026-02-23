@@ -16,7 +16,9 @@ module Mailgun
     #     start - [String] A start date (default: 7 days before current time). Must be in RFC 2822 format.
     #     end - [String] An end date (default: current time). Must be in RFC 2822 format.
     #     resolution - [String] A resolution in the format of 'day' 'hour' 'month'. Default is day.
-    #     duration - [String] A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.
+    #     duration - [String] A duration in the format of '1d' '2h' '2m'.
+    #                         If duration is provided then it is calculated from the end date
+    #                         and overwrites the start date.
     #     dimensions - [Array] Attributes of the metric data such as 'subaccount'.
     #     metrics - [Array] Name of the metrics to receive the stats for such as 'processed_count'
     #     filter - [Object]
@@ -40,7 +42,9 @@ module Mailgun
     #     start - [String] A start date (default: 7 days before current time). Must be in RFC 2822 format.
     #     end - [String] An end date (default: current time). Must be in RFC 2822 format.
     #     resolution - [String] A resolution in the format of 'day' 'hour' 'month'. Default is day.
-    #     duration - [String] A duration in the format of '1d' '2h' '2m'. If duration is provided then it is calculated from the end date and overwrites the start date.
+    #     duration - [String] A duration in the format of '1d' '2h' '2m'.
+    #                         If duration is provided then it is calculated from the end date and
+    #                         overwrites the start date.
     #     dimensions - [Array] Attributes of the metric data such as 'subaccount'.
     #     metrics - [Array] Name of the metrics to receive the stats for such as 'processed_count'
     #     filter - [Object]

@@ -13,9 +13,9 @@ module Mailgun
     attr_accessor :body, :status, :code
 
     ResponseHash = Struct.new(:body, :status)
-    def self.from_hash(h)
+    def self.from_hash(hash)
       # Create a "fake" response object with the data passed from h
-      new ResponseHash.new(h[:body], h[:status])
+      new ResponseHash.new(hash[:body], hash[:status])
     end
 
     def initialize(response)

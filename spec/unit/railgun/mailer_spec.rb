@@ -162,17 +162,20 @@ describe 'Railgun::Mailer' do
   end
 
   it 'properly handles headers that are passed as separate POST params' do
-    message = UnitTestMailer.plain_message('test@example.org', 'Test!', {
-                                             # `From`, `To`, and `Subject` are set on the envelope, so they should be ignored as headers
-                                             'From' => 'units@example.net',
-                                             'To' => 'user@example.com',
-                                             'Subject' => 'This should disappear',
-                                             # If `Bcc` or `Cc` are set as headers, they should be carried over as POST params, not headers
-                                             'Bcc' => ['list@example.org'],
-                                             'Cc' => ['admin@example.com'],
-                                             # This is an arbitrary header and should be carried over properly
-                                             'X-Source' => 'unit tests'
-                                           })
+    message = UnitTestMailer.plain_message(
+      'test@example.org', 'Test!',
+      {
+        # `From`, `To`, and `Subject` are set on the envelope, so they should be ignored as headers
+        'From' => 'units@example.net',
+        'To' => 'user@example.com',
+        'Subject' => 'This should disappear',
+        # If `Bcc` or `Cc` are set as headers, they should be carried over as POST params, not headers
+        'Bcc' => ['list@example.org'],
+        'Cc' => ['admin@example.com'],
+        # This is an arbitrary header and should be carried over properly
+        'X-Source' => 'unit tests'
+      }
+    )
 
     body = Railgun.transform_for_mailgun(message)
 

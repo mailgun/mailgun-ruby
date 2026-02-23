@@ -63,10 +63,12 @@ module Mailgun
     # tag    - [String] Tag name to lookup for
     # options - [Hash] of
     #     event - [String] The type of the event. Required. (ex. accepted, delivered, failed, opened)
-    #     start - [String] The starting time. Should be in RFC 282 or unix epoch format. Default: 7 days from the current time.
+    #     start - [String] The starting time. Should be in RFC 282 or unix epoch format.
+    #                      Default: 7 days from the current time.
     #     end   - [String] The ending date. Should be in RFC 2822 or unix epoch time in seconds. Default: current time.
     #     resolution   - [String] Can be either hour, day or month. Default: day
-    #     duration   - [String] Period of time with resolution encoded. If provided, overwrites the start date and resolution.
+    #     duration   - [String] Period of time with resolution encoded.
+    #                           If provided, overwrites the start date and resolution.
     #
     # Returns [Hash] of tag stats info
     def get_tag_stats(domain, tag, options = {})

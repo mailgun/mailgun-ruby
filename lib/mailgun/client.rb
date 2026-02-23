@@ -50,14 +50,18 @@ module Mailgun
     end
 
     # Change API key
+    # rubocop:disable Naming/AccessorMethodName
     def set_api_key(api_key)
       @http_client.set_basic_auth('api', api_key)
     end
+    # rubocop:enable Naming/AccessorMethodName
 
     # Add subaccount id to headers
+    # rubocop:disable Naming/AccessorMethodName
     def set_subaccount(subaccount_id)
       @http_client.headers.merge!({ SUBACCOUNT_HEADER => subaccount_id })
     end
+    # rubocop:enable Naming/AccessorMethodName
 
     # Reset subaccount for primary usage
     def reset_subaccount
@@ -78,7 +82,7 @@ module Mailgun
     #
     # @return [Hash]
     def self.deliveries
-      @@deliveries ||= []
+      @deliveries ||= []
     end
 
     # Simple Message Sending
@@ -231,18 +235,18 @@ module Mailgun
     # Raises CommunicationError and stores response in it if present
     #
     # @param [StandardException] e upstream exception object
-    def communication_error(e)
-      if e.respond_to?(:response) && e.response
-        return case e.response_status
+    def communication_error(error)
+      if error.respond_to?(:response) && error.response
+        return case error.response_status
                when Unauthorized::CODE
-                 Unauthorized.new(e.message, e.response)
+                 Unauthorized.new(error.message, error.response)
                when BadRequest::CODE
-                 BadRequest.new(e.message, e.response)
+                 BadRequest.new(error.message, error.response)
                else
-                 CommunicationError.new(e.message, e.response)
+                 CommunicationError.new(error.message, error.response)
                end
       end
-      CommunicationError.new(e.message)
+      CommunicationError.new(error.message)
     end
 
     def perform_data_validation(working_domain, data)
