@@ -25,7 +25,8 @@ module Mailgun
     #
     # @param [String] recipient_type The type of recipient. "to", "cc", "bcc" or "h:reply-to".
     # @param [String] address The email address of the recipient to add to the message object.
-    # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
+    # @param [Hash] variables A hash of the variables associated with the recipient.
+    #                         We recommend "first" and "last" at a minimum!
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
       if recipient_type == 'h:reply-to'
@@ -46,7 +47,8 @@ module Mailgun
     # Sets the from address for the message
     #
     # @param [String] address The address of the sender.
-    # @param [Hash] variables A hash of the variables associated with the recipient. We recommend "first" and "last" at a minimum!
+    # @param [Hash] variables A hash of the variables associated with the recipient.
+    #                         We recommend "first" and "last" at a minimum!
     # @return [void]
     def from(address, vars = nil)
       add_recipient(:from, address, vars)
@@ -155,24 +157,12 @@ module Mailgun
       set_multi_simple('o:testmode', bool_lookup(mode))
     end
 
-    # Deprecated: 'set_test_mode' is depreciated. Please use 'test_mode' instead.
-    def set_test_mode(mode)
-      warn 'DEPRECATION: "set_test_mode" is deprecated. Please use "test_mode" instead.'
-      test_mode(mode)
-    end
-
     # Turn DKIM on or off per message
     #
     # @param [Boolean] mode The boolean or string value(will fix itself)
     # @return [void]
     def dkim(mode)
       set_multi_simple('o:dkim', bool_lookup(mode))
-    end
-
-    # Deprecated: 'set_dkim' is deprecated. Please use 'dkim' instead.
-    def set_dkim(mode)
-      warn 'DEPRECATION: "set_dkim" is deprecated. Please use "dkim" instead.'
-      dkim(mode)
     end
 
     # Add campaign IDs to message. Limit of 3 per message.
@@ -212,12 +202,6 @@ module Mailgun
       set_multi_simple('o:tracking', value)
     end
 
-    # Deprecated: 'set_open_tracking' is deprecated. Please use 'track_opens' instead.
-    def set_open_tracking(tracking)
-      warn 'DEPRECATION: "set_open_tracking" is deprecated. Please use "track_opens" instead.'
-      track_opens(tracking)
-    end
-
     # Turn Click Tracking on and off, on a per message basis.
     #
     # @param [String] mode True, False, or HTML (for HTML only tracking)
@@ -226,12 +210,6 @@ module Mailgun
       value = bool_lookup(mode)
       set_single('o:tracking-clicks', value)
       set_multi_simple('o:tracking', value)
-    end
-
-    # Depreciated: 'set_click_tracking. is deprecated. Please use 'track_clicks' instead.
-    def set_click_tracking(tracking)
-      warn 'DEPRECATION: "set_click_tracking" is deprecated. Please use "track_clicks" instead.'
-      track_clicks(tracking)
     end
 
     # Enable Delivery delay on message. Specify an RFC2822 date, and Mailgun
@@ -244,12 +222,6 @@ module Mailgun
     def deliver_at(timestamp)
       time_str = DateTime.parse(timestamp)
       set_multi_simple('o:deliverytime', time_str.rfc2822)
-    end
-
-    # Deprecated: 'set_delivery_time' is deprecated. Please use 'deliver_at' instead.
-    def set_delivery_time(timestamp)
-      warn 'DEPRECATION: "set_delivery_time" is deprecated. Please use "deliver_at" instead.'
-      deliver_at timestamp
     end
 
     # Add custom data to the message. The data should be either a hash or JSON

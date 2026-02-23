@@ -323,14 +323,6 @@ describe 'The method list_unsubscribe' do
   end
 end
 
-describe 'The method set_test_mode' do
-  it 'warns of set_test_mode deprecation' do
-    @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_test_mode 'Yes'
-  end
-end
-
 describe 'The method test_mode' do
   before(:each) do
     @mb_obj = Mailgun::MessageBuilder.new
@@ -362,14 +354,6 @@ describe 'The method test_mode' do
 
     expect(@mb_obj.message['o:testmode'].length).to eq(1)
     expect(@mb_obj.message['o:testmode'][0]).to eq('no')
-  end
-end
-
-describe 'The method set_dkim' do
-  it 'warns of set_dkim deprecation' do
-    @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_dkim 'Yes'
   end
 end
 
@@ -461,14 +445,6 @@ describe 'The method add_tag' do
   end
 end
 
-describe 'The method set_open_tracking' do
-  it 'warns of set_open_tracking deprecation' do
-    @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_open_tracking 'Yes'
-  end
-end
-
 describe 'The method track_opens' do
   before(:each) do
     @mb_obj = Mailgun::MessageBuilder.new
@@ -490,14 +466,6 @@ describe 'The method track_opens' do
     @mb_obj.track_opens(false)
 
     expect(@mb_obj.message['o:tracking-opens']).to eq('no')
-  end
-end
-
-describe 'The method set_click_tracking' do
-  it 'warns of set_click_tracking deprecation' do
-    @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_click_tracking 'Yes'
   end
 end
 
@@ -533,14 +501,6 @@ describe 'The method track_clicks' do
       expect(@mb_obj).to receive :warn
       @mb_obj.track_clicks('random')
     end
-  end
-end
-
-describe 'The method set_delivery_time' do
-  it 'warns of set_delivery_time deprecation' do
-    @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_delivery_time 'October 25, 2013 10:00PM CST'
   end
 end
 
@@ -662,13 +622,13 @@ describe 'The method template' do
 
   context 'when multiple values are passed' do
     it 'sets the last value as message template' do
-      template_name_1 = 'template.name_1'
-      template_name_2 = 'template.name_2'
+      template_name1 = 'template.name_1'
+      template_name2 = 'template.name_2'
 
-      @mb_obj.template(template_name_1)
-      @mb_obj.template(template_name_2)
+      @mb_obj.template(template_name1)
+      @mb_obj.template(template_name2)
 
-      expect(@mb_obj.message['template']).to eq(template_name_2)
+      expect(@mb_obj.message['template']).to eq(template_name2)
     end
   end
 
@@ -700,13 +660,13 @@ describe 'The method template_version' do
 
   context 'when multiple values are passed' do
     it 'adds the last value as `t:version` key value to the message' do
-      version_1 = 'version_1'
-      version_2 = 'version_2'
+      version1 = 'version_1'
+      version2 = 'version_2'
 
-      @mb_obj.template_version(version_1)
-      @mb_obj.template_version(version_2)
+      @mb_obj.template_version(version1)
+      @mb_obj.template_version(version2)
 
-      expect(@mb_obj.message['t:version']).to eq(version_2)
+      expect(@mb_obj.message['t:version']).to eq(version2)
     end
   end
 

@@ -69,7 +69,10 @@ describe Mailgun::Metrics, vcr: vcr_opts do
                           'display_value' => 'Wed, 27 Nov 2024 13:00:00 +0000'
                         }],
                         'metrics' => {
-                          'accepted_count' => 1, 'delivered_count' => 1, 'opened_rate' => '0.0000', 'clicked_rate' => '0.0000'
+                          'accepted_count' => 1,
+                          'delivered_count' => 1,
+                          'opened_rate' => '0.0000',
+                          'clicked_rate' => '0.0000'
                         }
                       },
                       {
@@ -79,7 +82,10 @@ describe Mailgun::Metrics, vcr: vcr_opts do
                           'display_value' => 'Thu, 28 Nov 2024 15:00:00 +0000'
                         }],
                         'metrics' => {
-                          'accepted_count' => 1, 'delivered_count' => 1, 'opened_rate' => '0.0000', 'clicked_rate' => '0.0000'
+                          'accepted_count' => 1,
+                          'delivered_count' => 1,
+                          'opened_rate' => '0.0000',
+                          'clicked_rate' => '0.0000'
                         }
                       }],
           'aggregates' => {

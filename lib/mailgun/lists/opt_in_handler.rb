@@ -32,7 +32,8 @@ module Mailgun
     #
     # @param [String] secret_app_id A secret passphrase used as a constant for the hash.
     # @param [Hash] unique_hash The hash from the user. Likely via link click.
-    # @return [Hash or Boolean] A hash with 'recipient_address' and 'mailing_list', if validates. Otherwise, boolean false.
+    # @return [Hash or Boolean] A hash with 'recipient_address' and 'mailing_list', if validates.
+    #                           Otherwise, boolean false.
     def self.validate_hash(secret_app_id, unique_hash)
       outer_payload = JSON.parse(base64_decode(CGI.unescape(unique_hash)))
 
@@ -57,9 +58,6 @@ module Mailgun
 
     # Equivalent to Base64.decode64
     def self.base64_decode(input)
-      # TODO: Condition can be droped if Ruby >= 2.4.0
-      if input.respond_to?(:unpack1)
-      end
       input.unpack1('m')
     end
 

@@ -1,0 +1,27 @@
+Metrics/MethodLength:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'lib/mailgun-ruby.rb'

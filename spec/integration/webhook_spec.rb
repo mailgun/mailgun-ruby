@@ -37,8 +37,13 @@ describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
   end
 
   it 'updates a webhook.' do
-    result = @mg_obj.put("domains/#{@domain}/webhooks/#{@testhook}", { id: @testhook,
-                                                                       url: "http://example.com/mailgun/events/#{@testhookup}" })
+    result = @mg_obj.put(
+      "domains/#{@domain}/webhooks/#{@testhook}",
+      {
+        id: @testhook,
+        url: "http://example.com/mailgun/events/#{@testhookup}"
+      }
+    )
 
     result.to_h!
     expect(result.body['message']).to eq('Webhook has been updated')
