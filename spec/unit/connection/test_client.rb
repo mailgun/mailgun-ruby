@@ -69,7 +69,7 @@ module Mailgun
     end
 
     private
-
+    #test
     def perform_data_validation(working_domain, data)
       raise ParameterError.new('Missing working domain', working_domain) unless working_domain
       return true unless data.is_a?(Hash) && data.present?
@@ -89,7 +89,7 @@ module Mailgun
         working_domain
       )
     end
-
+    #test
     def response_generator(resource_endpoint)
       if resource_endpoint == 'messages'
         t = Time.now
