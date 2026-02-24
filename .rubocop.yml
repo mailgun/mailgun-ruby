@@ -1,3 +1,6 @@
+AllCops:
+  NewCops: disable
+
 Metrics/MethodLength:
   Enabled: false
 Metrics/BlockLength:
