@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'The method generate_hash' do
-  before(:each) do
+  before do
     @mailing_list = 'mylist@example.com'
     @secret_app_id = 'mysupersecretpassword'
     @recipient_address = 'bob@example.com'

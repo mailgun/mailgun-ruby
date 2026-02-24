@@ -205,7 +205,7 @@ describe 'Railgun::Mailer' do
         }
       end
       body = Railgun.transform_for_mailgun(message)
-      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data']).to be_a(String)
       expect(body['v:my-data'].to_s).to eq('{"key":"value"}')
     end
 
@@ -217,7 +217,7 @@ describe 'Railgun::Mailer' do
       end
       body = Railgun.transform_for_mailgun(message)
 
-      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data']).to be_a(String)
       expect(body['v:my-data'].to_s).to eq('{"key":"value"}')
     end
 
@@ -229,7 +229,7 @@ describe 'Railgun::Mailer' do
       end
       body = Railgun.transform_for_mailgun(message)
 
-      expect(body['v:my-data']).to be_kind_of(String)
+      expect(body['v:my-data']).to be_a(String)
       expect(body['v:my-data'].to_s).to eq('String Value.')
     end
   end

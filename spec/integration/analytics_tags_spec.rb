@@ -44,7 +44,7 @@ describe 'AnalyticsTags', vcr: vcr_opts do
     end
   end
 
-  context '#limits' do
+  describe '#limits' do
     it 'returns limits' do
       response = mg_obj.limits
 

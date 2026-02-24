@@ -54,7 +54,7 @@ describe 'For the Mailing Lists Members endpoint', order: :defined, vcr: vcr_opt
     expect(result.body['message']).to eq('Mailing list member has been updated')
     expect(result.body['member']['address']).to eq(@ml_member)
     expect(result.body['member']['name']).to eq('Jane Doe Update')
-    expect(result.body['member']['subscribed']).to eq(false)
+    expect(result.body['member']['subscribed']).to be(false)
   end
 
   it 'removes a list member' do

@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'stringio'
 
 describe 'MessageBuilder attribute readers' do
-  it 'should be readable' do
+  it 'is readable' do
     @mb_obj = Mailgun::MessageBuilder.new
 
     expect(@mb_obj).to respond_to(:message)
@@ -13,7 +13,7 @@ describe 'MessageBuilder attribute readers' do
 end
 
 describe 'The instantiation of MessageBuilder' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
 
@@ -37,7 +37,7 @@ describe 'The instantiation of MessageBuilder' do
 end
 
 describe 'The method add_recipient' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
     @address = 'jane@example.com'
     @variables = { 'first' => 'Jane', 'last' => 'Doe' }
@@ -92,6 +92,7 @@ describe 'The method add_recipient' do
     expect(@mb_obj.message[recipient_type][0]).to eq("'#{@variables['first']} #{@variables['last']}' <#{@address}>")
     @mb_obj.counters[:recipients].each_value { |value| expect(value).to eq(0) }
   end
+
   it 'adds too many to recipients and raises an exception.' do
     recipient_type = :to
 
@@ -101,6 +102,7 @@ describe 'The method add_recipient' do
       end
     end.to raise_error(Mailgun::ParameterError)
   end
+
   it 'adds too many cc recipients and raises an exception.' do
     recipient_type = :cc
 
@@ -110,6 +112,7 @@ describe 'The method add_recipient' do
       end
     end.to raise_error(Mailgun::ParameterError)
   end
+
   it 'adds too many bcc recipients and raises an exception.' do
     recipient_type = :bcc
 
@@ -130,7 +133,7 @@ describe 'The method set_subject' do
 end
 
 describe 'The method subject' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
 
@@ -167,18 +170,21 @@ describe 'The method set_text_body' do
 end
 
 describe 'The method body_text' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'sets the body_text to blank if called and no parameters are provided' do
     @mb_obj.body_text
     @mb_obj.message[:text] = ''
   end
+
   it 'sets the message text if called with the body_text parameter' do
     the_text = 'Don\'t mess with Texas!'
     @mb_obj.body_text(the_text)
     @mb_obj.message[:text] = the_text
   end
+
   it 'ensures no duplicate text bodies can exist and last setter is stored' do
     the_first_text = 'Mess with Texas!'
     the_second_text = 'Don\'t mess with Texas!'
@@ -209,7 +215,7 @@ describe 'The method set_from_address' do
 end
 
 describe 'The method from' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
 
@@ -246,9 +252,10 @@ describe 'The method from' do
 end
 
 describe 'The method add_attachment' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'adds a few file paths to the message object' do
     file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
     file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
@@ -283,9 +290,10 @@ describe 'The method add_attachment' do
 end
 
 describe 'The method add_inline_image' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'adds a few file paths to the message object' do
     file1 = "#{File.dirname(__FILE__)}/sample_data/mailgun_icon.png"
     file2 = "#{File.dirname(__FILE__)}/sample_data/rackspace_logo.jpg"
@@ -299,7 +307,7 @@ describe 'The method add_inline_image' do
 end
 
 describe 'The method list_unsubscribe' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
 
@@ -324,29 +332,34 @@ describe 'The method list_unsubscribe' do
 end
 
 describe 'The method test_mode' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'turns on test mode with boolean true' do
     @mb_obj.test_mode(true)
 
     expect(@mb_obj.message['o:testmode'][0]).to eq('yes')
   end
+
   it 'turns on test mode with string true' do
     @mb_obj.test_mode('true')
 
     expect(@mb_obj.message['o:testmode'][0]).to eq('yes')
   end
+
   it 'turns off test mode with boolean false' do
     @mb_obj.test_mode(false)
 
     expect(@mb_obj.message['o:testmode'][0]).to eq('no')
   end
+
   it 'turns off test mode with string false' do
     @mb_obj.test_mode('false')
 
     expect(@mb_obj.message['o:testmode'][0]).to eq('no')
   end
+
   it 'does not allow multiple values' do
     @mb_obj.test_mode('false')
     @mb_obj.test_mode('true')
@@ -358,29 +371,34 @@ describe 'The method test_mode' do
 end
 
 describe 'The method dkim' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'turns on dkim with boolean true' do
     @mb_obj.dkim(true)
 
     expect(@mb_obj.message['o:dkim'][0]).to eq('yes')
   end
+
   it 'turns on dkim with string true' do
     @mb_obj.dkim('true')
 
     expect(@mb_obj.message['o:dkim'][0]).to eq('yes')
   end
+
   it 'turns off dkim with boolean false' do
     @mb_obj.dkim(false)
 
     expect(@mb_obj.message['o:dkim'][0]).to eq('no')
   end
+
   it 'turns off dkim with string false' do
     @mb_obj.dkim('false')
 
     expect(@mb_obj.message['o:dkim'][0]).to eq('no')
   end
+
   it 'does not allow multiple values' do
     @mb_obj.dkim('false')
     @mb_obj.dkim('true')
@@ -392,14 +410,16 @@ describe 'The method dkim' do
 end
 
 describe 'The method add_campaign_id' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'adds a campaign ID to the message' do
     @mb_obj.add_campaign_id('My-Campaign-Id-1')
 
     expect(@mb_obj.message['o:campaign'][0]).to eq('My-Campaign-Id-1')
   end
+
   it 'adds a few more campaign IDs to the message' do
     @mb_obj.add_campaign_id('My-Campaign-Id-1')
     @mb_obj.add_campaign_id('My-Campaign-Id-2')
@@ -409,6 +429,7 @@ describe 'The method add_campaign_id' do
     expect(@mb_obj.message['o:campaign'][1]).to eq('My-Campaign-Id-2')
     expect(@mb_obj.message['o:campaign'][2]).to eq('My-Campaign-Id-3')
   end
+
   it 'adds too many campaign IDs to the message' do
     expect do
       10.times do
@@ -419,14 +440,16 @@ describe 'The method add_campaign_id' do
 end
 
 describe 'The method add_tag' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'adds a tag to the message' do
     @mb_obj.add_tag('My-Tag-1')
 
     expect(@mb_obj.message['o:tag'][0]).to eq('My-Tag-1')
   end
+
   it 'adds a few more tags to the message' do
     @mb_obj.add_tag('My-Tag-1')
     @mb_obj.add_tag('My-Tag-2')
@@ -436,6 +459,7 @@ describe 'The method add_tag' do
     expect(@mb_obj.message['o:tag'][1]).to eq('My-Tag-2')
     expect(@mb_obj.message['o:tag'][2]).to eq('My-Tag-3')
   end
+
   it 'adds too many tags to the message' do
     expect do
       12.times do
@@ -446,9 +470,10 @@ describe 'The method add_tag' do
 end
 
 describe 'The method track_opens' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'enables/disables open tracking on a per message basis.' do
     @mb_obj.track_opens('Yes')
 
@@ -470,9 +495,10 @@ describe 'The method track_opens' do
 end
 
 describe 'The method track_clicks' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'enables/disables click tracking on a per message basis.' do
     @mb_obj.track_clicks('Yes')
 
@@ -505,9 +531,10 @@ describe 'The method track_clicks' do
 end
 
 describe 'The method deliver_at' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'defines a time/date to deliver a message in RFC2822 format.' do
     @mb_obj.deliver_at('October 25, 2013 10:00PM CST')
 
@@ -524,48 +551,53 @@ describe 'The method set_custom_data' do
 end
 
 describe 'The method header' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'accepts valid JSON and appends as data to the message.' do
     @mb_obj.header('my-data', '{"key":"value"}')
 
-    expect(@mb_obj.message['h:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['h:my-data']).to be_a(String)
     expect(@mb_obj.message['h:my-data'].to_s).to eq('{"key":"value"}')
   end
 end
 
 describe 'The method variable' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'accepts valid JSON and stores it as message[param].' do
     @mb_obj.variable('my-data', '{"key":"value"}')
 
-    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data']).to be_a(String)
     expect(@mb_obj.message['v:my-data'].to_s).to eq('{"key":"value"}')
   end
+
   it 'accepts a hash and appends as data to the message.' do
     data = { 'key' => 'value' }
     @mb_obj.variable('my-data', data)
 
-    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data']).to be_a(String)
     expect(@mb_obj.message['v:my-data'].to_s).to eq('{"key":"value"}')
   end
+
   it 'accepts string values' do
     data = 'String Value.'
 
     @mb_obj.variable('my-data', data)
 
-    expect(@mb_obj.message['v:my-data']).to be_kind_of(String)
+    expect(@mb_obj.message['v:my-data']).to be_a(String)
     expect(@mb_obj.message['v:my-data'].to_s).to eq('String Value.')
   end
 end
 
 describe 'The method add_custom_parameter' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   it 'adds an undefined parameter to the message.' do
     @mb_obj.add_custom_parameter('h:my-sweet-header', 'datagoeshere')
 
@@ -582,35 +614,39 @@ describe 'The method set_message_id' do
 end
 
 describe 'The method message_id' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
     @the_message_id = '<20141014000000.11111.11111@example.com>'
   end
+
   it 'correctly sets the Message-Id header' do
     @mb_obj.message_id(@the_message_id)
 
     expect(@mb_obj.message['h:Message-Id']).to eq(@the_message_id)
   end
+
   it 'correctly clears the Message-Id header when passed nil' do
     @mb_obj.message_id(nil)
 
-    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to be(false)
   end
+
   it 'correctly sets the Message-Id header when passed an empty string' do
     @mb_obj.message_id(@the_message_id)
 
-    expect(@mb_obj.message.key?('h:Message-Id')).to eq(true)
+    expect(@mb_obj.message.key?('h:Message-Id')).to be(true)
 
     @mb_obj.message_id('')
 
-    expect(@mb_obj.message.key?('h:Message-Id')).to eq(false)
+    expect(@mb_obj.message.key?('h:Message-Id')).to be(false)
   end
 end
 
 describe 'The method template' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   context 'when template name is passed' do
     it 'sets `template` to the message' do
       template_name = 'template.name'
@@ -633,22 +669,23 @@ describe 'The method template' do
   end
 
   context 'when template name is not passed' do
-    it 'it deletes `template` key from the message' do
+    it 'deletes `template` key from the message' do
       @mb_obj.template('template.name')
 
-      expect(@mb_obj.message.key?('template')).to eq(true)
+      expect(@mb_obj.message.key?('template')).to be(true)
 
       @mb_obj.template
 
-      expect(@mb_obj.message.key?('template')).to eq(false)
+      expect(@mb_obj.message.key?('template')).to be(false)
     end
   end
 end
 
 describe 'The method template_version' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
+
   context 'when template version is passed' do
     it 'adds `t:version` key value to the message' do
       version = 'version_1'
@@ -671,20 +708,20 @@ describe 'The method template_version' do
   end
 
   context 'when version is not passed' do
-    it 'it deletes `t:version` key from the message' do
+    it 'deletes `t:version` key from the message' do
       @mb_obj.template_version('version')
 
-      expect(@mb_obj.message.key?('t:version')).to eq(true)
+      expect(@mb_obj.message.key?('t:version')).to be(true)
 
       @mb_obj.template_version
 
-      expect(@mb_obj.message.key?('t:version')).to eq(false)
+      expect(@mb_obj.message.key?('t:version')).to be(false)
     end
   end
 end
 
 describe 'The method template_text' do
-  before(:each) do
+  before do
     @mb_obj = Mailgun::MessageBuilder.new
   end
 

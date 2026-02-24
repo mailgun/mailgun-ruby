@@ -30,8 +30,3 @@ RSpec::Core::RakeTask.new('spec:all') do |t|
 end
 
 task default: 'spec:unit'
-task spec: 'spec:unit'
-
-task :console do
-  sh 'pry --gem'
-end

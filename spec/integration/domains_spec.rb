@@ -44,7 +44,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
       end
     end
 
-    context '#update' do
+    describe '#update' do
       let(:api_version) { 'v4' }
 
       it 'updates the domain' do
@@ -52,11 +52,11 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
         expect(response['domain']['spam_action']).to eq('block')
         expect(response['domain']['web_scheme']).to eq('https')
-        expect(response['domain']['wildcard']).to eq(true)
+        expect(response['domain']['wildcard']).to be(true)
       end
     end
 
-    context '#verify' do
+    describe '#verify' do
       let(:api_version) { 'v4' }
 
       it 'verifies the domain' do
@@ -199,7 +199,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
         )
 
         expect(result).to include('tracking')
-        expect(result['tracking']['click']['active']).to eq(false)
+        expect(result['tracking']['click']['active']).to be(false)
       end
     end
 
@@ -212,7 +212,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
           }
         )
 
-        expect(result['click']['active']).to eq(false)
+        expect(result['click']['active']).to be(false)
       end
     end
 
@@ -225,7 +225,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
           }
         )
 
-        expect(result['open']['active']).to eq(false)
+        expect(result['open']['active']).to be(false)
       end
     end
 
@@ -238,15 +238,9 @@ describe 'For the domains endpoint', vcr: vcr_opts do
           }
         )
 
-        expect(result['unsubscribe']['active']).to eq(false)
+        expect(result['unsubscribe']['active']).to be(false)
       end
     end
-  end
-
-  context 'Domain::DKIM_Security methods' do
-    # TODO: add missing:
-    # dkim_rotation
-    # dkim_rotate
   end
 
   context 'Credentials methods' do

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'The method get' do
-  it 'should return a proper hash of log data.' do
+  it 'returns a proper hash of log data.' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     result = events.get
@@ -14,7 +14,7 @@ describe 'The method get' do
 end
 
 describe 'Pagination' do
-  it 'should return a proper hash of log data.' do
+  it 'returns a proper hash of log data.' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     result = events.get
@@ -25,7 +25,7 @@ describe 'Pagination' do
     expect(json['paging']).to include('previous')
   end
 
-  it 'should calculate proper next-page url' do
+  it 'calculates proper next-page url' do
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     output = events.send(
       :extract_endpoint_from,
@@ -51,7 +51,7 @@ wLCBudWxsXQ=="
 end
 
 describe 'The method next' do
-  it 'should return the next series of data.' do
+  it 'returns the next series of data.' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     result = events.next
@@ -62,7 +62,7 @@ describe 'The method next' do
 end
 
 describe 'The method previous' do
-  it 'should return the previous series of data.' do
+  it 'returns the previous series of data.' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     result = events.previous
@@ -73,7 +73,7 @@ describe 'The method previous' do
 end
 
 describe 'The method each' do
-  it 'should iterate over all event items.' do
+  it 'iterates over all event items.' do
     @mg_obj = Mailgun::UnitClient.new('events')
     events = Mailgun::Events.new(@mg_obj, 'samples.mailgun.org')
     # Events from the UnitClient are actually empty.

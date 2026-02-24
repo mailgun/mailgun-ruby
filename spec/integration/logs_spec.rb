@@ -6,7 +6,7 @@ require 'mailgun'
 vcr_opts = { cassette_name: 'logs' }
 
 describe Mailgun::Logs, vcr: vcr_opts do
-  let(:logs) { Mailgun::Logs.new(Mailgun::Client.new(APIKEY, APIHOST, 'v1')) }
+  let(:logs) { described_class.new(Mailgun::Client.new(APIKEY, APIHOST, 'v1')) }
 
   describe '#account_logs' do
     let(:options) do

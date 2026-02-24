@@ -41,11 +41,11 @@ describe 'extract_body' do
   context 'with <Content-Type: text/plain>' do
     let(:sample_mail) { Mail.new(text_mail_option) }
 
-    it 'should return body text' do
+    it 'returns body text' do
       expect(Railgun.extract_body_text(sample_mail)).to eq(text_content)
     end
 
-    it 'should not return body html' do
+    it 'does not return body html' do
       expect(Railgun.extract_body_html(sample_mail)).to be_nil
     end
   end
@@ -53,11 +53,11 @@ describe 'extract_body' do
   context 'with <Content-Type: text/html>' do
     let(:sample_mail) { Mail.new(html_mail_option) }
 
-    it 'should not return body text' do
+    it 'does not return body text' do
       expect(Railgun.extract_body_text(sample_mail)).to be_nil
     end
 
-    it 'should return body html' do
+    it 'returns body html' do
       expect(Railgun.extract_body_html(sample_mail)).to eq(html_content)
     end
   end
@@ -74,15 +74,15 @@ describe 'extract_body' do
       @sample_mail.add_part html_mail
     end
 
-    it 'should return body text' do
+    it 'returns body text' do
       expect(Railgun.extract_body_text(@sample_mail)).to eq(text_content)
     end
 
-    it 'should return body html' do
+    it 'returns body html' do
       expect(Railgun.extract_body_html(@sample_mail)).to eq(html_content)
     end
 
-    it 'should return AMP html' do
+    it 'returns AMP html' do
       expect(Railgun.extract_amp_html(@sample_mail)).to eq(amp_content)
     end
   end
