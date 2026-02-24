@@ -1,8 +1,8 @@
 AllCops:
   NewCops: disable
 
-Metrics/MethodLength:
-  Enabled: false
+#Metrics/MethodLength:
+#  Enabled: false
 Metrics/BlockLength:
   Enabled: false
 Metrics/ClassLength:
