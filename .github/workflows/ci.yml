@@ -25,3 +25,17 @@ jobs:
         bundler-cache: true 
     - name: Run tests
       run: bundle exec rake spec:all
+
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Run rubocop
+        run: |
+          bundle exec rubocop --format github
