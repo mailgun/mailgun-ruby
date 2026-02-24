@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'BatchMessage attribute readers' do
-  it 'should be readable' do
+  it 'is readable' do
     @mb_client = Mailgun::UnitClient.new('messages')
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
 
@@ -16,7 +16,7 @@ describe 'BatchMessage attribute readers' do
 end
 
 describe 'The instantiation of Batch Message' do
-  before(:each) do
+  before do
     @mb_client = Mailgun::UnitClient.new('messages')
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
   end
@@ -63,7 +63,7 @@ describe 'The instantiation of Batch Message' do
 end
 
 describe 'The method add_recipient' do
-  before(:each) do
+  before do
     @mb_client = Mailgun::UnitClient.new('messages')
     @mb_obj = Mailgun::BatchMessage.new(@mb_client, 'example.com')
     @address1   = 'jane@example.com'
@@ -73,8 +73,9 @@ describe 'The method add_recipient' do
     @address3   = 'sam@example.com'
     @variables3 = { 'first' => 'Sam', 'last' => 'Doe', 'tracking' => 'GHI123' }
   end
+
   context 'when from is present' do
-    before(:each) do
+    before do
       @mb_obj.from('example@email.com')
     end
 

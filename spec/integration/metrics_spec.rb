@@ -6,7 +6,7 @@ require 'mailgun'
 vcr_opts = { cassette_name: 'metrics' }
 
 describe Mailgun::Metrics, vcr: vcr_opts do
-  let(:metrics) { Mailgun::Metrics.new(Mailgun::Client.new(APIKEY, APIHOST, 'v1')) }
+  let(:metrics) { described_class.new(Mailgun::Client.new(APIKEY, APIHOST, 'v1')) }
 
   describe '#account_metrics' do
     let(:options) do

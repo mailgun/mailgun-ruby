@@ -1,6 +1,12 @@
 AllCops:
   NewCops: disable
+  SuggestExtensions: false
 
+plugins:
+  - rubocop-rspec
+  - rubocop-rake
+
+# temporary disable main codebase errors
 Metrics/MethodLength:
   Enabled: false
 Metrics/BlockLength:
@@ -15,16 +21,48 @@ Metrics/AbcSize:
   Enabled: false
 Metrics/ParameterLists:
   Enabled: false
-
 Lint/MissingSuper:
   Enabled: false
-
 Style/Documentation:
   Enabled: false
-
 Style/OptionalBooleanParameter:
   Enabled: false
-
 Naming/FileName:
   Exclude:
     - 'lib/mailgun-ruby.rb'
+
+# temporary disable rspec errors
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/InstanceVariable:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+RSpec/DescribeClass:
+  Enabled: false
+RSpec/VerifiedDoubles:
+  Enabled: false
+RSpec/NoExpectationExample:
+  Enabled: false
+RSpec/RepeatedDescription:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+RSpec/MultipleDescribes:
+  Enabled: false
+RSpec/BeforeAfterAll:
+  Enabled: false
+RSpec/SpecFilePathFormat:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
+RSpec/OverwritingSetup:
+  Enabled: false

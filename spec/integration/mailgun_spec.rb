@@ -115,7 +115,7 @@ describe 'The method send_message()', vcr: { cassette_name: 'send_message' } do
   it 'fakes message send while in *client* test mode' do
     @mg_obj.enable_test_mode!
 
-    expect(@mg_obj.test_mode?).to eq(true)
+    expect(@mg_obj.test_mode?).to be(true)
 
     data = { from: "joe@#{@domain}",
              to: "bob@#{@domain}",
@@ -183,7 +183,7 @@ Testing some Mailgun awesomness!'
   it 'receives success response code' do
     @mg_obj.enable_test_mode!
 
-    expect(@mg_obj.test_mode?).to eq(true)
+    expect(@mg_obj.test_mode?).to be(true)
 
     data = { from: "joe@#{@domain}",
              to: "bob@#{@domain}",

@@ -9,7 +9,7 @@ describe 'Mailgun instantiation' do
 end
 
 describe 'The method send_message()' do
-  before(:each) do
+  before do
     @mg_obj = Mailgun::UnitClient.new('messages')
     @domain = 'test.com'
     @list_address = 'mylist@test.com'
@@ -73,10 +73,11 @@ describe 'The method send_message()' do
 end
 
 describe 'The method post()' do
-  before(:each) do
+  before do
     @mg_obj = Mailgun::UnitClient.new('messages')
     @domain = 'test.com'
   end
+
   it 'in this case, sends a simple message.' do
     data = { 'from' => 'joe@test.com',
              'to' => 'bob@example.com',
@@ -111,7 +112,7 @@ describe 'The method post()' do
 end
 
 describe 'The method put()' do
-  before(:each) do
+  before do
     @mg_obj = Mailgun::UnitClient.new('lists')
     @domain = 'test.com'
     @list_address = 'mylist@test.com'
@@ -136,10 +137,11 @@ describe 'The method put()' do
 end
 
 describe 'The method get()' do
-  before(:each) do
+  before do
     @mg_obj = Mailgun::UnitClient.new('bounces')
     @domain = 'test.com'
   end
+
   it 'in this case, obtains a list of bounces for the domain, limit of 5, skipping the first 10.' do
     query_string = { 'skip' => '10',
                      'limit' => '5' }
@@ -153,7 +155,7 @@ describe 'The method get()' do
 end
 
 describe 'The method delete()' do
-  before(:each) do
+  before do
     @mg_obj = Mailgun::UnitClient.new('campaigns')
     @domain = 'test.com'
   end

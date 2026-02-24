@@ -23,8 +23,6 @@ describe 'For the Events endpoint', vcr: vcr_opts do
   end
 
   it 'can iterate over all events with `each`' do
-    @events.each do |e|
-      expect(e).to have_key('event')
-    end
+    expect(@events).to all(have_key('event'))
   end
 end
