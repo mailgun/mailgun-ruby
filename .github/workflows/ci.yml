@@ -11,22 +11,30 @@ permissions:
 
 jobs:
   test:
+    permissions: write-all
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: [ '3.0', '3.1', '3.2', '3.3', '3.4', '4.0' ]
 
     steps:
-    - uses: actions/checkout@v6
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true 
-    - name: Run tests
-      run: bundle exec rake spec:all
+      - uses: actions/checkout@v6
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rake spec:all
+      - uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 85
+          minimum_file_coverage: 60
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.ruby-version == '4.0'
 
   rubocop:
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
