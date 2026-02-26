@@ -34,6 +34,7 @@ jobs:
         if: matrix.ruby-version == '4.0'
 
   rubocop:
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
