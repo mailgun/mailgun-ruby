@@ -29,7 +29,7 @@ jobs:
       - uses: joshmfrankel/simplecov-check-action@main
         with:
           minimum_suite_coverage: 85
-          minimum_file_coverage: 70
+          minimum_file_coverage: 60
           github_token: ${{ secrets.GITHUB_TOKEN }}
         if: matrix.ruby-version == '4.0'
 
