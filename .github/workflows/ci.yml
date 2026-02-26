@@ -26,7 +26,11 @@ jobs:
       - name: Run tests
         run: bundle exec rake spec:all
       - uses: joshmfrankel/simplecov-check-action@main
-        if: matrix.ruby-version == '4.0'
+        with:
+          minimum_suite_coverage: 85
+          minimum_file_coverage: 70
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        if: matrix.ruby-version == '3.3'
 
   rubocop:
     runs-on: ubuntu-latest
