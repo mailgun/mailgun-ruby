@@ -5,7 +5,7 @@ require 'spec_helper'
 require 'mailgun'
 require 'mailgun/suppressions'
 
-vcr_opts = { cassette_name: 'suppressions', match_requests_on: %i[uri method body]  }
+vcr_opts = { cassette_name: 'suppressions', match_requests_on: %i[uri method body] }
 
 describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts do
   let(:mg_obj) { Mailgun::Client.new(APIKEY, APIHOST, 'v3') }
@@ -43,7 +43,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'returns nil if no bounces passed' do
     response = suppress.create_bounces({})
 
-    expect(response[0]).to eq(nil)
+    expect(response[0]).to be_nil
   end
 
   it 'creates a single bounce' do
@@ -149,7 +149,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'returns nil if no unsubscribes passed' do
     response = suppress.create_unsubscribes({})
 
-    expect(response[0]).to eq(nil)
+    expect(response[0]).to be_nil
   end
 
   it 'removes a single unsubscribe address' do
@@ -164,9 +164,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
 
   it 'creates a single unsubscribe' do
     response = suppress.create_unsubscribe({
-      address: 'test777@example.com',
-      tags: ['integration']
-    })
+                                             address: 'test777@example.com',
+                                             tags: ['integration']
+                                           })
     response.to_h!
 
     expect(response.code).to eq(200)
@@ -174,7 +174,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   end
 
   it 'returns a single unsubscribe' do
-    response = suppress.get_unsubscribe( 'test777@example.com')
+    response = suppress.get_unsubscribe('test777@example.com')
     response.to_h!
 
     expect(response.code).to eq(200)
@@ -215,11 +215,11 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   it 'returns nil if no complaints passed' do
     response = suppress.create_complaints({})
 
-    expect(response[0]).to eq(nil)
+    expect(response[0]).to be_nil
   end
 
   it 'creates a single complaint' do
-    response = suppress.create_complaint({ address: 'test777@example.com'})
+    response = suppress.create_complaint({ address: 'test777@example.com' })
     response.to_h!
 
     expect(response.code).to eq(200)
@@ -227,7 +227,7 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   end
 
   it 'returns a single complaint' do
-    response = suppress.get_complaint( 'test777@example.com')
+    response = suppress.get_complaint('test777@example.com')
     response.to_h!
 
     expect(response.code).to eq(200)
@@ -275,26 +275,23 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
   end
 
   context 'with 1000 or more entries' do
+    subject(:suppressions) { Mailgun::Suppressions.new(client, domain) }
+
     let(:large_list) { Array.new(1000) { |i| { address: "user#{i}@example.com" } } }
     let(:client)  { double(:client) }
     let(:domain)  { 'example.com' }
 
     def stub_response(body = {})
       double(:response).tap do |r|
-        allow(r).to receive(:to_h).and_return(body)
-        allow(r).to receive(:to_h!).and_return(body)
-        allow(r).to receive(:code).and_return(200)
-        allow(r).to receive(:body).and_return(body)
+        allow(r).to receive_messages(to_h: body, to_h!: body, code: 200, body: body)
       end
     end
 
-    subject(:suppressions) { Mailgun::Suppressions.new(client, domain) }
-
     it 'splits bounces list and makes two POST requests' do
       expect(client).to receive(:post)
-                          .with('example.com/bounces', anything, { 'Content-Type' => 'application/json' })
-                          .twice
-                          .and_return(stub_response)
+        .with('example.com/bounces', anything, { 'Content-Type' => 'application/json' })
+        .twice
+        .and_return(stub_response)
 
       _resp, split = suppressions.create_bounces(large_list)
       expect(split).not_to be_empty
@@ -302,9 +299,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
 
     it 'splits unsubscribes list and makes two POST requests' do
       expect(client).to receive(:post)
-                          .with('example.com/unsubscribes', anything, { 'Content-Type' => 'application/json' })
-                          .twice
-                          .and_return(stub_response)
+        .with('example.com/unsubscribes', anything, { 'Content-Type' => 'application/json' })
+        .twice
+        .and_return(stub_response)
 
       _resp, split = suppressions.create_unsubscribes(large_list)
       expect(split).not_to be_empty
@@ -312,9 +309,9 @@ describe 'For the suppressions handling class', order: :defined, vcr: vcr_opts d
 
     it 'splits complaints list and makes two POST requests' do
       expect(client).to receive(:post)
-                          .with('example.com/complaints', anything, { 'Content-Type' => 'application/json' })
-                          .twice
-                          .and_return(stub_response)
+        .with('example.com/complaints', anything, { 'Content-Type' => 'application/json' })
+        .twice
+        .and_return(stub_response)
 
       _resp, split = suppressions.create_complaints(large_list)
       expect(split).not_to be_empty
