@@ -8,6 +8,8 @@ require 'mailgun/helpers/api_version_checker'
 describe Mailgun::ApiVersionChecker do
   # Build a minimal host class that includes the module, with a controllable
   # @client so we can set api_version per example.
+  subject(:instance) { host_class.new(client) }
+
   let(:client) { double(:client) }
 
   let(:host_class) do
@@ -25,8 +27,6 @@ describe Mailgun::ApiVersionChecker do
       end
     end
   end
-
-  subject(:instance) { host_class.new(client) }
 
   # ──────────────────────────────────────────────────────────────────────────
   # .included / module structure
@@ -89,17 +89,17 @@ describe Mailgun::ApiVersionChecker do
     end
 
     it 'wraps multiple methods when given a list' do
-      host_class.class_eval { def do_other; @result = :other; end }
+      host_class.class_eval { def do_other = @result = :other }
       host_class.requires_api_version('v3', :do_something, :do_other)
 
       allow(client).to receive(:api_version).and_return('v4')
 
       expect { instance.do_something }.to output(/v3/).to_stderr
-      expect { instance.do_other    }.to output(/v3/).to_stderr
+      expect { instance.do_other }.to output(/v3/).to_stderr
     end
 
     it 'wraps only the listed methods, leaving others unwrapped' do
-      host_class.class_eval { def unwrapped; @result = :unwrapped; end }
+      host_class.class_eval { def unwrapped = @result = :unwrapped }
       host_class.requires_api_version('v3', :do_something)
 
       allow(client).to receive(:api_version).and_return('v4')
@@ -148,23 +148,27 @@ describe Mailgun::ApiVersionChecker do
       end
 
       it 'does not call the original method' do
-        instance.do_something rescue nil
+        begin
+          instance.do_something
+        rescue StandardError
+          nil
+        end
         expect(instance.result).to be_nil
       end
     end
 
     it 'wraps multiple methods when given a list' do
-      host_class.class_eval { def do_other; @result = :other; end }
+      host_class.class_eval { def do_other = @result = :other }
       host_class.enforces_api_version('v3', :do_something, :do_other)
 
       allow(client).to receive(:api_version).and_return('v4')
 
       expect { instance.do_something }.to raise_error(Mailgun::ParameterError)
-      expect { instance.do_other    }.to raise_error(Mailgun::ParameterError)
+      expect { instance.do_other }.to raise_error(Mailgun::ParameterError)
     end
 
     it 'wraps only the listed methods, leaving others unwrapped' do
-      host_class.class_eval { def unwrapped; @result = :unwrapped; end }
+      host_class.class_eval { def unwrapped = @result = :unwrapped }
       host_class.enforces_api_version('v3', :do_something)
 
       allow(client).to receive(:api_version).and_return('v4')
@@ -180,8 +184,8 @@ describe Mailgun::ApiVersionChecker do
   describe 'requires_api_version vs enforces_api_version' do
     before do
       host_class.class_eval do
-        def soft_method; @result = :soft; end
-        def hard_method; @result = :hard; end
+        def soft_method = @result = :soft
+        def hard_method = @result = :hard
       end
       host_class.requires_api_version('v3', :soft_method)
       host_class.enforces_api_version('v3', :hard_method)
