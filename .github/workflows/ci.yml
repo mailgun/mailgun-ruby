@@ -28,8 +28,8 @@ jobs:
         run: bundle exec rake spec:all
       - uses: joshmfrankel/simplecov-check-action@main
         with:
-          minimum_suite_coverage: 85
-          minimum_file_coverage: 60
+          minimum_suite_coverage: 95
+          minimum_file_coverage: 80
           github_token: ${{ secrets.GITHUB_TOKEN }}
         if: matrix.ruby-version == '4.0'
 
