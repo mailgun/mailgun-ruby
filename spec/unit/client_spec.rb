@@ -8,20 +8,19 @@ describe Mailgun::Client do
   # ---------------------------------------------------------------------------
   # Shared helpers
   # ---------------------------------------------------------------------------
-  let(:api_key)    { 'test-api-key-abc123' }
-  let(:domain)     { 'example.com' }
-
   # Build a client in test mode so no real HTTP calls are ever made.
   subject(:client) { described_class.new(api_key, 'api.mailgun.net', 'v3', true, true) }
 
+  let(:api_key)    { 'test-api-key-abc123' }
   let(:message_params) do
     {
-      from:    'bob@example.com',
-      to:      'sally@example.com',
+      from: 'bob@example.com',
+      to: 'sally@example.com',
       subject: 'Hello!',
-      text:    'Test body.'
+      text: 'Test body.'
     }
   end
+  let(:domain) { 'example.com' }
 
   # Fake HTTP response double reusable across examples
   def fake_http_response(body: '{"message":"ok"}', status: 200)
@@ -202,7 +201,7 @@ describe Mailgun::Client do
     before do
       allow(live_client.instance_variable_get(:@http_client))
         .to receive(:post)
-              .and_return(success_response)
+        .and_return(success_response)
     end
 
     it 'posts to the messages endpoint and returns a Response' do
@@ -213,7 +212,7 @@ describe Mailgun::Client do
     it 'strips nil values from the data hash before posting' do
       params_with_nil = message_params.merge(cc: nil)
       http = live_client.instance_variable_get(:@http_client)
-      expect(http).to receive(:post) do |path, data, *|
+      expect(http).to receive(:post) do |_path, data, *|
         expect(data).not_to have_key(:cc)
         success_response
       end
@@ -223,7 +222,7 @@ describe Mailgun::Client do
     it 'raises CommunicationError when the underlying request fails' do
       allow(live_client.instance_variable_get(:@http_client))
         .to receive(:post)
-              .and_raise(StandardError, 'connection refused')
+        .and_raise(StandardError, 'connection refused')
 
       expect { live_client.send_message(domain, message_params) }
         .to raise_error(Mailgun::CommunicationError)
@@ -252,7 +251,7 @@ describe Mailgun::Client do
     before do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:get)
-              .and_return(http_response)
+        .and_return(http_response)
     end
 
     it 'returns a Mailgun::Response' do
@@ -270,7 +269,7 @@ describe Mailgun::Client do
     it 'raises CommunicationError on failure' do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:get)
-              .and_raise(StandardError, 'timeout')
+        .and_raise(StandardError, 'timeout')
 
       expect { client.get("#{domain}/events") }
         .to raise_error(Mailgun::CommunicationError)
@@ -286,7 +285,7 @@ describe Mailgun::Client do
     before do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:post)
-              .and_return(http_response)
+        .and_return(http_response)
     end
 
     it 'returns a Mailgun::Response' do
@@ -297,7 +296,7 @@ describe Mailgun::Client do
     it 'raises CommunicationError on failure' do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:post)
-              .and_raise(StandardError, 'connection error')
+        .and_raise(StandardError, 'connection error')
 
       expect { client.post("#{domain}/messages", message_params) }
         .to raise_error(Mailgun::CommunicationError)
@@ -313,7 +312,7 @@ describe Mailgun::Client do
     before do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:put)
-              .and_return(http_response)
+        .and_return(http_response)
     end
 
     it 'returns a Mailgun::Response' do
@@ -324,7 +323,7 @@ describe Mailgun::Client do
     it 'raises CommunicationError on failure' do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:put)
-              .and_raise(StandardError, 'connection error')
+        .and_raise(StandardError, 'connection error')
 
       expect { client.put("#{domain}/routes/abc123", {}) }
         .to raise_error(Mailgun::CommunicationError)
@@ -340,7 +339,7 @@ describe Mailgun::Client do
     before do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:delete)
-              .and_return(http_response)
+        .and_return(http_response)
     end
 
     it 'returns a Mailgun::Response' do
@@ -351,7 +350,7 @@ describe Mailgun::Client do
     it 'raises CommunicationError on failure' do
       allow(client.instance_variable_get(:@http_client))
         .to receive(:delete)
-              .and_raise(StandardError, 'connection error')
+        .and_raise(StandardError, 'connection error')
 
       expect { client.delete("#{domain}/bounces/test@example.com") }
         .to raise_error(Mailgun::CommunicationError)
