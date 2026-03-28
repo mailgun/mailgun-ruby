@@ -13,7 +13,7 @@ module Mailgun
 
           define_method(method_name) do |*args, &block|
             warn_unless_api_version(version)
-            original_method.bind(self).call(*args, &block)
+            original_method.bind_call(self, *args, &block)
           end
         end
       end
@@ -24,7 +24,7 @@ module Mailgun
 
           define_method(method_name) do |*args, &block|
             require_api_version(version)
-            original_method.bind(self).call(*args, &block)
+            original_method.bind_call(self, *args, &block)
           end
         end
       end
