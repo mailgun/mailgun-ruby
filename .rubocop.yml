@@ -5,6 +5,7 @@ AllCops:
     - bin/*
 
 plugins:
+  - rubocop-performance
   - rubocop-rspec
   - rubocop-rake
 
