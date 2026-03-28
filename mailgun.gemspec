@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata['documentation_uri'] = 'https://documentation.mailgun.com/'
   spec.metadata['source_code_uri'] = 'https://github.com/mailgun/mailgun-ruby'
 
-  spec.files = `git ls-files -z`.split("\x0")
+  spec.files = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb']
 
   spec.required_ruby_version = '>= 3.0.0'
 
