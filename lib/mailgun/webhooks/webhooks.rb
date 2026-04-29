@@ -4,6 +4,8 @@ module Mailgun
   # A Mailgun::Webhooks object is a simple CRUD interface to Mailgun Webhooks.
   # Uses Mailgun
   class Webhooks
+    include ApiVersionChecker
+
     ACTIONS = %w[accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed].freeze
 
     # Public creates a new Mailgun::Webhooks instance.
@@ -22,7 +24,14 @@ module Mailgun
       res = @client.get("domains/#{domain}/webhooks", options)
       res.to_h['webhooks']
     end
-    alias get_webhooks list
+
+    # :nocov:
+
+    def get_webhooks(domain, _options = {})
+      warn('`get_webhooks` method will be deprecated in future versions of Mailgun. Please use `list` instead.')
+      list(domain, {})
+    end
+    # :nocov:
 
     # Public: Get webook information for a specific action
     #
@@ -31,13 +40,19 @@ module Mailgun
     #
     # Returns a String of the url for the identified webhook or an
     #   empty String if one is not set
-    def info(domain, action)
+    def get(domain, action)
       res = @client.get("domains/#{domain}/webhooks/#{action}")
       res.to_h['webhook']['urls'] || ''
-    rescue NoMethodError
-      ''
     end
-    alias get_webhook_url info
+
+    # :nocov:
+    %i[info get_webhook_url].each do |method|
+      define_method(method) do |domain, action|
+        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `get` instead.")
+        get(domain, action)
+      end
+    end
+    # :nocov:
 
     # Public: Add webhook
     #
@@ -50,8 +65,16 @@ module Mailgun
       res = @client.post("domains/#{domain}/webhooks", id: action, url: url)
       res.to_h['webhook']['urls'].include?(url) && res.to_h['message'] == 'Webhook has been created'
     end
-    alias add create
-    alias add_webhook create
+
+    # :nocov:
+    %i[add add_webhook].each do |method|
+      define_method(method) do |domain, action, url|
+        url ||= ''
+        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `create` instead.")
+        create(domain, action, url)
+      end
+    end
+    # :nocov:
 
     # Public: Sets all webhooks to the same URL
     #
@@ -59,15 +82,17 @@ module Mailgun
     # url    - A String of the url to set all webhooks to
     #
     # Returns true or false
-    def create_all(domain, url = '')
-      ACTIONS.each do |action|
-        add_webhook domain, action, url
+    # :nocov:
+    %i[create_all add_all_webhooks].each do |method|
+      define_method(method) do |domain|
+        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `create` instead.")
+
+        ACTIONS.each do |action|
+          create domain, action, url
+        end
       end
-      true
-    rescue StandardError
-      false
     end
-    alias add_all_webhooks create_all
+    # :nocov:
 
     # Public: Update webhook
     #
@@ -81,9 +106,15 @@ module Mailgun
       raise Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
 
       res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
-      res.to_h['webhook']['urls'] == url && res.to_h['message'] == 'Webhook has been updated'
+      res.to_h['message'] == 'Webhook has been updated'
     end
-    alias update_webhook update
+
+    # :nocov:
+    def update_webhook(domain, action, url = '')
+      warn('`update_webhook` method will be deprecated in future versions of Mailgun. Please use `update` instead.')
+      update(domain, action, url)
+    end
+    # :nocov:
 
     # Public: Delete a specific webhook
     #
@@ -96,25 +127,36 @@ module Mailgun
       raise Mailgun::ParameterError('Action not provided to identify webhook to remove') unless action
 
       @client.delete("domains/#{domain}/webhooks/#{action}").to_h['message'] == 'Webhook has been deleted'
-    rescue Mailgun::CommunicationError
-      false
     end
-    alias delete remove
-    alias delete_webhook remove
+
+    # :nocov:
+    %i[delete delete_webhook].each do |method|
+      define_method(method) do |domain, action|
+        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `remove` instead.")
+        remove(domain, action)
+      end
+    end
+    # :nocov:
 
     # Public: Delete all webhooks for a domain
     #
     # domain - A required String of the domain to remove all webhooks for
     #
     # Returns a Boolean on the success
-    def remove_all(domain)
-      raise Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
+    # :nocov:
+    %i[remove_all delete_all delete_all_webooks].each do |method|
+      define_method(method) do |domain|
+        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `remove` instead.")
 
-      ACTIONS.each do |action|
-        delete_webhook domain, action
+        raise Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
+
+        ACTIONS.each do |action|
+          remove domain, action
+        end
       end
     end
-    alias delete_all remove_all
-    alias delete_all_webooks remove_all
+    # :nocov:
+
+    enforces_api_version 'v3', :list, :get, :create, :update, :remove
   end
 end
