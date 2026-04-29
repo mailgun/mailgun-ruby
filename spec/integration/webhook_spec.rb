@@ -6,55 +6,40 @@ require 'mailgun'
 vcr_opts = { cassette_name: 'webhooks' }
 
 describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
-  before(:all) do
-    @mg_obj = Mailgun::Client.new(APIKEY, APIHOST, APIVERSION, SSL)
-    @domain = 'DOMAIN.TEST'
-    @testhook = 'accepted'
-    @testhookup = 'accepted'
-  end
+  let(:api_version) { 'v3' }
+  let(:mg_client) { Mailgun::Client.new(APIKEY, APIHOST, api_version, SSL) }
+  let(:mg_obj) { Mailgun::Webhooks.new(mg_client) }
+  let(:domain) { 'DOMAIN.TEST' }
+  let(:testhook) { 'accepted' }
+  let(:testhookup) { 'accepted' }
 
   it 'creates a webhook' do
-    result = @mg_obj.post("domains/#{@domain}/webhooks", { id: @testhook,
-                                                           url: "http://example.com/mailgun/events/#{@testhook}" })
+    result = mg_obj.create(domain, testhook, "http://example.com/mailgun/events/#{testhook}")
 
-    result.to_h!
-    expect(result.body['message']).to eq('Webhook has been created')
-    expect(result.body['webhook']['urls']).to include("http://example.com/mailgun/events/#{@testhook}")
+    expect(result).to be_truthy
   end
 
-  it 'gets a webhook.' do
-    result = @mg_obj.get("domains/#{@domain}/webhooks/#{@testhook}")
+  it 'gets a webhook' do
+    result = mg_obj.get(domain, testhook)
 
-    result.to_h!
-    expect(result.body['webhook']['urls']).to include("http://example.com/mailgun/events/#{@testhook}")
+    expect(result).to include("http://example.com/mailgun/events/#{testhook}")
   end
 
-  it 'gets a list of all webhooks.' do
-    result = @mg_obj.get("domains/#{@domain}/webhooks")
+  it 'gets a list of all webhooks' do
+    result = mg_obj.list(domain)
 
-    result.to_h!
-    expect(result.body['webhooks']['accepted']['urls']).to include("http://example.com/mailgun/events/#{@testhook}")
+    expect(result['accepted']['urls'][0]).to include("http://example.com/mailgun/events/#{testhook}")
   end
 
-  it 'updates a webhook.' do
-    result = @mg_obj.put(
-      "domains/#{@domain}/webhooks/#{@testhook}",
-      {
-        id: @testhook,
-        url: "http://example.com/mailgun/events/#{@testhookup}"
-      }
-    )
+  it 'updates a webhook' do
+    result = mg_obj.update(domain, testhook, "http://example.com/mailgun/events/#{testhookup}")
 
-    result.to_h!
-    expect(result.body['message']).to eq('Webhook has been updated')
-    expect(result.body['webhook']['urls']).to include("http://example.com/mailgun/events/#{@testhookup}")
+    expect(result).to be_truthy
   end
 
   it 'removes a webhook' do
-    result = @mg_obj.delete("domains/#{@domain}/webhooks/#{@testhook}")
+    result = mg_obj.remove(domain, testhook)
 
-    result.to_h!
-    expect(result.body['message']).to eq('Webhook has been deleted')
-    expect(result.body['webhook']['urls']).to include("http://example.com/mailgun/events/#{@testhookup}")
+    expect(result).to be_truthy
   end
 end
