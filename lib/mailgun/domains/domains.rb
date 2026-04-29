@@ -88,7 +88,6 @@ module Mailgun
 
     # ==== End of Core Domains methods ====
 
-
     # ==== Domain::Tracking methods ====
 
     # Public: Returns tracking settings for the defined domain.
