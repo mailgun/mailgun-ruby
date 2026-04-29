@@ -41,34 +41,6 @@ domainer.remove 'this.one.is.not.needed.'
 
 ```
 
-Domain Keys methods:
-
-```ruby
-# List keys for all domains
-domainer.list_domain_keys { some: 'options' }
-
-# Create a domain key
-domainer.create_domain_key { some: 'options' }
-
-# Delete a domain key
-domainer.delete_domain_key { some: 'options' }
-
-# Activate a domain key
-domainer.activate_domain_key 'my.perfect.domain', 'selector'
-
-# List domain keys
-domainer.get_domain_keys 'my.perfect.domain'
-
-# Deactivate a domain key
-domainer.deactivate_domain_key 'my.perfect.domain', 'selector'
-
-# Update DKIM authority
-domainer.update_domain_dkim_authority 'my.perfect.domain', { some: 'options' }
-
-# Update a DKIM selector
-domainer.update_domain_dkim_selector 'my.perfect.domain', { some: 'options' }
-```
-
 Domain Tracking methods:
 
 ```ruby
