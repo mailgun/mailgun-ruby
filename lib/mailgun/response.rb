@@ -65,7 +65,7 @@ module Mailgun
     #
     # @return [Boolean] A boolean that binarizes the response status result.
     def success?
-      (200..299).include?(status)
+      (200..299).cover?(status)
     end
   end
 end
