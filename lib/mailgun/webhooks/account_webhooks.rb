@@ -20,7 +20,7 @@ module Mailgun
     # Retrieve all account-level webhooks or filter by specific webhook IDs.
     # Returns webhook details including associated event types.
     def list(webhook_ids = '')
-      res = @client.get("webhooks", webhook_ids: webhook_ids)
+      res = @client.get('webhooks', webhook_ids: webhook_ids)
       res.to_h['webhooks']
     end
 
@@ -32,20 +32,20 @@ module Mailgun
     #   url         - [String] URL for webhook to be sent to
     #
     # Returns the Unique identifier for the webhook
-    def create(options = {})
-      res = @client.post("webhooks", description: description, event_types: event_types, url: url)
+    def create(_options = {})
+      res = @client.post('webhooks', description: description, event_types: event_types, url: url)
       res.to_h
     end
 
-
     # Public: Delete account-level webhooks
     #
-    # webhook_ids - [String] Comma-separated list of webhook IDs to delete. If provided, only these specific webhooks will be deleted.
+    # webhook_ids - [String] Comma-separated list of webhook IDs to delete.
+    #               If provided, only these specific webhooks will be deleted.
     # all         - [Boolean] The required String of the webhook action to delete
     #
     # Returns a Boolean of the success
     def remove_all(webhook_ids = nil, all: false)
-      @client.delete("webhooks", { webhook_ids: webhook_ids, all: all }.compact).status == 204
+      @client.delete('webhooks', { webhook_ids: webhook_ids, all: all }.compact).status == 204
     end
 
     # Public: Get account-level webhook by ID
