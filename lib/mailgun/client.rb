@@ -185,7 +185,7 @@ module Mailgun
               request.body = params.to_json
             end
           else
-            @http_client.delete(resource_path, params: params)
+            @http_client.delete(resource_path, params)
           end
         else
           @http_client.delete(resource_path)
