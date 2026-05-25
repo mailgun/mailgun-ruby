@@ -25,15 +25,15 @@ module Mailgun
     end
 
     # Public: Create an account-level webhook
-    # options - [Hash] of
-    #   description - [String] Description for the webhook
-    #   event_types - [String] Event types to subscribe to. Use multiple times to specify multiple event types.
-    #                 Maximum of 3 unique URLs per event type.
-    #   url         - [String] URL for webhook to be sent to
+    #
+    # description - [String] Description for the webhook
+    # event_types - [String] Event types to subscribe to. Use multiple times to specify multiple event types.
+    #               Maximum of 3 unique URLs per event type.
+    # url         - [String] URL for webhook to be sent to
     #
     # Returns the Unique identifier for the webhook
-    def create(_options = {})
-      res = @client.post('webhooks', description: description, event_types: event_types, url: url)
+    def create(description:, event_types:, url:)
+      res = @client.post('webhooks', {description:, event_types:, url:})
       res.to_h
     end
 
@@ -44,8 +44,8 @@ module Mailgun
     # all         - [Boolean] The required String of the webhook action to delete
     #
     # Returns a Boolean of the success
-    def remove_all(webhook_ids = nil, all: false)
-      @client.delete('webhooks', { webhook_ids: webhook_ids, all: all }.compact).status == 204
+    def remove(webhook_ids = nil, all: false)
+      @client.delete('webhooks', { webhook_ids:, all: }.compact).status == 204
     end
 
     # Public: Get account-level webhook by ID
@@ -60,15 +60,14 @@ module Mailgun
 
     # Public: Update an account-level webhook
     #
-    # options - [Hash] of
-    #   description - [String] Description for the webhook
-    #   event_types - [String] Event types to subscribe to. Use multiple times to specify multiple event types.
-    #                 Maximum of 3 unique URLs per event type.
-    #   url         - [String] URL for webhook to be sent to
+    # description - [String] Description for the webhook
+    # event_types - [String] Event types to subscribe to. Use multiple times to specify multiple event types.
+    #               Maximum of 3 unique URLs per event type.
+    # url         - [String] URL for webhook to be sent to
     #
     # Returns a Boolean of the success
-    def update(webhook_id, options = {})
-      @client.put("webhooks/#{webhook_id}", options).status == 204
+    def update(webhook_id, description:, event_types:, url:)
+      @client.put("webhooks/#{webhook_id}", {description:, event_types:, url:}).status == 204
     end
 
     # Public: Delete account-level webhook by ID
@@ -76,10 +75,10 @@ module Mailgun
     # webhook_id - [String] The webhook ID to delete
     #
     # Returns a Boolean of the success
-    def remove(webhook_id)
+    def remove_by_id(webhook_id)
       @client.delete("webhooks/#{webhook_id}").status == 204
     end
 
-    enforces_api_version 'v1', :list, :create, :remove_all, :get, :update, :remove
+    enforces_api_version 'v1', :list, :create, :remove, :get, :update, :remove_by_id
   end
 end

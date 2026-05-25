@@ -11,9 +11,9 @@ module Mailgun
         method_names.each do |method_name|
           original_method = instance_method(method_name)
 
-          define_method(method_name) do |*args, &block|
+          define_method(method_name) do |*args, **kwargs, &block|
             warn_unless_api_version(version)
-            original_method.bind(self).call(*args, &block)
+            original_method.bind(self).call(*args, **kwargs, &block)
           end
         end
       end
@@ -22,9 +22,9 @@ module Mailgun
         method_names.each do |method_name|
           original_method = instance_method(method_name)
 
-          define_method(method_name) do |*args, &block|
+          define_method(method_name) do |*args, **kwargs, &block|
             require_api_version(version)
-            original_method.bind(self).call(*args, &block)
+            original_method.bind(self).call(*args, **kwargs, &block)
           end
         end
       end

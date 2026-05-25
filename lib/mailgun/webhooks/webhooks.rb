@@ -27,9 +27,9 @@ module Mailgun
 
     # :nocov:
 
-    def get_webhooks(domain, _options = {})
+    def get_webhooks(domain, options = {})
       warn('`get_webhooks` method will be deprecated in future versions of Mailgun. Please use `list` instead.')
-      list(domain, {})
+      list(domain, options)
     end
     # :nocov:
 

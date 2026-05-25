@@ -1,0 +1,269 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/webhooks
+    body:
+      encoding: UTF-8
+      string: description=test&event_types=accepted&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '42'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 25 May 2026 09:11:02 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+      Server-Timing:
+      - cfReqDur;dur=382.358
+      Cf-Team:
+      - xxx
+    body:
+      encoding: UTF-8
+      string: '{"webhook_id":"test"}
+
+        '
+  recorded_at: Mon, 25 May 2026 09:11:02 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v1/webhooks?webhook_ids=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '183'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 25 May 2026 09:16:27 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+      Server-Timing:
+      - cfReqDur;dur=201.477
+      Cf-Team:
+      - xxx
+    body:
+      encoding: UTF-8
+      string: '{"webhooks":[{"webhook_id":"test","description":"test","url":"http://example.com/mailgun/events","event_types":["accepted"],"created_at":"2026-05-25T09:11:02Z"}]}
+
+        '
+  recorded_at: Mon, 25 May 2026 09:16:27 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v1/webhooks/test
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '168'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 25 May 2026 09:22:12 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+      Server-Timing:
+      - cfReqDur;dur=234.628
+      Cf-Team:
+      - xxx
+    body:
+      encoding: UTF-8
+      string: '{"webhook_id":"test","description":"test","url":"http://example.com/mailgun/events","event_types":["accepted"],"created_at":"2026-05-25T09:11:02Z"}
+
+        '
+  recorded_at: Mon, 25 May 2026 09:22:12 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v1/webhooks/test
+    body:
+      encoding: UTF-8
+      string: description=test2&event_types=accepted&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Date:
+      - Mon, 25 May 2026 12:03:17 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Mon, 25 May 2026 12:03:17 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v1/webhooks/test
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Date:
+      - Mon, 25 May 2026 12:08:15 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Mon, 25 May 2026 12:08:15 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v1/webhooks?all=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.4
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Date:
+      - Mon, 25 May 2026 20:28:16 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+      Server-Timing:
+      - cfReqDur;dur=246.503
+      Cf-Team:
+      - xxx
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Mon, 25 May 2026 20:28:16 GMT
+recorded_with: VCR 6.4.0
