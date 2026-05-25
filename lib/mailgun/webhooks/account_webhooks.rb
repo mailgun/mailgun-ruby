@@ -33,7 +33,7 @@ module Mailgun
     #
     # Returns the Unique identifier for the webhook
     def create(description:, event_types:, url:)
-      res = @client.post('webhooks', {description:, event_types:, url:})
+      res = @client.post('webhooks', { description: description, event_types: event_types, url: url })
       res.to_h
     end
 
@@ -45,7 +45,7 @@ module Mailgun
     #
     # Returns a Boolean of the success
     def remove(webhook_ids = nil, all: false)
-      @client.delete('webhooks', { webhook_ids:, all: }.compact).status == 204
+      @client.delete('webhooks', { webhook_ids: webhook_ids, all: all }.compact).status == 204
     end
 
     # Public: Get account-level webhook by ID
@@ -67,7 +67,8 @@ module Mailgun
     #
     # Returns a Boolean of the success
     def update(webhook_id, description:, event_types:, url:)
-      @client.put("webhooks/#{webhook_id}", {description:, event_types:, url:}).status == 204
+      @client.put("webhooks/#{webhook_id}",
+                  { description: description, event_types: event_types, url: url }).status == 204
     end
 
     # Public: Delete account-level webhook by ID

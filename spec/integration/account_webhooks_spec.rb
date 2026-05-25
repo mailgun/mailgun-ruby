@@ -3,9 +3,6 @@
 require 'spec_helper'
 require 'mailgun'
 
-# require 'pry'; binding.pry
-
-
 vcr_opts = { cassette_name: 'account_webhooks' }
 
 describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
@@ -19,7 +16,6 @@ describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
       event_types: 'accepted',
       url: 'http://example.com/mailgun/events'
     )
-
 
     expect(result).to have_key('webhook_id')
   end
@@ -37,7 +33,6 @@ describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
   end
 
   it 'updates a webhook' do
-
     result = mg_obj.update(
       'test',
       description: 'test2',
