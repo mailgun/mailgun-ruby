@@ -84,7 +84,8 @@ module Mailgun
     # Returns true or false
     # :nocov:
     %i[create_all add_all_webhooks].each do |method|
-      define_method(method) do |domain|
+      define_method(method) do |domain, url|
+        url ||= ''
         warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `create` instead.")
 
         ACTIONS.each do |action|
