@@ -23,6 +23,7 @@ Zeitwerk::Loader.for_gem.tap do |loader|
   loader.ignore("#{__dir__}/railgun.rb")
   loader.ignore("#{__dir__}/railgun")
 
+  loader.collapse("#{__dir__}/mailgun/api_keys")
   loader.collapse("#{__dir__}/mailgun/analytics_tags")
   loader.collapse("#{__dir__}/mailgun/domains")
   loader.collapse("#{__dir__}/mailgun/events")

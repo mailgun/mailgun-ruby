@@ -1,0 +1,184 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.mailgun.net/v1/keys
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '1543'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 26 Jun 2026 16:39:35 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"total_count":1,"items":[{"id":"test","description":"Alex","kind":"user","role":"admin","created_at":"2024-11-27T11:45:29","updated_at":"2024-11-27T11:45:29","is_disabled":false,"domain_name":null,"requestor":null,"user_name":null}]}
+
+        '
+  recorded_at: Fri, 26 Jun 2026 16:39:35 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v1/keys/test
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 26 Jun 2026 17:08:22 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"key deleted"}
+
+        '
+  recorded_at: Fri, 26 Jun 2026 17:08:22 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/keys
+    body:
+      encoding: UTF-8
+      string: description=test+test&kind=user&role=admin
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '321'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 26 Jun 2026 17:14:08 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"great success","key":{"id":"test","description":"test test","kind":"user","role":"admin","created_at":"2026-06-26T17:14:08","updated_at":"2026-06-26T17:14:08","is_disabled":false,"domain_name":null,"requestor":null,"user_name":null,"secret":"xxx"}}
+
+        '
+  recorded_at: Fri, 26 Jun 2026 17:14:08 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v1/keys/public
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '116'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 26 Jun 2026 17:34:40 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - xxx
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"key":"pubkey-test","message":"The public
+        API key has been successfully regenerated."}
+
+        '
+  recorded_at: Fri, 26 Jun 2026 17:34:40 GMT
+recorded_with: VCR 6.4.0
