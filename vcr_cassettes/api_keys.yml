@@ -181,4 +181,32 @@ http_interactions:
 
         '
   recorded_at: Fri, 26 Jun 2026 17:34:40 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v1/keys?domain_name=DOMAIN.TEST&kind=domain
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic xxx
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Mailgun-Key-Id:
+      - xxx
+    body:
+      encoding: UTF-8
+      string: '{"total_count":2,"items":[{"id":"test-domain","description":"test domain key","kind":"domain","role":"sending","created_at":"2026-09-29T12:00:00","updated_at":"2026-09-29T12:00:00","disabled_reason":null,"is_disabled":false,"domain_name":"DOMAIN.TEST","requestor":null,"user_name":null},{"id":"test-public","description":"public validation key","kind":"public","role":"public","created_at":"2024-11-27T11:45:29","updated_at":"2024-11-27T11:45:29","disabled_reason":null,"is_disabled":false,"domain_name":null,"requestor":null,"user_name":null}]}'
+  recorded_at: Tue, 29 Sep 2026 12:00:00 GMT
 recorded_with: VCR 6.4.0
