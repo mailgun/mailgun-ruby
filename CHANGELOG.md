@@ -1,5 +1,22 @@
 # Changelog
 
+## [v1.4.5](https://github.com/mailgun/mailgun-ruby/tree/v1.4.5) (2026-09-29)
+
+[Full Changelog](https://github.com/mailgun/mailgun-ruby/compare/v1.4.4...v1.4.5)
+
+**Closed issues:**
+
+- Testmode not correctly initialized from global setting [\#394](https://github.com/mailgun/mailgun-ruby/issues/394)
+
+**Merged pull requests:**
+
+- DE-10765: Client - Fix global test\_mode enabled when set to false [\#399](https://github.com/mailgun/mailgun-ruby/pull/399) ([alex-leb](https://github.com/alex-leb))
+- DE-1856: API Keys - Add docs and list filters [\#398](https://github.com/mailgun/mailgun-ruby/pull/398) ([alex-leb](https://github.com/alex-leb))
+- DE-1772: Domain Webhooks - Add v4 create, update and remove endpoints [\#397](https://github.com/mailgun/mailgun-ruby/pull/397) ([alex-leb](https://github.com/alex-leb))
+- fix\(webhooks\): re-introduce url parameter [\#393](https://github.com/mailgun/mailgun-ruby/pull/393) ([markokajzer](https://github.com/markokajzer))
+- DE-1786: Add github-changelog-generator gem [\#396](https://github.com/mailgun/mailgun-ruby/pull/396) ([alex-leb](https://github.com/alex-leb))
+- DE-1854: Add ApiKeys support [\#395](https://github.com/mailgun/mailgun-ruby/pull/395) ([alex-leb](https://github.com/alex-leb))
+
 ## [v1.4.4](https://github.com/mailgun/mailgun-ruby/tree/v1.4.4) (2026-05-26)
 
 [Full Changelog](https://github.com/mailgun/mailgun-ruby/compare/v1.4.3...v1.4.4)
