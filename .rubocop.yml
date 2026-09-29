@@ -1,8 +1,11 @@
 AllCops:
   NewCops: disable
   SuggestExtensions: false
+  Exclude:
+    - bin/*
 
 plugins:
+  - rubocop-performance
   - rubocop-rspec
   - rubocop-rake
 
