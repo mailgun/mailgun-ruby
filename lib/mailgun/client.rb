@@ -13,7 +13,7 @@ module Mailgun
                    api_host = Mailgun.api_host || 'api.mailgun.net',
                    api_version = Mailgun.api_version || 'v3',
                    ssl = true,
-                   test_mode = !Mailgun.test_mode.nil?,
+                   test_mode = Mailgun.test_mode ? true : false,
                    timeout = nil,
                    proxy_url = Mailgun.proxy_url)
       endpoint = endpoint_generator(api_host, api_version, ssl)
