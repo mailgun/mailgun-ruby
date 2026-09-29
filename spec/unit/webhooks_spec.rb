@@ -21,6 +21,52 @@ describe Mailgun::Webhooks do
     end
   end
 
+  context 'with v3 endpoints' do
+    let(:client) { instance_double(Mailgun::Client, api_version: 'v3') }
+
+    describe '#create' do
+      let(:urls) { [url, 'https://example.com/other'] }
+      let(:response) do
+        instance_double(Mailgun::Response,
+                        to_h: { 'message' => 'Webhook has been created', 'webhook' => { 'urls' => urls } })
+      end
+
+      before { allow(client).to receive(:post).and_return(response) }
+
+      it 'returns true when a single url was created' do
+        expect(webhooks.create(domain, 'delivered', url)).to be(true)
+      end
+
+      it 'returns true when multiple urls were created' do
+        expect(webhooks.create(domain, 'delivered', urls)).to be(true)
+      end
+
+      it 'returns false when a url is missing from the response' do
+        expect(webhooks.create(domain, 'delivered', [url, 'https://example.com/missing'])).to be(false)
+      end
+    end
+
+    describe 'parameter validation' do
+      it 'raises a ParameterError when the domain is missing' do
+        [nil, ''].each do |blank|
+          expect { webhooks.update(blank, 'delivered', url) }
+            .to raise_error(Mailgun::ParameterError, 'Domain not provided to update webhooks')
+          expect { webhooks.remove(blank, 'delivered') }
+            .to raise_error(Mailgun::ParameterError, 'Domain not provided to remove webhook from')
+        end
+      end
+
+      it 'raises a ParameterError when the action is missing' do
+        [nil, ''].each do |blank|
+          expect { webhooks.update(domain, blank, url) }
+            .to raise_error(Mailgun::ParameterError, 'Action not provided to identify webhook to update')
+          expect { webhooks.remove(domain, blank) }
+            .to raise_error(Mailgun::ParameterError, 'Action not provided to identify webhook to remove')
+        end
+      end
+    end
+  end
+
   context 'with v4 endpoints' do
     let(:api_version) { 'v4' }
     let(:client) { instance_double(Mailgun::Client, api_version: api_version) }
