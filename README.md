@@ -187,6 +187,7 @@ This SDK includes the following components:
 - [Domains](docs/Domains.md)
 - [Webhooks](docs/Webhooks.md)
 - [Account Webhooks](docs/AccountWebhooks.md)
+- [API Keys](docs/ApiKeys.md)
 - [Events](docs/Events.md)
 - [Snippets](docs/Snippets.md)
 - [Subaccounts](docs/Subaccounts.md)
