@@ -28,6 +28,14 @@ describe 'ApiKeys', order: :defined, vcr: vcr_opts do
     expect(result[0]['id']).to eq('test')
   end
 
+  it 'gets api keys filtered by kind and domain' do
+    result = mg_obj.list(kind: 'domain', domain_name: 'DOMAIN.TEST')
+
+    domain_keys = result.select { |key| key['kind'] == 'domain' }
+    expect(domain_keys.map { |key| key['domain_name'] }).to eq(['DOMAIN.TEST'])
+    expect(result.map { |key| key['kind'] }).not_to include('user', 'web')
+  end
+
   it 'removes an api key' do
     result = mg_obj.remove('test')
 

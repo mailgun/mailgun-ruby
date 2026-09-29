@@ -14,12 +14,13 @@ module Mailgun
 
     # Public: List Mailgun API keys
     #
-    # domain_name - [String] Domain name filter for domain keys
-    # kind        - [String] Key kind filter
+    # options - [Hash] of
+    #   domain_name - [String] Domain name filter for domain keys
+    #   kind        - [String] Key kind filter ('domain', 'user', or 'web')
     #
     # Retrieve filtered api keys.
-    def list
-      res = @client.get('keys')
+    def list(options = {})
+      res = @client.get('keys', options)
       res.to_h['items']
     end
 
