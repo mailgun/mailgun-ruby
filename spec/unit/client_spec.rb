@@ -54,6 +54,30 @@ describe Mailgun::Client do
     it 'supports EU api host' do
       expect { described_class.new(api_key, 'api.eu.mailgun.net') }.not_to raise_error
     end
+
+    context 'when test_mode is not passed' do
+      around do |example|
+        original = Mailgun.test_mode
+        example.run
+      ensure
+        Mailgun.test_mode = original
+      end
+
+      it 'enables test mode when Mailgun.test_mode is true' do
+        Mailgun.test_mode = true
+        expect(described_class.new(api_key).test_mode?).to be(true)
+      end
+
+      it 'disables test mode when Mailgun.test_mode is false' do
+        Mailgun.test_mode = false
+        expect(described_class.new(api_key).test_mode?).to be(false)
+      end
+
+      it 'disables test mode when Mailgun.test_mode is not set' do
+        Mailgun.test_mode = nil
+        expect(described_class.new(api_key).test_mode?).to be(false)
+      end
+    end
   end
 
   # ---------------------------------------------------------------------------
