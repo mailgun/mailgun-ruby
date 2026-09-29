@@ -43,3 +43,37 @@ describe 'For the webhooks endpoint', order: :defined, vcr: vcr_opts do
     expect(result).to be_truthy
   end
 end
+
+describe 'For the v4 webhooks endpoint', vcr: { cassette_name: 'webhooks_v4' } do
+  let(:mg_client) { Mailgun::Client.new(APIKEY, APIHOST, 'v4', SSL) }
+  let(:mg_obj) { Mailgun::Webhooks.new(mg_client) }
+  let(:domain) { 'DOMAIN.TEST' }
+  let(:url) { 'http://example.com/mailgun/events/v4' }
+
+  describe '#create_v4' do
+    it 'creates webhooks for multiple event types' do
+      result = mg_obj.create_v4(domain, url: url, event_types: %w[accepted delivered])
+
+      expect(result.keys).to contain_exactly('accepted', 'delivered')
+      expect(result['accepted']['urls']).to include(url)
+      expect(result['delivered']['urls']).to include(url)
+    end
+  end
+
+  describe '#update_v4' do
+    it 'replaces the event types associated with a url' do
+      result = mg_obj.update_v4(domain, url: url, event_types: %w[clicked opened])
+
+      expect(result.keys).to contain_exactly('clicked', 'opened')
+      expect(result['clicked']['urls']).to include(url)
+    end
+  end
+
+  describe '#remove_v4' do
+    it 'removes the urls from all event types' do
+      result = mg_obj.remove_v4(domain, url: [url, 'http://example.com/mailgun/events/v4-other'])
+
+      expect(result).to eq({})
+    end
+  end
+end

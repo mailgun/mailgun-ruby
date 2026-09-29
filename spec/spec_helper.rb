@@ -17,6 +17,8 @@ require 'mailgun'
 
 require 'vcr'
 require 'webmock/rspec'
+# Keep repeated query keys (e.g. ?url=a&url=b) instead of collapsing them to the last value
+WebMock::Config.instance.query_values_notation = :flat_array
 require 'rspec/its'
 
 # WebMock.disable_net_connect!(allow_localhost: true)
@@ -43,6 +45,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.default_cassette_options = { record: :new_episodes }
   c.filter_sensitive_data('<APIKEY>') { APIKEY }
+  c.filter_sensitive_data('<BASIC_AUTH>') { ["api:#{APIKEY}"].pack('m0') } if APIKEY
   c.filter_sensitive_data('DOMAIN.TEST') { TESTDOMAIN }
   c.filter_sensitive_data('<PUBKEY>') { PUB_APIKEY }
 

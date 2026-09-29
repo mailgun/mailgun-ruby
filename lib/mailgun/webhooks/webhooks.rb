@@ -158,6 +158,43 @@ module Mailgun
     end
     # :nocov:
 
+    # Public: Create webhooks for multiple event types (v4)
+    #
+    # domain      - [String] The domain name to create webhooks for
+    # url         - [String] The webhook URL that will receive POST requests
+    # event_types - [String, Array<String>] Event types to associate with the URL
+    #
+    # Returns a Hash of the domain webhooks keyed by event type
+    def create_v4(domain, url:, event_types:)
+      res = @client.post("domains/#{domain}/webhooks", { url: url, event_types: event_types })
+      res.to_h['webhooks']
+    end
+
+    # Public: Update the event types associated with a webhook URL (v4)
+    #
+    # domain      - [String] The domain name to update webhooks for
+    # url         - [String] The webhook URL to update
+    # event_types - [String, Array<String>] Event types to associate with the URL.
+    #               Replaces the existing associations.
+    #
+    # Returns a Hash of the domain webhooks keyed by event type
+    def update_v4(domain, url:, event_types:)
+      res = @client.put("domains/#{domain}/webhooks", { url: url, event_types: event_types })
+      res.to_h['webhooks']
+    end
+
+    # Public: Delete webhook URLs from all event types they are associated with (v4)
+    #
+    # domain - [String] The domain name to delete webhooks from
+    # url    - [String, Array<String>] The webhook URL(s) to delete
+    #
+    # Returns a Hash of the remaining domain webhooks keyed by event type
+    def remove_v4(domain, url:)
+      res = @client.delete("domains/#{domain}/webhooks", { url: url })
+      res.to_h['webhooks']
+    end
+
     enforces_api_version 'v3', :list, :get, :create, :update, :remove
+    enforces_api_version 'v4', :create_v4, :update_v4, :remove_v4
   end
 end

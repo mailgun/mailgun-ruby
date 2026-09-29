@@ -20,4 +20,56 @@ describe Mailgun::Webhooks do
       end
     end
   end
+
+  context 'with v4 endpoints' do
+    let(:api_version) { 'v4' }
+    let(:client) { instance_double(Mailgun::Client, api_version: api_version) }
+    let(:response) { instance_double(Mailgun::Response, to_h: { 'webhooks' => { 'accepted' => { 'urls' => [url] } } }) }
+
+    describe '#create_v4' do
+      it 'posts the url and event types to the domain webhooks endpoint' do
+        expect(client).to receive(:post)
+          .with("domains/#{domain}/webhooks", { url: url, event_types: %w[accepted delivered] })
+          .and_return(response)
+
+        expect(webhooks.create_v4(domain, url: url, event_types: %w[accepted delivered]))
+          .to eq('accepted' => { 'urls' => [url] })
+      end
+    end
+
+    describe '#update_v4' do
+      it 'puts the url and event types to the domain webhooks endpoint' do
+        expect(client).to receive(:put)
+          .with("domains/#{domain}/webhooks", { url: url, event_types: 'accepted' })
+          .and_return(response)
+
+        expect(webhooks.update_v4(domain, url: url, event_types: 'accepted'))
+          .to eq('accepted' => { 'urls' => [url] })
+      end
+    end
+
+    describe '#remove_v4' do
+      it 'sends the urls as query params' do
+        urls = [url, 'https://example.com/other']
+        expect(client).to receive(:delete)
+          .with("domains/#{domain}/webhooks", { url: urls })
+          .and_return(response)
+
+        webhooks.remove_v4(domain, url: urls)
+      end
+    end
+
+    context 'when the client api version is not v4' do
+      let(:api_version) { 'v3' }
+
+      it 'raises a ParameterError' do
+        expect { webhooks.create_v4(domain, url: url, event_types: 'accepted') }
+          .to raise_error(Mailgun::ParameterError, /must be v4/)
+        expect { webhooks.update_v4(domain, url: url, event_types: 'accepted') }
+          .to raise_error(Mailgun::ParameterError, /must be v4/)
+        expect { webhooks.remove_v4(domain, url: url) }
+          .to raise_error(Mailgun::ParameterError, /must be v4/)
+      end
+    end
+  end
 end

@@ -1,0 +1,275 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks
+    body:
+      encoding: UTF-8
+      string: event_types=accepted&event_types=delivered&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fv4
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '138'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:13:39 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"webhooks":{"accepted":{"urls":["http://example.com/mailgun/events/v4"]},"delivered":{"urls":["http://example.com/mailgun/events/v4"]}}}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:13:39 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks
+    body:
+      encoding: UTF-8
+      string: event_types=clicked&event_types=opened&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fv4
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '134'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:13:39 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"webhooks":{"opened":{"urls":["http://example.com/mailgun/events/v4"]},"clicked":{"urls":["http://example.com/mailgun/events/v4"]}}}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:13:40 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks?url=http://example.com/mailgun/events/v4&url=http://example.com/mailgun/events/v4-other
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '16'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:13:40 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"webhooks":{}}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:13:40 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks
+    body:
+      encoding: UTF-8
+      string: event_types=accepted&event_types=delivered&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fv4
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:14:22 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:14:22 GMT
+- request:
+    method: put
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks
+    body:
+      encoding: UTF-8
+      string: event_types=clicked&event_types=opened&url=http%3A%2F%2Fexample.com%2Fmailgun%2Fevents%2Fv4
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:14:22 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:14:22 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v4/domains/DOMAIN.TEST/webhooks?url=http://example.com/mailgun/events/v4&url=http://example.com/mailgun/events/v4-other
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 29 Sep 2026 16:14:23 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - 7543e985-936138f6
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Domain not found"}
+
+        '
+  recorded_at: Tue, 29 Sep 2026 16:14:23 GMT
+recorded_with: VCR 6.4.0
