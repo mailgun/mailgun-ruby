@@ -58,12 +58,13 @@ module Mailgun
     #
     # domain - A String of the domain name (ex. domain.com)
     # action - A String of the action to create a webhook for
-    # url    - A String of the url of the webhook
+    # url    - A String of the url of the webhook, or an Array of up to 3 urls
     #
     # Returns a Boolean of whether the webhook was created
     def create(domain, action, url = '')
       res = @client.post("domains/#{domain}/webhooks", id: action, url: url)
-      res.to_h['webhook']['urls'].include?(url) && res.to_h['message'] == 'Webhook has been created'
+      urls = res.to_h['webhook']['urls']
+      Array(url).all? { |u| urls.include?(u) } && res.to_h['message'] == 'Webhook has been created'
     end
 
     # :nocov:
@@ -98,13 +99,13 @@ module Mailgun
     # Public: Update webhook
     #
     # domain - A String of the domain name (ex. domain.com)
-    # action - A String of the action to create a webhook for
-    # url    - A String of the url of the webhook
+    # action - A String of the action to update the webhook for
+    # url    - A String of the url of the webhook, or an Array of up to 3 urls
     #
     # Returns a Boolean of whether the webhook was updated
     def update(domain, action, url = '')
-      raise Mailgun::ParameterError('Domain not provided to update webhooks') unless domain
-      raise Mailgun::ParameterError('Action not provided to identify webhook to update') unless action
+      raise Mailgun::ParameterError, 'Domain not provided to update webhooks' if domain.to_s.empty?
+      raise Mailgun::ParameterError, 'Action not provided to identify webhook to update' if action.to_s.empty?
 
       res = @client.put("domains/#{domain}/webhooks/#{action}", id: action, url: url)
       res.to_h['message'] == 'Webhook has been updated'
@@ -124,8 +125,8 @@ module Mailgun
     #
     # Returns a Boolean of the success
     def remove(domain, action)
-      raise Mailgun::ParameterError('Domain not provided to remove webhook from') unless domain
-      raise Mailgun::ParameterError('Action not provided to identify webhook to remove') unless action
+      raise Mailgun::ParameterError, 'Domain not provided to remove webhook from' if domain.to_s.empty?
+      raise Mailgun::ParameterError, 'Action not provided to identify webhook to remove' if action.to_s.empty?
 
       @client.delete("domains/#{domain}/webhooks/#{action}").to_h['message'] == 'Webhook has been deleted'
     end
@@ -149,7 +150,7 @@ module Mailgun
       define_method(method) do |domain|
         warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `remove` instead.")
 
-        raise Mailgun::ParameterError('Domain not provided to remove webhooks from') unless domain
+        raise Mailgun::ParameterError, 'Domain not provided to remove webhooks from' if domain.to_s.empty?
 
         ACTIONS.each do |action|
           remove domain, action
@@ -158,6 +159,43 @@ module Mailgun
     end
     # :nocov:
 
+    # Public: Create webhooks for multiple event types (v4)
+    #
+    # domain      - [String] The domain name to create webhooks for
+    # url         - [String] The webhook URL that will receive POST requests
+    # event_types - [String, Array<String>] Event types to associate with the URL
+    #
+    # Returns a Hash of the domain webhooks keyed by event type
+    def create_v4(domain, url:, event_types:)
+      res = @client.post("domains/#{domain}/webhooks", { url: url, event_types: event_types })
+      res.to_h['webhooks']
+    end
+
+    # Public: Update the event types associated with a webhook URL (v4)
+    #
+    # domain      - [String] The domain name to update webhooks for
+    # url         - [String] The webhook URL to update
+    # event_types - [String, Array<String>] Event types to associate with the URL.
+    #               Replaces the existing associations.
+    #
+    # Returns a Hash of the domain webhooks keyed by event type
+    def update_v4(domain, url:, event_types:)
+      res = @client.put("domains/#{domain}/webhooks", { url: url, event_types: event_types })
+      res.to_h['webhooks']
+    end
+
+    # Public: Delete webhook URLs from all event types they are associated with (v4)
+    #
+    # domain - [String] The domain name to delete webhooks from
+    # url    - [String, Array<String>] The webhook URL(s) to delete
+    #
+    # Returns a Hash of the remaining domain webhooks keyed by event type
+    def remove_v4(domain, url:)
+      res = @client.delete("domains/#{domain}/webhooks", { url: url })
+      res.to_h['webhooks']
+    end
+
     enforces_api_version 'v3', :list, :get, :create, :update, :remove
+    enforces_api_version 'v4', :create_v4, :update_v4, :remove_v4
   end
 end
