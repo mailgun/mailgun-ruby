@@ -229,11 +229,6 @@ module Mailgun
                          :list_members, :list_members_pages, :get_member, :create_member,
                          :update_member, :remove_member, :create_members, :import_members
 
-    alias get_lists list
-    alias delete remove
-    alias add_member create_member
-    alias delete_member remove_member
-
     private
 
     def require_address!(address, message)
