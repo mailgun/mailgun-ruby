@@ -6,6 +6,8 @@ module Mailgun
   class AccountWebhooks
     include ApiVersionChecker
 
+    enforces_api_version 'v1', :list, :create, :remove, :get, :update, :remove_by_id
+
     # Public creates a new Mailgun::Webhooks instance.
     #   Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new(Mailgun.api_key, Mailgun.api_host || 'api.mailgun.net', 'v1'))
@@ -79,7 +81,5 @@ module Mailgun
     def remove_by_id(webhook_id)
       @client.delete("webhooks/#{webhook_id}").status == 204
     end
-
-    enforces_api_version 'v1', :list, :create, :remove, :get, :update, :remove_by_id
   end
 end

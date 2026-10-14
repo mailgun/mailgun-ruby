@@ -203,4 +203,75 @@ describe Mailgun::ApiVersionChecker do
       expect(instance.result).not_to eq(:hard)
     end
   end
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # declarations placed before the methods they name
+  # ──────────────────────────────────────────────────────────────────────────
+
+  describe 'declared before the methods are defined' do
+    let(:host_class) do
+      Class.new do
+        include Mailgun::ApiVersionChecker
+
+        enforces_api_version 'v3', :hard_method
+        requires_api_version 'v3', :soft_method
+
+        attr_reader :result
+
+        def initialize(client)
+          @client = client
+        end
+
+        def hard_method(arg = nil) = @result = arg || :hard
+        def soft_method = @result = :soft
+      end
+    end
+
+    it 'enforces_api_version raises and does not call through' do
+      allow(client).to receive(:api_version).and_return('v4')
+
+      expect { instance.hard_method }.to raise_error(Mailgun::ParameterError, /v3/)
+      expect(instance.result).to be_nil
+    end
+
+    it 'enforces_api_version calls through with its arguments on the expected version' do
+      allow(client).to receive(:api_version).and_return('v3')
+
+      instance.hard_method(:payload)
+      expect(instance.result).to eq(:payload)
+    end
+
+    it 'requires_api_version warns but still calls through' do
+      allow(client).to receive(:api_version).and_return('v4')
+
+      expect { instance.soft_method }.to output(/v3/).to_stderr
+      expect(instance.result).to eq(:soft)
+    end
+  end
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # declarations in the gem's own classes
+  # ──────────────────────────────────────────────────────────────────────────
+
+  describe 'declarations in Mailgun classes' do
+    # Every class under lib/mailgun that includes the checker (loading only those classes)
+    let(:checked_classes) do
+      Dir[File.expand_path('../../../lib/mailgun/**/*.rb', __dir__)]
+        .map { |path| File.read(path) }
+        .select { |source| source.include?('include ApiVersionChecker') }
+        .map { |source| Mailgun.const_get(source[/^\s*class (\w+)/, 1]) }
+    end
+
+    it 'only name methods the class defines, so a misspelled name fails here' do
+      undefined = checked_classes.flat_map do |klass|
+        defined = klass.public_instance_methods(false) + klass.private_instance_methods(false)
+        klass.ancestors.grep(Mailgun::ApiVersionChecker::Check).flat_map(&:method_names)
+             .reject { |name| defined.include?(name) }
+             .map { |name| "#{klass}##{name}" }
+      end
+
+      expect(checked_classes).to include(Mailgun::Domains, Mailgun::Routes)
+      expect(undefined).to be_empty
+    end
+  end
 end

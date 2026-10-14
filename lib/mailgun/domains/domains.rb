@@ -6,6 +6,15 @@ module Mailgun
   class Domains
     include ApiVersionChecker
 
+    enforces_api_version 'v1', :dkim_rotation, :dkim_rotate
+    enforces_api_version 'v2', :get_domain_tracking_certificate, :regenerate_domain_tracking_certificate,
+                         :generate_domain_tracking_certificate
+    enforces_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
+                         :delete_smtp_credentials, :get_domain_tracking_settings,
+                         :update_domain_tracking_open_settings, :update_domain_tracking_click_settings,
+                         :update_domain_tracking_unsubscribe_settings, :get_domain_stats
+    enforces_api_version 'v4', :list, :verify, :create, :update
+
     # Public: creates a new Mailgun::Domains instance.
     #   Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -251,14 +260,5 @@ module Mailgun
     end
 
     # ==== End of Reporting::Stats methods ====
-
-    enforces_api_version 'v1', :dkim_rotation, :dkim_rotate
-    enforces_api_version 'v2', :get_domain_tracking_certificate, :regenerate_domain_tracking_certificate,
-                         :generate_domain_tracking_certificate
-    enforces_api_version 'v3', :remove, :create_smtp_credentials, :update_smtp_credentials,
-                         :delete_smtp_credentials, :get_domain_tracking_settings,
-                         :update_domain_tracking_open_settings, :update_domain_tracking_click_settings,
-                         :update_domain_tracking_unsubscribe_settings, :get_domain_stats
-    enforces_api_version 'v4', :list, :verify, :create, :update
   end
 end

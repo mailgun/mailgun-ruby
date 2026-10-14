@@ -6,6 +6,11 @@ module Mailgun
   class DomainKeys
     include ApiVersionChecker
 
+    enforces_api_version 'v1', :list_domain_keys, :create_domain_key, :delete_domain_key
+    enforces_api_version 'v3', :update_domain_dkim_authority, :update_domain_dkim_selector
+    enforces_api_version 'v4', :activate_domain_key, :deactivate_domain_key
+    enforces_api_version 'v4', :get_domain_keys
+
     def initialize(client = Mailgun::Client.new)
       @client = client
     end
@@ -98,10 +103,5 @@ module Mailgun
     def update_domain_dkim_selector(domain, options = {})
       @client.put("domains/#{domain}/dkim_selector", options).to_h
     end
-
-    enforces_api_version 'v1', :list_domain_keys, :create_domain_key, :delete_domain_key
-    enforces_api_version 'v3', :update_domain_dkim_authority, :update_domain_dkim_selector
-    enforces_api_version 'v4', :activate_domain_key, :deactivate_domain_key
-    enforces_api_version 'v4', :get_domain_keys
   end
 end

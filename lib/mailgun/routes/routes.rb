@@ -7,6 +7,8 @@ module Mailgun
   class Routes
     include ApiVersionChecker
 
+    enforces_api_version 'v3', :list, :create, :get, :update, :remove, :match
+
     # Public: creates a new Mailgun::Routes instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -86,8 +88,6 @@ module Mailgun
 
       @client.get('routes/match', { address: address }).to_h
     end
-
-    enforces_api_version 'v3', :list, :create, :get, :update, :remove, :match
 
     private
 

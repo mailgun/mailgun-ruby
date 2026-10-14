@@ -7,6 +7,10 @@ module Mailgun
   class MailingLists
     include ApiVersionChecker
 
+    enforces_api_version 'v3', :list, :list_pages, :create, :get, :update, :remove,
+                         :list_members, :list_members_pages, :get_member, :create_member,
+                         :update_member, :remove_member, :create_members, :import_members
+
     # Public: creates a new Mailgun::MailingLists instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new)
@@ -224,10 +228,6 @@ module Mailgun
       file = Faraday::Multipart::FilePart.new(csv, 'text/csv', csv.is_a?(String) ? File.basename(csv) : 'members.csv')
       @client.post("lists/#{escape(list_address)}/members.csv", options.merge(members: file)).to_h
     end
-
-    enforces_api_version 'v3', :list, :list_pages, :create, :get, :update, :remove,
-                         :list_members, :list_members_pages, :get_member, :create_member,
-                         :update_member, :remove_member, :create_members, :import_members
 
     private
 
