@@ -18,17 +18,26 @@ module Mailgun
 
       private
 
-      # Prepends a module whose methods run the check and then the class's own method
-      # through super, so the class methods don't have to exist yet.
       def wrap_with_api_version_check(method_names, &check)
-        prepend(Module.new do
-          method_names.each do |method_name|
-            define_method(method_name) do |*args, **kwargs, &block|
-              instance_exec(&check)
-              super(*args, **kwargs, &block)
-            end
+        prepend(Check.new(method_names, &check))
+      end
+    end
+
+    # The module a declaration prepends. Its methods run the check and then the class's
+    # own method through super, so the class methods don't have to exist yet.
+    class Check < Module
+      # The methods this check wraps
+      attr_reader :method_names
+
+      def initialize(method_names, &check)
+        super(&nil) # keep Module#initialize from running the check block as module code
+        @method_names = method_names
+        method_names.each do |method_name|
+          define_method(method_name) do |*args, **kwargs, &block|
+            instance_exec(&check)
+            super(*args, **kwargs, &block)
           end
-        end)
+        end
       end
     end
 
