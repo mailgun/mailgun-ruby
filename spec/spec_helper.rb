@@ -48,6 +48,12 @@ VCR.configure do |c|
   c.filter_sensitive_data('<BASIC_AUTH>') { ["api:#{APIKEY}"].pack('m0') } if APIKEY
   c.filter_sensitive_data('DOMAIN.TEST') { TESTDOMAIN }
   c.filter_sensitive_data('<PUBKEY>') { PUB_APIKEY }
+  # The key ID is the last part of the API key (<secret>-<key id>), so keep it out of cassettes too
+  c.before_record do |interaction|
+    interaction.response.headers.each_key do |name|
+      interaction.response.headers[name] = ['<KEY_ID>'] if name.casecmp?('X-Mailgun-Key-Id')
+    end
+  end
 
   c.configure_rspec_metadata!
 end
