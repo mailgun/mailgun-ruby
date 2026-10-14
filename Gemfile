@@ -7,3 +7,19 @@ gemspec
 
 gem 'json', '~> 2.1'
 gem 'mini_mime'
+
+group :development, :test do
+  gem 'pry', '~> 0.16.0'
+  gem 'rails'
+  gem 'rake', '~> 13.3.1'
+  gem 'rspec', '~> 3.13.0'
+  gem 'rspec-its', '~> 2.0.0'
+  gem 'rubocop'
+  gem 'rubocop-performance', '>= 1.24'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
+  gem 'simplecov'
+  gem 'simplecov-json'
+  gem 'vcr', '~> 6.4.0'
+  gem 'webmock', '~> 3.7'
+end

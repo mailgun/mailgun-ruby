@@ -27,7 +27,7 @@ module Mailgun
           'Accept' => '*/*'
         }
       }
-      request_options.merge!(request: { timeout: timeout }) if timeout
+      request_options[:request] = { timeout: timeout } if timeout
 
       @http_client = build_http_client(api_key, request_options)
 
