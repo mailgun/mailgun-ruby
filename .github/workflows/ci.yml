@@ -14,6 +14,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         ruby-version: [ '3.0', '3.1', '3.2', '3.3', '3.4', '4.0' ]
 
@@ -31,7 +32,8 @@ jobs:
           minimum_suite_coverage: 95
           minimum_file_coverage: 80
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        if: matrix.ruby-version == '4.0'
+        # Fork PRs get a read-only GITHUB_TOKEN, so the action can't create its check run there
+        if: matrix.ruby-version == '4.0' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
 
   rubocop:
     permissions: write-all
