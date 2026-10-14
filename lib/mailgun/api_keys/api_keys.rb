@@ -6,6 +6,8 @@ module Mailgun
   class ApiKeys
     include ApiVersionChecker
 
+    enforces_api_version 'v1', :list, :create, :remove, :regenerate
+
     # Public creates a new Mailgun::ApiKeys instance.
     #   Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new(Mailgun.api_key, Mailgun.api_host || 'api.mailgun.net', 'v1'))
@@ -59,7 +61,5 @@ module Mailgun
       res = @client.post('keys/public', {})
       res.to_h['key']
     end
-
-    enforces_api_version 'v1', :list, :create, :remove, :regenerate
   end
 end

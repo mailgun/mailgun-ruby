@@ -6,6 +6,9 @@ module Mailgun
   class Webhooks
     include ApiVersionChecker
 
+    enforces_api_version 'v3', :list, :get, :create, :update, :remove
+    enforces_api_version 'v4', :create_v4, :update_v4, :remove_v4
+
     ACTIONS = %w[accepted clicked complained delivered opened permanent_fail temporary_fail unsubscribed].freeze
 
     # Public creates a new Mailgun::Webhooks instance.
@@ -194,8 +197,5 @@ module Mailgun
       res = @client.delete("domains/#{domain}/webhooks", { url: url })
       res.to_h['webhooks']
     end
-
-    enforces_api_version 'v3', :list, :get, :create, :update, :remove
-    enforces_api_version 'v4', :create_v4, :update_v4, :remove_v4
   end
 end

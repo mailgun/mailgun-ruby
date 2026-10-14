@@ -6,6 +6,8 @@ module Mailgun
   class AnalyticsTags
     include ApiVersionChecker
 
+    enforces_api_version 'v1', :update, :list, :remove, :limits
+
     # Public: creates a new Mailgun::AnalyticsTags instance.
     # Defaults to Mailgun::Client
     def initialize(client = Mailgun::Client.new(Mailgun.api_key, Mailgun.api_host || 'api.mailgun.net', 'v1'))
@@ -61,7 +63,5 @@ module Mailgun
     def limits
       @client.get('analytics/tags/limits').to_h
     end
-
-    enforces_api_version 'v1', :update, :list, :remove, :limits
   end
 end
