@@ -225,7 +225,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 90b59dea-f2d12a53
+      - <KEY_ID>
       X-Request-Limit:
       - '2500'
       X-Request-Remaining:
@@ -277,7 +277,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 90b59dea-f2d12a53
+      - <KEY_ID>
       X-Request-Limit:
       - '2500'
       X-Request-Remaining:
@@ -329,7 +329,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 90b59dea-f2d12a53
+      - <KEY_ID>
       X-Request-Limit:
       - '2500'
       X-Request-Remaining:
@@ -381,7 +381,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 90b59dea-f2d12a53
+      - <KEY_ID>
       X-Request-Limit:
       - '2500'
       X-Request-Remaining:

@@ -37,7 +37,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -83,7 +83,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -127,7 +127,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -173,7 +173,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -219,7 +219,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
@@ -263,7 +263,7 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       X-Mailgun-Key-Id:
-      - 7543e985-936138f6
+      - <KEY_ID>
       X-Xss-Protection:
       - 1; mode=block
     body:
