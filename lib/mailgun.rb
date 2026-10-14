@@ -33,6 +33,7 @@ Zeitwerk::Loader.for_gem.tap do |loader|
   loader.collapse("#{__dir__}/mailgun/logs")
   loader.collapse("#{__dir__}/mailgun/messages")
   loader.collapse("#{__dir__}/mailgun/metrics")
+  loader.collapse("#{__dir__}/mailgun/routes")
   loader.collapse("#{__dir__}/mailgun/subaccounts")
   loader.collapse("#{__dir__}/mailgun/tags")
   loader.collapse("#{__dir__}/mailgun/templates")
