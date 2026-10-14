@@ -1,0 +1,141 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/routes
+    body:
+      encoding: UTF-8
+      string: action=stop%28%29&description=Integration+Test+Match+Route&expression=match_recipient%28%22integration_test_match%40DOMAIN.TEST%22%29&priority=0
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '294'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 16:21:43 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Route has been created","route":{"id":"6acfac17ad287c1120af0a0b","description":"Integration
+        Test Match Route","actions":["stop()"],"priority":0,"expression":"match_recipient(\"integration_test_match@DOMAIN.TEST\")","created_at":"Wed,
+        14 Oct 2026 16:21:43 GMT"}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 16:21:44 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/routes/match?address=integration_test_match@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '259'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 16:21:44 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"route":{"id":"6acfac17ad287c1120af0a0b","description":"Integration
+        Test Match Route","actions":["stop()"],"priority":0,"expression":"match_recipient(\"integration_test_match@DOMAIN.TEST\")","created_at":"Wed,
+        14 Oct 2026 16:21:43 GMT"}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 16:21:44 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/routes/6acfac17ad287c1120af0a0b
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '69'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 16:21:45 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"message":"Route has been deleted","id":"6acfac17ad287c1120af0a0b"}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 16:21:45 GMT
+recorded_with: VCR 6.4.0
