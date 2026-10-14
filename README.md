@@ -184,6 +184,7 @@ This SDK includes the following components:
 - [Message Builder](docs/MessageBuilder.md)
 - [Batch Message](docs/MessageBuilder.md#usage---batch-message)
 - [Opt-In Handler](docs/OptInHandler.md)
+- [Mailing Lists](docs/MailingLists.md)
 - [Domains](docs/Domains.md)
 - [Webhooks](docs/Webhooks.md)
 - [Account Webhooks](docs/AccountWebhooks.md)

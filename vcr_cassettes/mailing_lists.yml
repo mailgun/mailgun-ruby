@@ -1,0 +1,424 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/lists
+    body:
+      encoding: UTF-8
+      string: address=integration_test_bulk_list%40DOMAIN.TEST&description=This+list+should+be+deleted+automatically.&name=Integration+Test+Bulk+List
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '336'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:45 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"list":{"access_level":"readonly","address":"integration_test_bulk_list@DOMAIN.TEST","created_at":"Wed,
+        14 Oct 2026 15:51:45 -0000","description":"This list should be deleted automatically.","members_count":0,"name":"Integration
+        Test Bulk List","reply_preference":"list"},"message":"Mailing list has been
+        created"}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:45 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members.json
+    body:
+      encoding: UTF-8
+      string: members=%5B%7B%22address%22%3A%22integration_test_jane%40DOMAIN.TEST%22%2C%22name%22%3A%22Jane+Doe%22%2C%22vars%22%3A%7B%22age%22%3A26%7D%7D%2C%22integration_test_bob%2Bnews%40DOMAIN.TEST%22%5D&upsert=true
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '373'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:46 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"list":{"access_level":"readonly","address":"integration_test_bulk_list@DOMAIN.TEST","created_at":"Wed,
+        14 Oct 2026 15:51:45 -0000","description":"This list should be deleted automatically.","members_count":0,"name":"Integration
+        Test Bulk List","reply_preference":"list"},"message":"Mailing list has been
+        updated","task-id":"6acfa512bb2d6826467423d4"}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:46 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '260'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:46 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"address":"integration_test_bob+news@DOMAIN.TEST","name":"","subscribed":true,"vars":{}},{"address":"integration_test_jane@DOMAIN.TEST","name":"Jane
+        Doe","subscribed":true,"vars":{"age":26}}],"total_count":2}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:46 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/integration_test_bob+news@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '121'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:47 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"member":{"address":"integration_test_bob+news@DOMAIN.TEST","name":"","subscribed":true,"vars":{}}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:47 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/integration_test_jane@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '133'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:47 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"member":{"address":"integration_test_jane@DOMAIN.TEST","name":"Jane
+        Doe","subscribed":true,"vars":{"age":26}}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:47 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/pages?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '815'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:48 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"address":"integration_test_bob+news@DOMAIN.TEST","name":"","subscribed":true,"vars":{}}],"paging":{"first":"https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/pages?limit=1&page=first","last":"https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/pages?limit=1&page=last","next":"https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/pages?address=integration_test_bob%2Bnews%40DOMAIN.TEST&limit=1&page=next","previous":"https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members/pages?address=integration_test_bob%2Bnews%40DOMAIN.TEST&limit=1&page=previous"}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:48 GMT
+- request:
+    method: get
+    uri: https://api.mailgun.net/v3/lists/pages?limit=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '720'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:48 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"items":[{"access_level":"readonly","address":"integration_test_bulk_list@DOMAIN.TEST","created_at":"Wed,
+        14 Oct 2026 15:51:45 -0000","description":"This list should be deleted automatically.","members_count":2,"name":"Integration
+        Test Bulk List","reply_preference":"list"}],"paging":{"first":"https://api.mailgun.net/v3/lists/pages?limit=1&page=first","last":"https://api.mailgun.net/v3/lists/pages?limit=1&page=last","next":"https://api.mailgun.net/v3/lists/pages?address=integration_test_bulk_list%40DOMAIN.TEST&limit=1&page=next","previous":"https://api.mailgun.net/v3/lists/pages?address=integration_test_bulk_list%40DOMAIN.TEST&limit=1&page=previous"}}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:48 GMT
+- request:
+    method: post
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST/members.csv
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-c58c4650f9aba3301655844efccf8e2d\r\nContent-Disposition:
+        form-data; name=\"upsert\"\r\n\r\ntrue\r\n-------------RubyMultipartPost-c58c4650f9aba3301655844efccf8e2d\r\nContent-Disposition:
+        form-data; name=\"members\"; filename=\"members20261014-29677-qewj0q.csv\"\r\nContent-Length:
+        74\r\nContent-Type: text/csv\r\nContent-Transfer-Encoding: binary\r\n\r\naddress,name\nintegration_test_carol@DOMAIN.TEST,Carol\n\r\n-------------RubyMultipartPost-c58c4650f9aba3301655844efccf8e2d--\r\n"
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-c58c4650f9aba3301655844efccf8e2d
+      Content-Length:
+      - '502'
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '385'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:49 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"list":{"access_level":"readonly","address":"integration_test_bulk_list@DOMAIN.TEST","created_at":"Wed,
+        14 Oct 2026 15:51:45 -0000","description":"This list should be deleted automatically.","members_count":2,"name":"Integration
+        Test Bulk List","reply_preference":"list"},"message":"Mailing list upload
+        started in background","task-id":"6acfa51576462eb51ceefa2e"}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:49 GMT
+- request:
+    method: delete
+    uri: https://api.mailgun.net/v3/lists/integration_test_bulk_list@DOMAIN.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - mailgun-sdk-ruby/1.4.5
+      Accept:
+      - "*/*"
+      Authorization:
+      - Basic <BASIC_AUTH>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - '115'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 14 Oct 2026 15:51:49 GMT
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Mailgun-Key-Id:
+      - <KEY_ID>
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"address":"integration_test_bulk_list@DOMAIN.TEST","message":"Mailing
+        list has been removed"}
+
+        '
+  recorded_at: Wed, 14 Oct 2026 15:51:49 GMT
+recorded_with: VCR 6.4.0
