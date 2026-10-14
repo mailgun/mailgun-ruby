@@ -112,8 +112,9 @@ mailing_lists.import_members('developers@mg.example.com', 'members.csv', { upser
 mailing_lists.import_members('developers@mg.example.com', File.open('members.csv'))
 ```
 
+The `members_count` in a bulk upload's response is the count from before the upload.
 CSV imports, and JSON uploads of more than 100 members, are processed in the
-background: the response confirms the upload has started, not the final member count.
+background, so new members can take a moment to appear.
 
 More Documentation
 ------------------
