@@ -31,7 +31,7 @@ module Mailgun
     # :nocov:
 
     def get_webhooks(domain, options = {})
-      warn('`get_webhooks` method will be deprecated in future versions of Mailgun. Please use `list` instead.')
+      warn_deprecated(__method__, :list)
       list(domain, options)
     end
     # :nocov:
@@ -51,7 +51,7 @@ module Mailgun
     # :nocov:
     %i[info get_webhook_url].each do |method|
       define_method(method) do |domain, action|
-        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `get` instead.")
+        warn_deprecated(method, :get)
         get(domain, action)
       end
     end
@@ -74,7 +74,7 @@ module Mailgun
     %i[add add_webhook].each do |method|
       define_method(method) do |domain, action, url|
         url ||= ''
-        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `create` instead.")
+        warn_deprecated(method, :create)
         create(domain, action, url)
       end
     end
@@ -90,7 +90,7 @@ module Mailgun
     %i[create_all add_all_webhooks].each do |method|
       define_method(method) do |domain, url|
         url ||= ''
-        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `create` instead.")
+        warn_deprecated(method, :create)
 
         ACTIONS.each do |action|
           create domain, action, url
@@ -116,7 +116,7 @@ module Mailgun
 
     # :nocov:
     def update_webhook(domain, action, url = '')
-      warn('`update_webhook` method will be deprecated in future versions of Mailgun. Please use `update` instead.')
+      warn_deprecated(__method__, :update)
       update(domain, action, url)
     end
     # :nocov:
@@ -137,7 +137,7 @@ module Mailgun
     # :nocov:
     %i[delete delete_webhook].each do |method|
       define_method(method) do |domain, action|
-        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `remove` instead.")
+        warn_deprecated(method, :remove)
         remove(domain, action)
       end
     end
@@ -151,7 +151,7 @@ module Mailgun
     # :nocov:
     %i[remove_all delete_all delete_all_webooks].each do |method|
       define_method(method) do |domain|
-        warn("`#{method}` method will be deprecated in future versions of Mailgun. Please use `remove` instead.")
+        warn_deprecated(method, :remove)
 
         raise Mailgun::ParameterError, 'Domain not provided to remove webhooks from' if domain.to_s.empty?
 
@@ -196,6 +196,14 @@ module Mailgun
     def remove_v4(domain, url:)
       res = @client.delete("domains/#{domain}/webhooks", { url: url })
       res.to_h['webhooks']
+    end
+
+    private
+
+    # Internal: Warns that a Webhooks method is deprecated and names its replacement
+    def warn_deprecated(method_name, replacement)
+      Deprecation.warn("Mailgun::Webhooks##{method_name}", "Mailgun::Webhooks##{replacement}",
+                       removal: 'a future version of mailgun-ruby')
     end
   end
 end

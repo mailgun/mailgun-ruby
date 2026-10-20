@@ -21,7 +21,7 @@ module Mailgun
     #
     # Returns [Array] A list of tags (hash)
     def get_tags(domain, options = {})
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::AnalyticsTags#list')
       raise(ParameterError, 'No domain given to store template on', caller) unless domain
 
       @client.get("#{domain}/tags", options).to_h['items']
@@ -34,7 +34,7 @@ module Mailgun
     #
     # Returns [Hash] Information on the requested tag.
     def get_tag(domain, tag)
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::AnalyticsTags#list')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
@@ -50,7 +50,7 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def update(domain, tag, options = {})
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::AnalyticsTags#update')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
@@ -72,7 +72,7 @@ module Mailgun
     #
     # Returns [Hash] of tag stats info
     def get_tag_stats(domain, tag, options = {})
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::Metrics#account_metrics')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
@@ -87,7 +87,7 @@ module Mailgun
     #
     # Returns [Boolean] if successful or not
     def remove(domain, tag)
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::AnalyticsTags#remove')
       raise(ParameterError, 'No domain given to remove on Mailgun', caller) unless domain
       raise(ParameterError, 'No template name given to find on provided domain', caller) unless tag
 
@@ -101,7 +101,7 @@ module Mailgun
     #
     # Returns [Hash] of countries of origin for a given domain
     def get_countries_aggregated_stats(domain, tag)
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::Metrics#account_metrics')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
@@ -115,7 +115,7 @@ module Mailgun
     #
     # Returns [Hash] of email providers for a given domain
     def get_providers_aggregated_stats(domain, tag)
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::Metrics#account_metrics')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
@@ -129,11 +129,19 @@ module Mailgun
     #
     # Returns [Hash] of devices for a given domain
     def get_devices_aggregated_stats(domain, tag)
-      warn('This API is deprecated in favor of our new analytics Tags API')
+      warn_deprecated(__method__, 'Mailgun::Metrics#account_metrics')
       raise(ParameterError, 'No domain given to find on Mailgun', caller) unless domain
       raise(ParameterError, 'No tag name given to find on provided domain', caller) unless tag
 
       @client.get("#{domain}/tags/#{tag}/stats/aggregates/devices").to_h
+    end
+
+    private
+
+    # Internal: Warns that a Tags method is deprecated and names its replacement
+    def warn_deprecated(method_name, replacement)
+      Deprecation.warn("Mailgun::Tags##{method_name}", replacement,
+                       reason: 'Mailgun deprecated the Tags API', removal: 'mailgun-ruby 1.5')
     end
   end
 end

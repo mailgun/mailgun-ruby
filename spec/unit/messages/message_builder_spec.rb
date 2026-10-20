@@ -127,8 +127,8 @@ end
 describe 'The method set_subject' do
   it 'warns of set_subject deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_subject 'warn on set_subject'
+    expect { @mb_obj.set_subject 'warn on set_subject' }
+      .to output(/"Mailgun::MessageBuilder#set_subject" is deprecated.*"Mailgun::MessageBuilder#subject"/).to_stderr
   end
 end
 
@@ -164,8 +164,8 @@ end
 describe 'The method set_text_body' do
   it 'warns of set_text_body deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_text_body 'warn on set_text_body'
+    expect { @mb_obj.set_text_body 'warn on set_text_body' }
+      .to output(/"Mailgun::MessageBuilder#set_text_body" is deprecated.*"Mailgun::MessageBuilder#body_text"/).to_stderr
   end
 end
 
@@ -209,8 +209,8 @@ end
 describe 'The method set_from_address' do
   it 'warns of set_from_address deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_from_address 'warn on set_from_address'
+    expect { @mb_obj.set_from_address 'warn on set_from_address' }
+      .to output(/"Mailgun::MessageBuilder#set_from_address" is deprecated.*"Mailgun::MessageBuilder#from"/).to_stderr
   end
 end
 
@@ -545,8 +545,8 @@ end
 describe 'The method set_custom_data' do
   it 'warns of set_custom_data deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_custom_data 'my-data', '{"key":"value"}'
+    expect { @mb_obj.set_custom_data 'my-data', '{"key":"value"}' }
+      .to output(/"Mailgun::MessageBuilder#set_custom_data" is deprecated.*"Mailgun::MessageBuilder#header"/).to_stderr
   end
 end
 
@@ -608,8 +608,8 @@ end
 describe 'The method set_message_id' do
   it 'warns of set_message_id deprecation' do
     @mb_obj = Mailgun::MessageBuilder.new
-    expect(@mb_obj).to receive :warn
-    @mb_obj.set_message_id 'warn on set_message_id'
+    expect { @mb_obj.set_message_id 'warn on set_message_id' }
+      .to output(/"Mailgun::MessageBuilder#set_message_id" is deprecated.*"Mailgun::MessageBuilder#message_id"/).to_stderr
   end
 end
 

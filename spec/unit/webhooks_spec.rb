@@ -16,7 +16,7 @@ describe Mailgun::Webhooks do
         end
 
         expect { webhooks.public_send(method, domain, url) }
-          .to output(/`#{method}` method will be deprecated/).to_stderr
+          .to output(/"Mailgun::Webhooks##{method}" is deprecated and will be removed/).to_stderr
       end
     end
   end

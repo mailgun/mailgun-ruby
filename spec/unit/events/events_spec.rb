@@ -86,3 +86,13 @@ describe 'The method each' do
     expect(count).to eq(0)
   end
 end
+
+describe 'The Events deprecation' do
+  it 'warns that the Events API is deprecated in favor of the Logs API' do
+    events = Mailgun::Events.new(Mailgun::UnitClient.new('events'), 'samples.mailgun.org')
+
+    expect { events.get }
+      .to output(/"Mailgun::Events" is deprecated \(Mailgun deprecated the Events API\)\. Please use "Mailgun::Logs#account_logs"/)
+      .to_stderr
+  end
+end
