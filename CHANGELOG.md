@@ -1,5 +1,19 @@
 # Changelog
 
+## [v1.4.6](https://github.com/mailgun/mailgun-ruby/tree/v1.4.6) (2026-10-20)
+
+[Full Changelog](https://github.com/mailgun/mailgun-ruby/compare/v1.4.5...v1.4.6)
+
+**Merged pull requests:**
+
+- Deprecations - Warn on Domains\#get\_domain\_stats and use one warning format [\#405](https://github.com/mailgun/mailgun-ruby/pull/405) ([alex-leb](https://github.com/alex-leb))
+- ApiVersionChecker - Allow declarations before the methods [\#404](https://github.com/mailgun/mailgun-ruby/pull/404) ([alex-leb](https://github.com/alex-leb))
+- Specs - Scrub X-Mailgun-Key-Id from VCR cassettes [\#403](https://github.com/mailgun/mailgun-ruby/pull/403) ([alex-leb](https://github.com/alex-leb))
+- Routes - Add Mailgun::Routes wrapper [\#402](https://github.com/mailgun/mailgun-ruby/pull/402) ([alex-leb](https://github.com/alex-leb))
+- Mailing Lists - Add Mailgun::MailingLists wrapper [\#401](https://github.com/mailgun/mailgun-ruby/pull/401) ([alex-leb](https://github.com/alex-leb))
+- CI: skip the coverage check on fork PRs, don't fail fast [\#400](https://github.com/mailgun/mailgun-ruby/pull/400) ([alex-leb](https://github.com/alex-leb))
+- Various improvements [\#387](https://github.com/mailgun/mailgun-ruby/pull/387) ([n-rodriguez](https://github.com/n-rodriguez))
+
 ## [v1.4.5](https://github.com/mailgun/mailgun-ruby/tree/v1.4.5) (2026-09-29)
 
 [Full Changelog](https://github.com/mailgun/mailgun-ruby/compare/v1.4.4...v1.4.5)
@@ -7,15 +21,17 @@
 **Closed issues:**
 
 - Testmode not correctly initialized from global setting [\#394](https://github.com/mailgun/mailgun-ruby/issues/394)
+- Unable to make use of Postbin [\#337](https://github.com/mailgun/mailgun-ruby/issues/337)
+-  events abstraction issues [\#319](https://github.com/mailgun/mailgun-ruby/issues/319)
 
 **Merged pull requests:**
 
 - DE-10765: Client - Fix global test\_mode enabled when set to false [\#399](https://github.com/mailgun/mailgun-ruby/pull/399) ([alex-leb](https://github.com/alex-leb))
 - DE-1856: API Keys - Add docs and list filters [\#398](https://github.com/mailgun/mailgun-ruby/pull/398) ([alex-leb](https://github.com/alex-leb))
 - DE-1772: Domain Webhooks - Add v4 create, update and remove endpoints [\#397](https://github.com/mailgun/mailgun-ruby/pull/397) ([alex-leb](https://github.com/alex-leb))
-- fix\(webhooks\): re-introduce url parameter [\#393](https://github.com/mailgun/mailgun-ruby/pull/393) ([markokajzer](https://github.com/markokajzer))
 - DE-1786: Add github-changelog-generator gem [\#396](https://github.com/mailgun/mailgun-ruby/pull/396) ([alex-leb](https://github.com/alex-leb))
 - DE-1854: Add ApiKeys support [\#395](https://github.com/mailgun/mailgun-ruby/pull/395) ([alex-leb](https://github.com/alex-leb))
+- fix\(webhooks\): re-introduce url parameter [\#393](https://github.com/mailgun/mailgun-ruby/pull/393) ([markokajzer](https://github.com/markokajzer))
 
 ## [v1.4.4](https://github.com/mailgun/mailgun-ruby/tree/v1.4.4) (2026-05-26)
 
