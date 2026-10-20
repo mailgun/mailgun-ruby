@@ -186,6 +186,11 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
         expect(result).to include('stats')
       end
+
+      it 'warns that the Stats API is deprecated' do
+        expect { mg_obj.get_domain_stats(domain, { event: 'clicked' }) }
+          .to output(/deprecated in favor of our Metrics API/).to_stderr
+      end
     end
   end
 
