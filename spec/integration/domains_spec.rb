@@ -189,7 +189,7 @@ describe 'For the domains endpoint', vcr: vcr_opts do
 
       it 'warns that the Stats API is deprecated' do
         expect { mg_obj.get_domain_stats(domain, { event: 'clicked' }) }
-          .to output(/deprecated in favor of our Metrics API/).to_stderr
+          .to output(/"Mailgun::Domains#get_domain_stats" is deprecated.*"Mailgun::Metrics#account_metrics"/).to_stderr
       end
     end
   end

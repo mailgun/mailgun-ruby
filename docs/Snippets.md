@@ -67,10 +67,10 @@ mg_client.send_message "sending_domain.com", data
 ```ruby
 mb_obj = Mailgun::MessageBuilder.new
 
-mb_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+mb_obj.from "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
 mb_obj.add_recipient :to, "recipient@example.com", {'first' => 'Recipient', 'last' => 'User'}
-mb_obj.set_subject "This is the subject!"
-mb_obj.set_text_body "This is the text body."
+mb_obj.subject "This is the subject!"
+mb_obj.body_text "This is the text body."
 
 mg_client.send_message "sending_domain.com", mb_obj
 ```
@@ -80,10 +80,10 @@ mg_client.send_message "sending_domain.com", mb_obj
 ```ruby
 mb_obj = Mailgun::MessageBuilder.new
 
-mb_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+mb_obj.from "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
 mb_obj.add_recipient :to, "recipient@example.com", {'first' => 'Recipient', 'last' => 'User'}
-mb_obj.set_subject "This is the subject!"
-mb_obj.set_text_body "This is the text body."
+mb_obj.subject "This is the subject!"
+mb_obj.body_text "This is the text body."
 
 # Add separate attachments
 mb_obj.add_attachment "/path/to/file/invoice_8675309.pdf", "Order Invoice - 8675309.pdf"
@@ -101,10 +101,10 @@ mg_client.send_message "sending_domain.com", mb_obj
 bm_obj = Mailgun::BatchMessage.new
 
 # Build message using Message Builder
-bm_obj.set_from_address "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
-bm_obj.set_message_id("<20141014000000.11111.11111@example.com>") # optional
-bm_obj.set_subject "This is the subject!"
-bm_obj.set_text_body "This is the text body."
+bm_obj.from "sender@example.com", {'first' => 'Sending', 'last' => 'User'}
+bm_obj.message_id("<20141014000000.11111.11111@example.com>") # optional
+bm_obj.subject "This is the subject!"
+bm_obj.body_text "This is the text body."
 
 # Loop and add unlimited recipients (batch jobs will fire when thresholds reached)
 bm_obj.add_recipient :to, "a_user@example.com"

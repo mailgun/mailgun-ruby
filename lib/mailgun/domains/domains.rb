@@ -255,8 +255,8 @@ module Mailgun
     #
     # Returns [Array] A list of domains (hash)
     def get_domain_stats(domain, options = {})
-      warn('WARN: This API is deprecated in favor of our Metrics API. ' \
-           'Please use `Mailgun::Metrics#account_metrics` instead.')
+      Deprecation.warn('Mailgun::Domains#get_domain_stats', 'Mailgun::Metrics#account_metrics',
+                       reason: 'Mailgun deprecated the Stats API')
       raise(ParameterError, 'No domain given to list stats on Mailgun', caller) unless domain
 
       @client.get("#{domain}/stats/total", options).to_h

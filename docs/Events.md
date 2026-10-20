@@ -1,7 +1,7 @@
 Mailgun - Events
 ====================
 
-_WARNING: This API is deprecated in favor of our Logs API._
+_WARNING: This API is deprecated in favor of our Logs API. Please use [`Mailgun::Logs#account_logs`](Logs.md) instead._
 
 This is the Mailgun Ruby *Events* utility.
 

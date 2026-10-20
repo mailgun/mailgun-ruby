@@ -30,7 +30,7 @@ module Mailgun
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
       if recipient_type == 'h:reply-to'
-        warn 'DEPRECATION: "add_recipient("h:reply-to", ...)" is deprecated. Please use "reply_to" instead.'
+        warn_deprecated('add_recipient("h:reply-to", ...)', :reply_to)
         return reply_to(address, variables)
       end
 
@@ -56,7 +56,7 @@ module Mailgun
 
     # Deprecated: please use 'from' instead.
     def set_from_address(address, variables = nil)
-      warn 'DEPRECATION: "set_from_address" is deprecated. Please use "from" instead.'
+      warn_deprecated(__method__, :from)
       from(address, variables)
     end
 
@@ -83,7 +83,7 @@ module Mailgun
 
     # Deprecated: Please use "subject" instead.
     def set_subject(subj = nil)
-      warn 'DEPRECATION: "set_subject" is deprecated. Please use "subject" instead.'
+      warn_deprecated(__method__, :subject)
       subject(subj)
     end
 
@@ -97,7 +97,7 @@ module Mailgun
 
     # Deprecated: Please use "body_text" instead.
     def set_text_body(text_body = nil)
-      warn 'DEPRECATION: "set_text_body" is deprecated. Please use "body_text" instead.'
+      warn_deprecated(__method__, :body_text)
       body_text(text_body)
     end
 
@@ -111,7 +111,7 @@ module Mailgun
 
     # Deprecated: Please use "body_html" instead.
     def set_html_body(html_body = nil)
-      warn 'DEPRECATION: "set_html_body" is deprecated. Please use "body_html" instead.'
+      warn_deprecated(__method__, :body_html)
       body_html(html_body)
     end
 
@@ -243,7 +243,7 @@ module Mailgun
 
     # Deprecated: 'set_custom_data' is deprecated. Please use 'header' instead.
     def set_custom_data(name, data)
-      warn 'DEPRECATION: "set_custom_data" is deprecated. Please use "header" instead.'
+      warn_deprecated(__method__, :header)
       header name, data
     end
 
@@ -292,7 +292,7 @@ module Mailgun
 
     # Deprecated: 'set_message_id' is deprecated. Use 'message_id' instead.
     def set_message_id(data = nil)
-      warn 'DEPRECATION: "set_message_id" is deprecated. Please use "message_id" instead.'
+      warn_deprecated(__method__, :message_id)
       message_id data
     end
 
@@ -463,6 +463,16 @@ module Mailgun
         attachment.instance_eval 'def original_filename; @original_filename; end', __FILE__, __LINE__
       end
       add_faraday_attachment(disposition, attachment, filename)
+    end
+
+    # Warns that a MessageBuilder method is deprecated.
+    #
+    # @param [String|Symbol] method_name The deprecated method.
+    # @param [Symbol] replacement The method to use instead.
+    # @return [void]
+    def warn_deprecated(method_name, replacement)
+      Deprecation.warn("Mailgun::MessageBuilder##{method_name}", "Mailgun::MessageBuilder##{replacement}",
+                       removal: 'a future version of mailgun-ruby')
     end
   end
 end
