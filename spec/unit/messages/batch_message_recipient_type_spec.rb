@@ -13,10 +13,11 @@ RSpec.describe Mailgun::BatchMessage do
     [type, type.to_s].each do |input|
       it "sends and clears a #{input.inspect} recipient on finalize" do
         response = double('response', to_h!: { 'id' => '<batch@example.com>' })
-        expect(client).to receive(:send_message).with('example.com', hash_including(
+        expected = hash_including(
           type => ['jane@example.com'],
           'recipient-variables' => JSON.generate('jane@example.com' => { id: 0 })
-        )).once.and_return(response)
+        )
+        expect(client).to receive(:send_message).with('example.com', expected).once.and_return(response)
 
         batch.add_recipient(input, 'jane@example.com')
 
