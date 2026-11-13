@@ -43,6 +43,8 @@ module Mailgun
     #                         We recommend "first" and "last" at a minimum!
     # @return [void]
     def add_recipient(recipient_type, address, variables = nil)
+      recipient_type = recipient_type.to_sym
+
       # send the message when we have 1000, not before
       send_message if @counters[:recipients][recipient_type] == Mailgun::Chains::MAX_RECIPIENTS
 
